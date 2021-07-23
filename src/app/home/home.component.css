@@ -1,8 +1,8 @@
-.container {
+#carousel {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 #carouselExampleIndicators {
@@ -21,3 +21,104 @@ img {
     height: 400px;
     border-radius: 20px;
 }
+
+#cardapio{
+    background: white;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    overflow: auto;
+    flex-wrap: wrap;
+    padding: 0;
+    
+}
+
+#carrinho{
+    background: white;
+    margin-top: 20px;
+    margin-left: auto;
+    border-radius: 20px;
+    height: 400px;
+}
+
+#cardapio h4, h5, p{
+    padding-left: 5%;
+}
+
+#cardapio h5{
+    color: red;
+    font-size: 1em;
+    margin-top: 2%;
+}
+
+#cardapio p{
+    width: 100%;
+}
+
+.produto{
+    margin: 15px 10px;
+    width: 45%;
+    height: 20%;
+}
+
+
+.produto p{
+    width: 50%;
+    font-size: 0.7em;
+    height: 50%;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.img-produto{
+    width: 100px;
+    height: 100px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.cor-verde{
+    color: #2F4F4F;
+}
+
+#links-produto{
+    display: flex;
+    align-items: center;
+}
+
+#links-produto a{
+    text-decoration: none;
+    color: #191970;
+    padding-left: 5%;
+    margin-right: 5%;
+    font-size: 0.8em;
+    
+}
+
+#links-produto h5{
+    margin-right: 15%;
+    margin-top: 5%;
+    
+}
+
+.linha{
+    background: rgba(0,0,0,0.1);
+    height: 1px;
+    padding-left: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+.row{
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+

@@ -5,14 +5,15 @@ html, body{
 
 #complemento-header{
     background: white;
+    height: 100%;
+    margin-top: 97px;
 }
 
 
 #navbar{
-    background: rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
-    padding-bottom: 0px;
-    padding-top: 0px;
+    padding: 10px 0px;
 }
 
 #navbar h1{
@@ -30,6 +31,11 @@ html, body{
 
 #nav-principal{
     padding-top: 10px;
+
+}
+
+#menu-direita{
+    margin-left: auto;
 }
 
 
@@ -39,11 +45,16 @@ html, body{
     padding: 0%;
 }
 
+#saudacao-usuario{
+    color: white;
+}
+
 #complemento-header a{
     color: white;
     font-family: Helvetica, Arial, sans-serif;
     transition: 1s;
     font-size: 1em;
+    text-decoration: none;
 
 
 }
@@ -79,7 +90,8 @@ html, body{
 .divisor{
     width: 1px;
     background: white;
-    margin: 10px  15px 28px 15px;
+    margin: 10px;
+
 }
 
 .container-logo{
@@ -89,7 +101,6 @@ html, body{
 }
 
 .container-titulo{
-    background: black;
     padding: 10px;
     margin: 0px;
 }
@@ -146,7 +157,7 @@ a.navbar-brand{
     #complemento-header{
         display: none;
     }
-  
+
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -158,6 +169,10 @@ a.navbar-brand{
     .margin-botoes{
         margin-left: 5px;
     }    
+
+    .divisor{
+        margin: 14px 0px
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -166,6 +181,10 @@ a.navbar-brand{
     font-size: 0.7em;
     transition: 1s;
     }
+
+    .divisor{
+        margin: 13px 0px
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -173,6 +192,10 @@ a.navbar-brand{
     #complemento-header a{
         font-size: 0.7em;
         transition: 1s;
+        }
+
+        .divisor{
+            margin: 12px 10px
         }
   
    
