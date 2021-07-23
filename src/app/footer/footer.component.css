@@ -1,0 +1,21 @@
+footer{
+    background: black;
+}
+
+#logo-footer{
+    width: 80px;
+}
+
+#msg-desenvolvedor {
+    font-size: 0.7em;
+    margin: auto;
+}
+
+#msg-desenvolvedor fa-icon {
+    color: aqua;
+}
+
+h5{
+    color: white;
+    margin:0px;
+}
