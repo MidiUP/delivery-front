@@ -33,7 +33,36 @@
       <div class="col-md-8 d-flex justify-content-center " id="cardapio">
 
         
-        
+        <nav class="navbar navbar-expand-lg navbar-light" id="navbar-cardapio">
+          <div class="container-fluid navbar-cardapio">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <div class="d-flex">
+                <i class="fas fa-bars text-white"></i>
+                <h2 id="titulo-menu-cardapio"> Menu</h2>
+              </div>
+
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categoria
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Hambúrguer</a></li>
+                    <li><a class="dropdown-item" href="#">Bebidas</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Tira Gosto</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Procure um produto" aria-label="Search">
+                <button class="btn btn-outline-white" type="submit">Procurar</button>
+              </form>
+            </div>
+          </div>
+        </nav>
         
         <mat-card class="produto">
           <div class="row" style="margin: 0;">
@@ -51,7 +80,35 @@
                   <mat-icon>add</mat-icon>
                 </button>
                 
-                <button mat-icon-button color="warn">
+                <button mat-icon-button color="warn" class="">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+            </div>
+            <div class="col-md-4" style="padding: 0;">
+              <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto">
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="produto">
+          <div class="row">
+            <div class="col-md-8" style="padding: 0;">
+              <h4>Hambúrguer</h4>
+              <div>
+                <p>O combo é composto de um Crispy Bacon  com um refrigerante geladinho.</p>
+              </div>
+
+              <div class="linha"></div>
+              
+              <div id="links-produto">
+                <h5>R$ 13,90</h5>
+                <button mat-icon-button class="cor-verde tamanho">
+                  <mat-icon>add</mat-icon>
+                </button>
+                
+                <button mat-icon-button color="warn" class="tamanho">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -286,6 +343,65 @@
             </div>
           </div>
         </mat-card>
+
+        <mat-card class="produto">
+          <div class="row">
+            <div class="col-md-8" style="padding: 0;">
+              <h4>Hambúrguer</h4>
+              <div>
+                <p>O combo é composto de um Crispy Bacon  com um refrigerante geladinho.</p>
+              </div>
+
+              <div class="linha"></div>
+              
+              <div id="links-produto">
+                <h5>R$ 13,90</h5>
+                <button mat-icon-button class="cor-verde">
+                  <mat-icon>add</mat-icon>
+                </button>
+                
+                <button mat-icon-button color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+            </div>
+            <div class="col-md-4" style="padding: 0;">
+              <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto">
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="produto">
+          <div class="row">
+            <div class="col-md-8" style="padding: 0;">
+              <h4>Hambúrguer</h4>
+              <div>
+                <p>O combo é composto de um Crispy Bacon  com um refrigerante geladinho.</p>
+              </div>
+
+              <div class="linha"></div>
+              
+              <div id="links-produto">
+                <h5>R$ 13,90</h5>
+                <button mat-icon-button class="cor-verde">
+                  <mat-icon>add</mat-icon>
+                </button>
+                
+                <button mat-icon-button color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+            </div>
+            <div class="col-md-4" style="padding: 0;">
+              <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto">
+            </div>
+          </div>
+        </mat-card>
+
+        
+
 
         
         
@@ -295,7 +411,81 @@
 
       <div class="col-md-4" style="padding: 0; padding-left: 15px;" >
         <div id="carrinho">
-          Carrinho
+
+          <div class="campo-opcoes-pedido">
+            <div>
+              <nav class="navbar navbar-expand-md opcoes-pedido">
+                <div class="container-fluid" style="padding-bottom:0">
+                  <h4 class="navbar-brand titulo-opcoes" href="#">Entrega</h4>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-left: auto;">
+                    <div style="margin-left: auto;">
+                      <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                        
+
+                          <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Endereço
+                          </a>
+                      
+                          <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Rua Miguel Couto, 2395</a></li>
+                            <li><a class="dropdown-item" href="#">Av. Higino Cunha, 980</a></li>
+                            <li><a class="dropdown-item" href="#">Av. Solferina Ricci pace, 800</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Novo Endereço</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                </div>
+              </nav>
+            </div>
+            <p class="opcao-selecionada">Avenida Solferina Ricci pace, 800</p>
+          </div>
+
+          <div class="campo-opcoes-pedido">
+            <div>
+              <nav class="navbar navbar-expand-md opcoes-pedido">
+                <div class="container-fluid" style="padding-bottom:0">
+                  <h4 class="navbar-brand titulo-opcoes" href="#">Pagamento</h4>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-left: auto;">
+                    <div style="margin-left: auto;">
+                      <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                        
+
+                          <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Método
+                          </a>
+                      
+                          <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Á vista</a></li>
+                            <li><a class="dropdown-item" href="#">Cartão de Crédito</a></li>
+                            <li><a class="dropdown-item" href="#">Cartão de Débito</a></li>
+                            <li><a class="dropdown-item" href="#">Pix</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                </div>
+              </nav>
+            </div>
+            <p class="opcao-selecionada">Á vista</p>
+          </div>
+        
+
+
+          
         </div>
       </div>
 
