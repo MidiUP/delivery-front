@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ROUTES } from './app.routes'
+import { PreloadAllModules, RouterModule } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -13,6 +15,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { AdicionarEnderecoComponent } from './adicionar-endereco/adicionar-endereco.component';
+import { AdicionarUsuarioComponent } from './adicionar-usuario/adicionar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { AdicionarEnderecoComponent } from './adicionar-endereco/adicionar-ender
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    AdicionarEnderecoComponent
+    AdicionarEnderecoComponent,
+    AdicionarUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { AdicionarEnderecoComponent } from './adicionar-endereco/adicionar-ender
     FontAwesomeModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent]
