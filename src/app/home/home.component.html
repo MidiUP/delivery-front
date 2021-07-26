@@ -417,25 +417,17 @@
               <nav class="navbar navbar-expand-md opcoes-pedido">
                 <div class="container-fluid" style="padding-bottom:0">
                   <h4 class="navbar-brand titulo-opcoes" href="#">Entrega</h4>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
                   <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-left: auto;">
                     <div style="margin-left: auto;">
                       <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                        
-
                           <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Endereço
-                          </a>
-                      
+                          </a>                      
                           <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Rua Miguel Couto, 2395</a></li>
-                            <li><a class="dropdown-item" href="#">Av. Higino Cunha, 980</a></li>
-                            <li><a class="dropdown-item" href="#">Av. Solferina Ricci pace, 800</a></li>
+                            <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item" (click)="onClickEnderecoItem(endereco)">{{ endereco }}</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Novo Endereço</a></li>
+                            <li><a class="dropdown-item" >Novo Endereço</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -445,7 +437,7 @@
                 </div>
               </nav>
             </div>
-            <p class="opcao-selecionada">Avenida Solferina Ricci pace, 800</p>
+            <p class="opcao-selecionada">{{ enderecoSelecionado }}</p>
           </div>
 
           <div class="campo-opcoes-pedido">
@@ -467,10 +459,7 @@
                           </a>
                       
                           <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Á vista</a></li>
-                            <li><a class="dropdown-item" href="#">Cartão de Crédito</a></li>
-                            <li><a class="dropdown-item" href="#">Cartão de Débito</a></li>
-                            <li><a class="dropdown-item" href="#">Pix</a></li>
+                            <li *ngFor="let pagamento of tiposPagamento"><a class="dropdown-item" (click)="onClickTipoPagamento(pagamento)">{{ pagamento }}</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -480,7 +469,7 @@
                 </div>
               </nav>
             </div>
-            <p class="opcao-selecionada">Á vista</p>
+            <p class="opcao-selecionada">{{ pagamentoSelecionado }}</p>
           </div>
         
 

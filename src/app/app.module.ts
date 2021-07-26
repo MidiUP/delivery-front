@@ -12,13 +12,15 @@ import { HomeComponent } from './home/home.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { AdicionarEnderecoComponent } from './adicionar-endereco/adicionar-endereco.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    AdicionarEnderecoComponent
   ],
   imports: [
     BrowserModule,
