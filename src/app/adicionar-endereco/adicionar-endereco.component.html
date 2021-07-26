@@ -1,1 +1,68 @@
-<p>adicionar-endereco works!</p>
+<div class="flexPosition">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Dados do endereço</h2>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="addressForm">
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="CEP" (ngModel)="endereco.cep" formControlName="cep">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Cidade" (ngModel)="endereco.city" formControlName="city">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Rua" (ngModel)="endereco.street" formControlName="street">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Bairro" (ngModel)="endereco.neighborhood" formControlName="neighborhood">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Número" (ngModel)="endereco.number" formControlName="number">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Complemento" (ngModel)="endereco.complement" formControlName="complement">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-success form-control" [disabled]="!addressForm.valid" (click)="salvarEndereco(addressForm.value)">Salvar</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-warning form-control" [disabled]="addressForm.untouched" (click)="addressForm.reset()">Limpar campos</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-danger form-control" (click)="cancel()">Cancelar</button>
+                        </div>
+                    </div>
+            
+                </form>
+            </div>
+        </div>
+    </div>  
+</div>
