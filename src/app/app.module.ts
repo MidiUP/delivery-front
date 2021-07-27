@@ -4,11 +4,11 @@ import { ROUTES } from './app.routes'
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 
@@ -30,13 +30,13 @@ import { AdicionarUsuarioComponent } from './adicionar-usuario/adicionar-usuario
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

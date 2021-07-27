@@ -1,0 +1,58 @@
+.flexPosition {
+    margin-top: 97px;
+    min-height: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-properties {
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 300px;
+    border-radius: 20px;
+}
+
+h2, h5 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+.row {
+    margin: 25px 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+button {
+    margin: 20px 0;
+}
+
+.novoEndereco {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.textNovoEndereco {
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+}
+
+.textNovoEndereco:hover {
+    opacity: 0.4;
+}
+
+.addressContainer {
+    border-radius: 20px;
+}

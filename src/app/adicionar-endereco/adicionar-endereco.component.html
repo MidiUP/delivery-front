@@ -54,7 +54,7 @@
                             <button type="button" class="btn btn-success form-control" [disabled]="!addressForm.valid" (click)="salvarEndereco(addressForm.value)">Salvar</button>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-warning form-control" [disabled]="addressForm.untouched" (click)="addressForm.reset()">Limpar campos</button>
+                            <button type="button" class="btn btn-secondary form-control" [disabled]="addressForm.untouched" (click)="addressForm.reset()">Limpar campos</button>
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-danger form-control" (click)="cancel()">Cancelar</button>
