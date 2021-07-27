@@ -414,11 +414,11 @@
 
           <div class="campo-opcoes-pedido">
             <div>
-              <nav class="navbar navbar-expand-md opcoes-pedido">
+              <nav class="navbar navbar-expand opcoes-pedido">
                 <div class="container-fluid" style="padding-bottom:0">
                   <h4 class="navbar-brand titulo-opcoes" href="#">Entrega</h4>
                   <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-left: auto;">
-                    <div style="margin-left: auto;">
+                    <div class="opcoes-endereco-pagamento">
                       <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -439,16 +439,209 @@
             <p class="opcao-selecionada">{{ enderecoSelecionado }}</p>
           </div>
 
+
+          <div class="carrinho d-none d-lg-block">
+            <div class="d-flex">
+              <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
+              <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
+            </div>
+            <ul class="itens-carrinho">
+              <li>
+                 <div class="d-flex">
+                  <span class="nome-produto">Hambúrguer</span>
+                  <span class="quantidade-produto">{{quantidadeProduto}}x</span>
+
+                  <div class="botoes-produto-carrinho">
+                    <a mat-icon-button class="cor-verde botao-carrinho" (click)="onClickAumentarQuantidade()">
+                      <mat-icon>add</mat-icon>
+                    </a>
+                    
+                    <a mat-icon-button color="warn" class="botao-carrinho" (click)="onClickDiminuirQuantidade()">
+                      <mat-icon >delete</mat-icon>
+                    </a>
+                  </div>
+                    
+                  <div class="preco-produto-carrinho">
+                    <span class="preco-produto-carrinho">R${{precoProdutoAtual}}</span>
+                  </div>
+                 </div>
+                 <hr class="divisor-carrinho">
+              </li>
+
+              <li>
+                <div class="d-flex">
+                 <span class="nome-produto">Hambúrguer</span>
+                 <span class="quantidade-produto">{{quantidadeProduto}}x</span>
+
+                 <div class="botoes-produto-carrinho">
+                   <a mat-icon-button class="cor-verde botao-carrinho" (click)="onClickAumentarQuantidade()">
+                     <mat-icon>add</mat-icon>
+                   </a>
+                   
+                   <a mat-icon-button color="warn" class="botao-carrinho" (click)="onClickDiminuirQuantidade()">
+                     <mat-icon >delete</mat-icon>
+                   </a>
+                 </div>
+                   
+                 <div class="preco-produto-carrinho">
+                   <span class="preco-produto-carrinho">R${{precoProdutoAtual}}</span>
+                 </div>
+                </div>
+                <hr class="divisor-carrinho">
+             </li>
+
+             <li>
+              <div class="d-flex">
+               <span class="nome-produto">Hambúrguer</span>
+               <span class="quantidade-produto">{{quantidadeProduto}}x</span>
+
+               <div class="botoes-produto-carrinho">
+                 <a mat-icon-button class="cor-verde botao-carrinho" (click)="onClickAumentarQuantidade()">
+                   <mat-icon>add</mat-icon>
+                 </a>
+                 
+                 <a mat-icon-button color="warn" class="botao-carrinho" (click)="onClickDiminuirQuantidade()">
+                   <mat-icon >delete</mat-icon>
+                 </a>
+               </div>
+                 
+               <div class="preco-produto-carrinho">
+                 <span class="preco-produto-carrinho">R${{precoProdutoAtual}}</span>
+               </div>
+              </div>
+              <hr class="divisor-carrinho">
+           </li>
+
+              <li>
+                <div class="d-flex">
+                 <span>FRETE</span>
+                   
+                 <div class="preco-total-carrinho">
+                   <span >R${{totalPedido}}</span>
+                 </div>
+                </div>
+             </li>
+
+              <li>
+                <div class="d-flex">
+                 <span class="total-produto">TOTAL</span>
+                   
+                 <div class="preco-total-carrinho">
+                   <span >R${{totalPedido}}</span>
+                 </div>
+                </div>
+             </li>
+
+            </ul>
+          </div>
+
+          <div class="carrinho v-md">
+            <div class="d-flex">
+              <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
+              <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
+            </div>
+            <ul class="itens-carrinho">
+              <li>
+                 <div class="d-flex">
+                  <span class="nome-produto">Hambúrguer</span>
+                  <span class="quantidade-produto">{{quantidadeProduto}}x</span>
+
+                    
+                  <div class="preco-produto-carrinho">
+                    <span class="preco-produto-carrinho">R${{precoProdutoAtual}}</span>
+                  </div>
+                 </div>
+                 <div class="botoes-produto-carrinho">
+                  <a mat-icon-button class="cor-verde botao-carrinho" (click)="onClickAumentarQuantidade()">
+                    <mat-icon>add</mat-icon>
+                  </a>
+                  
+                  <a mat-icon-button color="warn" class="botao-carrinho" (click)="onClickDiminuirQuantidade()">
+                    <mat-icon >delete</mat-icon>
+                  </a>
+                </div>
+                 <hr class="divisor-carrinho">
+              </li>
+
+              <li>
+                <div class="d-flex">
+                 <span class="nome-produto">Hambúrguer</span>
+                 <span class="quantidade-produto">{{quantidadeProduto}}x</span>
+
+                   
+                 <div class="preco-produto-carrinho">
+                   <span class="preco-produto-carrinho">R${{precoProdutoAtual}}</span>
+                 </div>
+                </div>
+                <div class="botoes-produto-carrinho">
+                 <a mat-icon-button class="cor-verde botao-carrinho" (click)="onClickAumentarQuantidade()">
+                   <mat-icon>add</mat-icon>
+                 </a>
+                 
+                 <a mat-icon-button color="warn" class="botao-carrinho" (click)="onClickDiminuirQuantidade()">
+                   <mat-icon >delete</mat-icon>
+                 </a>
+               </div>
+                <hr class="divisor-carrinho">
+             </li>
+
+             <li>
+              <div class="d-flex">
+               <span class="nome-produto">Hambúrguer</span>
+               <span class="quantidade-produto">{{quantidadeProduto}}x</span>
+
+                 
+               <div class="preco-produto-carrinho">
+                 <span class="preco-produto-carrinho">R${{precoProdutoAtual}}</span>
+               </div>
+              </div>
+              <div class="botoes-produto-carrinho">
+               <a mat-icon-button class="cor-verde botao-carrinho" (click)="onClickAumentarQuantidade()">
+                 <mat-icon>add</mat-icon>
+               </a>
+               
+               <a mat-icon-button color="warn" class="botao-carrinho" (click)="onClickDiminuirQuantidade()">
+                 <mat-icon >delete</mat-icon>
+               </a>
+             </div>
+              <hr class="divisor-carrinho">
+           </li>
+
+              <li>
+                <div class="d-flex">
+                 <span>FRETE</span>
+                   
+                 <div class="preco-total-carrinho">
+                   <span >R${{totalPedido}}</span>
+                 </div>
+                </div>
+             </li>
+
+              <li>
+                <div class="d-flex">
+                 <span class="total-produto">TOTAL</span>
+                   
+                 <div class="preco-total-carrinho">
+                   <span >R${{totalPedido}}</span>
+                 </div>
+                </div>
+             </li>
+
+            </ul>
+          </div>
+
+          
+
           <div class="campo-opcoes-pedido">
             <div>
-              <nav class="navbar navbar-expand-md opcoes-pedido">
+              <nav class="navbar navbar-expand opcoes-pedido">
                 <div class="container-fluid" style="padding-bottom:0">
                   <h4 class="navbar-brand titulo-opcoes" href="#">Pagamento</h4>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-left: auto;">
-                    <div style="margin-left: auto;">
+                    <div class="opcoes-endereco-pagamento">
                       <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                         
@@ -477,6 +670,26 @@
         </div>
       </div>
 
+
+
     </div>
   </div>
+</section>
+
+<section id="carrinho-mobile" class="fixed-bottom">
+ <div class="d-flex">
+  <div>
+    <mat-icon class="icone-carrinho-mobile">shopping_cart</mat-icon>
+  </div>
+
+  <div style="margin-left: auto;">
+    <a href="#" class="preco-final-carrinho-mobile">Ver Carrinho</a>
+  </div>
+
+  <div style="margin-left: auto;">
+    <span class="preco-final-carrinho-mobile">R$13,90</span>
+  </div>
+ </div>
+
+
 </section>
