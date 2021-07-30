@@ -32,8 +32,6 @@ export class AdicionarEnderecoComponent implements OnInit {
       cep: this.formBuilder.control('', [Validators.required])
     }, {updateOn: 'change'});
 
-    
-    this.user_ =this.route.snapshot.params["user"];
   }
 
   updateUserProperties(data:User){

@@ -13,7 +13,7 @@ import { UserService } from 'src/app/user/user.service';
 export class AdicionarUsuarioFormComponent implements OnInit {
 
   openPanelAddress: boolean = false;
-
+  users: User[] = [];
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
   usuario: User = new User("", "", "", "", ", ", "", new Address("", "", "", "", "", ""), undefined);
@@ -36,6 +36,10 @@ export class AdicionarUsuarioFormComponent implements OnInit {
       rg: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       phone: this.formBuilder.control('', [Validators.required, Validators.minLength(11)])
     }, {updateOn: 'change'});
+
+    this.getUsersList();
+    console.log(this.users);
+    
   }
 
   salvarUsuario(usuario: User){
@@ -46,6 +50,16 @@ export class AdicionarUsuarioFormComponent implements OnInit {
         error =>
           console.log(error)
       );
+  }
+
+  getUsersList(): void{
+    this.userService.getUsers()
+      .subscribe(
+        data => {
+          this.users = data
+          console.log(this.users)
+        }
+      )
   }
 
   openPanelToAddAddress(){
