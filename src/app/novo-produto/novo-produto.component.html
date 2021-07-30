@@ -20,13 +20,31 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Categoria</label>
+                <label for="nome-produto" class="form-label">Selecione uma Categoria</label>
                 <select class="form-select" aria-label="Default select example">
                     <option selected>Categoria</option>
                     <option value="Hamburguer">Hambúrguer</option>
                     <option value="Bebida">Bebida</option>
                     <option value="Tira-gosto">Tira gosto</option>
                   </select>
+            </div>
+            <div class="col-md-6">
+                <label for="nome-produto" class="form-label">Quantidade no estoque</label>
+                <input type="quantidade" id="quantidadeProduto" class="form-control" aria-describedby="quantidade" placeholder="Ex: 25">
+                <!--<div id="Nome" class="form-text">
+                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="nome-produto" class="form-label">Preço</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">R$</span>
+                    <input type="text" class="form-control" placeholder="0,00" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
             </div>
             <div class="col-md-6">
                 <label for="nome-produto" class="form-label">Quantidade no estoque</label>
