@@ -11,7 +11,7 @@
                                 <input type="text" class="form-control" placeholder="CEP" (ngModel)="endereco.cep" formControlName="cep">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 marginWidthSmall">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Cidade" (ngModel)="endereco.city" formControlName="city">
                             </div>
@@ -32,12 +32,12 @@
                                 <input type="text" class="form-control" placeholder="Bairro" (ngModel)="endereco.neighborhood" formControlName="neighborhood">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 marginWidthSmall">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Número" (ngModel)="endereco.number" formControlName="number">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 marginWidthSmall">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Complemento" (ngModel)="endereco.complement" formControlName="complement">
                             </div>
@@ -48,14 +48,13 @@
                         <div class="col-md-4">
                             <button type="button" class="btn btn-success form-control" [disabled]="!addressForm.valid" (click)="salvarEndereco(addressForm.value)">Salvar</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 marginWidthSmall">
                             <button type="button" class="btn btn-secondary form-control" [disabled]="addressForm.untouched" (click)="addressForm.reset()">Limpar campos</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 marginWidthSmall">
                             <button type="button" class="btn btn-danger form-control" (click)="cancel()">Cancelar</button>
                         </div>
-                    </div>
-            
+                    </div>            
                 </form>
             </div>
         </div>

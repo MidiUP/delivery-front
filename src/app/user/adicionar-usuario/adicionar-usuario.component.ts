@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user/user.model';
 import { UserService } from 'src/app/user/user.service';
-import { Address } from '../adicionar-endereco/address.model';
+import { Address } from './adicionar-endereco/address.model';
 
 @Component({
   selector: 'app-adicionar-usuario',

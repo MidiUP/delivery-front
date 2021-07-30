@@ -34,7 +34,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 
 
-import { AdicionarEnderecoComponent } from './user/adicionar-endereco/adicionar-endereco.component';
+import { AdicionarEnderecoComponent } from './user/adicionar-usuario/adicionar-endereco/adicionar-endereco.component';
 import { AdicionarUsuarioComponent } from './user/adicionar-usuario/adicionar-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
