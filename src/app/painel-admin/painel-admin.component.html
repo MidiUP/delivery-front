@@ -1,0 +1,110 @@
+<body>
+  <div class="row">
+      <div class="col-md-3 painel-esquerda">
+          <h1>Painel de controle</h1>
+          <div class="container">
+              <div class="link-menu">
+                <a (click)="contentInfo()">Informações da Empresa
+              </a>
+              </div>
+              <hr class="dropdown-divider ">
+
+              <mat-accordion class="item-menu" >
+                <mat-expansion-panel hideToggle class="item-menu">
+                  <mat-expansion-panel-header class="item-menu">
+                    <mat-panel-title class="item-menu" >
+                      Produtos<mat-icon>{{icone()}}</mat-icon>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header >
+                  <a (click)="contentNovoProduto()" >Novo Produto</a><br><br>
+                  <a (click)="contentEditarProduto()">Editar Produto</a><br><br>
+                  <a (click)="contentCategorias()">Categorias</a>
+
+                </mat-expansion-panel>
+                <mat-expansion-panel class="item-menu" (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">                   
+                </mat-expansion-panel>
+                <hr class="dropdown-divider">
+            </mat-accordion>
+
+            <mat-accordion class="item-menu" >
+              <mat-expansion-panel hideToggle class="item-menu">
+                <mat-expansion-panel-header class="item-menu">
+                  <mat-panel-title class="item-menu" >
+                    Taxa de Entrega<mat-icon>{{icone()}}</mat-icon>
+                  </mat-panel-title>
+                </mat-expansion-panel-header >
+                <a (click)="contentBairros()">Bairros</a><br><br>
+                <a (click)="contentNovoBairro()">Novo Bairro</a><br><br>
+                <a (click)="contentEditarBairro()">Editar Bairro</a>
+
+              </mat-expansion-panel>
+              <mat-expansion-panel class="item-menu" (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false">                   
+              </mat-expansion-panel>
+              <hr class="dropdown-divider">
+          </mat-accordion>
+
+            <div class="link-menu">
+              <a (click)="contentPersonalizacao()">Personalização
+            </a>
+            </div>
+            <hr class="dropdown-divider ">
+              
+
+              
+          
+      </div>
+    </div>
+
+      
+      <div class="col-md-9 conteudo">
+        <section id="navbar-painel">
+          <div class="d-flex" style="background: rgba(0, 0, 0, 0.1);;">
+
+            <h1 *ngIf="content==''">Painel</h1>
+              <h1 *ngIf="content=='info'">Informações</h1>
+              <h1 *ngIf="content=='novo-produto'">Novo Produto</h1>
+              <h1 *ngIf="content=='editar-produto'">Editar Produto</h1>
+              <h1 *ngIf="content=='categorias'">Categorias</h1>
+              <h1 *ngIf="content=='bairros'">Bairros</h1>
+              <h1 *ngIf="content=='novo-bairro'">Novo Bairro</h1>
+              <h1 *ngIf="content=='editar-bairro'">Editar Bairro</h1>
+              <h1 *ngIf="content=='personalizacao'">Personalização</h1>
+            
+            <ul class="d-flex">
+              <li>
+                <a>Aplicação</a>
+              </li>
+
+              <li>
+                <a>Suporte</a>
+              </li>
+
+              <li>
+                <a>Instruções</a>
+              </li>
+            </ul>
+           
+          </div>
+        </section>
+        <div *ngIf="content=='info'"><app-info-empresa></app-info-empresa></div>
+        <div *ngIf="content=='novo-produto'"><app-novo-produto></app-novo-produto></div>
+        <div *ngIf="content=='editar-produto'"><app-editar-produto></app-editar-produto></div>
+        <div *ngIf="content=='categorias'"><app-categorias></app-categorias></div>
+        <div *ngIf="content=='bairros'"><app-bairros></app-bairros></div>
+        <div *ngIf="content=='novo-bairro'"><app-novo-bairro></app-novo-bairro></div>
+        <div *ngIf="content=='editar-bairro'"><app-editar-bairro></app-editar-bairro></div>
+        <div *ngIf="content=='personalizacao'"><app-personalizacao></app-personalizacao></div>
+        
+      </div>
+
+  </div>
+
+  <app-footer></app-footer>
+
+</body>
+
+                          
+      
+      

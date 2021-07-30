@@ -1,0 +1,36 @@
+<mat-accordion class="painel">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Cardápio
+        </mat-panel-title>
+        <mat-panel-description>
+          Faça todas as suas configurações referentes ao cardápio.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>This is the primary content of the panel.</p>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">                   
+    </mat-expansion-panel>
+</mat-accordion>
+
+<br>
+
+<mat-accordion class="painel">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Produtos
+        </mat-panel-title>
+        <mat-panel-description>
+          Faça todas as suas configurações referentes ao produtos.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>This is the primary content of the panel.</p>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+                         
+    </mat-expansion-panel>
+</mat-accordion>
