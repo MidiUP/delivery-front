@@ -2,11 +2,7 @@ html{
     height: 100%;
 }
 body{
-    background: url(./assets/img/Background-test-1.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     font-family: Helvetica, Arial, sans-serif;
     width: 100%;
-    background-size: 100%;
 
 }

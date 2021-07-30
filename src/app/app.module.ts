@@ -12,11 +12,19 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import { AdicionarEnderecoComponent } from './adicionar-endereco/adicionar-endereco.component';
-import { AdicionarUsuarioComponent } from './adicionar-usuario/adicionar-usuario.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatInputModule} from '@angular/material/input';
+
+
+import { AdicionarEnderecoComponent } from './user/adicionar-endereco/adicionar-endereco.component';
+import { AdicionarUsuarioComponent } from './user/adicionar-usuario/adicionar-usuario.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AdicionarUsuarioFormComponent } from './user/adicionar-usuario/adicionar-usuario-form/adicionar-usuario-form.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +33,9 @@ import { AdicionarUsuarioComponent } from './adicionar-usuario/adicionar-usuario
     FooterComponent,
     HomeComponent,
     AdicionarEnderecoComponent,
-    AdicionarUsuarioComponent
+    AdicionarUsuarioComponent,
+    NotFoundComponent,
+    AdicionarUsuarioFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,10 +45,13 @@ import { AdicionarUsuarioComponent } from './adicionar-usuario/adicionar-usuario
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    MatExpansionModule,
+    MatInputModule,
     RouterModule.forRoot(ROUTES),
-    FontAwesomeModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

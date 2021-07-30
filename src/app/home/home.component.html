@@ -400,13 +400,6 @@
           </div>
         </mat-card>
 
-        
-
-
-        
-        
-        
-
       </div>
 
       <div class="col-md-4" style="padding: 0; padding-left: 15px;" >
@@ -427,7 +420,7 @@
                           <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item" (click)="onClickEnderecoItem(endereco)">{{ endereco }}</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" [routerLink]="['/novoEndereco']">Novo Endereço</a></li>
+                            <li><a class="dropdown-item" [routerLink]="['/users/addEndereco']">Novo Endereço</a></li>
                           </ul>
                         </li>
                       </ul>

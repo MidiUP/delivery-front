@@ -1,0 +1,136 @@
+<div class="flexPosition">
+    <div class="container container-properties">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Dados do cliente</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="userForm">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nome" [(ngModel)]="usuario.name"
+                                    formControlName="name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="E-mail" [(ngModel)]="usuario.email"
+                                    formControlName="email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Senha"
+                                    [(ngModel)]="usuario.password" formControlName="password">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="CPF" [(ngModel)]="usuario.cpf"
+                                    formControlName="cpf">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="RG" [(ngModel)]="usuario.rg"
+                                    formControlName="rg">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Phone" [(ngModel)]="usuario.phone"
+                                    formControlName="phone">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="address != undefined">
+                        <h5>Endereços cadastrados</h5>
+                        <div class="col-md-6">
+                            <section class="shadow addressContainer">
+                                <a href=""></a>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6" style="margin-top: 20px;">
+                                            <label for="Cidade">Cidade: {{ usuario.address.city }}</label>
+                                        </div>
+                                        <div class="col-md-6" style="margin-top: 20px;">
+                                            <label for="Rua">Rua: {{ usuario.address.street }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="Bairro">Bairro: {{ usuario.address.neighborhood }}</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="Numero">Numero: {{ usuario.address.number }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="margin-bottom: 20px;">
+                                            <label for="Complemento">Complemento: {{ usuario.address.complement }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="row novoEndereco">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <button type="button" class="textNovoEndereco form-control" (click)="openPanelToAddAddress()"
+                            [disabled]="openPanelAddress"><i class="fas fa-plus-circle" style="margin-right: 10px;"></i>
+                                <label for="Novo Endereço"> Adicionar um novo Endereço</label></button>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+                    <mat-accordion class="headers-align" *ngIf="openPanelAddress">
+                        <mat-expansion-panel (opened)="openPanelAddress = true" (closed)="openPanelAddress = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Dados do Endereço
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Informe os seguintes campos sobre o seu Endereço
+                                    <mat-icon>import_contacts</mat-icon>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <app-adicionar-endereco></app-adicionar-endereco>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-success form-control" [disabled]="!userForm.valid"
+                                (click)="salvarUsuario(userForm.value)">Salvar</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-secondary form-control" [disabled]="userForm.untouched"
+                                (click)="userForm.reset()">Limpar campos</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-danger form-control"
+                                (click)="cancel()">Cancelar</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

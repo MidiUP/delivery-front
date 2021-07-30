@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Address } from '../adicionar-endereco/address.model';
-import { User_ } from './user_.model';
+import { Address } from 'src/app/user/adicionar-endereco/address.model';
+import { User } from 'src/app/user/user.model';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
-  selector: 'app-adicionar-usuario',
-  templateUrl: './adicionar-usuario.component.html',
-  styleUrls: ['./adicionar-usuario.component.css']
+  selector: 'app-adicionar-usuario-form',
+  templateUrl: './adicionar-usuario-form.component.html',
+  styleUrls: ['./adicionar-usuario-form.component.css']
 })
-export class AdicionarUsuarioComponent implements OnInit {
+export class AdicionarUsuarioFormComponent implements OnInit {
+
+  openPanelAddress: boolean = false;
 
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-  usuario: User_;
+  usuario: User = new User("", "", "", "", ", ", "", new Address("", "", "", "", "", ""), undefined);
 
-  addresses:Address[] = [ 
-    {street: "Arroz Carne da silva", neighborhood: "teste", number: "teste", complement: "teste", city: "Arroz Feijão batata e carne", cep: "teste"},
-    {street: "teste", neighborhood: "teste", number: "teste", complement: "teste", city: "teste", cep: "teste"}
-  ];
+  address:Address;
 
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router) {    
+              private router: Router,
+              private userService: UserService) {    
    }
 
   ngOnInit(): void {   
@@ -37,10 +38,20 @@ export class AdicionarUsuarioComponent implements OnInit {
     }, {updateOn: 'change'});
   }
 
-  salvarUsuario(usuario: User_){
-    console.log(usuario);
+  salvarUsuario(usuario: User){
+    this.userService.createUser(usuario)
+      .subscribe(
+        data=>
+          console.log(data),
+        error =>
+          console.log(error)
+      );
   }
 
+  openPanelToAddAddress(){
+    this.openPanelAddress = !this.openPanelAddress;
+  }
+  
   cancel(){
     this.router.navigate(['/']);
   }
