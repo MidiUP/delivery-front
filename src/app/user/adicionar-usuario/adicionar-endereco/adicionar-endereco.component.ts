@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/user/user.model';
-import { Address } from 'src/app/user/adicionar-endereco/address.model';
+import { Address } from 'src/app/user/adicionar-usuario/adicionar-endereco/address.model';
 
 @Component({
   selector: 'app-adicionar-endereco',
@@ -11,6 +11,9 @@ import { Address } from 'src/app/user/adicionar-endereco/address.model';
 })
 export class AdicionarEnderecoComponent implements OnInit {
 
+  @Input() openPanelAddress: boolean;
+  @Output() changeOpenPanelAddress = new EventEmitter();
+
   user_?:User= new User("", "", "", "", "", "", new Address("", "", "", "", "", ""), undefined);
 
   endereco: Address;
@@ -18,7 +21,6 @@ export class AdicionarEnderecoComponent implements OnInit {
   addressForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private route: ActivatedRoute,
               private router:Router) { 
    }
 
@@ -32,6 +34,8 @@ export class AdicionarEnderecoComponent implements OnInit {
       cep: this.formBuilder.control('', [Validators.required])
     }, {updateOn: 'change'});
 
+    console.log(this.openPanelAddress);
+    
   }
 
   updateUserProperties(data:User){
@@ -43,6 +47,7 @@ export class AdicionarEnderecoComponent implements OnInit {
   }
 
   cancel(){
-    this.router.navigate(['/'])
+    this.openPanelAddress = !this.openPanelAddress;
+    this.changeOpenPanelAddress.emit(this.openPanelAddress);
   }
 }

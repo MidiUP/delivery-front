@@ -37,19 +37,19 @@
                                     [(ngModel)]="usuario.password" formControlName="password">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 marginWidthSmall">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="CPF" [(ngModel)]="usuario.cpf"
                                     formControlName="cpf">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 marginWidthSmall">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="RG" [(ngModel)]="usuario.rg"
                                     formControlName="rg">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 marginWidthSmall">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Phone" [(ngModel)]="usuario.phone"
                                     formControlName="phone">
@@ -67,7 +67,7 @@
                                         <div class="col-md-6" style="margin-top: 20px;">
                                             <label for="Cidade">Cidade: {{ usuario.address.city }}</label>
                                         </div>
-                                        <div class="col-md-6" style="margin-top: 20px;">
+                                        <div class="col-md-6 marginWidthSmall" style="margin-top: 20px;">
                                             <label for="Rua">Rua: {{ usuario.address.street }}</label>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <div class="col-md-6">
                                             <label for="Bairro">Bairro: {{ usuario.address.neighborhood }}</label>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 marginWidthSmall">
                                             <label for="Numero">Numero: {{ usuario.address.number }}</label>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <app-adicionar-endereco></app-adicionar-endereco>
+                            <app-adicionar-endereco [openPanelAddress]="openPanelAddress" (changeOpenPanelAddress)="onChangeOpenPanelAddress($event)"></app-adicionar-endereco>
 
                         </mat-expansion-panel>
                     </mat-accordion>

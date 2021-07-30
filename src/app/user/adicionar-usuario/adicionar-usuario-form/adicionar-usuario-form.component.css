@@ -45,3 +45,16 @@ button {
 .addressContainer {
     border-radius: 20px;
 }
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;    
+    flex-basis: 0;
+}
+
+@media screen and (max-width: 770px) {
+    .marginWidthSmall{
+        margin-top: 25px;
+    }
+}

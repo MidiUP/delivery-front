@@ -1,4 +1,4 @@
-import { AdicionarEnderecoComponent } from "./user/adicionar-endereco/adicionar-endereco.component";
+import { AdicionarEnderecoComponent } from "./user/adicionar-usuario/adicionar-endereco/adicionar-endereco.component";
 import { AdicionarUsuarioComponent } from "./user/adicionar-usuario/adicionar-usuario.component";
 import { HomeComponent } from "./home/home.component";
 import { PainelAdminComponent } from "./painel-admin/painel-admin.component";

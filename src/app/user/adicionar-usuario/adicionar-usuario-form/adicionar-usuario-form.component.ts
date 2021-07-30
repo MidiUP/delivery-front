@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Address } from 'src/app/user/adicionar-endereco/address.model';
+import { Address } from 'src/app/user/adicionar-usuario/adicionar-endereco/address.model';
 import { User } from 'src/app/user/user.model';
 import { UserService } from 'src/app/user/user.service';
 
@@ -12,11 +12,11 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class AdicionarUsuarioFormComponent implements OnInit {
 
-  openPanelAddress: boolean = false;
+  @Output() openPanelAddress: boolean = false;
   users: User[] = [];
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-  usuario: User = new User("", "", "", "", ", ", "", new Address("", "", "", "", "", ""), undefined);
+  usuario: User = new User("", "", "", "", "", "", new Address("", "", "", "", "", ""), undefined);
 
   address:Address;
 
@@ -68,6 +68,10 @@ export class AdicionarUsuarioFormComponent implements OnInit {
   
   cancel(){
     this.router.navigate(['/']);
+  }
+
+  onChangeOpenPanelAddress(evento: any):void{
+    this.openPanelAddress = evento;
   }
 
 }
