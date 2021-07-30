@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Product } from './product.model';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-novo-produto',
@@ -22,6 +25,6 @@ export class NovoProdutoComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
   }
-  }
+}
 
 

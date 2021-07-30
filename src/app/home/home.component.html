@@ -68,7 +68,7 @@
             </div>
           </nav>
           
-          <mat-card class="produto" *ngFor="let produto of cardapio">
+          <mat-card class="produto" *ngFor="let produto of products">
             <div class="row" style="margin: 0;">
               <div class="col-md-8" style="padding: 0;">
                 <h4>{{produto.name}}</h4>
@@ -151,7 +151,7 @@
                     </div>
                       
                     <div class="preco-produto-carrinho">
-                      <span class="preco-produto-carrinho">R${{item.precoTotal.toFixed(2)}}</span>
+                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
                     </div>
                   </div>
                   <hr class="divisor-carrinho">
@@ -194,7 +194,7 @@
                     <span class="quantidade-produto">{{item.quantityCar}}x</span>
                       
                     <div class="preco-produto-carrinho">
-                      <span class="preco-produto-carrinho">R${{item.precoTotal.toFixed(2)}}</span>
+                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
                     </div>
                   </div>
 

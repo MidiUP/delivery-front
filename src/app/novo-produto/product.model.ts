@@ -1,14 +1,13 @@
-export class Produto{
-    
+export class Product{
     constructor(
         public id: number,
-        public name: String,
+        public name: string,
         public price: number,
-        public description: String,
+        public description: string,
         public availability: boolean,
         public quantity: number,
+        public rate: number,
         public quantityCar: number,
-        public precoTotal: number
-     
+        public total: number
     ){}
 }

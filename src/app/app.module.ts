@@ -40,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdicionarUsuarioFormComponent } from './user/adicionar-usuario/adicionar-usuario-form/adicionar-usuario-form.component';
 import { UserService } from './user/user.service';
+import { ProductService } from './novo-produto/product.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { UserService } from './user/user.service';
     MatSidenavModule,
     MatExpansionModule
   ],
-  providers: [UserService],
+  providers: [UserService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

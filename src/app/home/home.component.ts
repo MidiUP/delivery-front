@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Produto } from './produto.model';
+import { Product } from '../novo-produto/product.model';
+import { ProductService } from '../novo-produto/product.service';
 
 @Component({
   selector: 'app-home',
@@ -19,53 +20,28 @@ export class HomeComponent implements OnInit {
 
   totalPedido:number = 0;
 
-  frete: number = 0;
-
-
-  produto1: Produto = new Produto(
-        1, "X-tudo", 13.90, "Hamburguer bom", true, 20, 0, 0
-        );
-
-  produto2: Produto = new Produto(
-        2, "X-bacon", 19.95, "Hamburguer bom", true, 20, 0, 0
-        );
-
-  produto3: Produto = new Produto(
-        3, "X-salada", 9.95, "Hamburguer bom", true, 20, 0, 0
-        );
-  
-  produto4: Produto = new Produto(
-        4, "X-gordo", 25.95, "Hamburguer bom", true, 20, 0, 0
-        );
-  produto5: Produto = new Produto(
-        5, "Cheddar", 25.95, "Hamburguer bom", true, 20, 0, 0
-        );
-  produto6: Produto = new Produto(
-        6, "bbc", 25.95, "Hamburguer bom", true, 20, 0, 0
-        );
-
-  produto7: Produto = new Produto(
-        6, "bbc", 25.95, "Hamburguer bom", true, 20, 0, 0
-        );
-
-  produto8: Produto = new Produto(
-        6, "bbc", 25.95, "Hamburguer bom", true, 20, 0, 0
-        );
-
+  frete: number = 0
       
+  products: Product[] =  [];
 
-  cardapio: Produto[] = [this.produto1,this.produto2,this.produto3,this.produto4, this.produto5, this.produto6, this.produto7, this.produto8];
-
-  itensCarrinho: Produto[] = [];
+  itensCarrinho: Product[] = [];
   
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-
-    
+    this.getProducts();
   }
 
+  getProducts():void{    
+    this.productService.getProducts()
+      .subscribe(
+        data=>{
+          this.products = data
+          console.log(this.products);          
+        }
+      );
+  }
 
   onClickEnderecoItem(endereco: string):void {
     this.enderecoSelecionado = endereco;
@@ -75,18 +51,18 @@ export class HomeComponent implements OnInit {
     this.pagamentoSelecionado = pagamento;
   }
 
-  addItem(produto: Produto):void{
+  addItem(produto: Product):void{
     if(!this.itensCarrinho.includes(produto)){
       this.itensCarrinho.push(produto);
       produto.quantityCar=1;
     }else{
     produto.quantityCar++;}
-    produto.precoTotal = produto.quantityCar * produto.price;
+    produto.total = produto.quantityCar * produto.price;
     this.totalPedido += produto.price;
 
   }
 
-  removeItem(produto: Produto):void{
+  removeItem(produto: Product):void{
     if(produto.quantityCar==1){
       this.totalPedido-=produto.price
     }
@@ -101,7 +77,7 @@ export class HomeComponent implements OnInit {
     }
     if(produto.quantityCar>0)
     produto.quantityCar--;
-    produto.precoTotal = produto.quantityCar * produto.price;
+    produto.total = produto.quantityCar * produto.price;
     
     if(produto.quantityCar>0){
     this.totalPedido -= produto.price;}
