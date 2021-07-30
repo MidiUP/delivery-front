@@ -1,6 +1,5 @@
 .flexPosition {
-    margin-top: 97px;
-    min-height: 900px;
+    min-height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +8,6 @@
 .container {
     background-color: #fff;
     margin-top: 20px;
-    margin-bottom: 300px;
     border-radius: 20px;
 }
 

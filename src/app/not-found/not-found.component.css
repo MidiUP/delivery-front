@@ -1,0 +1,13 @@
+.content-header .jumbotron{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img{
+    width: 50%;
+    height: 500px;
+}

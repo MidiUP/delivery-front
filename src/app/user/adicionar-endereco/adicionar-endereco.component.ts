@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Address } from './address.model'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/user/user.model';
+import { Address } from 'src/app/user/adicionar-endereco/address.model';
 
 @Component({
   selector: 'app-adicionar-endereco',
@@ -10,12 +11,15 @@ import { Address } from './address.model';
 })
 export class AdicionarEnderecoComponent implements OnInit {
 
+  user_?:User= new User("", "", "", "", "", "", new Address("", "", "", "", "", ""), undefined);
+
   endereco: Address;
 
   addressForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router) {    
+              private route: ActivatedRoute,
+              private router:Router) { 
    }
 
   ngOnInit(): void {   
@@ -27,10 +31,15 @@ export class AdicionarEnderecoComponent implements OnInit {
       city: this.formBuilder.control('', [Validators.required]),
       cep: this.formBuilder.control('', [Validators.required])
     }, {updateOn: 'change'});
+
+  }
+
+  updateUserProperties(data:User){
+    this.user_ = data;
   }
 
   salvarEndereco(endereco: Address): void {
-    console.log(endereco);    
+    console.log(this.user_);    
   }
 
   cancel(){

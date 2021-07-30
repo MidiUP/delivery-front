@@ -39,18 +39,7 @@ button {
 
 .novoEndereco {
     display: flex;
-    justify-content: flex-start;
-}
-
-.textNovoEndereco {
-    color: #000;
-    text-decoration: none;
-    text-align: center;
-    font-size: 18px;
-}
-
-.textNovoEndereco:hover {
-    opacity: 0.4;
+    justify-content: center;
 }
 
 .addressContainer {
