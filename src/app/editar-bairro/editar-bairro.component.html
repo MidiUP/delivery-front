@@ -1,1 +1,27 @@
-<p>editar-bairro works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="nome-produto" class="form-label">Selecione o Bairro</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Bairros</option>
+                <option value="1">Centro</option>
+                <option value="2">Lourival Parente</option>
+                <option value="3">Morada Nova</option>
+              </select>
+        </div>
+        <div class="col-md-6">
+            <label for="nome-produto" class="form-label">Novo Nome</label>
+            <div class="flex">
+            <input formControlName="name" type="text" class="form-control" placeholder="Ex: Morada Nova">
+            <label for="nome-produto" class="form-label">Novo Preço</label>
+            <div class="input-group mb-2">
+                <span class="input-group-text cifrao" id="basic-addon1">R$</span>
+                <input type="text" class="form-control" placeholder="Ex: 0,00" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+            
+            </div>
+        </div>
+        <div class="botao d-flex">
+            <button class="btn btn-primary">Salvar</button>
+        </div>
+</div>

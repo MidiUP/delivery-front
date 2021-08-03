@@ -1,0 +1,26 @@
+.bairro{
+    width: 30%;
+    margin-top: 15px;
+    padding-bottom: 0%;
+    margin-right: 15px;
+}
+
+.container{
+    display: flex;
+    direction: row;
+    flex-wrap: wrap;
+}
+
+span{
+    color: red;
+}
+
+mat-icon{
+    font-size: medium;
+    margin-left: 0;
+}
+
+a:hover{
+    cursor: pointer;
+
+}

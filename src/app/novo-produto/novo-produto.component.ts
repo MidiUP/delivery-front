@@ -11,20 +11,37 @@ import { ProductService } from './product.service';
 })
 export class NovoProdutoComponent implements OnInit {
 
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  newProductForm: FormGroup;
+  product: Product = new Product("",0,"",true,0,0,0,0,undefined);
+
+  constructor(private formBuilder: FormBuilder,
+    private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+    this.newProductForm = new FormGroup({
+      name: this.formBuilder.control('', []),
+      description: this.formBuilder.control('', []),
+      quantity: this.formBuilder.control('', []),
+      price: this.formBuilder.control('', []),
+      availability: this.formBuilder.control('', [])
+    }, {updateOn: 'change'});
   }
+
+  createProduct():void{
+    console.log(this.product);
+    
+    this.productService.createProduct(this.product)
+      .subscribe(
+        data => {
+          this.product = data;
+          console.log(this.product);
+          
+        }
+      )
+  }
+
+
 }
 
 

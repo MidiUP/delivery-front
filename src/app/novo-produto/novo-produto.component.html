@@ -1,23 +1,25 @@
-<form>
-    <div class="container">
+<div class="container">
+    <form [formGroup]="newProductForm">
         <div class="row">
             <div class="col-md-6">
                 <label for="nome-produto" class="form-label">Nome do Produto</label>
-                <input type="nome" id="nomeProduto" class="form-control" aria-describedby="nome" placeholder="Ex: Hambúrguer">
+                <input [(ngModel)]="product.name" formControlName="name" type="text" class="form-control"
+                    placeholder="Ex: Hambúrguer">
                 <!--<div id="Nome" class="form-text">
                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                 </div>-->
             </div>
             <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Descrição do produto</label>
-                <input type="nome" id="nomeProduto" class="form-control" aria-describedby="nome" placeholder="Ex: Carne, queijo, ovo, alface e tomate">
+                <label for="descricao" class="form-label">Descrição do produto</label>
+                <input [(ngModel)]="product.description" formControlName="description" type="text" class="form-control"
+                    placeholder="Ex: Carne, queijo, ovo, alface e tomate">
                 <!--<div id="Nome" class="form-text">
                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                 </div>-->
             </div>
         </div>
-    </div>
-    <div class="container">
+
+
         <div class="row">
             <div class="col-md-6">
                 <label for="nome-produto" class="form-label">Selecione uma Categoria</label>
@@ -26,34 +28,43 @@
                     <option value="Hamburguer">Hambúrguer</option>
                     <option value="Bebida">Bebida</option>
                     <option value="Tira-gosto">Tira gosto</option>
-                  </select>
+                </select>
             </div>
             <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Quantidade no estoque</label>
-                <input type="quantidade" id="quantidadeProduto" class="form-control" aria-describedby="quantidade" placeholder="Ex: 25">
+                <label for="quantidade" class="form-label">Quantidade no estoque</label>
+                <input [(ngModel)]="product.quantity" formControlName="quantity" type="number" id="quantidadeProduto"
+                    class="form-control" placeholder="Ex: 25">
                 <!--<div id="Nome" class="form-text">
                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                 </div>-->
             </div>
         </div>
-    </div>
-    <div class="container">
+
+
         <div class="row">
             <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Preço</label>
+                <label for="preco-produto" class="form-label">Preço</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">R$</span>
-                    <input type="text" class="form-control" placeholder="0,00" aria-label="Username" aria-describedby="basic-addon1">
-                  </div>
+                    <input [(ngModel)]="product.price" formControlName="price" type="number" class="form-control"
+                        placeholder="0,00" aria-describedby="basic-addon1">
+                </div>
             </div>
             <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Quantidade no estoque</label>
-                <input type="quantidade" id="quantidadeProduto" class="form-control" aria-describedby="quantidade" placeholder="Ex: 25">
-                <!--<div id="Nome" class="form-text">
-                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                </div>-->
+                <label for="nome-produto" style="margin-top: 25px;" class="form-label">Disponibilidade</label>
+                <div class="form-check">
+                    <input [(ngModel)]="product.availability" formControlName="availability" class="form-check-input"
+                        type="checkbox" value="true" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Disponível no estoque
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-</form>
-  
+
+        <div class="d-flex justify-content-center mt-2">
+            <button class="btn btn-success" type="submit" (click)="createProduct()">Salvar</button>
+        </div>
+
+    </form>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../novo-produto/product.model';
+import { ProductService } from '../novo-produto/product.service';
 
 @Component({
   selector: 'app-editar-produto',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarProdutoComponent implements OnInit {
 
-  constructor() { }
+  products: Product[] =  [];
+
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.getProducts();
+    console.log(this.products)
+    
+  }
+
+  getProducts():void{
+    this.productService.getProducts()
+      .subscribe(
+        data=>{
+        this.products = data;
+        
+        }
+      );
+
   }
 
 }

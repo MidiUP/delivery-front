@@ -1,0 +1,66 @@
+.all-products{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.form-label{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.form-select{
+    margin-top:0;
+}
+
+.produto{
+    width: 35%;
+    margin-top: 15px;
+}
+
+h2{
+    font-size: 1.3em;
+    margin-bottom: 2px;
+}
+
+.img-produto{
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    padding: auto;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    line-height: 1.2em;
+    margin-bottom: 10px;
+}
+
+mat-card{
+    padding: 10px 5px 0px 5px;
+}
+
+.preco{
+    font-size:0.9em;
+    margin-top: 13px;
+}
+
+span{
+    color: red;
+}
+
+mat-icon{
+    font-size: medium ;
+    margin: 0;
+}
+
+.botoes{
+    margin-bottom: 10px ;
+    margin-top: 0;
+    padding: 0;
+}
