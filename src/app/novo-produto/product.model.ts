@@ -8,6 +8,6 @@ export class Product{
         public rate: number,
         public quantityCar: number,
         public total: number,
-        public id?: number,
+        public key: number
     ){}
 }

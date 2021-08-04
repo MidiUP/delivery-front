@@ -13,7 +13,7 @@ export class NovoProdutoComponent implements OnInit {
 
 
   newProductForm: FormGroup;
-  product: Product = new Product("",0,"",true,0,0,0,0,undefined);
+  product: Product = new Product("",0,"",true,0,0,0,0,0);
 
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService) { }
