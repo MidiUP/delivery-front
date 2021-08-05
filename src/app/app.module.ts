@@ -32,6 +32,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { AdicionarEnderecoComponent } from './user/adicionar-usuario/adicionar-endereco/adicionar-endereco.component';
@@ -41,6 +45,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AdicionarUsuarioFormComponent } from './user/adicionar-usuario/adicionar-usuario-form/adicionar-usuario-form.component';
 import { UserService } from './user/user.service';
 import { ProductService } from './novo-produto/product.service';
+import { AlertaSuccesComponent } from './alerta-succes/alerta-succes.component';
+import { AlertaErrorComponent } from './alerta-error/alerta-error.component';
+import { DialogDeleteComponent } from './editar-produto/dialog-delete/dialog-delete.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +68,9 @@ import { ProductService } from './novo-produto/product.service';
     PersonalizacaoComponent,
     NotFoundComponent,
     AdicionarUsuarioFormComponent,
+    AlertaSuccesComponent,
+    AlertaErrorComponent,
+    DialogDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +87,11 @@ import { ProductService } from './novo-produto/product.service';
     RouterModule.forRoot(ROUTES),
     FontAwesomeModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [UserService, ProductService],
   bootstrap: [AppComponent]

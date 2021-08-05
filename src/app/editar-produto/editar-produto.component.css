@@ -43,6 +43,7 @@ p{
 
 mat-card{
     padding: 10px 5px 0px 5px;
+    margin-right: 10px;
 }
 
 .preco{
@@ -63,4 +64,13 @@ mat-icon{
     margin-bottom: 10px ;
     margin-top: 0;
     padding: 0;
+}
+
+mat-form-field{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn{
+    margin-bottom: 10px;
 }

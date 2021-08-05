@@ -1,0 +1,13 @@
+<h2>Você realmente deseja remover este produto?</h2>
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <button mat-dialog-close mat-raised-button color="primary">Cancelar</button>
+        </div>
+        <div class="col-md-4">
+            <button mat-raised-button color="warn" [mat-dialog-close]="true" (click)="delete()">Deletar</button>
+        </div>
+    </div>
+</div>

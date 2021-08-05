@@ -6,3 +6,54 @@
 .form-select{
     margin-top:0;
 }
+
+mat-form-field{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn{
+    margin-bottom: 10px;
+}
+
+.produto{
+    width: 35%;
+    margin-top: 15px;
+}
+
+h2{
+    font-size: 1.3em;
+    margin-bottom: 2px;
+}
+
+.img-produto{
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    padding: auto;
+    margin-bottom: 5px;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    line-height: 1.2em;
+    margin-bottom: 10px;
+}
+
+mat-card{
+    padding: 10px 5px 0px 5px;
+}
+
+.preco{
+    font-size:0.9em;
+    margin-top: 13px;
+}
+
+span{
+    color: red;
+}

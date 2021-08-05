@@ -19,7 +19,7 @@
                                 style="margin-left: 5px; width: 30px; height: 30px;" (click)="edit(produto)">
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" style="margin-left: 5px; width: 30px; height: 30px;"(click)="delete(produto.key)">
+                            <button mat-icon-button color="warn" style="margin-left: 5px; width: 30px; height: 30px;"(click)="openDialog(produto.key)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </div>
@@ -35,59 +35,94 @@
     <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Nome do Produto</label>
-                <input [(ngModel)]="product.name" formControlName="name" type="text" class="form-control" placeholder="Ex: Hambúrguer">
+                <mat-form-field appearance="outline">
+                    <mat-label for="nome-produto" >Nome do Produto</mat-label>
+                <input matInput  [(ngModel)]="product.name" formControlName="name" type="text" placeholder="Ex: Hambúrguer" >
+                <mat-error *ngIf="editProductForm.controls.name.hasError('required')">
+                    Por favor insira um nome.
+                </mat-error>
+                <mat-error *ngIf="editProductForm.controls.name.hasError('minlength')">
+                    Por favor insira um nome com dois ou mais caracteres.
+                </mat-error>
+                </mat-form-field>
             </div>
             <div class="col-md-6">
-                <label for="descricao" class="form-label">Descrição do produto</label>
-                <input [(ngModel)]="product.description" formControlName="description" type="text" class="form-control"
-                    placeholder="Ex: Carne, queijo, ovo, alface e tomate">
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-6">
-                <label for="nome-produto" class="form-label">Selecione uma Categoria</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Categoria</option>
-                    <option value="Hamburguer">Hambúrguer</option>
-                    <option value="Bebida">Bebida</option>
-                    <option value="Tira-gosto">Tira gosto</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="quantidade" class="form-label">Quantidade no estoque</label>
-                <input [(ngModel)]="product.quantity" formControlName="quantity" type="number" id="quantidadeProduto" class="form-control"
-                    placeholder="Ex: 25">
+                <mat-form-field appearance="outline">
+                    <mat-label for="descricao">Descrição do produto</mat-label>
+                    <input matInput [(ngModel)]="product.description" formControlName="description" type="text"
+                        placeholder="Ex: Carne, queijo, ovo, alface e tomate">
+                        <mat-error *ngIf="editProductForm.controls.description.hasError('required')">
+                            Por favor insira uma descrição.
+                        </mat-error>
+                        <mat-error *ngIf="editProductForm.controls.description.hasError('minlength')">
+                            Sua descrição deve conter pelo menos 04 caracteres.
+                        </mat-error>
+                </mat-form-field>
             </div>
         </div>
 
 
         <div class="row">
             <div class="col-md-6">
-                <label for="preco-produto" class="form-label">Preço</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">R$</span>
-                    <input [(ngModel)]="product.price" formControlName="price" type="number" class="form-control" placeholder="0,00"
+                <mat-form-field appearance="fill">
+                    <mat-label>Escolha uma Categoria</mat-label>
+                    <mat-select>
+                      <mat-option value="1">Hamburguer</mat-option>
+                      <mat-option value="1">Bebida</mat-option>
+                      <mat-option value="1">Tira-Gosto</mat-option>
+                    </mat-select>
+                  </mat-form-field> 
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label for="quantidade" >Quantidade no estoque</mat-label>
+                    <input matInput [(ngModel)]="product.quantity" formControlName="quantity" type="number" id="quantidadeProduto" 
+                        placeholder="Ex: 25">
+                        <mat-error *ngIf="editProductForm.controls.quantity.hasError('required')">
+                            Deve haver pelo menos 01 item no estoque.
+                        </mat-error>
+                        <mat-error *ngIf="editProductForm.controls.quantity.hasError('min')">
+                            Deve haver pelo menos 01 item no estoque.
+                        </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label for="preco-produto" class="form-label">Preço</mat-label>
+                    <input matInput [(ngModel)]="product.price" formControlName="price" type="number" placeholder="0,00"
                         aria-describedby="basic-addon1">
-                </div>
+                        <mat-error *ngIf="editProductForm.controls.price.hasError('required')">
+                            Seu produto deve ter o valor minímo de R$1,00.
+                        </mat-error>
+                        <mat-error *ngIf="editProductForm.controls.price.hasError('min')">
+                            Seu produto deve ter o valor minímo de R$1,00.
+                        </mat-error>
+                </mat-form-field>
+                
+                    
+                
             </div>
             <div class="col-md-6">
-                <label for="nome-produto" style="margin-top: 25px;" class="form-label">Disponibilidade</label>
-                <div class="form-check">
-                    <input [(ngModel)]="product.availability" formControlName="availability" class="form-check-input" type="checkbox" value="true"
-                        id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Disponível no estoque
-                    </label>
+                    <label for="nome-produto" style="margin-top: 25px;" class="form-label">Disponibilidade</label>
+                    <div class="form-check">
+                        <input [(ngModel)]="product.availability" formControlName="availability" class="form-check-input" type="checkbox" value="true"
+                            id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Disponível no estoque
+                        </label>
                 </div>
             </div>
         </div>
 
         <div class="d-flex justify-content-center mt-2">
-            <button class="btn btn-success" type="submit">Salvar</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!editProductForm.valid">Salvar</button>
         </div>
+
+        <app-dialog-delete [idDeleteFilho]="idDelete" style="display: none;"></app-dialog-delete>
 
     </form>
 

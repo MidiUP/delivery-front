@@ -10,7 +10,7 @@ export class PainelAdminComponent implements OnInit {
   panelOpenState = false;
   iconeMenu:String = "expand_more";
   contador:number;
-  content:String="editar-produto";
+  content:String="";
 
   constructor() { }
 
