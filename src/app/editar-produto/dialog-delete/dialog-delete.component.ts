@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ProductService } from '../../novo-produto/product.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { ProductService } from '../../novo-produto/product.service';
 export class DialogDeleteComponent implements OnInit {
 
   @Input() idDeleteFilho: number;
+  @Output() clickDelete = new EventEmitter;
 
   constructor(private productService: ProductService) { }
 
@@ -17,14 +18,18 @@ export class DialogDeleteComponent implements OnInit {
   }
 
   delete() {
-    this.productService.deleteProduct(this.idDeleteFilho)
-      .subscribe(
-        (res) => {
-          console.log("apagou");
-        },
-        (err) => {
-          console.log(err);
-        }
-      )
+
+    // this.productService.deleteProduct(this.idDeleteFilho)
+    //   .subscribe(
+    //     (res) => {
+    //       console.log("apagou");
+    //     },
+    //     (err) => {
+    //       console.log(err);
+    //     }
+    //   )
+    this.clickDelete.emit();
   }
+
+  
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../novo-produto/product.model';
 import { ProductService } from '../novo-produto/product.service';
@@ -7,6 +7,7 @@ import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component'
 import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
+
 
 @Component({
   selector: 'app-editar-produto',
@@ -19,6 +20,7 @@ export class EditarProdutoComponent implements OnInit {
   product: Product = new Product("", 0, "", true, 0, 0, 0, 0, 0);
   editProductForm: FormGroup;
   
+  @Output() clickDelete = new EventEmitter;
   
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -102,14 +104,21 @@ export class EditarProdutoComponent implements OnInit {
 
   openDialog(id:number) {
     const dialogRef = this.dialog.open(DialogDeleteComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
     this.idDelete=id;
-    
   }
 
+  Clicou(evento: any){
+  
+    this.productService.deleteProduct(this.idDelete)
+      .subscribe(
+        (res) => {
+          console.log("apagou");
+        },
+        (err) => {
+          console.log(err);
+        }
+      )
+  }
 
 
 }
