@@ -10,7 +10,7 @@ export class PainelAdminComponent implements OnInit {
   panelOpenState = false;
   iconeMenu:String = "expand_more";
   contador:number;
-  content:String="novo-produto";
+  content:String="";
 
   constructor() { }
 
@@ -18,15 +18,6 @@ export class PainelAdminComponent implements OnInit {
     
   }
 
-  icone(): String{
-    this.contador=1;
-    if(this.contador%2!=0){
-      return "expand_more"
-
-    }else{
-      return "expand_less"
-    }
-  }
   
   contentInfo():void{
     this.content="info";

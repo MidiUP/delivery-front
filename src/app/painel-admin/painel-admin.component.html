@@ -13,7 +13,7 @@
                 <mat-expansion-panel hideToggle class="item-menu">
                   <mat-expansion-panel-header class="item-menu">
                     <mat-panel-title class="item-menu" >
-                      Produtos<mat-icon>{{icone()}}</mat-icon>
+                      Produtos<mat-icon>expand_more</mat-icon>
                     </mat-panel-title>
                   </mat-expansion-panel-header >
                   <a (click)="contentNovoProduto()" >Novo Produto</a><br><br>
@@ -31,7 +31,7 @@
               <mat-expansion-panel hideToggle class="item-menu">
                 <mat-expansion-panel-header class="item-menu">
                   <mat-panel-title class="item-menu" >
-                    Taxa de Entrega<mat-icon>{{icone()}}</mat-icon>
+                    Taxa de Entrega<mat-icon>expand_more</mat-icon>
                   </mat-panel-title>
                 </mat-expansion-panel-header >
                 <a (click)="contentBairros()">Bairros</a><br><br>
@@ -74,15 +74,15 @@
             
             <ul class="d-flex">
               <li>
-                <a>Aplicação</a>
+                <a href="#" class="link-navbar">Aplicação</a>
               </li>
 
               <li>
-                <a>Suporte</a>
+                <a class="link-navbar">Suporte</a>
               </li>
 
               <li>
-                <a>Instruções</a>
+                <a class="link-navbar">Instruções</a>
               </li>
             </ul>
            
@@ -100,8 +100,6 @@
       </div>
 
   </div>
-
-  <app-footer></app-footer>
 
 </body>
 

@@ -1,1 +1,22 @@
-<p>novo-bairro works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="nome-produto" class="form-label">Nome do Bairro</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Ex: Centro">
+        </div>
+        <div class="col-md-6">
+            <label for="nome-produto" class="form-label">Taxa de Entrega</label>
+            <div class="d-flex">
+                <div class="input-group mb-2">
+                    <span class="input-group-text cifrao" id="basic-addon1">R$</span>
+                    <input type="text" class="form-control" placeholder="Ex: 0,00" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="botao d-flex">
+        <button class="btn btn-primary">Salvar</button>
+    </div>
+</div>
+        

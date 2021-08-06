@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts()
       .subscribe(
         data=>{
-          this.products = data
-          console.log(this.products);          
+          this.products = data         
         }
       );
   }

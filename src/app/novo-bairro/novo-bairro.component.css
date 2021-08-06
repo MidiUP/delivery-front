@@ -1,0 +1,76 @@
+.categorias{
+    width: 25%;
+    margin-top: 15px;
+    padding-bottom: 0%;
+    margin-right: 15px;
+}
+
+.container-cards{
+    display: flex;
+    direction: row;
+    flex-wrap: wrap;
+}
+
+span{
+    color: red;
+}
+
+.cifrao{
+    color: black;
+}
+mat-icon{
+    font-size: medium;
+    margin-left: 0px;
+}
+
+a:hover{
+    cursor: pointer;
+
+}
+
+.divisor{
+    margin: 20px 0px;
+    height: 1px;
+    background: rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+h1{
+    font-size: 1.5em;
+    margin-bottom: 0px;
+}
+
+.form-label{
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+  
+  .form-select{
+    margin-top:0;
+  }
+  
+  .form-text{
+    font-size: 0.7em;
+    margin-left: 5px;
+  }
+  
+  .checkbox{
+    display: flex;
+    flex-wrap: wrap
+  
+  }
+  
+  .form-check{
+    margin-left: 10px;
+  }
+
+  .btn{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+  }
+
+  .botao{
+      margin-left: auto;
+      margin-right: auto;
+  }
