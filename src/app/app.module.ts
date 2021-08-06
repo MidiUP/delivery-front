@@ -41,6 +41,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AdicionarUsuarioFormComponent } from './user/adicionar-usuario/adicionar-usuario-form/adicionar-usuario-form.component';
 import { UserService } from './user/user.service';
 import { ProductService } from './novo-produto/product.service';
+import { DialogDeleteProductComponent } from './dialog-delete-product/dialog-delete-product.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProductService } from './novo-produto/product.service';
     PersonalizacaoComponent,
     NotFoundComponent,
     AdicionarUsuarioFormComponent,
+    DialogDeleteProductComponent,
   ],
   imports: [
     BrowserModule,

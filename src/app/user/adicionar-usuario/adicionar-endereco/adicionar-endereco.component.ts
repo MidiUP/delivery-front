@@ -14,17 +14,16 @@ export class AdicionarEnderecoComponent implements OnInit {
   @Input() openPanelAddress: boolean;
   @Output() changeOpenPanelAddress = new EventEmitter();
 
-  user_?:User= new User("", "", "", "", "", "", new Address("", "", "", "", "", ""), undefined);
+  @Output() sendAddress = new EventEmitter();
 
   endereco: Address;
 
   addressForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
-              private router:Router) { 
+  constructor(private formBuilder: FormBuilder) { 
    }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
       this.addressForm = new FormGroup({
       street: this.formBuilder.control('', [Validators.required]),
       neighborhood: this.formBuilder.control('', [Validators.required]),
@@ -38,12 +37,8 @@ export class AdicionarEnderecoComponent implements OnInit {
     
   }
 
-  updateUserProperties(data:User){
-    this.user_ = data;
-  }
-
-  salvarEndereco(endereco: Address): void {
-    console.log(this.user_);    
+  salvarEndereco(endereco: Address): void {    
+    this.sendAddress.emit(endereco);
   }
 
   cancel(){

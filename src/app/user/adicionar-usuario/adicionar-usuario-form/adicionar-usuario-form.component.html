@@ -111,7 +111,7 @@
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <app-adicionar-endereco [openPanelAddress]="openPanelAddress" (changeOpenPanelAddress)="onChangeOpenPanelAddress($event)"></app-adicionar-endereco>
+                            <app-adicionar-endereco [openPanelAddress]="openPanelAddress" (changeOpenPanelAddress)="onChangeOpenPanelAddress($event)" (sendAddress)="addressValue($event)"></app-adicionar-endereco>
 
                         </mat-expansion-panel>
                     </mat-accordion>

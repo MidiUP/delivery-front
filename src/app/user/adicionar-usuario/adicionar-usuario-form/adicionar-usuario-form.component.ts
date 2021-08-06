@@ -43,6 +43,7 @@ export class AdicionarUsuarioFormComponent implements OnInit {
   }
 
   salvarUsuario(usuario: User){
+    usuario.address = this.address;
     this.userService.createUser(usuario)
       .subscribe(
         data=>
@@ -72,6 +73,11 @@ export class AdicionarUsuarioFormComponent implements OnInit {
 
   onChangeOpenPanelAddress(evento: any):void{
     this.openPanelAddress = evento;
+  }
+  
+  addressValue(evento: any): void {
+    this.usuario.address = evento;
+    this.onChangeOpenPanelAddress(false);
   }
 
 }
