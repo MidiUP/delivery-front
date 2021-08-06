@@ -103,8 +103,9 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   openDialog(id:number) {
-    const dialogRef = this.dialog.open(DialogDeleteComponent);
-    this.idDelete=id;
+    const dialogRef = this.dialog.open(DialogDeleteComponent,{
+      data:{id: id}
+    });
   }
 
   Clicou(evento: any){

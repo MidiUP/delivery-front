@@ -1,5 +1,10 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductService } from '../../novo-produto/product.service';
+
+export interface DialogData {
+  id: number;
+}
 
 @Component({
   selector: 'app-dialog-delete',
@@ -8,27 +13,26 @@ import { ProductService } from '../../novo-produto/product.service';
 })
 export class DialogDeleteComponent implements OnInit {
 
-  @Input() idDeleteFilho: number;
-  @Output() clickDelete = new EventEmitter;
-
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+            public dialogRef: MatDialogRef<DialogDeleteComponent>,
+            @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
-    console.log(this.idDeleteFilho);
+    console.log(this.data.id);
   }
 
   delete() {
-
-    // this.productService.deleteProduct(this.idDeleteFilho)
-    //   .subscribe(
-    //     (res) => {
-    //       console.log("apagou");
-    //     },
-    //     (err) => {
-    //       console.log(err);
-    //     }
-    //   )
-    this.clickDelete.emit();
+    this.productService.deleteProduct(this.data.id)
+      .subscribe(
+        (data) => {
+          console.log(data); 
+          window.location.reload();        
+        },
+        (error) => {
+          console.log("error");
+          
+        }
+      )
   }
 
   
