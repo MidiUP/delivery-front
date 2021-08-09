@@ -1,23 +1,4 @@
-.form-label{
-  margin-bottom: 0;
+mat-form-field{
+  width: 100%;
   margin-top: 10px;
-}
-
-.form-select{
-  margin-top:0;
-}
-
-.form-text{
-  font-size: 0.7em;
-  margin-left: 5px;
-}
-
-.checkbox{
-  display: flex;
-  flex-wrap: wrap
-
-}
-
-.form-check{
-  margin-left: 10px;
 }

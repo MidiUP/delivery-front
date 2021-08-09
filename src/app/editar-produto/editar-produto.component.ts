@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../novo-produto/product.model';
 import { ProductService } from '../novo-produto/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,6 +7,8 @@ import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component'
 import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
+import { categoriaService } from '../categorias/categoria.service';
+import { Categoria } from '../categorias/categoria.model';
 
 
 @Component({
@@ -15,24 +17,26 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
   styleUrls: ['./editar-produto.component.css']
 })
 export class EditarProdutoComponent implements OnInit {
-  @Output() idDelete: number = 2;
   products: Product[];
-  product: Product = new Product("", 0, "", true, 0, 0, 0, 0, 0);
+  product: Product = new Product("", 0, "", true, 0, 0, 0, 0, 0, {id: 0, description:""});
   editProductForm: FormGroup;
+  categorias: Categoria[];
   
-  @Output() clickDelete = new EventEmitter;
   
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private categoriaService: categoriaService) { }
 
   ngOnInit(): void {
     this.getProducts();
+    this.getCategorias();
 
     this.editProductForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
       description: this.formBuilder.control('', [Validators.required, Validators.minLength(4)]),
+      category: this.formBuilder.control('', []),
       quantity: this.formBuilder.control('', [Validators.required, Validators.min(1)]),
       price: this.formBuilder.control('', [Validators.required, Validators.min(1)]),
       availability: this.formBuilder.control('', [])
@@ -108,18 +112,13 @@ export class EditarProdutoComponent implements OnInit {
     });
   }
 
-  Clicou(evento: any){
-  
-    this.productService.deleteProduct(this.idDelete)
+  getCategorias(): void {
+    this.categoriaService.getCategories()
       .subscribe(
-        (res) => {
-          console.log("apagou");
-        },
-        (err) => {
-          console.log(err);
+        data => {
+          this.categorias = data;
         }
-      )
+      );
   }
-
 
 }

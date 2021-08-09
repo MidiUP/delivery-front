@@ -1,8 +1,7 @@
-
 <div class="container container-cards">
-    <mat-card class="categorias">
+    <mat-card class="categorias" *ngFor="let categoria of categorias">
         <mat-card-title>
-            Hambúrguer
+            {{categoria.description}}
         </mat-card-title>
         <mat-card-content>
             <div class="d-flex">
@@ -10,165 +9,86 @@
                     Produtos: <span>10</span>
                 </p>
                 <a>
-                    <mat-icon style="margin-left: 15px;">edit</mat-icon>
+                    <mat-icon style="margin-left: 15px;" (click)="buttonEdit(categoria)">edit</mat-icon>
                 </a>
-    
+
                 <a>
-                    <mat-icon>delete</mat-icon>
+                    <mat-icon (click)="delete(categoria.id)">delete</mat-icon>
                 </a>
             </div>
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="categorias">
-        <mat-card-title>
-            Refrigerante
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Produtos: <span>10</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 15px;">edit</mat-icon>
-                </a>
-    
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="categorias">
-        <mat-card-title>
-            Pastel
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Produtos: <span>10</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 15px;">edit</mat-icon>
-                </a>
-    
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="categorias">
-        <mat-card-title>
-            Pizza
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Produtos: <span>10</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 15px;">edit</mat-icon>
-                </a>
-    
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="categorias">
-        <mat-card-title>
-            Suco
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Produtos: <span>10</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 15px;">edit</mat-icon>
-                </a>
-    
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="categorias">
-        <mat-card-title>
-            Cachorro Quente
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Produtos: <span>10</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 15px;">edit</mat-icon>
-                </a>
-    
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-    
-          
 </div>
 
 
 
 <div class="container">
-    
+
     <hr>
 
     <h1>Nova Categoria</h1>
 
     <div class="row">
-        <div class="col-md-6">
-            <label for="nome-produto" class="form-label">Nome da Categoria</label>
-            <div class="d-flex">
-            <input formControlName="name" type="text" class="form-control" placeholder="Ex: Hambúrguer">
-            <button class="btn btn-primary">Salvar</button>
+        <form [formGroup]="newCategoriaForm" (ngSubmit)="createCategory()">
+            <div class="col-md-6 ">
+                <div class="row">
+                    <div class="col-md-8 alinhamento">
+                        <mat-form-field appearance="outline">
+                            <mat-label for="nome-produto">Nome da Categoria</mat-label>
+                            <input matInput formControlName="name" [(ngModel)]="categoriaNew.description" type="text"
+                                placeholder="Ex: Hambúrguer">
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col-md-4 alinhamento">
+                        <button class="btn btn-primary" type="submit"
+                            [disabled]="!newCategoriaForm.valid">Salvar</button>
+                    </div>
+                </div>
             </div>
-        </div>
-      
+        </form>
+
+
+
 
     </div>
 </div>
 
 <div class="container">
-    
+
     <hr>
 
     <h1>Editar Categoria</h1>
 
     <div class="row">
-        <div class="col-md-6">
-            <label for="nome-produto" class="form-label">Selecione a Categoria</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Categorias</option>
-                <option value="1">Hambúrguer</option>
-                <option value="2">Pastél</option>
-                <option value="3">Refrigerante</option>
-              </select>
-        </div>
-        <div class="col-md-6">
-            <label for="nome-produto" class="form-label">Novo Nome</label>
-            <div class="d-flex">
-            <input formControlName="name" type="text" class="form-control" placeholder="Ex: Hambúrguer">
-            <button class="btn btn-primary">Salvar</button>
+        <form [formGroup]="editCategoriaForm" (ngSubmit)="editCategory()">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Escolha uma Categoria</mat-label>
+                    <mat-select>
+                        <mat-option value="1">Hamburguer</mat-option>
+                        <mat-option value="1">Bebida</mat-option>
+                        <mat-option value="1">Tira-Gosto</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
-        </div>
-      
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-8 alinhamento">
+                        <mat-form-field appearance="outline">
+                            <mat-label for="nome-produto">Novo Nome</mat-label>
+                            <input matInput type="text" formControlName="name" [(ngModel)]="categoriaEdit.description" placeholder="Ex: Hambúrguer">
+                        </mat-form-field>
 
+                    </div>
+                    <div class="col-md-4 alinhamento">
+                        <button class="btn btn-primary" type="submit"
+                            [disabled]="!editCategoriaForm.valid">Salvar</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>
-

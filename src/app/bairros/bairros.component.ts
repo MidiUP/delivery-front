@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Bairro } from '../novo-bairro/bairro.model';
+import { bairroService } from '../novo-bairro/bairro.service';
 
 @Component({
   selector: 'app-bairros',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BairrosComponent implements OnInit {
 
-  constructor() { }
+  bairros: Bairro[];
+
+  constructor(private bairroService: bairroService) { }
 
   ngOnInit(): void {
+    this.getBairros();
+  }
+
+  getBairros(): void {
+    this.bairroService.getBairros()
+      .subscribe(
+        data => {
+          this.bairros = data;
+        }
+      )
   }
 
 }

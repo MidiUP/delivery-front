@@ -64,3 +64,12 @@ h1{
   .btn{
       margin-left: 5px;
   }
+
+  mat-form-field{
+    width: 100%;
+  }
+
+  .alinhamento{
+    display: flex;
+    align-items: center;
+  }

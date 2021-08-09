@@ -1,121 +1,15 @@
 <div class="container">
-    <mat-card class="bairro">
+    <mat-card class="bairro" *ngFor="let bairro of bairros">
         <mat-card-title>
-            Lourival Parente
+            {{bairro.name}}
         </mat-card-title>
         <mat-card-content>
             <div class="d-flex">
                 <p>
-                    Taxa de entrega: <span>R$5,00</span>
+                    Taxa de entrega: <span>R${{bairro.value}}</span>
                 </p>
-                <a>
-                    <mat-icon style="margin-left: 10px;">edit</mat-icon>
-                </a>
-
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
             </div>
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="bairro">
-        <mat-card-title>
-            Morada Nova
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Taxa de entrega: <span>R$5,00</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 10px;">edit</mat-icon>
-                </a>
-
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="bairro">
-        <mat-card-title>
-            Parque Piauí
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Taxa de entrega: <span>R$3,00</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 10px;">edit</mat-icon>
-                </a>
-
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="bairro">
-        <mat-card-title>
-            Promorar
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Taxa de entrega: <span>R$5,00</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 10px;">edit</mat-icon>
-                </a>
-
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="bairro">
-        <mat-card-title>
-            Dirceu
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Taxa de entrega: <span>R$7,00</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 10px;">edit</mat-icon>
-                </a>
-
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="bairro">
-        <mat-card-title>
-            Centro
-        </mat-card-title>
-        <mat-card-content>
-            <div class="d-flex">
-                <p>
-                    Taxa de entrega: <span>R$10,00</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 10px;">edit</mat-icon>
-                </a>
-
-                <a>
-                    <mat-icon>delete</mat-icon>
-                </a>
-            </div>
-        </mat-card-content>
-    </mat-card>
 </div>

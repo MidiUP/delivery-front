@@ -55,10 +55,8 @@
             <div class="col-md-6">
                 <mat-form-field appearance="fill">
                     <mat-label>Escolha uma Categoria</mat-label>
-                    <mat-select>
-                      <mat-option value="1">Hamburguer</mat-option>
-                      <mat-option value="1">Bebida</mat-option>
-                      <mat-option value="1">Tira-Gosto</mat-option>
+                    <mat-select [(ngModel)]="product.category" formControlName="category">
+                      <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria.description}}</mat-option>
                     </mat-select>
                   </mat-form-field> 
             </div>
@@ -110,6 +108,8 @@
         <div class="d-flex justify-content-center mt-2">
             <button class="btn btn-primary" type="submit" [disabled]="!newProductForm.valid">Salvar</button>
         </div>
+
+        
 
     </form>
 </div>

@@ -1,56 +1,64 @@
 <div class="container">
-  
-  <div class="row">
-    <div class="col-md-6">
-      <label for="nome-produto" class="form-label">Nome da Empresa</label>
-      <input formControlName="name" type="text" class="form-control" placeholder="Ex: Mc Donalds">
-      <!--<div id="Nome" class="form-text">
-            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-            </div>-->
-    </div>
-    <div class="col-md-6">
-      <label for="descricao" class="form-label">Slogan da Empresa</label>
-      <input formControlName="description" type="text" class="form-control" placeholder="Ex: Amo muito tudo isso">
-      <div class="form-text">
-        Um slogan deve ser uma frase curta que irá aparecer em baixo de sua logo. Então evite frases com mais de 06
-        palavras
+  <form [formGroup]="infoEmpresaForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome da Empresa</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.name" formControlName="name" placeholder="Ex: Mc Donalds">
+        </mat-form-field>
+
       </div>
-    </div>
-  </div>
 
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Slogan da Empresa</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.slogan" formControlName="slogan" placeholder="Ex: Amo muito tudo isso">
+        </mat-form-field>
+        <!--<div class="form-text">
+          Um slogan deve ser uma frase curta que irá aparecer em baixo de sua logo. Então evite frases com mais de 06
+          palavras
+        </div>-->
+      </div>
+      </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <label for="descricao" class="form-label">CNPJ</label>
-      <input formControlName="description" type="text" class="form-control" placeholder="Ex: 69.411.320/0001-30">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>CNPJ</mat-label>
+            <input matInput type="text" [(ngModel)]="empresa.cnpj" formControlName="cnpj" placeholder="Ex: 69.411.320/0001-30">
+          </mat-form-field>
 
-    </div>
-    <div class="col-md-6">
-      <label for="quantidade" class="form-label">Endereço</label>
-      <input formControlName="quantity" type="text" id="quantidadeProduto" class="form-control"
-        placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente">
-    </div>
-  </div>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Endereço</mat-label>
+            <input matInput type="text" [(ngModel)]="empresa.endereco" formControlName="endereco" placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente">
+          </mat-form-field>
+        </div>
 
+      </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <label for="preco-produto" class="form-label">Telefone</label>
-      <input formControlName="price" type="text" class="form-control" placeholder="(86)9 9808-0092"
-        aria-describedby="basic-addon1">
-    </div>
-    <div class="col-md-6">
-      <label for="quantidade" class="form-label">Whatsapp</label>
-      <input formControlName="quantity" type="text" id="quantidadeProduto" class="form-control"
-        placeholder="Ex: (86)9 9808-0092">
-    </div>
-  </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="text" [(ngModel)]="empresa.telefone" formControlName="telefone" placeholder="(86)9 9808-0092" aria-describedby="basic-addon1">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Whatsapp</mat-label>
+            <input matInput type="text" [(ngModel)]="empresa.whatsapp" formControlName="whatsapp" placeholder="Ex: (86)9 9808-0092">
+          </mat-form-field>
+        </div>
+      </div>
 
-  <hr>
-  <div class="row">
-    
-      <label for="nome-produto" class="form-label">Dias de Funcionamento</label>
-      <div class="checkbox">
+      <hr>
+
+      <div class="row">
+
+        <!--<label for="nome-produto" class="form-label">Dias de Funcionamento</label>
+       <div class="checkbox">
         <div class="form-check">
           <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
             id="flexCheckDefault">
@@ -93,28 +101,27 @@
           <label class="form-check-label" for="flexCheckDefault">
             Sábado</label>
         </div>
+  
+      </div>-->
 
       </div>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label for="quantidade">Link Google Maps</mat-label>
+            <input matInput type="text" [(ngModel)]="empresa.linkGoogleMaps" formControlName="linkGoogleMaps" placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
+          </mat-form-field>
+        </div>
+      </div>
+
+
     
-  </div>
-  <hr>
 
-  <div class="row">
-    <div class="col-md-6">
-      <label for="preco-produto" class="form-label">Link Whatsapp</label>
-      <input formControlName="price" type="text" class="form-control"
-        placeholder="https://api.whatsapp.com/send?phone=5586998080092" aria-describedby="basic-addon1">
+    <div class="d-flex justify-content-center mt-4">
+      <button class="btn btn-primary" [disabled]="!infoEmpresaForm.valid" type="submit">Salvar</button>
     </div>
-    <div class="col-md-6">
-      <label for="quantidade" class="form-label">Link Google Maps</label>
-      <input formControlName="quantity" type="text" id="quantidadeProduto" class="form-control"
-        placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
-    </div>
-  </div>
 
-  <div class="d-flex justify-content-center mt-4">
-    <button class="btn btn-success" type="submit">Salvar</button>
-  </div>
-
-
+  </form>
 </div>

@@ -1,3 +1,5 @@
+import { Categoria } from "../categorias/categoria.model";
+
 export class Product{
     constructor(
         public name: string,
@@ -8,6 +10,7 @@ export class Product{
         public rate: number,
         public quantityCar: number,
         public total: number,
-        public key: number
+        public key: number,
+        public category?: Categoria
     ){}
 }

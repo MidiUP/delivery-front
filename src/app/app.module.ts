@@ -48,6 +48,9 @@ import { ProductService } from './novo-produto/product.service';
 import { AlertaSuccesComponent } from './alerta-succes/alerta-succes.component';
 import { AlertaErrorComponent } from './alerta-error/alerta-error.component';
 import { DialogDeleteComponent } from './editar-produto/dialog-delete/dialog-delete.component';
+import { categoriaService } from './categorias/categoria.service';
+import { bairroService } from './novo-bairro/bairro.service';
+import { EmpresaService } from './info-empresa/empresa.service';
 
 @NgModule({
   declarations: [
@@ -93,7 +96,7 @@ import { DialogDeleteComponent } from './editar-produto/dialog-delete/dialog-del
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [UserService, ProductService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
