@@ -13,7 +13,6 @@ body{
     width: 100%;
     height: 400px;
     background-color: brown;
-    border-radius: 20px;
 }
 
 .carousel-item {
@@ -23,18 +22,20 @@ body{
 img {
     width: 100%;
     height: 400px;
-    border-radius: 20px;
 }
 
 #cardapio{
     background: white;
     margin-top: 20px;
-    border-radius: 20px;
     display: flex;
     overflow: auto;
     flex-wrap: wrap;
     padding: 0;
     
+}
+
+.titulo-produto{
+    cursor: pointer;
 }
 
 #carrinho{
@@ -47,6 +48,11 @@ img {
     background: black;
 }
 
+.produtos{
+    display: flex;
+    direction: row;
+    flex-wrap: wrap;
+}
 .campo-pedido{
     background: blanchedalmond;
     margin-bottom: 5px;
@@ -62,6 +68,24 @@ img {
 .titulo-opcoes{
     color: white;
     margin-top: 5px;
+}
+
+.finalizar-pedido{
+    background-color: none;
+    color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.finalizar-pedido:hover{
+    background-color: white;
+    color: black;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: 1s;
+    
 }
 
 .link-endereco{
@@ -114,7 +138,6 @@ img {
 .produto{
     margin: 15px 10px;
     width: 45%;
-    height: 150px;
 }
 
 
@@ -174,8 +197,6 @@ img {
 
 #navbar-cardapio{
     background: black;
-    margin: 10px 25px 5px 25px;
-    border-radius: 10px;
     width: 100%;
     padding: 10px 0px;
 }
@@ -362,7 +383,6 @@ button.navbar-toggler{
      .produto{
         margin: 15px 10px;
         width: 100%;
-        height: 315px;
     }
     
     .produto p{
@@ -427,7 +447,6 @@ button.navbar-toggler{
      .produto{
         margin: 15px 10px;
         width: 45%;
-        height: 250px;
     }
     
     .produto p{
@@ -447,10 +466,8 @@ button.navbar-toggler{
     }
 
     #links-produto h5{
-        margin-right: 55px;
+        margin-right: 20px;
         font-size: 1em;
-
-        
     }
 
     .mat-icon-button{
@@ -479,7 +496,6 @@ button.navbar-toggler{
     .produto{
         margin: 15px 10px;
         width: 45%;
-        height: 150px;
     }
     
     .produto p{
@@ -541,7 +557,6 @@ button.navbar-toggler{
     .produto{
         margin: 15px 10px;
         width: 45%;
-        height: 150px;
     }
     
     .produto p{
@@ -558,7 +573,8 @@ button.navbar-toggler{
     }
 
     #links-produto h5{
-        margin-right: 8px;
+        margin-right: 4px;
+        font-size: 0.9em;
         
     }
 

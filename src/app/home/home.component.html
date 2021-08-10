@@ -34,7 +34,7 @@
   <section class="d-flex">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 d-flex justify-content-center " id="cardapio">
+        <div class="col-md-8 d-flex" id="cardapio">
 
           
           <nav class="navbar navbar-expand-lg navbar-light" id="navbar-cardapio">
@@ -68,33 +68,35 @@
             </div>
           </nav>
           
-          <mat-card class="produto" *ngFor="let produto of products">
-            <div class="row" style="margin: 0;">
-              <div class="col-md-8" style="padding: 0;">
-                <h4>{{produto.name}}</h4>
-                <div>
-                  <p>{{produto.description}}</p>
+          <div class="container produtos">
+            <mat-card class="produto" *ngFor="let produto of products">
+              <div class="row" style="margin: 0;">
+                <div class="col-md-8" style="padding: 0;">
+                  <h4 class="titulo-produto" (click)="openDialog(produto)">{{produto.name}}</h4>
+                  <div>
+                    <p>{{produto.description}}</p>
+                  </div>
+  
+                  <div class="linha"></div>
+  
+                  <div id="links-produto">
+                    <h5>R$ {{produto.price.toFixed(2)}}</h5>
+                    <button mat-icon-button class="cor-verde" (click)="addItem(produto)">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    
+                    <button mat-icon-button color="warn" (click)="removeItem(produto)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+  
                 </div>
-
-                <div class="linha"></div>
-
-                <div id="links-produto">
-                  <h5>R$ {{produto.price.toFixed(2)}}</h5>
-                  <button mat-icon-button class="cor-verde" (click)="addItem(produto)">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                  
-                  <button mat-icon-button color="warn" (click)="removeItem(produto)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
+                <div class="col-md-4" style="padding: 0;">
+                  <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto titulo-produto"(click)="openDialog(produto)">
                 </div>
-
               </div>
-              <div class="col-md-4" style="padding: 0;">
-                <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto">
-              </div>
-            </div>
-          </mat-card>
+            </mat-card>
+          </div>
 
         </div>
 
@@ -136,6 +138,7 @@
               </div>
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">
+                  
                   <div class="d-flex">
                     <span class="nome-produto">{{item.name}}</span>
                     <span class="quantidade-produto">{{item.quantityCar}}x</span>
@@ -144,15 +147,16 @@
                       <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)" >
                         <mat-icon>add</mat-icon>
                       </a>
-                      
                       <a mat-icon-button color="warn" class="botao-carrinho" (click)="removeItem(item)" >
                         <mat-icon >delete</mat-icon>
                       </a>
                     </div>
                       
+                      
                     <div class="preco-produto-carrinho">
                       <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
                     </div>
+
                   </div>
                   <hr class="divisor-carrinho">
                 </li>
@@ -269,6 +273,18 @@
                 </nav>
               </div>
               <p class="opcao-selecionada">{{ pagamentoSelecionado }}</p>
+            </div>
+
+            <div class="campo-opcoes-pedido">
+              <div>
+                <nav class="navbar navbar-expand opcoes-pedido">
+                  <div class="container-fluid" style="padding-bottom:0">
+                    <h4 class="navbar-brand titulo-opcoes">Finalizar Pedido</h4>
+                    <button class=" btn finalizar-pedido">Compra</button>
+                    
+                  </div>
+                </nav>
+              </div>
             </div>
           
 

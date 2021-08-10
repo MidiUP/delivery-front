@@ -1,0 +1,17 @@
+<body>
+<h1>{{produto.name}}</h1>
+<div class="dialog row">
+    <div class="col-md-6" style="margin-top: 20px;">
+        <p>{{produto.description}}</p>
+        <hr>
+        <div class="row d-flex">
+            <h5>R${{produto.price.toFixed(2)}}</h5>
+        </div>
+         <button mat-raised-button color="primary" [mat-dialog-close]="true">OK</button>
+    </div>
+
+    <div class="col-md-6" style="padding-left: 0;">
+        <img src="../../../assets/img/Figura-Hamburguer-PNG-1280x720.png">
+    </div>
+</div>
+</body>

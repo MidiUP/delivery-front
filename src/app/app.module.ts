@@ -51,6 +51,7 @@ import { DialogDeleteComponent } from './editar-produto/dialog-delete/dialog-del
 import { categoriaService } from './categorias/categoria.service';
 import { bairroService } from './novo-bairro/bairro.service';
 import { EmpresaService } from './info-empresa/empresa.service';
+import { DialogProdutoComponent } from './home/dialog-produto/dialog-produto.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { EmpresaService } from './info-empresa/empresa.service';
     AlertaSuccesComponent,
     AlertaErrorComponent,
     DialogDeleteComponent,
+    DialogProdutoComponent,
   ],
   imports: [
     BrowserModule,

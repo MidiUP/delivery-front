@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from '../novo-produto/product.model';
 import { ProductService } from '../novo-produto/product.service';
+import { DialogProdutoComponent } from './dialog-produto/dialog-produto.component';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,8 @@ export class HomeComponent implements OnInit {
   itensCarrinho: Product[] = [];
   
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -81,6 +84,12 @@ export class HomeComponent implements OnInit {
     if(produto.quantityCar>0){
     this.totalPedido -= produto.price;}
 
+  }
+
+  openDialog(produto:Product) {
+    const dialogRef = this.dialog.open(DialogProdutoComponent,{
+      data:{name:produto.name, description:produto.description, price:produto.price}
+    });
   }
   
   
