@@ -52,6 +52,7 @@ import { categoriaService } from './categorias/categoria.service';
 import { bairroService } from './novo-bairro/bairro.service';
 import { EmpresaService } from './info-empresa/empresa.service';
 import { DialogProdutoComponent } from './home/dialog-produto/dialog-produto.component';
+import { addressService } from './user/adicionar-usuario/adicionar-endereco/address.service';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import { DialogProdutoComponent } from './home/dialog-produto/dialog-produto.com
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

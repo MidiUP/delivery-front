@@ -63,7 +63,7 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.productService.putProduct(this.product, this.product.key)
+    this.productService.putProduct(this.product, this.product.id)
       .subscribe(
         (res) => {
           console.log("editou");
@@ -71,6 +71,7 @@ export class EditarProdutoComponent implements OnInit {
         },
         (err) => {
           console.log(err);
+          console.log(this.product);
           this.openSnackBarError();
         }
       );

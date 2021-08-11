@@ -16,7 +16,7 @@ export class AdicionarUsuarioFormComponent implements OnInit {
   users: User[] = [];
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-  usuario: User = new User("", "", "", "", "", "", new Address("", "", "", "", "", ""), undefined);
+  usuario: User = new User("", "", "", "", "", "","",undefined);
 
   address:Address;
 
@@ -42,16 +42,16 @@ export class AdicionarUsuarioFormComponent implements OnInit {
     
   }
 
-  salvarUsuario(usuario: User){
-    usuario.address = this.address;
-    this.userService.createUser(usuario)
-      .subscribe(
-        data=>
-          console.log(data),
-        error =>
-          console.log(error)
-      );
-  }
+  // salvarUsuario(usuario: User){
+  //   usuario.address = this.address;
+  //   this.userService.createUser(usuario)
+  //     .subscribe(
+  //       data=>
+  //         console.log(data),
+  //       error =>
+  //         console.log(error)
+  //     );
+  // }
 
   getUsersList(): void{
     this.userService.getUsers()
@@ -75,9 +75,9 @@ export class AdicionarUsuarioFormComponent implements OnInit {
     this.openPanelAddress = evento;
   }
   
-  addressValue(evento: any): void {
-    this.usuario.address = evento;
-    this.onChangeOpenPanelAddress(false);
-  }
+  // addressValue(evento: any): void {
+  //   this.usuario.address = evento;
+  //   this.onChangeOpenPanelAddress(false);
+  // }
 
 }

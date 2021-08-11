@@ -116,7 +116,8 @@
                               Endereço
                             </a>                      
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                              <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item" (click)="onClickEnderecoItem(endereco)">{{ endereco }}</a></li>
+                              <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item" (click)="onClickEnderecoItem(endereco)">{{endereco.street}}, 
+                                {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" [routerLink]="['/novoEndereco']">Novo Endereço</a></li>
                             </ul>
@@ -127,7 +128,7 @@
                   </div>
                 </nav>
               </div>
-              <p class="opcao-selecionada">{{ enderecoSelecionado }}</p>
+              <p class="opcao-selecionada" *ngIf="enderecoSelecionado != null">{{enderecoSelecionado.street}}, {{enderecoSelecionado.number}}, {{enderecoSelecionado.neighborhood.name}}</p>
             </div>
 
 
@@ -168,7 +169,7 @@
                   <span>FRETE</span>
                     
                   <div class="preco-total-carrinho">
-                    <span >R${{frete}}</span>
+                    <span >R${{frete.toFixed(2)}}</span>
                   </div>
                   </div>
               </li>
@@ -223,7 +224,7 @@
                   <span>FRETE</span>
                     
                   <div class="preco-total-carrinho">
-                    <span >R${{frete}}</span>
+                    <span >R${{frete.toFixed(2)}}</span>
                   </div>
                   </div>
               </li>
