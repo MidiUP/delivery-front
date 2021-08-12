@@ -1,0 +1,19 @@
+<div class="container pedidos">
+    <mat-card *ngFor="let pedido of pedidos">
+        <mat-card-header>
+            <mat-card-title>Pedido {{pedido.id}}</mat-card-title>
+        </mat-card-header>
+        <div>{{pedido.user.name}}</div>
+
+        <div *ngFor="let item of tratarVetor(pedido)">
+            <span>{{item.product.name}}</span> <span>  {{item.quantityProduct}}x</span>
+        </div>
+
+        <div class="rodape-card">
+            <span>Valor Total: {{pedido.total.toFixed(2)}}</span><br>
+            <span>Pagamento: {{pedido.paymentMethod}}</span><br>
+            <span>{{pedido.address}}</span>
+        </div>
+        
+    </mat-card>
+</div>

@@ -1,0 +1,13 @@
+.pedidos{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+mat-card{
+    width: 30%;
+    margin: 0px 5px;
+    margin-bottom: 10px;
+}

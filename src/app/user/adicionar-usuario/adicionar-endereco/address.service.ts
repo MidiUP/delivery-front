@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { User } from "../../user.model";
 import { Address } from "./address.model";
 
 
@@ -30,6 +31,10 @@ export class addressService{
 
     putAddress(address: Address, id:number){
         return this.http.put(`${this.baseUrl}/${id}`,address)
+    }
+
+    findAddressByUser(user: User){
+        return this.http.get<Address[]>(`${this.baseUrl}/user/${user.id}`)
     }
 
 }

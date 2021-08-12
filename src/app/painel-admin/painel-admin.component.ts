@@ -10,7 +10,7 @@ export class PainelAdminComponent implements OnInit {
   panelOpenState = false;
   iconeMenu:String = "expand_more";
   contador:number;
-  content:String="";
+  content:String="painel-pedidos";
 
   constructor() { }
 
@@ -49,6 +49,10 @@ export class PainelAdminComponent implements OnInit {
 
   contentPersonalizacao():void{
     this.content="personalizacao";
+  }
+
+  contentPainelPedido():void{
+    this.content="Painel de Pedidos";
   }
 
 

@@ -53,6 +53,9 @@ import { bairroService } from './novo-bairro/bairro.service';
 import { EmpresaService } from './info-empresa/empresa.service';
 import { DialogProdutoComponent } from './home/dialog-produto/dialog-produto.component';
 import { addressService } from './user/adicionar-usuario/adicionar-endereco/address.service';
+import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.component';
+import { orderService } from './home/order.service';
+import { PainelPedidosComponent } from './painel-pedidos/painel-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,8 @@ import { addressService } from './user/adicionar-usuario/adicionar-endereco/addr
     AlertaErrorComponent,
     DialogDeleteComponent,
     DialogProdutoComponent,
+    MetodoPagamentoComponent,
+    PainelPedidosComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +104,7 @@ import { addressService } from './user/adicionar-usuario/adicionar-endereco/addr
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
