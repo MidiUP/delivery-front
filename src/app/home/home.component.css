@@ -215,6 +215,10 @@ img {
     color: turquoise;
 }
 
+.cursor{
+    cursor: pointer;
+}
+
 #titulo-menu-cardapio{
     color: white;
     font-size: 0.9em;

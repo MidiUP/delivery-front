@@ -3,32 +3,37 @@
   <app-header></app-header>
 
   <div class="container" id="carousel">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner center-block">
-            <div class="carousel-item active">
-              <img src="../../assets/img/Burger-King-Logo.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../../assets/img/background.jpg-1.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="../../assets/img/background.jpg" class="d-flex w-100" alt="...">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner center-block">
+        <div class="carousel-item active">
+          <img src="../../assets/img/Burger-King-Logo.png" class="d-block w-100" alt="...">
         </div>
+        <div class="carousel-item">
+          <img src="../../assets/img/background.jpg-1.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="../../assets/img/background.jpg" class="d-flex w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
 
   <section class="d-flex">
@@ -36,10 +41,12 @@
       <div class="row">
         <div class="col-md-8 d-flex" id="cardapio">
 
-          
+
           <nav class="navbar navbar-expand-lg navbar-light" id="navbar-cardapio">
             <div class="container-fluid navbar-cardapio">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <div class="d-flex">
                   <i class="fas fa-bars text-white"></i>
                   <h2 id="titulo-menu-cardapio"> Menu</h2>
@@ -49,25 +56,32 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
                       Categoria
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Hambúrguer</a></li>
-                      <li><a class="dropdown-item" href="#">Bebidas</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Tira Gosto</a></li>
+                      <li *ngFor="let categoria of categorias"><a class="dropdown-item cursor"
+                          (click)="selectCategoria(categoria.description)">{{categoria.description}}</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item cursor" (click)="getProducts()">Todos os Produtos</a></li>
                     </ul>
                   </li>
                 </ul>
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Procure um produto" aria-label="Search">
-                  <button class="btn btn-outline-white" type="submit">Procurar</button>
-                </form>
+
+                
+                  <div class="d-flex">
+                    <input class="form-control me-2" [formControl]="pesquisaName" [(ngModel)]="buscaNome" placeholder="Procure um produto">
+                    <button class="btn btn-outline-white" (click)="buscaName()">Procurar</button>
+                  </div>
+                
+
               </div>
             </div>
           </nav>
-          
+
           <div class="container produtos">
             <mat-card class="produto" *ngFor="let produto of products">
               <div class="row" style="margin: 0;">
@@ -76,23 +90,24 @@
                   <div>
                     <p>{{produto.description}}</p>
                   </div>
-  
+
                   <div class="linha"></div>
-  
+
                   <div id="links-produto">
                     <h5>R$ {{produto.price.toFixed(2)}}</h5>
                     <button mat-icon-button class="cor-verde" (click)="addItem(produto)">
                       <mat-icon>add</mat-icon>
                     </button>
-                    
+
                     <button mat-icon-button color="warn" (click)="removeItem(produto)">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </div>
-  
+
                 </div>
                 <div class="col-md-4" style="padding: 0;">
-                  <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto titulo-produto"(click)="openDialog(produto)">
+                  <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto titulo-produto"
+                    (click)="openDialog(produto)">
                 </div>
               </div>
             </mat-card>
@@ -100,7 +115,7 @@
 
         </div>
 
-        <div class="col-md-4" style="padding: 0; padding-left: 15px;" >
+        <div class="col-md-4" style="padding: 0; padding-left: 15px;">
           <div id="carrinho">
 
             <div class="campo-opcoes-pedido">
@@ -112,23 +127,28 @@
                       <div class="opcoes-endereco-pagamento">
                         <ul class="navbar-nav">
                           <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink"
+                              role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Endereço
-                            </a>                      
+                            </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                              <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item" (click)="onClickEnderecoItem(endereco)">{{endereco.street}}, 
-                                {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
-                              <li><hr class="dropdown-divider"></li>
+                              <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item"
+                                  (click)="onClickEnderecoItem(endereco)">{{endereco.street}},
+                                  {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
+                              <li>
+                                <hr class="dropdown-divider">
+                              </li>
                               <li><a class="dropdown-item" [routerLink]="['/novoEndereco']">Novo Endereço</a></li>
                             </ul>
                           </li>
                         </ul>
                       </div>
-                    </div>                  
+                    </div>
                   </div>
                 </nav>
               </div>
-              <p class="opcao-selecionada" *ngIf="enderecoSelecionado != null">{{enderecoSelecionado.street}}, {{enderecoSelecionado.number}}, {{enderecoSelecionado.neighborhood.name}}</p>
+              <p class="opcao-selecionada" *ngIf="enderecoSelecionado != null">{{enderecoSelecionado.street}},
+                {{enderecoSelecionado.number}}, {{enderecoSelecionado.neighborhood.name}}</p>
             </div>
 
 
@@ -139,21 +159,21 @@
               </div>
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">
-                  
+
                   <div class="d-flex">
                     <span class="nome-produto">{{item.name}}</span>
                     <span class="quantidade-produto">{{item.quantityCar}}x</span>
 
                     <div class="botoes-produto-carrinho">
-                      <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)" >
+                      <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)">
                         <mat-icon>add</mat-icon>
                       </a>
-                      <a mat-icon-button color="warn" class="botao-carrinho" (click)="removeItem(item)" >
-                        <mat-icon >delete</mat-icon>
+                      <a mat-icon-button color="warn" class="botao-carrinho" (click)="removeItem(item)">
+                        <mat-icon>delete</mat-icon>
                       </a>
                     </div>
-                      
-                      
+
+
                     <div class="preco-produto-carrinho">
                       <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
                     </div>
@@ -162,27 +182,27 @@
                   <hr class="divisor-carrinho">
                 </li>
 
-            
+
 
                 <li>
                   <div class="d-flex">
-                  <span>FRETE</span>
-                    
-                  <div class="preco-total-carrinho">
-                    <span >R${{frete.toFixed(2)}}</span>
+                    <span>FRETE</span>
+
+                    <div class="preco-total-carrinho">
+                      <span>R${{frete.toFixed(2)}}</span>
+                    </div>
                   </div>
-                  </div>
-              </li>
+                </li>
 
                 <li>
                   <div class="d-flex">
-                  <span class="total-produto">TOTAL</span>
-                    
-                  <div class="preco-total-carrinho">
-                    <span >R${{totalPedido.toFixed(2)}}</span>
+                    <span class="total-produto">TOTAL</span>
+
+                    <div class="preco-total-carrinho">
+                      <span>R${{totalPedido.toFixed(2)}}</span>
+                    </div>
                   </div>
-                  </div>
-              </li>
+                </li>
 
               </ul>
             </div>
@@ -197,83 +217,87 @@
                   <div class="d-flex">
                     <span class="nome-produto">{{item.name}}</span>
                     <span class="quantidade-produto">{{item.quantityCar}}x</span>
-                      
+
                     <div class="preco-produto-carrinho">
                       <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
                     </div>
                   </div>
 
                   <div class="botoes-produto-carrinho">
-                    <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)" >
+                    <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)">
                       <mat-icon>add</mat-icon>
                     </a>
-                    
-                    <a mat-icon-button color="warn" class="botao-carrinho" (click)="removeItem(item)" >
-                      <mat-icon >delete</mat-icon>
+
+                    <a mat-icon-button color="warn" class="botao-carrinho" (click)="removeItem(item)">
+                      <mat-icon>delete</mat-icon>
                     </a>
                   </div>
                   <hr class="divisor-carrinho">
 
-                  
+
                 </li>
 
-            
+
 
                 <li>
                   <div class="d-flex">
-                  <span>FRETE</span>
-                    
-                  <div class="preco-total-carrinho">
-                    <span >R${{frete.toFixed(2)}}</span>
+                    <span>FRETE</span>
+
+                    <div class="preco-total-carrinho">
+                      <span>R${{frete.toFixed(2)}}</span>
+                    </div>
                   </div>
-                  </div>
-              </li>
+                </li>
 
                 <li>
                   <div class="d-flex">
-                  <span class="total-produto">TOTAL</span>
-                    
-                  <div class="preco-total-carrinho">
-                    <span >R${{totalPedido.toFixed(2)}}</span>
+                    <span class="total-produto">TOTAL</span>
+
+                    <div class="preco-total-carrinho">
+                      <span>R${{totalPedido.toFixed(2)}}</span>
+                    </div>
                   </div>
-                  </div>
-              </li>
+                </li>
 
               </ul>
             </div>
 
-            
+
 
             <div class="campo-opcoes-pedido">
               <div>
                 <nav class="navbar navbar-expand opcoes-pedido">
                   <div class="container-fluid" style="padding-bottom:0">
                     <h4 class="navbar-brand titulo-opcoes" href="#">Pagamento</h4>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                      aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" style="margin-left: auto;">
                       <div class="opcoes-endereco-pagamento">
                         <ul class="navbar-nav">
                           <li class="nav-item dropdown">
-                          
 
-                            <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            <a class="nav-link dropdown-toggle link-endereco" href="#" id="navbarDarkDropdownMenuLink"
+                              role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Método
                             </a>
-                        
+
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                              <li *ngFor="let pagamento of tiposPagamento"><a class="dropdown-item" (click)="onClickTipoPagamento(pagamento)">{{ pagamento }}</a></li>
+                              <li *ngFor="let pagamento of pagamentos"><a class="dropdown-item"
+                                  (click)="onClickTipoPagamento(pagamento)">{{ pagamento.description }}</a></li>
                             </ul>
                           </li>
                         </ul>
                       </div>
                     </div>
-                    
+
                   </div>
                 </nav>
               </div>
-              <p class="opcao-selecionada">{{ pagamentoSelecionado }}</p>
+              <p class="opcao-selecionada">{{ pagamento.description }}</p>
             </div>
 
             <div class="campo-opcoes-pedido">
@@ -282,15 +306,15 @@
                   <div class="container-fluid" style="padding-bottom:0">
                     <h4 class="navbar-brand titulo-opcoes">Finalizar Pedido</h4>
                     <button class=" btn finalizar-pedido" (click)="exportarPedido()">Compra</button>
-                    
+
                   </div>
                 </nav>
               </div>
             </div>
-          
 
 
-            
+
+
           </div>
         </div>
 
@@ -301,24 +325,24 @@
   </section>
 
   <section id="carrinho-mobile" class="fixed-bottom">
-  <div class="d-flex">
-    <div>
-      <mat-icon class="icone-carrinho-mobile">shopping_cart</mat-icon>
-    </div>
+    <div class="d-flex">
+      <div>
+        <mat-icon class="icone-carrinho-mobile">shopping_cart</mat-icon>
+      </div>
 
-    <div style="margin-left: auto;">
-      <a href="#" class="preco-final-carrinho-mobile">Ver Carrinho</a>
-    </div>
+      <div style="margin-left: auto;">
+        <a href="#" class="preco-final-carrinho-mobile">Ver Carrinho</a>
+      </div>
 
-    <div style="margin-left: auto;">
-      <span class="preco-final-carrinho-mobile">R${{totalPedido.toFixed(2)}}</span>
+      <div style="margin-left: auto;">
+        <span class="preco-final-carrinho-mobile">R${{totalPedido.toFixed(2)}}</span>
+      </div>
     </div>
-  </div>
 
 
   </section>
 
-  
+
 </body>
 
 <app-footer></app-footer>

@@ -56,6 +56,7 @@ import { addressService } from './user/adicionar-usuario/adicionar-endereco/addr
 import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.component';
 import { orderService } from './home/order.service';
 import { PainelPedidosComponent } from './painel-pedidos/painel-pedidos.component';
+import { metodoPagamentoService } from './metodo-pagamento/metodoPagamento.service';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,7 @@ import { PainelPedidosComponent } from './painel-pedidos/painel-pedidos.componen
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

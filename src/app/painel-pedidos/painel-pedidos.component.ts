@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Items } from '../home/items.model';
 import { Order } from '../home/order.model';
 import { orderService } from '../home/order.service';
 
@@ -11,14 +10,12 @@ import { orderService } from '../home/order.service';
 export class PainelPedidosComponent implements OnInit {
 
   pedidos: Order[];
-  teste: number[] = [1,2,3];
-  pedidosAberto: Order[];
 
   constructor(private orderService: orderService) { }
 
   ngOnInit(): void {
     this.getPedidosByDate();
-    setInterval(() => this.getPedidos(), 60000)
+    setInterval(() => this.getPedidosByDate(), 60000)
   }
 
   chamar(){

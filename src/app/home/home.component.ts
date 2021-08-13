@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Categoria } from '../categorias/categoria.model';
+import { categoriaService } from '../categorias/categoria.service';
 import { MetodoPagamento } from '../metodo-pagamento/metodoPagamento.model';
+import { metodoPagamentoService } from '../metodo-pagamento/metodoPagamento.service';
 import { Bairro } from '../novo-bairro/bairro.model';
 import { Product } from '../novo-produto/product.model';
 import { ProductService } from '../novo-produto/product.service';
@@ -13,6 +17,8 @@ import { Items } from './items.model';
 import { Order } from './order.model';
 import { orderService } from './order.service';
 import { Status } from './status.model';
+import { map, tap, filter, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -41,16 +47,26 @@ export class HomeComponent implements OnInit {
 
   items: Items[] = [];
 
+  categorias: Categoria[];
+
+  buscaNome: string = "";
 
   user: User = new User("Mateus", "mateus@gmail.com", "123", "mateus", "11111111111", "MG18999888", "999999999", 1);
 
-  pagamento: MetodoPagamento = new MetodoPagamento(1, "Pix");
+  pagamento: MetodoPagamento = new MetodoPagamento(1, "");
+
+  pagamentos: MetodoPagamento[];
 
   cupom: Cupom = new Cupom(1, "Frete off", 15);
 
   bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min");
 
-  status: Status = new Status(1, "Em aberto")
+  status: Status = new Status(1, "Em aberto");
+
+  pesquisaName = new FormControl();
+
+  result$: Observable<Product[]>;
+
 
   order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items);
 
@@ -58,11 +74,21 @@ export class HomeComponent implements OnInit {
   constructor(private productService: ProductService,
     public dialog: MatDialog,
     private addressService: addressService,
-    private orderService: orderService) { }
+    private orderService: orderService,
+    private metodoPagamentoService: metodoPagamentoService,
+    private categoriaService: categoriaService) { }
 
   ngOnInit(): void {
     this.getProducts();
     this.filtroEnderecos(this.user);
+    this.getPagamentos();
+    this.getCategorias();
+    this.autoComplete();
+
+    
+
+
+      
   }
 
   getProducts(): void {
@@ -82,8 +108,9 @@ export class HomeComponent implements OnInit {
 
   }
 
-  onClickTipoPagamento(pagamento: string): void {
-    this.pagamentoSelecionado = pagamento;
+  onClickTipoPagamento(pagamento: MetodoPagamento): void {
+    this.pagamento = pagamento;
+    this.order.paymentMethod = pagamento.description;
   }
 
   addItem(produto: Product): void {
@@ -163,6 +190,85 @@ export class HomeComponent implements OnInit {
       )
 
     window.location.reload();
+  }
+
+  getPagamentos(){
+    this.metodoPagamentoService.getMetodosPagamentos()
+      .subscribe(
+        (data => {
+          this.pagamentos = data;
+        })
+      )
+  }
+
+  getProdutosByCategoria(categoria: string){
+    this.productService.searchProduct(categoria,"");
+  }
+
+  getCategorias(){
+    this.categoriaService.getCategories()
+      .subscribe(
+        (data => {
+          this.categorias = data;
+        })
+      )
+  }
+
+  selectCategoria(categoria: string){
+    this.productService.searchProduct(categoria,"") 
+      .subscribe(
+        (data => {
+          this.products = data;
+        })
+      )
+  }
+
+  buscaName(){
+    this.productService.searchProduct("",this.buscaNome) 
+      .subscribe(
+        (data => {
+          if(data.length>0){
+            this.products=data;
+            console.log(data);
+            console.log(this.buscaNome);
+          }else{
+            this.products=[];
+            console.log("vazio")
+          }
+        })
+      )
+  }
+
+  autoComplete(){
+    this.pesquisaName.valueChanges
+      .pipe(
+        map(value => value.trim()),
+        filter(value => value.length>2),
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(value => {
+          this.productService.searchProduct("",value)
+            .subscribe(
+              (data => this.products = data)
+            )
+            console.log("requisição");
+        }),
+      ).subscribe();
+
+      this.pesquisaName.valueChanges
+      .pipe(
+        map(value => value.trim()),
+        filter(value => value.length<3),
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(value => {
+          this.productService.searchProduct("","")
+            .subscribe(
+              (data => this.products = data)
+            )
+            console.log("requisição");
+        }),
+      ).subscribe();
   }
 
 

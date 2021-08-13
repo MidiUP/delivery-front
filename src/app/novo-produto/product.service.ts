@@ -30,5 +30,9 @@ export class ProductService{
         return this.http.put(`${this.baseUrl}/${id}`,product)
     }
 
+    searchProduct(category: string, productName: string){
+        return this.http.get<Product[]>(`${this.baseUrl}/filter?category=${category}&productName=${productName}`);
+    }
+
 
 }
