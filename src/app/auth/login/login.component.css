@@ -1,0 +1,50 @@
+.example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+  mat-form-field{
+      width: 100%;
+  }
+
+  .login{
+    height: 100vh;
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  button{
+      margin-top: 15px;
+  }
+  
+  a{
+      margin-top: 0;
+      padding-top: 0;
+      font-size: 0.8em;
+      margin-left: auto;
+  }
+
+  #campo-senha{
+      margin-bottom: 0;
+      padding-bottom: 0;
+  }
+
+  .mat-flat-button{
+      width: 80px ;
+      height: 40px;
+  }
+
+  

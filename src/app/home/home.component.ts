@@ -19,6 +19,8 @@ import { orderService } from './order.service';
 import { Status } from './status.model';
 import { map, tap, filter, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { authService } from '../auth/auth.service/auth.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +53,9 @@ export class HomeComponent implements OnInit {
 
   buscaNome: string = "";
 
-  user: User = new User("Mateus", "mateus@gmail.com", "123", "mateus", "11111111111", "MG18999888", "999999999", 1);
+  user: User = new User("", ".", "", "", "", "", "", 0);
+
+  userLogado: User = new User("", ".", "", "", "", "", "", 0);
 
   pagamento: MetodoPagamento = new MetodoPagamento(1, "");
 
@@ -65,7 +69,7 @@ export class HomeComponent implements OnInit {
 
   pesquisaName = new FormControl();
 
-  result$: Observable<Product[]>;
+  user$: Observable<User>;
 
 
   order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items);
@@ -76,19 +80,43 @@ export class HomeComponent implements OnInit {
     private addressService: addressService,
     private orderService: orderService,
     private metodoPagamentoService: metodoPagamentoService,
-    private categoriaService: categoriaService) { }
+    private categoriaService: categoriaService,
+    private authService: authService,
+    private userService: UserService) {
+
+  }
 
   ngOnInit(): void {
+    
+    if (this.authService.isAuthenticated()) {
+      console.log("autenticado");
+      let username: string = this.authService.getUsername();
+      console.log(username);
+
+      this.userService.findByUsername(username)
+        .subscribe(
+          (data => {
+            this.user = data;
+            this.filtroEnderecos(this.user);
+          })
+        )
+
+    }
+    
     this.getProducts();
     this.filtroEnderecos(this.user);
     this.getPagamentos();
     this.getCategorias();
     this.autoComplete();
 
-    
 
 
-      
+
+
+
+
+
+
   }
 
   getProducts(): void {
@@ -186,13 +214,14 @@ export class HomeComponent implements OnInit {
         }),
         (err => {
           console.log(err);
+          console.log(this.order);
         })
       )
 
-    window.location.reload();
+    // window.location.reload();
   }
 
-  getPagamentos(){
+  getPagamentos() {
     this.metodoPagamentoService.getMetodosPagamentos()
       .subscribe(
         (data => {
@@ -201,11 +230,11 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  getProdutosByCategoria(categoria: string){
-    this.productService.searchProduct(categoria,"");
+  getProdutosByCategoria(categoria: string) {
+    this.productService.searchProduct(categoria, "");
   }
 
-  getCategorias(){
+  getCategorias() {
     this.categoriaService.getCategories()
       .subscribe(
         (data => {
@@ -214,8 +243,8 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  selectCategoria(categoria: string){
-    this.productService.searchProduct(categoria,"") 
+  selectCategoria(categoria: string) {
+    this.productService.searchProduct(categoria, "")
       .subscribe(
         (data => {
           this.products = data;
@@ -223,50 +252,49 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  buscaName(){
-    this.productService.searchProduct("",this.buscaNome) 
+  buscaName() {
+    this.productService.searchProduct("", this.buscaNome)
       .subscribe(
         (data => {
-          if(data.length>0){
-            this.products=data;
+          if (data.length > 0) {
+            this.products = data;
             console.log(data);
             console.log(this.buscaNome);
-          }else{
-            this.products=[];
+          } else {
+            this.products = [];
             console.log("vazio")
           }
         })
       )
   }
 
-  autoComplete(){
+  autoComplete() {
     this.pesquisaName.valueChanges
       .pipe(
         map(value => value.trim()),
-        filter(value => value.length>2),
+        filter(value => value.length > 2),
         debounceTime(200),
         distinctUntilChanged(),
         tap(value => {
-          this.productService.searchProduct("",value)
+          this.productService.searchProduct("", value)
             .subscribe(
               (data => this.products = data)
             )
-            console.log("requisição");
+          console.log("requisição");
         }),
       ).subscribe();
 
-      this.pesquisaName.valueChanges
+    this.pesquisaName.valueChanges
       .pipe(
         map(value => value.trim()),
-        filter(value => value.length<3),
+        filter(value => value.length < 3),
         debounceTime(200),
         distinctUntilChanged(),
         tap(value => {
-          this.productService.searchProduct("","")
+          this.productService.searchProduct("", "")
             .subscribe(
               (data => this.products = data)
             )
-            console.log("requisição");
         }),
       ).subscribe();
   }

@@ -57,6 +57,10 @@ import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.co
 import { orderService } from './home/order.service';
 import { PainelPedidosComponent } from './painel-pedidos/painel-pedidos.component';
 import { metodoPagamentoService } from './metodo-pagamento/metodoPagamento.service';
+import { NovoMetodoPagamentoComponent } from './novo-metodo-pagamento/novo-metodo-pagamento.component';
+import { EditarMetodoPagamentoComponent } from './editar-metodo-pagamento/editar-metodo-pagamento.component';
+import { LoginComponent } from './auth/login/login.component';
+import { authService } from './auth/auth.service/auth.service';
 
 @NgModule({
   declarations: [
@@ -83,6 +87,9 @@ import { metodoPagamentoService } from './metodo-pagamento/metodoPagamento.servi
     DialogProdutoComponent,
     MetodoPagamentoComponent,
     PainelPedidosComponent,
+    NovoMetodoPagamentoComponent,
+    EditarMetodoPagamentoComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +112,7 @@ import { metodoPagamentoService } from './metodo-pagamento/metodoPagamento.servi
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

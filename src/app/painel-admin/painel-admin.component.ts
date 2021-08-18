@@ -55,5 +55,17 @@ export class PainelAdminComponent implements OnInit {
     this.content="Painel de Pedidos";
   }
 
+  contentMetodosPagamentos():void{
+    this.content="metodos-pagamentos";
+  }
+
+  contentNewMetodosPagamentos(){
+    this.content="novos-metodos-pagamentos"
+  }
+
+  contentEditMetodosPagamentos(){
+    this.content="editar-metodos-pagamentos"
+  }
+
 
 }

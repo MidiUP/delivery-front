@@ -8,6 +8,7 @@ import { categoriaService } from '../categorias/categoria.service';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 
+
 @Component({
   selector: 'app-novo-produto',
   templateUrl: './novo-produto.component.html',

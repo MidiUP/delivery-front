@@ -1,0 +1,9 @@
+mat-form-field{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.botao{
+    display: flex;
+    justify-content: center;
+}

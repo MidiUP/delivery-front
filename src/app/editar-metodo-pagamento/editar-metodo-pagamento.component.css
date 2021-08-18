@@ -1,0 +1,21 @@
+
+  .flex{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container{
+    margin-top: 10px;
+  
+  }
+  
+  mat-form-field{
+    width: 100%;
+  }
+
+  .botao{
+    display: flex;
+    justify-content: center;
+  }
+
+

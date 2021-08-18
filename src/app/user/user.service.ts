@@ -26,4 +26,8 @@ export class UserService {
         return this.http.delete<User>(`${this.baseUrl}/${id}`);
     }
 
+    findByUsername(username:string): Observable<User>{
+        return this.http.get<User>(`${this.baseUrl}/find?username=${username}`);
+    }
+
 }
