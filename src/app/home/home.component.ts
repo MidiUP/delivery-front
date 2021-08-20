@@ -8,8 +8,8 @@ import { metodoPagamentoService } from '../metodo-pagamento/metodoPagamento.serv
 import { Bairro } from '../novo-bairro/bairro.model';
 import { Product } from '../novo-produto/product.model';
 import { ProductService } from '../novo-produto/product.service';
-import { Address } from '../user/adicionar-usuario/adicionar-endereco/address.model';
-import { addressService } from '../user/adicionar-usuario/adicionar-endereco/address.service';
+import { Address } from '../enderecos/address.model';
+import { addressService } from '../enderecos/address.service';
 import { User } from '../user/user.model';
 import { Cupom } from './cupom.model';
 import { DialogProdutoComponent } from './dialog-produto/dialog-produto.component';
@@ -17,8 +17,7 @@ import { Items } from './items.model';
 import { Order } from './order.model';
 import { orderService } from './order.service';
 import { Status } from './status.model';
-import { map, tap, filter, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, tap, filter, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { authService } from '../auth/auth.service/auth.service';
 import { UserService } from '../user/user.service';
 
@@ -105,14 +104,6 @@ export class HomeComponent implements OnInit {
     this.getPagamentos();
     this.getCategorias();
     this.autoComplete();
-
-
-
-
-
-
-
-
 
   }
 
@@ -202,7 +193,7 @@ export class HomeComponent implements OnInit {
     this.order.total = this.totalPedido;
     this.order.coupon = this.cupom;
     this.order.items = this.items;
-    this.order.address = this.enderecoSelecionado.neighborhood.name;
+    this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`
 
     this.orderService.createOrder(this.order)
       .subscribe(

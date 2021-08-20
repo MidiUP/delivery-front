@@ -1,5 +1,5 @@
 import { Bairro } from "src/app/novo-bairro/bairro.model";
-import { User } from "../../user.model";
+import { User } from "../user/user.model";
 
 export class Address{
     constructor(

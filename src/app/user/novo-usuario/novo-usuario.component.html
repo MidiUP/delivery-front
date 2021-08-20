@@ -1,0 +1,310 @@
+<app-header></app-header>
+
+
+<div class="container container-form">
+    <mat-card>
+        <div class="container">
+            <div class="titulo">
+                <h1>CADASTRO</h1>
+                <mat-icon>account_circle</mat-icon>
+
+            </div>
+            <form [formGroup]="novoUsuarioForm">
+                <div class="row">
+                    <div class="subtitulo">
+                        <h2>Informações Pessoais</h2>
+                        <mat-icon>perm_identity</mat-icon>
+                    </div>
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput placeholder="Ex. Mateus Mendes da Silva" formControlName="name"
+                                [(ngModel)]="newUser.name">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>CPF</mat-label>
+                            <input matInput placeholder="Ex. 120.686.940-26" formControlName="cpf"
+                                [(ngModel)]="newUser.cpf">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>RG</mat-label>
+                            <input matInput placeholder="Ex. 23.664.406-3" formControlName="rg"
+                                [(ngModel)]="newUser.rg">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="subtitulo">
+                        <h2>Contato</h2>
+                        <mat-icon>alternate_email</mat-icon>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Ex. email@email.com" formControlName="email"
+                                [(ngModel)]="newUser.email">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Celular</mat-label>
+                            <input matInput placeholder="Ex. (86)9 9999-9999" formControlName="phone"
+                                [(ngModel)]="newUser.phone">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="subtitulo">
+                        <h2>Login</h2>
+                        <mat-icon>login</mat-icon>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="Ex. MateusMendes01" formControlName="username"
+                                [(ngModel)]="newUser.username">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Senha</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                [(ngModel)]="newUser.password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6"></div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Confirme sua Senha</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmationPassword">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+
+            <hr>
+
+            <form [formGroup]="novoEnderecoForm">
+                <div class="row">
+
+                    <div class="subtitulo">
+                        <h2>Endereço</h2>
+                        <mat-icon>home</mat-icon>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Rua</mat-label>
+                            <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
+                                [(ngModel)]="newAddress.street">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número</mat-label>
+                            <input matInput placeholder="Ex. 25" formControlName="number"
+                                [(ngModel)]="newAddress.number">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Complemento</mat-label>
+                            <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
+                                [(ngModel)]="newAddress.complement">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>CEP</mat-label>
+                            <input matInput placeholder="Ex. 89210-070" formControlName="cep"
+                                [(ngModel)]="newAddress.cep">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Escolha um dos bairros disponíveis</mat-label>
+                            <mat-select [(ngModel)]="newAddress.neighborhood" formControlName="neighborhood">
+                                <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cidade</mat-label>
+                            <input matInput placeholder="Ex. Teresina" formControlName="city"
+                                [(ngModel)]="newAddress.city">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+
+            <form [formGroup]="novoEnderecoForm2">
+                <div class="row" *ngIf="campoEndereco > 1">
+                    <div class="container">
+                        <hr>
+                    </div>
+                    <div class="subtitulo">
+                        <h2>Endereço 2</h2>
+                        <mat-icon>home</mat-icon>
+                        <button mat-icon-button style="margin-left: auto;" (click)="deleteCampoEndereco()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Rua</mat-label>
+                            <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
+                                [(ngModel)]="newAddress2.street">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número</mat-label>
+                            <input matInput placeholder="Ex. 25" formControlName="number"
+                                [(ngModel)]="newAddress2.number">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Complemento</mat-label>
+                            <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
+                                [(ngModel)]="newAddress2.complement">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>CEP</mat-label>
+                            <input matInput placeholder="Ex. 89210-070" formControlName="cep"
+                                [(ngModel)]="newAddress2.cep">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Escolha um dos bairros disponíveis</mat-label>
+                            <mat-select [(ngModel)]="newAddress2.neighborhood" formControlName="neighborhood">
+                                <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cidade</mat-label>
+                            <input matInput placeholder="Ex. Teresina" formControlName="city"
+                                [(ngModel)]="newAddress2.city">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+
+            <form [formGroup]="novoEnderecoForm3">
+                <div class="row" *ngIf="campoEndereco > 2">
+                    <div class="container">
+                        <hr>
+                    </div>
+                    <div class="subtitulo">
+                        <h2>Endereço 3</h2>
+                        <mat-icon>home</mat-icon>
+                        <button mat-icon-button style="margin-left: auto;" (click)="deleteCampoEndereco()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Rua</mat-label>
+                            <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
+                                [(ngModel)]="newAddress3.street">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número</mat-label>
+                            <input matInput placeholder="Ex. 25" formControlName="number"
+                                [(ngModel)]="newAddress3.number">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Complemento</mat-label>
+                            <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
+                                [(ngModel)]="newAddress3.complement">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>CEP</mat-label>
+                            <input matInput placeholder="Ex. 89210-070" formControlName="cep"
+                                [(ngModel)]="newAddress3.cep">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Escolha um dos bairros disponíveis</mat-label>
+                            <mat-select [(ngModel)]="newAddress3.neighborhood" formControlName="neighborhood">
+                                <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cidade</mat-label>
+                            <input matInput placeholder="Ex. Teresina" formControlName="city"
+                                [(ngModel)]="newAddress3.city">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+
+
+
+            <div class="botoes">
+                <button mat-flat-button color="primary" (click)="onSubmit()"
+                    [disabled]="!formsValid()">Cadastrar-se</button>
+                <button mat-flat-button color="primary" style="margin-left: 5px;" (click)="newCampoEndereco()"
+                    [disabled]="campoEndereco > 2">Adicionar outro Endereço</button>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<app-footer></app-footer>

@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res => {
           console.log("logou");
-          this.router.navigate(['']);
       }
         ),
         (err => {

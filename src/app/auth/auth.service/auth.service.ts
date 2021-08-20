@@ -8,6 +8,7 @@ import { UserService } from "src/app/user/user.service";
 import { UserLogin } from "../login/userLogin.model";
 import { Token } from "./token.model";
 import jwt_decode from 'jwt-decode';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class authService{
@@ -19,7 +20,8 @@ export class authService{
     private subjUser$: BehaviorSubject<User> = new BehaviorSubject(this.user);
 
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,
+                private router: Router){}
 
     login(userLogin: UserLogin):Observable<any>{
         return this.http
@@ -28,6 +30,7 @@ export class authService{
                 tap((token: Token) => {
                     localStorage.setItem('token', token.access_token);
                     this.username = userLogin.username;
+                    this.router.navigate(['']);
                 })
             )
             

@@ -38,11 +38,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
-import { AdicionarEnderecoComponent } from './user/adicionar-usuario/adicionar-endereco/adicionar-endereco.component';
-import { AdicionarUsuarioComponent } from './user/adicionar-usuario/adicionar-usuario.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AdicionarUsuarioFormComponent } from './user/adicionar-usuario/adicionar-usuario-form/adicionar-usuario-form.component';
 import { UserService } from './user/user.service';
 import { ProductService } from './novo-produto/product.service';
 import { AlertaSuccesComponent } from './alerta-succes/alerta-succes.component';
@@ -52,7 +49,7 @@ import { categoriaService } from './categorias/categoria.service';
 import { bairroService } from './novo-bairro/bairro.service';
 import { EmpresaService } from './info-empresa/empresa.service';
 import { DialogProdutoComponent } from './home/dialog-produto/dialog-produto.component';
-import { addressService } from './user/adicionar-usuario/adicionar-endereco/address.service';
+import { addressService } from './enderecos/address.service';
 import { MetodoPagamentoComponent } from './metodo-pagamento/metodo-pagamento.component';
 import { orderService } from './home/order.service';
 import { PainelPedidosComponent } from './painel-pedidos/painel-pedidos.component';
@@ -62,6 +59,8 @@ import { EditarMetodoPagamentoComponent } from './editar-metodo-pagamento/editar
 import { LoginComponent } from './auth/login/login.component';
 import { authService } from './auth/auth.service/auth.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { NovoUsuarioComponent } from './user/novo-usuario/novo-usuario.component';
+import { NovoEnderecoComponent } from './enderecos/novo-endereco/novo-endereco.component';
 
 @NgModule({
   declarations: [
@@ -69,8 +68,6 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    AdicionarEnderecoComponent,
-    AdicionarUsuarioComponent,
     PainelAdminComponent,
     InfoEmpresaComponent,
     NovoProdutoComponent,
@@ -81,7 +78,6 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     EditarBairroComponent,
     PersonalizacaoComponent,
     NotFoundComponent,
-    AdicionarUsuarioFormComponent,
     AlertaSuccesComponent,
     AlertaErrorComponent,
     DialogDeleteComponent,
@@ -91,6 +87,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NovoMetodoPagamentoComponent,
     EditarMetodoPagamentoComponent,
     LoginComponent,
+    NovoUsuarioComponent,
+    NovoEnderecoComponent,
   ],
   imports: [
     BrowserModule,

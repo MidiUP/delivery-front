@@ -1,0 +1,42 @@
+
+.container-form{
+    margin-top: 15px;
+}
+
+mat-card{
+    margin-bottom: 10px;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.subtitulo{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+h1{
+    font-size: 2em;
+    margin: 0;
+}
+
+h2{
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+mat-icon{
+    margin-left: 5px;
+}
