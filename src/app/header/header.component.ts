@@ -17,17 +17,21 @@ export class HeaderComponent implements OnInit {
   faHome = faHome;
 
   user: User = new User("Visitante","","","","","","",undefined)
+  authenticated: boolean;
   
   
   constructor(private authService: authService,
-              private userService: UserService) {}
+              private userService: UserService) {
+                if (this.authService.isAuthenticated()){
+                  this.authenticated = true;
+                }else {
+                  this.authenticated= false;
+                }
+              }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      console.log("autenticado");
       let username: string = this.authService.getUsername();
-      console.log(username);
-
       this.userService.findByUsername(username)
         .subscribe(
           (data => {
@@ -36,6 +40,11 @@ export class HeaderComponent implements OnInit {
         )
 
     }
+  }
+
+  logout(){
+    this.authService.logout();
+    window.location.reload();  
   }
 
 

@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   user: User = new User("", ".", "", "", "", "", "", 0);
 
-  userLogado: User = new User("", ".", "", "", "", "", "", 0);
+  userLogado: User = new User("", ".", "", "", "", "", "", 1);
 
   pagamento: MetodoPagamento = new MetodoPagamento(1, "");
 
@@ -65,11 +65,10 @@ export class HomeComponent implements OnInit {
 
   bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min");
 
-  status: Status = new Status(1, "Em aberto");
+  status: Status = new Status(1, "Pedido feito, aguardando estabelecimento aceitar");
 
   pesquisaName = new FormControl();
 
-  user$: Observable<User>;
 
 
   order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items);
@@ -89,15 +88,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     
     if (this.authService.isAuthenticated()) {
-      console.log("autenticado");
       let username: string = this.authService.getUsername();
-      console.log(username);
-
       this.userService.findByUsername(username)
         .subscribe(
           (data => {
             this.user = data;
             this.filtroEnderecos(this.user);
+            this.userLogado.id = this.user.id;
           })
         )
 
@@ -199,7 +196,7 @@ export class HomeComponent implements OnInit {
 
 
 
-    this.order.user = this.user;
+    this.order.user = this.userLogado;
     this.order.paymentMethod = this.pagamento.description;
     this.order.status = this.status;
     this.order.total = this.totalPedido;

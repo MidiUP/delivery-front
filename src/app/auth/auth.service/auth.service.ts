@@ -7,6 +7,7 @@ import { User } from "src/app/user/user.model";
 import { UserService } from "src/app/user/user.service";
 import { UserLogin } from "../login/userLogin.model";
 import { Token } from "./token.model";
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class authService{
@@ -15,12 +16,10 @@ export class authService{
 
     private user: User = new User ("","","","","","","",0);
     private username:string;
-    private loggedIn: boolean = false;
     private subjUser$: BehaviorSubject<User> = new BehaviorSubject(this.user);
 
 
-    constructor(private http: HttpClient,
-                private userService: UserService){}
+    constructor(private http: HttpClient){}
 
     login(userLogin: UserLogin):Observable<any>{
         return this.http
@@ -28,8 +27,7 @@ export class authService{
             .pipe(
                 tap((token: Token) => {
                     localStorage.setItem('token', token.access_token);
-                    this.loggedIn=true;
-                    this.username = userLogin.username
+                    this.username = userLogin.username;
                 })
             )
             
@@ -37,7 +35,19 @@ export class authService{
     }
 
     isAuthenticated(): boolean{
-        return this.loggedIn;
+        // return this.loggedIn;
+        if(localStorage.getItem('token')){
+            let token: any = localStorage.getItem('token');
+            if(this.getTokenValid(token) == true){
+                const decoded: any = jwt_decode(token);
+                this.username = decoded.sub;
+                return true;
+            }else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     getUser(): User {
@@ -48,14 +58,31 @@ export class authService{
         return this.username;
     }
 
-    // findUser(username: string): User{
-    //     let user: User = new User("","","","","","","");
-    //     this.userService.findByUsername(username)
-    //         .subscribe(
-    //             (data => user = data)
-    //         );
-    //     return user;
-    // }
+    logout(){
+        localStorage.removeItem('token');
+        this.username = "";
+    }
+
+    getTokenValid(token: any): boolean {
+        const decoded: any = jwt_decode(token);
+
+        if(decoded.exp === undefined){
+            return false;
+        }
+
+        const date = new Date(0);
+        date.setUTCSeconds(decoded.exp);
+
+        if(date.valueOf() > new Date().valueOf()){
+            return true;
+        }else{
+            return false;
+        }
+
+        
+
+
+    }
 
 
 

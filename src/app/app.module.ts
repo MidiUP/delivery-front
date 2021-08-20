@@ -40,7 +40,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { AdicionarEnderecoComponent } from './user/adicionar-usuario/adicionar-endereco/adicionar-endereco.component';
 import { AdicionarUsuarioComponent } from './user/adicionar-usuario/adicionar-usuario.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdicionarUsuarioFormComponent } from './user/adicionar-usuario/adicionar-usuario-form/adicionar-usuario-form.component';
 import { UserService } from './user/user.service';
@@ -61,6 +61,7 @@ import { NovoMetodoPagamentoComponent } from './novo-metodo-pagamento/novo-metod
 import { EditarMetodoPagamentoComponent } from './editar-metodo-pagamento/editar-metodo-pagamento.component';
 import { LoginComponent } from './auth/login/login.component';
 import { authService } from './auth/auth.service/auth.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,7 @@ import { authService } from './auth/auth.service/auth.service';
     MatSnackBarModule,
     MatDialogModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

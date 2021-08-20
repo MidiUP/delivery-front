@@ -27,9 +27,13 @@
             <li class="nav-item divisor d-none d-md-block"></li>
           
           <li class="nav-item">
-            <a [routerLink]="['/addUsuario']" class="nav-link ">Cadastrar-se</a></li>
+            <a [routerLink]="['/addUsuario']" class="nav-link " *ngIf="authenticated==false">Cadastrar-se</a>
+            <a [routerLink]="['/addUsuario']" class="nav-link " *ngIf="authenticated==true"style="margin-right: 5px">Perfil</a>
+          </li>
             <li class="nav-item">
-              <a [routerLink]="['/login']" href="" class="nav-link ">Entrar</a></li>
+              <a [routerLink]="['']" href="" class="nav-link" *ngIf="authenticated==true" (click)="logout()">Logout</a>
+              <a [routerLink]="['/login']" href="" class="nav-link" *ngIf="authenticated==false">Login</a>
+            </li>
          </ul>
       </div>
     </div>
