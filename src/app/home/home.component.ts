@@ -105,6 +105,8 @@ export class HomeComponent implements OnInit {
     this.getCategorias();
     this.autoComplete();
 
+
+
   }
 
   getProducts(): void {
@@ -167,6 +169,12 @@ export class HomeComponent implements OnInit {
   openDialog(produto: Product) {
     const dialogRef = this.dialog.open(DialogProdutoComponent, {
       data: { name: produto.name, description: produto.description, price: produto.price }
+    });
+  }
+
+  openDialogCarMobile() {
+    const dialogRef = this.dialog.open(DialogProdutoComponent, {
+      data: {}
     });
   }
 

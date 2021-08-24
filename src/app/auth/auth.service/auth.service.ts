@@ -46,6 +46,7 @@ export class authService{
                 this.username = decoded.sub;
                 return true;
             }else {
+                localStorage.removeItem("token");
                 return false;
             }
         } else {

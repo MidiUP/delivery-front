@@ -1,5 +1,5 @@
 body{
-   
+   overflow: hidden;
 }
 #carousel {
     display: flex;
@@ -290,6 +290,7 @@ button.navbar-toggler{
 #carrinho-mobile{
     background-color: black;
     padding: 10px 20px;
+    width: 100%;
 }
 
 .icone-carrinho-mobile{
@@ -299,6 +300,12 @@ button.navbar-toggler{
 .preco-final-carrinho-mobile{
     color: white;
     text-decoration: white;
+    cursor: pointer;
+}
+
+#div-opcoes-carrinho{
+    padding: 0; 
+    padding-left: 15px;
 }
 
 
@@ -368,6 +375,13 @@ button.navbar-toggler{
     .v-md{
         display: none;
     }
+
+    #div-opcoes-carrinho {
+        display: none;
+     }
+
+ 
+
 }
 
 /* personalizado */
@@ -431,6 +445,12 @@ button.navbar-toggler{
         display: none;
     }
 
+
+
+    #div-opcoes-carrinho {
+       display: none;
+    }
+
 }
 
 
@@ -491,6 +511,10 @@ button.navbar-toggler{
     .v-md{
         display: none;
     }
+
+    #div-opcoes-carrinho {
+        display: none;
+     }
 
 }
 

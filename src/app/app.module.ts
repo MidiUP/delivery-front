@@ -36,6 +36,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -61,6 +62,8 @@ import { authService } from './auth/auth.service/auth.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { NovoUsuarioComponent } from './user/novo-usuario/novo-usuario.component';
 import { NovoEnderecoComponent } from './enderecos/novo-endereco/novo-endereco.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { DialogCarrinhoMobileComponent } from './home/dialog-carrinho-mobile/dialog-carrinho-mobile.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +92,8 @@ import { NovoEnderecoComponent } from './enderecos/novo-endereco/novo-endereco.c
     LoginComponent,
     NovoUsuarioComponent,
     NovoEnderecoComponent,
+    PerfilComponent,
+    DialogCarrinhoMobileComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +114,8 @@ import { NovoEnderecoComponent } from './enderecos/novo-endereco/novo-endereco.c
     MatFormFieldModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatBadgeModule
   ],
   providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

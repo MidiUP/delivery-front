@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   faAddressCard = faAddressCard;
   faHome = faHome;
 
-  user: User = new User("Visitante","","","","","","",undefined)
+  user: User = new User("Visitante","","","","","","",0)
   authenticated: boolean;
   
   

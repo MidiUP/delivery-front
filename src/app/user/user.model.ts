@@ -10,7 +10,7 @@ export class User{
         public cpf: string,
         public rg: string,
         public phone: string,
-        public id?: number,
+        public id: number,
     ){}
 
 }

@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { authService } from 'src/app/auth/auth.service/auth.service';
-import { Address } from 'src/app/enderecos/address.model';
-import { addressService } from 'src/app/enderecos/address.service';
-import { Bairro } from 'src/app/novo-bairro/bairro.model';
-import { bairroService } from 'src/app/novo-bairro/bairro.service';
-import { User } from '../user.model';
-import { UserService } from '../user.service';
-
+import { authService } from '../auth/auth.service/auth.service';
+import { Address } from '../enderecos/address.model';
+import { addressService } from '../enderecos/address.service';
+import { Bairro } from '../novo-bairro/bairro.model';
+import { bairroService } from '../novo-bairro/bairro.service';
+import { User } from '../user/user.model';
+import { UserService } from '../user/user.service';
 
 @Component({
-  selector: 'app-novo-usuario',
-  templateUrl: './novo-usuario.component.html',
-  styleUrls: ['./novo-usuario.component.css']
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.css']
 })
-export class NovoUsuarioComponent implements OnInit {
+export class PerfilComponent implements OnInit {
 
   hide = true;
   campoEndereco: number = 1;
@@ -56,12 +55,15 @@ export class NovoUsuarioComponent implements OnInit {
     'city': ['', [Validators.required, Validators.minLength(3)]]
   });
 
-  newUser: User = new User("", "", "", "", "", "", "",0);
+  edit: boolean = false;
+  newUser: User = new User("", "", "", "", "", "", "", 0);
   userAddress: User = new User("", "", "", "", "", "", "", 3);
   newAddress: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
   newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
   newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
   bairros: Bairro[] = [];
+  enderecos: Address[] = [];
+
 
 
 
@@ -74,6 +76,22 @@ export class NovoUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBairros();
+    this.userService.findByUsername(this.authService.getUsername())
+      .subscribe(
+        (data => {
+          this.newUser.id = data.id;
+          this.newUser.cpf = data.cpf;
+          this.newUser.email = data.email;
+          this.newUser.name = data.name;
+          this.newUser.password = data.password;
+          this.newUser.phone = data.phone;
+          this.newUser.rg = data.rg;
+          this.newUser.username = data.username;
+          // this.newUser.password = "***";
+          this.getEnderecos(this.newUser);
+        })
+      )
+
   }
 
   newCampoEndereco() {
@@ -85,7 +103,7 @@ export class NovoUsuarioComponent implements OnInit {
     console.log(this.campoEndereco)
   }
 
-  deleteCampoEndereco() {
+  deleteCampoEndereco(endereco: number) {
     if (this.campoEndereco > 1)
       this.campoEndereco--;
 
@@ -123,7 +141,7 @@ export class NovoUsuarioComponent implements OnInit {
     return false;
   }
 
-  cadastroEndereco(address: Address){
+  cadastroEndereco(address: Address) {
     this.addressService.createAddress(address)
       .subscribe(
         (res) => {
@@ -131,50 +149,112 @@ export class NovoUsuarioComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-          console.log(this.newUser)
+        })
+  }
+
+  editEndereco(address: Address) {
+    this.addressService.putAddress(address, address.id)
+      .subscribe(
+        (res) => {
+          console.log("endereco cadastrado");
+        },
+        (err) => {
+          console.log(err);
         })
   }
 
   onSubmit() {
-    this.userService.createUser(this.newUser)
+    this.userService.putUser(this.newUser, this.newUser.id)
       .subscribe(
         (res) => {
-          console.log("usuario cadastrado");
-          this.userService.findByUsername(this.newUser.username)
-            .subscribe(
-              (data => {
-                this.userService.findByUsername(this.newUser.username)
-                  .subscribe(
-                    (data => {
-                      this.userAddress.id = data.id;
-                      this.cadastroEndereco(this.newAddress);
-                      if(this.campoEndereco===2){
-                        this.cadastroEndereco(this.newAddress2);
-                      }
-                      if(this.campoEndereco===3){
-                        this.cadastroEndereco(this.newAddress2);
-                        this.cadastroEndereco(this.newAddress3);
-                      }
-                      this.authService.login({username: this.newUser.username, password: this.newUser.password})
-                        .subscribe(
-                          (res => console.log("chamei login")),
-                          (err => console.log(err))
-                        );
-                      console.log("cheguei")
-                    }),
-                    (err => console.log(err))
-                  )
-              }),
-              (err) => {
-                console.log(err)
-              })
+          console.log("usuario alterado");
         },
         (err) => {
           console.log(err);
           console.log(this.newUser)
         })
+    
+    if(this.enderecos.length < 2 ){
+      this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
+        .subscribe(
+          (res => console.log("endereco 1 alterado")),
+          (err => {
+            console.log(err)
+            console.log(this.newAddress)
+          })
+        )
+    }else if (this.enderecos.length === 2){
+      this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
+        .subscribe(
+          (res => console.log("endereco 1 alterado")),
+          (err => {
+            console.log(err)
+            console.log(this.newAddress)
+          })
+        )
 
-      
+        this.addressService.putAddress(this.newAddress2, this.enderecos[1].id)
+        .subscribe(
+          (res => console.log("endereco 2 alterado")),
+          (err => {
+            console.log(err)
+            console.log(this.newAddress)
+          })
+        )
+    } else if (this.enderecos.length === 3){
+      this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
+        .subscribe(
+          (res => console.log("endereco 1 alterado")),
+          (err => {
+            console.log(err)
+            console.log(this.newAddress)
+          })
+        )
+
+        this.addressService.putAddress(this.newAddress2, this.enderecos[1].id)
+        .subscribe(
+          (res => console.log("endereco 2 alterado")),
+          (err => console.log(err))
+        )
+
+        this.addressService.putAddress(this.newAddress3, this.enderecos[2].id)
+        .subscribe(
+          (res => console.log("endereco 3 alterado")),
+          (err => console.log(err))
+        )
+    }
+
+ 
+  }
+
+  getEnderecos(user: User) {
+    this.addressService.findAddressByUser(user)
+      .subscribe(
+        (data => {
+          this.enderecos = data;
+          if (this.enderecos.length == 1) {
+            this.newAddress = this.enderecos[0];
+            this.newAddress.userRestaurant = this.newUser;
+            this.campoEndereco = 1;
+          }
+          if (this.enderecos.length == 2) {
+            this.newAddress = this.enderecos[0];
+            this.newAddress.userRestaurant = this.newUser;
+            this.newAddress2 = this.enderecos[1];
+            this.newAddress2.userRestaurant = this.newUser;
+            this.campoEndereco = 2;
+          }
+          if (this.enderecos.length == 3) {
+            this.newAddress = this.enderecos[0];
+            this.newAddress.userRestaurant = this.newUser;
+            this.newAddress2 = this.enderecos[1];
+            this.newAddress2.userRestaurant = this.newUser;
+            this.newAddress3 = this.enderecos[2];
+            this.newAddress3.userRestaurant = this.newUser;
+            this.campoEndereco = 3;
+          }
+        })
+      );
   }
 
 }
