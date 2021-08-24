@@ -1,1 +1,87 @@
-<p>dialog-carrinho-mobile works!</p>
+<body>
+    <header>
+        <h4>SACOLA</h4>
+    </header>
+
+    <div class="row div-itens-carrinho" *ngFor="let item of carrinho.products">
+        <div class="col-6 item">
+            <h5 class="produto">{{item.name}}</h5>
+            <div class="div-infos">
+                <span class="descricao-produto">{{item.description}}</span>
+            </div>
+            <span class="preco">R${{item.total.toFixed(2)}}</span>
+        </div>
+
+        <div class="col-3 botoes">
+            <a class="botoes-itens">
+                <mat-icon style="color: black;">add</mat-icon>
+            </a>
+
+            <a class="botoes-itens">
+                <mat-icon color="warn">delete</mat-icon>
+            </a>
+        </div>
+
+        <div class="col-3">
+            <img src="../../../assets/img/Figura-Hamburguer-PNG-1280x720.png">
+        </div>
+
+        <div class="container">
+            <hr>
+        </div>
+    </div>
+
+    <div class="">
+        <nav class="navbar navbar-expand navbar-dark" style="margin-bottom: 10px;">
+            <div class="container-fluid">
+                <h5 class="navbar-brand">Entrega</h5>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Endereço
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li *ngFor="let endereco of enderecos"><a class="dropdown-item">{{endereco.street}},
+                                        {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-expand navbar-dark">
+            <div class="container-fluid">
+                <h5 class="navbar-brand">Pagamento</h5>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Método
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li *ngFor="let metodo of pagamentos"><a
+                                        class="dropdown-item">{{metodo.description}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+</body>

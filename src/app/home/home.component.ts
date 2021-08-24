@@ -20,6 +20,7 @@ import { Status } from './status.model';
 import { map, tap, filter, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { authService } from '../auth/auth.service/auth.service';
 import { UserService } from '../user/user.service';
+import { DialogCarrinhoMobileComponent } from './dialog-carrinho-mobile/dialog-carrinho-mobile.component';
 
 @Component({
   selector: 'app-home',
@@ -173,8 +174,8 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogCarMobile() {
-    const dialogRef = this.dialog.open(DialogProdutoComponent, {
-      data: {}
+    const dialogRef = this.dialog.open(DialogCarrinhoMobileComponent, {
+      data: {user: this.user, products: this.itensCarrinho}, 
     });
   }
 
@@ -192,8 +193,6 @@ export class HomeComponent implements OnInit {
     this.itensCarrinho.forEach(item => {
       this.items.push(new Items(item.quantityCar, item))
     })
-
-
 
     this.order.user = this.userLogado;
     this.order.paymentMethod = this.pagamento.description;

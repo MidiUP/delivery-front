@@ -16,7 +16,7 @@ export class DialogProdutoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public produto: Product) { }
 
   ngOnInit(): void {
-    console.log(this.produto.name);
+
   }
 
 }
