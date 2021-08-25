@@ -14,13 +14,13 @@
       </div>
       <div class="carousel-inner center-block">
         <div class="carousel-item active">
-          <img src="../../assets/img/Burger-King-Logo.png" class="d-block w-100" alt="...">
+          <img src="../../assets/img/carrossel3.jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../../assets/img/background.jpg-1.png" class="d-block w-100" alt="...">
+          <img src="../../assets/img/carrossel4.jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../../assets/img/background.jpg" class="d-flex w-100" alt="...">
+          <img src="../../assets/img/carrossel3.jpeg" class="d-flex w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -36,13 +36,41 @@
     </div>
   </div>
 
+  <div class="container" id="infos-home">
+    <div class="row infos-home">
+      <div class="col-6">
+        <div class="estado-estabelecimento">
+          <div class="d-flex align-items-center">
+            <mat-icon class="icon-open">circle</mat-icon>
+            <h5 class="titulo-infos">ESTAMOS ABERTO</h5>
+          </div>
+          <p>Faça seu Pedido</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="estado-estabelecimento">
+          <div class="d-flex align-items-center">
+            <mat-icon class="icon-open">shopping_bag</mat-icon>
+            <h5 class="titulo-infos">PEDIDO #20</h5>
+          </div>
+          <p class="v-desktop-infos">Em Preparo ( Previsão de entrega: 20h30 )</p>
+          <div class="v-mobile-infos">
+            <p>Em Preparo</p>
+            <p>Entrega: 20h30</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section class="d-flex">
     <div class="container">
       <div class="row">
         <div class="col-md-8 d-flex" id="cardapio">
 
 
-          <nav class="navbar navbar-expand-lg navbar-light" id="navbar-cardapio">
+          <nav class="navbar navbar-expand navbar-light" id="navbar-cardapio">
             <div class="container-fluid navbar-cardapio">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -56,7 +84,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle link-categoria" href="#" id="navbarDropdown" role="button"
                       data-bs-toggle="dropdown" aria-expanded="false">
                       Categoria
                     </a>
@@ -73,9 +101,9 @@
 
 
                 <div class="d-flex">
-                  <input class="form-control me-2" [formControl]="pesquisaName" [(ngModel)]="buscaNome"
+                  <input class="form-control me-2 busca" [formControl]="pesquisaName" [(ngModel)]="buscaNome"
                     placeholder="Procure um produto">
-                  <button class="btn btn-outline-white" (click)="buscaName()">Procurar</button>
+                  <button class="btn btn-outline-white btn-busca" (click)="buscaName()">Procurar</button>
                 </div>
 
 
@@ -161,11 +189,13 @@
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">
 
-                  <div class="d-flex">
-                    <span class="nome-produto">{{item.name}}</span>
-                    <span class="quantidade-produto">{{item.quantityCar}}x</span>
+                  <div class="row item-carrinho">
+                    <div class="col-5 nome-produto-carrinho">
+                      <span class="nome-produto">{{item.name}}</span>
+                      <span class="quantidade-produto">{{item.quantityCar}}x</span>
+                    </div>
 
-                    <div class="botoes-produto-carrinho">
+                    <div class="col-4 botoes-produto-carrinho">
                       <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)">
                         <mat-icon>add</mat-icon>
                       </a>
@@ -175,7 +205,7 @@
                     </div>
 
 
-                    <div class="preco-produto-carrinho">
+                    <div class="col-3 preco-produto-carrinho">
                       <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
                     </div>
 
@@ -298,12 +328,12 @@
                   </div>
                 </nav>
               </div>
-              <p class="opcao-selecionada">{{ pagamento.description }}</p>
+              <p *ngIf="pagamentoSelecionado != null" class="opcao-selecionada">{{ pagamento.description }}</p>
             </div>
 
             <div class="campo-opcoes-pedido">
               <div>
-                <nav class="navbar navbar-expand opcoes-pedido">
+                <nav class="navbar navbar-expand opcoes-pedido" style="margin-top: 10px">
                   <div class="container-fluid" style="padding-bottom:0">
                     <h4 class="navbar-brand titulo-opcoes">Finalizar Pedido</h4>
                     <button class=" btn finalizar-pedido" (click)="exportarPedido()">Compra</button>
@@ -325,18 +355,19 @@
     </div>
   </section>
 
-  <section id="carrinho-mobile" class="fixed-bottom">
-    <div class="d-flex">
-      <div>
-        <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;">shopping_cart</mat-icon>
+  <section id="carrinho-mobile" class="fixed-bottom" style="padding:0">
+    <div class="row d-flex align-items-center" style="padding: 5px 0px; margin: 0;">
+      <div class="col-3">
+        <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;">
+          shopping_cart</mat-icon>
       </div>
 
-      <div style="margin-left: auto;">
+      <div class="col-6 d-flex justify-content-center" style="margin-left: auto;">
         <a class="preco-final-carrinho-mobile" (click)="openDialogCarMobile()">Ver Carrinho</a>
       </div>
 
-      <div style="margin-left: auto;">
-        <span class="preco-final-carrinho-mobile">R${{totalPedido.toFixed(2)}}</span>
+      <div class="col-3 d-flex" style="padding: 0px 12px 0px 0px;">
+        <span class="preco-final-carrinho-mobile" style="margin-left: auto;">R${{totalPedido.toFixed(2)}}</span>
       </div>
     </div>
 
@@ -344,6 +375,6 @@
   </section>
 
 
-  
+
   <app-footer></app-footer>
 </body>

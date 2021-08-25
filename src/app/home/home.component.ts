@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   enderecoSelecionado: Address;
 
   tiposPagamento: string[] = ["Á vista", "Cartão de Crédito", "Cartão de Débito", "Pix"];
-  pagamentoSelecionado: string = "";
+  pagamentoSelecionado: string;
 
   quantidadeProdutoCarrinho: number = 1;
   precoProdutoAtual: number;

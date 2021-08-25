@@ -1,5 +1,11 @@
+
 body{
-   overflow: hidden;
+    overflow: hidden;
+    background: url(../../assets/img/BackgroundTheliveryWhite.jpg) no-repeat fixed;
+    background-size: cover;
+
+
+
 }
 #carousel {
     display: flex;
@@ -26,7 +32,7 @@ img {
 
 #cardapio{
     background: white;
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     overflow: auto;
     flex-wrap: wrap;
@@ -39,9 +45,9 @@ img {
 }
 
 #carrinho{
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: auto;
-    height: 400px;
+    height: auto;
 }
 
 .campo-opcoes-pedido{
@@ -61,8 +67,9 @@ img {
 
 .opcoes-pedido{
     background: black;
-    margin-bottom:0;
+    margin-bottom:0px;
     padding-bottom: 0;
+    margin-top: 0;
 }
 
 .titulo-opcoes{
@@ -119,6 +126,38 @@ img {
     font-size: 0.7em;
 }
 
+.infos-home{
+    background: black;
+    padding: 20px 20px;
+}
+
+#infos-home{
+    margin-top: 15px;
+}
+
+.titulo-infos{
+    color: white;
+    margin: 0px 0px 0px 5px;
+    padding: 0;
+    font-size: 1em;
+}
+
+.estado-estabelecimento{
+    display: flex;
+    flex-direction: column;
+}
+.estado-estabelecimento p{
+    margin: 0;
+    padding: 0;
+    color: #d3d3d3;
+    font-size: 0.8em;
+    margin-left: 29px;
+}
+
+.icon-open{
+    color: green;
+
+}
 
 
 
@@ -197,10 +236,17 @@ img {
 }
 
 #navbar-cardapio{
+    display: flex;
+    align-items: center;
     background: black;
     width: 100%;
     padding: 10px 0px;
     height: 60px;
+    margin-bottom: 5px;
+}
+
+.link-categoria{
+    padding: 0;
 }
 
 .btn-outline-white{
@@ -236,8 +282,16 @@ button.navbar-toggler{
 
 .carrinho{
     background: white;
-    margin-bottom: 16px;
-    padding: 8px 24px;
+    padding: 18px 34px;
+}
+
+.item-carrinho{
+    align-items: center;
+}
+
+.nome-produto-carrinho{
+    margin: 0;
+    padding: 0;
 }
 
 .titulo-carrinho{
@@ -268,7 +322,8 @@ button.navbar-toggler{
 
 .preco-produto-carrinho{
     margin-top: 10px;
-    margin-left: auto;
+    margin-left: 0;
+    padding: 0;
 }
 
 .botoes-produto-carrinho{
@@ -316,13 +371,13 @@ button.navbar-toggler{
     
     #carouselExampleIndicators{
         width: 600px;
-        height: 200px;
+        height: 150px;
         margin-top: 97px;
     }
 
     img {
         width: 60px;
-        height: 200px;
+        height: 150px;
     }
 
      /* Formatação card produto */
@@ -359,6 +414,41 @@ button.navbar-toggler{
     .mat-icon-button{
         width: 25px;
         margin-left: auto;
+    }
+
+    .navbar-cardapio{
+        padding: 0;
+    }
+
+    .link-categoria{
+        font-size: 1em;
+        margin-top: 7px;
+    }
+
+    .busca{
+        width: 150px;
+        margin: 0px 10px;
+    }
+
+    .btn-busca{
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        margin-right: 12px;
+
+    }
+
+    .infos-home{
+        background: black;
+        padding: 15px 8px;
+    }
+
+    .v-mobile-infos{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .v-desktop-infos{
+        display: none;
     }
 
     /* Formatação card produto */
@@ -577,6 +667,10 @@ button.navbar-toggler{
         font-size: 0.9em;
     }
 
+    .v-mobile-infos{
+        display: none;
+    }
+
 
 }
 
@@ -585,7 +679,7 @@ button.navbar-toggler{
     
 
     .produto{
-        margin: 15px 10px;
+        margin: 15px 2.5%;
         width: 45%;
     }
     
@@ -615,6 +709,11 @@ button.navbar-toggler{
     .v-md{
         display: none;
     }
+
+    .v-mobile-infos{
+        display: none;
+    }
+
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -626,6 +725,16 @@ button.navbar-toggler{
     .v-md{
         display: none;
     }
+
+    .produto{
+        margin: 15px 2.5%;
+        width: 45%;
+    }
+
+    .v-mobile-infos{
+        display: none;
+    }
+
 }
 
 
