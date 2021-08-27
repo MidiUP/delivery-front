@@ -21,6 +21,7 @@ import { map, tap, filter, distinctUntilChanged, debounceTime } from 'rxjs/opera
 import { authService } from '../auth/auth.service/auth.service';
 import { UserService } from '../user/user.service';
 import { DialogCarrinhoMobileComponent } from './dialog-carrinho-mobile/dialog-carrinho-mobile.component';
+import { carrinhoService } from './carrinho.service';
 
 @Component({
   selector: 'app-home',
@@ -31,21 +32,21 @@ export class HomeComponent implements OnInit {
 
   enderecosCadastrados: Address[] = [];
   enderecos: Address[];
-  enderecoSelecionado: Address;
+  enderecoSelecionado: Address = this.carrinhoService.getEnderecoSelecionado();
 
   tiposPagamento: string[] = ["Á vista", "Cartão de Crédito", "Cartão de Débito", "Pix"];
-  pagamentoSelecionado: string;
+  pagamentoSelecionado: MetodoPagamento = this.carrinhoService.getMetodoPagamento();
 
   quantidadeProdutoCarrinho: number = 1;
   precoProdutoAtual: number;
 
-  totalPedido: number = 0;
+  totalPedido: number = this.carrinhoService.getTotalPedido();
 
   frete: number = 0;
 
   products: Product[] = [];
 
-  itensCarrinho: Product[] = [];
+  itensCarrinho: Product[] = this.carrinhoService.getItensCarrinho();
 
   items: Items[] = [];
 
@@ -69,6 +70,8 @@ export class HomeComponent implements OnInit {
 
   pesquisaName = new FormControl();
 
+  carrinhoMobileOpen: boolean = false
+
 
 
   order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items);
@@ -81,7 +84,8 @@ export class HomeComponent implements OnInit {
     private metodoPagamentoService: metodoPagamentoService,
     private categoriaService: categoriaService,
     private authService: authService,
-    private userService: UserService) {
+    private userService: UserService,
+    private carrinhoService: carrinhoService) {
 
   }
 
@@ -106,7 +110,7 @@ export class HomeComponent implements OnInit {
     this.getCategorias();
     this.autoComplete();
 
-
+    // setInterval(() => console.log(this.itensCarrinho), 10000)
 
   }
 
@@ -119,51 +123,42 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  onClickEnderecoItem(endereco: Address): void {
-    this.enderecoSelecionado = endereco;
-    this.totalPedido -= this.frete;
-    this.frete = this.enderecoSelecionado.neighborhood.value;
-    this.totalPedido += this.frete;
+  // onClickEnderecoItem(endereco: Address): void {
+  //   this.enderecoSelecionado = endereco;
+  //   this.totalPedido -= this.frete;
+  //   this.frete = this.enderecoSelecionado.neighborhood.value;
+  //   this.totalPedido += this.frete;
 
+  // }
+
+  alterarEndereco(endereco: Address){
+    this.carrinhoService.onClickEnderecoItem(endereco);
+    this.totalPedido=this.carrinhoService.getTotalPedido();
+    this.enderecoSelecionado=this.carrinhoService.getEnderecoSelecionado();
+    this.frete=endereco.neighborhood.value;
   }
 
-  onClickTipoPagamento(pagamento: MetodoPagamento): void {
-    this.pagamento = pagamento;
-    this.order.paymentMethod = pagamento.description;
+  // onClickTipoPagamento(pagamento: MetodoPagamento): void {
+  //   this.pagamento = pagamento;
+  //   this.order.paymentMethod = pagamento.description;
+  // }
+
+  alterarMetodoPagamento(metodo: MetodoPagamento){
+    this.carrinhoService.selecionarMetodoPagamento(metodo);
+    this.pagamentoSelecionado = metodo;
   }
 
   addItem(produto: Product): void {
-    if (!this.itensCarrinho.includes(produto)) {
-      this.itensCarrinho.push(produto);
-      produto.quantityCar = 1;
-    } else {
-      produto.quantityCar++;
-    }
-    produto.total = produto.quantityCar * produto.price;
-    this.totalPedido += produto.price;
+    this.carrinhoService.addItem(produto);
+    this.itensCarrinho = this.carrinhoService.getItensCarrinho();
+    this.totalPedido = this.carrinhoService.getTotalPedido();
 
   }
 
   removeItem(produto: Product): void {
-    if (produto.quantityCar == 1) {
-      this.totalPedido -= produto.price
-    }
-
-    if (produto.quantityCar <= 1) {
-      produto.quantityCar = 0;
-
-      var index = this.itensCarrinho.indexOf(produto);
-      if (index >= 0) {
-        this.itensCarrinho.splice(index, 1);
-      }
-    }
-    if (produto.quantityCar > 0)
-      produto.quantityCar--;
-    produto.total = produto.quantityCar * produto.price;
-
-    if (produto.quantityCar > 0) {
-      this.totalPedido -= produto.price;
-    }
+    this.carrinhoService.removeItem(produto);
+    this.itensCarrinho = this.carrinhoService.getItensCarrinho();
+    this.totalPedido = this.carrinhoService.getTotalPedido();
 
   }
 
@@ -175,7 +170,15 @@ export class HomeComponent implements OnInit {
 
   openDialogCarMobile() {
     const dialogRef = this.dialog.open(DialogCarrinhoMobileComponent, {
-      data: {user: this.user, products: this.itensCarrinho}, 
+      data: {user: this.user} 
+    });
+
+    this.carrinhoMobileOpen = true;
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.carrinhoMobileOpen = false;
+      this.totalPedido = this.carrinhoService.getTotalPedido();
+      this.itensCarrinho = this.carrinhoService.getItensCarrinho();
     });
   }
 
@@ -188,33 +191,38 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  exportarPedido() {
+  // exportarPedido() {
 
-    this.itensCarrinho.forEach(item => {
-      this.items.push(new Items(item.quantityCar, item))
-    })
+  //   this.itensCarrinho.forEach(item => {
+  //     this.items.push(new Items(item.quantityCar, item))
+  //   })
 
-    this.order.user = this.userLogado;
-    this.order.paymentMethod = this.pagamento.description;
-    this.order.status = this.status;
-    this.order.total = this.totalPedido;
-    this.order.coupon = this.cupom;
-    this.order.items = this.items;
-    this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`
+  //   this.order.user = this.userLogado;
+  //   this.order.paymentMethod = this.pagamento.description;
+  //   this.order.status = this.status;
+  //   this.order.total = this.totalPedido;
+  //   this.order.coupon = this.cupom;
+  //   this.order.items = this.items;
+  //   this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`
 
-    this.orderService.createOrder(this.order)
-      .subscribe(
-        (res => {
-          console.log("pedido concluido");
-        }),
-        (err => {
-          console.log(err);
-          console.log(this.order);
-        })
-      )
+  //   this.orderService.createOrder(this.order)
+  //     .subscribe(
+  //       (res => {
+  //         console.log("pedido concluido");
+  //       }),
+  //       (err => {
+  //         console.log(err);
+  //         console.log(this.order);
+  //       })
+  //     )
 
-    // window.location.reload();
-  }
+  //   // window.location.reload();
+  // }
+
+  exportarPedido(){
+    this.carrinhoService.exportarPedido();
+    }
+  
 
   getPagamentos() {
     this.metodoPagamentoService.getMetodosPagamentos()

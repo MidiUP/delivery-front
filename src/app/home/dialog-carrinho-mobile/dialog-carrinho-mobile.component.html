@@ -1,11 +1,11 @@
 <body>
     <header>
-        <h4>SACOLA</h4>
+        <h4>CARRINHO</h4>
     </header>
 
-    <div class="row div-itens-carrinho" *ngFor="let item of carrinho.products">
+    <div class="row div-itens-carrinho" *ngFor="let item of itensCarrinho">
         <div class="col-6 item">
-            <h5 class="produto">{{item.name}}</h5>
+            <h5 class="produto">{{item.name}} ({{item.quantityCar}}x)</h5>
             <div class="div-infos">
                 <span class="descricao-produto">{{item.description}}</span>
             </div>
@@ -14,11 +14,11 @@
 
         <div class="col-3 botoes">
             <a class="botoes-itens">
-                <mat-icon style="color: black;">add</mat-icon>
+                <mat-icon style="color: black;" (click)="addItem(item)">add</mat-icon>
             </a>
 
             <a class="botoes-itens">
-                <mat-icon color="warn">delete</mat-icon>
+                <mat-icon color="warn" (click)="removeItem(item)">delete</mat-icon>
             </a>
         </div>
 
@@ -29,6 +29,19 @@
         <div class="container">
             <hr>
         </div>
+    </div>
+
+    <div class="resumo">
+        <div class="item-resumo">
+            <h5 class="produto">FRETE</h5>
+            <h5 class="produto valor-resumo">{{frete.toFixed(2)}}</h5>
+        </div>
+        
+        <div class="item-resumo">
+            <h5 class="produto" style="color: red;">TOTAL</h5>
+            <h5 class="produto valor-resumo">{{totalPedido.toFixed(2)}}</h5>
+        </div>
+
     </div>
 
     <div class="">
@@ -48,13 +61,15 @@
                                 Endereço
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li *ngFor="let endereco of enderecos"><a class="dropdown-item">{{endereco.street}},
+                                <li *ngFor="let endereco of enderecos">
+                                    <a class="dropdown-item" (click)="alterarEndereco(endereco)">{{endereco.street}},
                                         {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
+            <p *ngIf="enderecoEscolhido!=null">{{enderecoEscolhido.street}}, {{enderecoEscolhido.number}}, {{enderecoEscolhido.neighborhood.name}}</p>
         </nav>
 
         <nav class="navbar navbar-expand navbar-dark">
@@ -74,14 +89,25 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li *ngFor="let metodo of pagamentos"><a
-                                        class="dropdown-item">{{metodo.description}}</a></li>
+                                        class="dropdown-item" (click)="alterarMetodoPagamento(metodo)">{{metodo.description}}</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
+            <p *ngIf="pagamentoEscolhido!=null">{{pagamentoEscolhido.description}}</p>
         </nav>
     </div>
+
+    <div class="botao-compra">
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="exportarPedido()">Confirmar Pedido</button>
+    </div>
+
+
+
+    <br>
+
+
 
 
 </body>

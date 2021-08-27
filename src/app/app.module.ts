@@ -64,6 +64,10 @@ import { NovoUsuarioComponent } from './user/novo-usuario/novo-usuario.component
 import { NovoEnderecoComponent } from './enderecos/novo-endereco/novo-endereco.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DialogCarrinhoMobileComponent } from './home/dialog-carrinho-mobile/dialog-carrinho-mobile.component';
+import { carrinhoService } from './home/carrinho.service';
+import { CarrinhoVazioComponent } from './snack-bars/carrinho-vazio/carrinho-vazio.component';
+import { MetodoPagamentoNullComponent } from './snack-bars/metodo-pagamento-null/metodo-pagamento-null.component';
+import { AddressNullComponent } from './snack-bars/address-null/address-null.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +98,9 @@ import { DialogCarrinhoMobileComponent } from './home/dialog-carrinho-mobile/dia
     NovoEnderecoComponent,
     PerfilComponent,
     DialogCarrinhoMobileComponent,
+    CarrinhoVazioComponent,
+    MetodoPagamentoNullComponent,
+    AddressNullComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +124,7 @@ import { DialogCarrinhoMobileComponent } from './home/dialog-carrinho-mobile/dia
     MatDialogModule,
     MatBadgeModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

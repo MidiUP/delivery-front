@@ -141,6 +141,7 @@
               </div>
             </mat-card>
           </div>
+          <div>⠀⠀⠀⠀⠀⠀⠀⠀⠀</div> <!-- Caracter invisivel para correção de bug no home com apenas um produto ou menos para exibição-->
 
         </div>
 
@@ -162,7 +163,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                               <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item"
-                                  (click)="onClickEnderecoItem(endereco)">{{endereco.street}},
+                                  (click)="alterarEndereco(endereco)">{{endereco.street}},
                                   {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
                               <li>
                                 <hr class="dropdown-divider">
@@ -318,7 +319,7 @@
 
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                               <li *ngFor="let pagamento of pagamentos"><a class="dropdown-item"
-                                  (click)="onClickTipoPagamento(pagamento)">{{ pagamento.description }}</a></li>
+                                  (click)="alterarMetodoPagamento(pagamento)">{{ pagamento.description }}</a></li>
                             </ul>
                           </li>
                         </ul>
@@ -328,7 +329,7 @@
                   </div>
                 </nav>
               </div>
-              <p *ngIf="pagamentoSelecionado != null" class="opcao-selecionada">{{ pagamento.description }}</p>
+              <p *ngIf="pagamentoSelecionado != null" class="opcao-selecionada">{{ pagamentoSelecionado.description }}</p>
             </div>
 
             <div class="campo-opcoes-pedido">
@@ -358,16 +359,24 @@
   <section id="carrinho-mobile" class="fixed-bottom" style="padding:0">
     <div class="row d-flex align-items-center" style="padding: 5px 0px; margin: 0;">
       <div class="col-3">
-        <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;">
+        <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;"
+          *ngIf="carrinhoMobileOpen==false">
+          shopping_cart</mat-icon>
+
+        <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;"
+          *ngIf="carrinhoMobileOpen==true">
           shopping_cart</mat-icon>
       </div>
 
       <div class="col-6 d-flex justify-content-center" style="margin-left: auto;">
-        <a class="preco-final-carrinho-mobile" (click)="openDialogCarMobile()">Ver Carrinho</a>
+        <a class="preco-final-carrinho-mobile" (click)="openDialogCarMobile()" *ngIf="carrinhoMobileOpen==false">Ver
+          Carrinho</a>
+        <a class="preco-final-carrinho-mobile" *ngIf="carrinhoMobileOpen==true">Carrinho Aberto</a>
       </div>
 
       <div class="col-3 d-flex" style="padding: 0px 12px 0px 0px;">
-        <span class="preco-final-carrinho-mobile" style="margin-left: auto;">R${{totalPedido.toFixed(2)}}</span>
+        <span class="preco-final-carrinho-mobile" style="margin-left: auto;"
+          *ngIf="carrinhoMobileOpen==false">R${{totalPedido.toFixed(2)}}</span>
       </div>
     </div>
 
