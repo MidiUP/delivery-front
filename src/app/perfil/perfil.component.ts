@@ -24,8 +24,9 @@ export class PerfilComponent implements OnInit {
     'email': ['', [Validators.required, Validators.email]],
     'phone': ['', [Validators.required, Validators.minLength(3)]],
     'username': ['', [Validators.required, Validators.minLength(3)]],
-    'password': ['', [Validators.required, Validators.minLength(3)]],
-    'confirmationPassword': ['', [Validators.required, Validators.minLength(3)]]
+    'password': ['', [Validators.minLength(3)]],
+    'confirmationPassword': ['', [ Validators.minLength(3)]],
+    'newPassword': ['', [ Validators.minLength(3)]]
   });
 
   novoEnderecoForm: FormGroup = this.formBuilder.group({
@@ -89,6 +90,7 @@ export class PerfilComponent implements OnInit {
           this.newUser.username = data.username;
           // this.newUser.password = "***";
           this.getEnderecos(this.newUser);
+          this.userAddress.id = data.id;
         })
       )
 
@@ -100,7 +102,6 @@ export class PerfilComponent implements OnInit {
     } else {
       this.campoEndereco++;
     }
-    console.log(this.campoEndereco)
   }
 
   deleteCampoEndereco(endereco: number) {
@@ -174,7 +175,7 @@ export class PerfilComponent implements OnInit {
           console.log(this.newUser)
         })
     
-    if(this.enderecos.length < 2 ){
+    if(this.enderecos.length === 1 ){
       this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
         .subscribe(
           (res => console.log("endereco 1 alterado")),
@@ -183,6 +184,26 @@ export class PerfilComponent implements OnInit {
             console.log(this.newAddress)
           })
         )
+
+        if(this.novoEnderecoForm2.valid){
+          this.addressService.createAddress(this.newAddress2)
+            .subscribe(
+              (res => console.log("endereco 2 cadastrado")),
+              (err => console.log(err))
+            )
+        }
+
+        if(this.novoEnderecoForm3.valid){
+          this.addressService.createAddress(this.newAddress2)
+            .subscribe(
+              (res => console.log("endereco 3 cadastrado")),
+              (err => console.log(err))
+            )
+        }
+
+      
+
+
     }else if (this.enderecos.length === 2){
       this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
         .subscribe(
@@ -201,6 +222,16 @@ export class PerfilComponent implements OnInit {
             console.log(this.newAddress)
           })
         )
+
+        if(this.novoEnderecoForm3.valid){
+          this.addressService.createAddress(this.newAddress3)
+            .subscribe(
+              (res => console.log("endereco 3 cadastrado")),
+              (err => console.log(err))
+            )
+        }
+
+
     } else if (this.enderecos.length === 3){
       this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
         .subscribe(
@@ -232,29 +263,34 @@ export class PerfilComponent implements OnInit {
       .subscribe(
         (data => {
           this.enderecos = data;
-          if (this.enderecos.length == 1) {
-            this.newAddress = this.enderecos[0];
-            this.newAddress.userRestaurant = this.newUser;
+          console.log(data)
+          if (data.length == 1) {
+            this.newAddress = data[0];
+            this.newAddress.userRestaurant = this.userAddress;
             this.campoEndereco = 1;
           }
-          if (this.enderecos.length == 2) {
-            this.newAddress = this.enderecos[0];
-            this.newAddress.userRestaurant = this.newUser;
-            this.newAddress2 = this.enderecos[1];
-            this.newAddress2.userRestaurant = this.newUser;
+          if (data.length == 2) {
+            this.newAddress = data[0];
+            this.newAddress.userRestaurant = this.userAddress;
+            this.newAddress2 = data[1];
+            this.newAddress2.userRestaurant = this.userAddress;
             this.campoEndereco = 2;
           }
-          if (this.enderecos.length == 3) {
-            this.newAddress = this.enderecos[0];
-            this.newAddress.userRestaurant = this.newUser;
-            this.newAddress2 = this.enderecos[1];
-            this.newAddress2.userRestaurant = this.newUser;
-            this.newAddress3 = this.enderecos[2];
-            this.newAddress3.userRestaurant = this.newUser;
+          if (data.length == 3) {
+            this.newAddress = data[0];
+            this.newAddress.userRestaurant = this.userAddress;
+            this.newAddress2 = data[1];
+            this.newAddress2.userRestaurant = this.userAddress;
+            this.newAddress3 = data[2];
+            this.newAddress3.userRestaurant = this.userAddress;
             this.campoEndereco = 3;
           }
         })
       );
+  }
+
+  tratarRequisicao(){
+
   }
 
 }

@@ -290,6 +290,7 @@ button.navbar-toggler{
 }
 
 .nome-produto-carrinho{
+
     margin: 0;
     padding: 0;
 }
@@ -300,7 +301,8 @@ button.navbar-toggler{
 }
 
 .icone-carrinho{
-    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0;
     color: black;
 }
 
@@ -321,14 +323,18 @@ button.navbar-toggler{
 }
 
 .preco-produto-carrinho{
-    margin-top: 10px;
     margin-left: 0;
     padding: 0;
 }
 
 .botoes-produto-carrinho{
-    padding: 0;
-    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botoes-produto-carrinho a{
+    cursor: pointer;
 }
 
 .divisor-carrinho{
@@ -582,14 +588,14 @@ button.navbar-toggler{
 @media (min-width: 378px) and (max-width: 575px) {
 
     #carouselExampleIndicators{
-        width: 600px;
-        height: 200px;
+        width: 100%;
+        height: 170px;
         margin-top: 97px;
     }
 
     img {
-        width: 60px;
-        height: 200px;
+        width: 100%;
+        height: 170px;
     }
 
      /* Formatação card produto */
@@ -644,6 +650,87 @@ button.navbar-toggler{
     #div-opcoes-carrinho {
        display: none;
     }
+
+    .v-desktop-infos{
+        display: none;
+    }
+
+    .produtos{
+        display: none;
+    }
+
+    /*Produtos mobile*/ 
+     
+    .produtos-mobile{
+        width: 100%;
+     }
+
+     mat-card{
+         width: 100%;
+         display: flex;
+         flex-direction: row;
+         margin-bottom: 10px;
+     }
+
+     .img-produto-mobile{
+        width: 80px;
+        height: 80px;
+     }
+
+     .infos-produto-mobile{
+         margin-left: 0;
+         padding-left: 0;
+         display: flex;
+     }
+     
+     .nome-produto-mobile{
+        font-size: 1em;
+        margin: 0;
+        padding: 0px;
+    }
+
+    #cardapio h4{
+        padding: 0;
+    }
+
+    .detalhes-produto{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .infos-produto-mobile p{
+        font-size: 0.8em;
+        margin: 0;
+        padding: 0px;
+    }
+
+    .preco-produto-mobile{
+        color: red;
+    }
+
+    .div-nome-produto-mobile{
+        height: 20%;
+    }
+
+    .div-preco-produto-mobile{
+        height: 50%;
+    }
+
+    .preco-botoes-mobile{
+        display: flex;
+        flex-direction: row;
+        margin-top: auto;
+    }
+
+    .div-descricao-produto-mobile{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+
+     
+     
+     /*Produtos mobile*/
 
 }
 
@@ -710,15 +797,34 @@ button.navbar-toggler{
         display: none;
      }
 
+     .produtos-mobile{
+        display: none;
+    }
+
+    .v-desktop-infos{
+        display: none;
+    }
+
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
 
+    #carouselExampleIndicators{
+        width: 100%;
+        height: 200px;
+    }
+
+    img {
+        width: 600px;
+        height: 200px;
+    }
+
     /* Formatação card produto */
+
     .produto{
-        margin: 15px 10px;
-        width: 45%;
+        margin: 5px 1%;
+        width: 48%;
     }
     
     .produto p{
@@ -727,27 +833,43 @@ button.navbar-toggler{
     }
 
     .produto h4{
-        font-size: 1.2em;
+        font-size: 1em;
     }
+
+  
     
     .img-produto{
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         margin-left: 0px;
         padding-left: 0px;
     }
 
     #links-produto h5{
-        margin-right: 7px;
+        margin: 0px;
         font-size: 0.8em;
 
         
     }
 
-    .mat-icon-button{
-        width: 25px;
-        margin-left: 2px;
+    .mat-icon-button mat-icon{ 
+        font-size: 20px;
+        
     }
+
+    .mat-icon-button{
+        width: 20px;
+        margin-left: 3px;
+    }
+
+   
+
+    #links-produto{
+        display: flex;
+        align-items: center;
+    }
+
+
 
     /* Formatação card produto */
 
@@ -758,7 +880,7 @@ button.navbar-toggler{
     .titulo-opcoes{
         color: white;
         margin-top: 5px;
-        font-size: 1em;
+        font-size: 0.9em;
     }
 
     .link-endereco{
@@ -777,6 +899,47 @@ button.navbar-toggler{
     .produtos-mobile{
         display: none;
     }
+
+    .finalizar-pedido{
+        font-size: 0.7em;
+    }
+
+    .nome-produto{
+        font-size: 0.7em;
+    }
+
+    .preco-produto-carrinho{
+        font-size: 11.2px;
+    }
+
+    .quantidade-produto{
+        font-size: 11.2px;
+    }
+
+    .botao-carrinho{
+        font-size: 18px;
+    }
+
+    #botao-delete-carrinho-md{
+        margin-right: 10px;
+        padding-right: 10px;
+    }
+
+    .carrinho{
+        padding: 10px;
+    }
+
+    .nome-produto-carrinho{
+        margin-bottom: 5px;
+    }
+
+    .botoes-produto-carrinho{
+        padding: 0;
+    }
+
+
+
+    
 
 
 }
@@ -824,6 +987,28 @@ button.navbar-toggler{
     .produtos-mobile{
         display: none;
     }
+
+    .nome-produto{
+        font-size: 0.8em;
+    }
+
+    .quantidade-produto{
+        font-size: 0.8em;
+    }
+
+    .preco-produto-carrinho{
+        font-size: 12.8px;
+    }
+
+    .botao-carrinho{
+        font-size: 20px;
+    }
+
+    .botoes-produto-carrinho{
+        padding-top: 5px;
+    }
+
+   
 
 }
 

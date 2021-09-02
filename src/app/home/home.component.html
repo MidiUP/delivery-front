@@ -14,10 +14,10 @@
       </div>
       <div class="carousel-inner center-block">
         <div class="carousel-item active">
-          <img src="../../assets/img/carrossel3.jpeg" class="d-block w-100" alt="...">
+          <img src="../../assets/img/carrossel4.jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../../assets/img/carrossel4.jpeg" class="d-block w-100" alt="...">
+          <img src="../../assets/img/carrossel5.jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
           <img src="../../assets/img/carrossel3.jpeg" class="d-flex w-100" alt="...">
@@ -129,7 +129,7 @@
                     </button>
 
                     <button mat-icon-button color="warn" (click)="removeItem(produto)">
-                      <mat-icon>delete</mat-icon>
+                      <mat-icon id="botao-delete">delete</mat-icon>
                     </button>
                   </div>
 
@@ -215,7 +215,7 @@
 
 
             <div class="carrinho d-none d-lg-block">
-              <div class="d-flex">
+              <div class="d-flex align-items-center">
                 <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
                 <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
               </div>
@@ -229,11 +229,11 @@
                     </div>
 
                     <div class="col-4 botoes-produto-carrinho">
-                      <a mat-icon-button class="cor-verde botao-carrinho" (click)="addItem(item)">
-                        <mat-icon>add</mat-icon>
+                      <a class="cor-verde botao-carrinho" (click)="addItem(item)">
+                        <mat-icon class="botao-carrinho">add</mat-icon>
                       </a>
-                      <a mat-icon-button color="warn" class="botao-carrinho" (click)="removeItem(item)">
-                        <mat-icon>delete</mat-icon>
+                      <a (click)="removeItem(item)" style="margin-left: 10px;">
+                        <mat-icon class="botao-carrinho" color="warn">delete</mat-icon>
                       </a>
                     </div>
 
@@ -272,6 +272,63 @@
             </div>
 
             <div class="carrinho v-md">
+              <div class="d-flex align-items-center">
+                <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
+                <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
+              </div>
+              <ul class="itens-carrinho">
+                <li *ngFor="let item of itensCarrinho">
+
+                  <div class="row item-carrinho">
+                    <div class="col-6 nome-produto-carrinho">
+                      <span class="nome-produto">{{item.name}}</span>
+                      <span class="quantidade-produto">{{item.quantityCar}}x</span>
+                    </div>
+
+                    <div class="col-3 botoes-produto-carrinho">
+                      <a class="cor-verde botao-carrinho" (click)="addItem(item)">
+                        <mat-icon class="botao-carrinho">add</mat-icon>
+                      </a>
+                      <a (click)="removeItem(item)" style="margin-left: 10px;">
+                        <mat-icon class="botao-carrinho" id="botao-delete-carrinho-md" color="warn">delete</mat-icon>
+                      </a>
+                    </div>
+
+
+                    <div class="col-3 preco-produto-carrinho">
+                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
+                    </div>
+
+                  </div>
+                  <hr class="divisor-carrinho">
+                </li>
+
+
+
+                <li>
+                  <div class="d-flex">
+                    <span>FRETE</span>
+
+                    <div class="preco-total-carrinho">
+                      <span>R${{frete.toFixed(2)}}</span>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="d-flex">
+                    <span class="total-produto">TOTAL</span>
+
+                    <div class="preco-total-carrinho">
+                      <span>R${{totalPedido.toFixed(2)}}</span>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <!-- <div class="carrinho v-md">
               <div class="d-flex">
                 <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
                 <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
@@ -324,7 +381,7 @@
                 </li>
 
               </ul>
-            </div>
+            </div> -->
 
 
 
