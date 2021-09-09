@@ -35,7 +35,7 @@ export class carrinhoService {
   items: Items[] = [];
   userLogado: User = new User("", "", "", "", "", "", "", 0);
   cupom: Cupom = new Cupom(1, "Frete off", 15);
-  status: Status = new Status(1, "Pedido feito, aguardando estabelecimento aceitar");
+  status: Status = new Status(1, "Novo Pedido");
   order: Order = new Order(0, this.userLogado, "", "", this.status, 0, this.cupom, this.items);
 
   addItem(produto: Product): void {
@@ -126,6 +126,7 @@ export class carrinhoService {
         .subscribe(
           (res => {
             console.log("pedido concluido");
+            window.location.reload();
           }),
           (err => {
             console.log(err);
@@ -133,7 +134,6 @@ export class carrinhoService {
           })
         )
 
-      window.location.reload();
 
       return false;
 

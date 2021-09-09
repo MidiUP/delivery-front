@@ -35,8 +35,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogState} from '@angular/material/dialog';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -68,6 +70,7 @@ import { carrinhoService } from './home/carrinho.service';
 import { CarrinhoVazioComponent } from './snack-bars/carrinho-vazio/carrinho-vazio.component';
 import { MetodoPagamentoNullComponent } from './snack-bars/metodo-pagamento-null/metodo-pagamento-null.component';
 import { AddressNullComponent } from './snack-bars/address-null/address-null.component';
+import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/dialog-delete-endereco.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +104,7 @@ import { AddressNullComponent } from './snack-bars/address-null/address-null.com
     CarrinhoVazioComponent,
     MetodoPagamentoNullComponent,
     AddressNullComponent,
+    DialogDeleteEnderecoComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,7 +126,9 @@ import { AddressNullComponent } from './snack-bars/address-null/address-null.com
     MatSelectModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService],
   bootstrap: [AppComponent]

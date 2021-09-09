@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
 
   cupom: Cupom = new Cupom(1, "Frete off", 15);
 
-  bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min");
+  bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min",true);
 
   status: Status = new Status(1, "Pedido feito, aguardando estabelecimento aceitar");
 

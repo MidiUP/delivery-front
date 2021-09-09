@@ -153,7 +153,7 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>CEP</mat-label>
-                            <input matInput placeholder="Ex. 89210-070" formControlName="cep"
+                            <input matInput placeholder="Ex. 89210-070" formControlName="cep" type="text"
                                 [(ngModel)]="newAddress.cep">
                         </mat-form-field>
                     </div>
@@ -180,14 +180,14 @@
             </form>
 
             <form [formGroup]="novoEnderecoForm2">
-                <div class="row" *ngIf="campoEndereco > 2 || enderecos.length > 1">
+                <div class="row" *ngIf="campoEndereco > 1 || enderecos.length > 1">
                     <div class="container">
                         <hr>
                     </div>
                     <div class="subtitulo">
                         <h2>Endereço 2</h2>
                         <mat-icon>home</mat-icon>
-                        <button mat-icon-button style="margin-left: auto;" (click)="deleteCampoEndereco(3)">
+                        <button mat-icon-button style="margin-left: auto;" (click)="deleteCampoEndereco(newAddress2)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
@@ -218,16 +218,16 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>CEP</mat-label>
-                            <input matInput placeholder="Ex. 89210-070" formControlName="cep"
+                            <input matInput placeholder="Ex. 89210-070" formControlName="cep" type="text"
                                 [(ngModel)]="newAddress2.cep">
                         </mat-form-field>
                     </div>
 
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
-                            <mat-label>{{newAddress2.neighborhood.name}}</mat-label>
+                            <mat-label >{{contentAddress(newAddress2.neighborhood)}}</mat-label>
                             <mat-select [(ngModel)]="newAddress2.neighborhood" formControlName="neighborhood">
-                                <mat-option [value]="newAddress2.neighborhood" selected >{{newAddress2.neighborhood.name}}</mat-option>
+                                <mat-option [value]="" selected >{{contentAddress(newAddress2.neighborhood)}}</mat-option>
                                 <hr>
                                 <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
                             </mat-select>
@@ -237,8 +237,7 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Cidade</mat-label>
-                            <input matInput placeholder="Ex. Teresina" formControlName="city"
-                                [(ngModel)]="newAddress2.city">
+                            <input matInput placeholder="Ex. Teresina" formControlName="city" [(ngModel)]="newAddress2.city">
                         </mat-form-field>
                     </div>
                 </div>
@@ -253,7 +252,7 @@
                     <div class="subtitulo">
                         <h2>Endereço 3</h2>
                         <mat-icon>home</mat-icon>
-                        <button mat-icon-button style="margin-left: auto;" (click)="deleteCampoEndereco(3)">
+                        <button mat-icon-button style="margin-left: auto;" (click)="deleteCampoEndereco(newAddress3)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
@@ -284,16 +283,16 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>CEP</mat-label>
-                            <input matInput placeholder="Ex. 89210-070" formControlName="cep"
+                            <input matInput placeholder="Ex. 89210-070" formControlName="cep" type="text"
                                 [(ngModel)]="newAddress3.cep">
                         </mat-form-field>
                     </div>
 
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
-                            <mat-label>{{newAddress3.neighborhood.name}}</mat-label>
+                            <mat-label >{{contentAddress(newAddress3.neighborhood)}}</mat-label>
                             <mat-select [(ngModel)]="newAddress3.neighborhood" formControlName="neighborhood">
-                                <mat-option [value]="newAddress3.neighborhood" selected >{{newAddress3.neighborhood.name}}</mat-option>
+                                <mat-option [value]="" selected >{{contentAddress(newAddress3.neighborhood)}}</mat-option>
                                 <hr>
                                 <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
                             </mat-select>

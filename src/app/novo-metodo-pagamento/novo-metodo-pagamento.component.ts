@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
+import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component';
 import { MetodoPagamento } from '../metodo-pagamento/metodoPagamento.model';
 import { metodoPagamentoService } from '../metodo-pagamento/metodoPagamento.service';
 
@@ -14,7 +17,8 @@ export class NovoMetodoPagamentoComponent implements OnInit {
   pagamento: MetodoPagamento = new MetodoPagamento(0,"");
 
   constructor(private formBuilder: FormBuilder,
-              private metodoPagamentoService: metodoPagamentoService) { }
+              private metodoPagamentoService: metodoPagamentoService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -27,12 +31,25 @@ export class NovoMetodoPagamentoComponent implements OnInit {
     this.metodoPagamentoService.createMetodoPagamento(this.pagamento)
       .subscribe(
         (res => {
-          console.log("cadastrou");
+          this.openSnackBarSuccess();
+          window.location.href= "/admin?newMetodoPagamento"
         }),
         (err => {
-          console.log(err);
+          this.openSnackBarError();
         })
       )
+  }
+
+  openSnackBarSuccess() {
+    this._snackBar.openFromComponent(AlertaSuccesComponent, {
+      duration: 5000,
+    });
+  }
+
+  openSnackBarError() {
+    this._snackBar.openFromComponent(AlertaErrorComponent, {
+      duration: 5000,
+    });
   }
 
 

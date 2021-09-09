@@ -4,26 +4,37 @@
             <div class="col-md-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Nome do Bairro</mat-label>
-                    <input matInput type="text" [(ngModel)]="bairro.name" formControlName="name" placeholder="Ex: Centro">
+                    <input matInput type="text" [(ngModel)]="bairro.name" formControlName="name"
+                        placeholder="Ex: Centro">
                 </mat-form-field>
             </div>
 
             <div class="col-md-6">
                 <mat-form-field appearance="outline">
                     <mat-label for="nome-produto" class="form-label">Taxa de Entrega</mat-label>
-                    <input matInput type="number" [(ngModel)]="bairro.value" formControlName="taxa" placeholder="Ex: 0,00">
+                    <input matInput type="number" [(ngModel)]="bairro.value" formControlName="taxa"
+                        placeholder="Ex: 0,00">
                 </mat-form-field>
             </div>
 
-            
+
         </div>
 
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Tempo Médio de Entrega(min)</mat-label>
-                    <input matInput type="text" [(ngModel)]="bairro.deliveryTime" formControlName="deliveryTime" placeholder="Ex: Centro">
+                    <input matInput type="text" [(ngModel)]="bairro.deliveryTime" formControlName="deliveryTime"
+                        placeholder="Ex: Centro">
                 </mat-form-field>
+            </div>
+
+            <div class="col-md-6 example-section d-flex align-items-center mt-3">
+                <label class="example-margin">Entregas:</label>
+                <mat-radio-group [(ngModel)]="bairro.isEnable" formControlName="isEnable">
+                    <mat-radio-button class="example-margin" value="true">Habilitado</mat-radio-button>
+                    <mat-radio-button class="example-margin" value="false">Desabilitado</mat-radio-button>
+                </mat-radio-group>
             </div>
 
         </div>

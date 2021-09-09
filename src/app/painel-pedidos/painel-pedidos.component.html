@@ -1,5 +1,5 @@
-<div class="container pedidos">
-    <mat-card *ngFor="let pedido of pedidos">
+<div class="container">
+    <!-- <mat-card *ngFor="let pedido of pedidos">
         <mat-card-header>
             <mat-card-title>Pedido {{pedido.id}}</mat-card-title>
         </mat-card-header>
@@ -15,5 +15,103 @@
             <span>{{pedido.address}}</span>
         </div>
         
-    </mat-card>
+    </mat-card> -->
+
+    <section class="menu">
+        <div class="select-lista-pedidos">
+            <select class="form-select">
+                <option selected disabled>Pedidos de hoje</option>
+                <option value="1">Pedidos em preparo</option>
+                <option value="2">Novos Pedidos</option>
+                <option value="3">Saiu para entrega</option>
+                <option value="4">Pedidos Entregues</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="cards-pedido">
+        <div class="card-pedido" *ngFor="let pedido of pedidos">
+            <form [formGroup]="statusForm">
+                <div class="header-card" [style]="colorHeader(pedido)">
+                    <span>PEDIDO #{{pedido.id}}</span>
+                    <div class="controlers">
+                        <button mat-icon-button>
+                            <mat-icon>highlight_off</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="alterarStatus(statusForm, pedido)">
+                            <mat-icon>check_circle_outline</mat-icon>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="info-pedido">
+                        <div class="col-4">
+                            <h5 class="bold">Cliente:</h5>
+                        </div>
+                        <div class="col-8">
+                            <h5> {{pedido.user.name}}</h5>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="info-pedido">
+                        <div class="col-4">
+                            <h5 class="bold">Endereço:</h5>
+                        </div>
+                        <div class="col-8">
+                            <h5> {{pedido.address}}</h5>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="info-pedido">
+                        <div class="col-4">
+                            <h5 class="bold">Pagamento:</h5>
+                        </div>
+                        <div class="col-8">
+                            <h5>{{pedido.paymentMethod}}</h5>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="info-pedido">
+                        <div class="col-4">
+                            <h5 class="bold">Valor:</h5>
+                        </div>
+                        <div class="col-8">
+                            <h5> R${{pedido.total.toFixed(2)}}</h5>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="info-pedido">
+                        <div class="col-4">
+                            <h5 class="bold">Itens:</h5>
+                        </div>
+                        <div class="col-8">
+                            <h5 *ngFor="let item of tratarVetor(pedido)"> {{item.product.name}}
+                                {{item.quantityProduct}}x</h5>
+                        </div>
+                    </div>
+
+                    <div class="status">
+
+                        <select class="form-select" formControlName="status">
+                            <option selected disabled>Status do Pedido</option>
+                            <option value="1">Pedido Aceito</option>
+                            <option value="2">Em Preparo</option>
+                            <option value="3">Saiu para Entrega</option>
+                            <option value="4">Pedido Entregue</option>
+                        </select>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
 </div>

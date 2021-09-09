@@ -40,16 +40,15 @@ export class NovoProdutoComponent implements OnInit {
   }
 
   createProduct():void{
-    console.log(this.product);
     
     this.productService.createProduct(this.product)
     .subscribe(
       (res) => {
         this.openSnackBarSuccess();
+        window.location.href= "/admin?newProduct"
 
       },
       (err) => {
-        console.log(err);
         this.openSnackBarError();
       }
     );

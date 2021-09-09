@@ -11,3 +11,109 @@ mat-card{
     margin: 0px 5px;
     margin-bottom: 10px;
 }
+
+.card-pedido{
+    margin: 1% 1.5%;
+    width: 30%;
+    background: white;
+}
+
+.header-card{
+    padding: 8px;
+    background: red;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content-card{
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-card h5{
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.content-card span{
+    font-size: 1em;
+    padding: 0;
+}
+
+.info-pedido{
+    display: flex;
+    flex-direction: row;
+    padding-top: 3px;
+    margin-bottom: 3px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.controlers{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.controlers mat-icon{
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+.status{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.form-select{
+    width: 70%;
+}
+
+.col-8{
+    padding-left: 4px;
+}
+
+.menu{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.select-lista-pedidos{
+    width: 30%;
+    margin: 0;
+    padding: 0;
+}
+
+.divisor{
+    height: 1px;
+    background-color: black;
+}
+
+hr{
+    margin: 5px 0px;
+}
+
+.cards-pedido{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.mat-icon-button{
+     margin: 0;
+     padding: 0;
+}

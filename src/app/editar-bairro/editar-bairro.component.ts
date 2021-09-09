@@ -11,7 +11,7 @@ import { bairroService } from '../novo-bairro/bairro.service';
 export class EditarBairroComponent implements OnInit {
   editBairroForm: FormGroup;
   bairros: Bairro[];
-  bairro: Bairro = new Bairro("",0,0,"");
+  bairro: Bairro = new Bairro("",0,0,"",true);
   constructor(private bairroService: bairroService,
     private formBuilder: FormBuilder) { }
 

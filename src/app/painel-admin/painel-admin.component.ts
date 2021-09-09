@@ -15,8 +15,29 @@ export class PainelAdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    let parametro = window.location.search;
+    parametro = parametro.replace('?','');
+    parametro = parametro.replace('=','');
     
+    if(parametro === "newProduct"){
+      this.content= "novo-produto";
+    }
+
+    if(parametro === "newMetodoPagamento"){
+      this.content= "novos-metodos-pagamentos";
+    }
+
+    if(parametro === "newBairro"){
+      this.content= "novo-bairro";
+    }
+    
+   
+      let altura = window.innerHeight;
+      console.log(altura);
+    
+
   }
+
 
   
   contentInfo():void{

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { authService } from '../auth/auth.service/auth.service';
 import { Address } from '../enderecos/address.model';
 import { addressService } from '../enderecos/address.service';
@@ -7,6 +8,7 @@ import { Bairro } from '../novo-bairro/bairro.model';
 import { bairroService } from '../novo-bairro/bairro.service';
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
+import { DialogDeleteEnderecoComponent } from './dialog-delete-endereco/dialog-delete-endereco.component';
 
 @Component({
   selector: 'app-perfil',
@@ -25,8 +27,8 @@ export class PerfilComponent implements OnInit {
     'phone': ['', [Validators.required, Validators.minLength(3)]],
     'username': ['', [Validators.required, Validators.minLength(3)]],
     'password': ['', [Validators.minLength(3)]],
-    'confirmationPassword': ['', [ Validators.minLength(3)]],
-    'newPassword': ['', [ Validators.minLength(3)]]
+    'confirmationPassword': ['', [Validators.minLength(3)]],
+    'newPassword': ['', [Validators.minLength(3)]]
   });
 
   novoEnderecoForm: FormGroup = this.formBuilder.group({
@@ -59,9 +61,9 @@ export class PerfilComponent implements OnInit {
   edit: boolean = false;
   newUser: User = new User("", "", "", "", "", "", "", 0);
   userAddress: User = new User("", "", "", "", "", "", "", 3);
-  newAddress: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
-  newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
-  newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
+  newAddress: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
+  newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
+  newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
   bairros: Bairro[] = [];
   enderecos: Address[] = [];
 
@@ -73,7 +75,8 @@ export class PerfilComponent implements OnInit {
     private bairroService: bairroService,
     private userService: UserService,
     private addressService: addressService,
-    private authService: authService) { }
+    private authService: authService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getBairros();
@@ -104,7 +107,11 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  deleteCampoEndereco(endereco: number) {
+  deleteCampoEndereco(endereco: Address) {
+    if (endereco.id != 0) {
+      this.openDialog(endereco);
+    }
+
     if (this.campoEndereco > 1)
       this.campoEndereco--;
 
@@ -174,8 +181,8 @@ export class PerfilComponent implements OnInit {
           console.log(err);
           console.log(this.newUser)
         })
-    
-    if(this.enderecos.length === 1 ){
+
+    if (this.enderecos.length === 1) {
       this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
         .subscribe(
           (res => console.log("endereco 1 alterado")),
@@ -185,26 +192,26 @@ export class PerfilComponent implements OnInit {
           })
         )
 
-        if(this.novoEnderecoForm2.valid){
-          this.addressService.createAddress(this.newAddress2)
-            .subscribe(
-              (res => console.log("endereco 2 cadastrado")),
-              (err => console.log(err))
-            )
-        }
+      if (this.novoEnderecoForm2.valid) {
+        this.addressService.createAddress(this.newAddress2)
+          .subscribe(
+            (res => console.log("endereco 2 cadastrado")),
+            (err => console.log(err))
+          )
+      }
 
-        if(this.novoEnderecoForm3.valid){
-          this.addressService.createAddress(this.newAddress2)
-            .subscribe(
-              (res => console.log("endereco 3 cadastrado")),
-              (err => console.log(err))
-            )
-        }
-
-      
+      if (this.novoEnderecoForm3.valid) {
+        this.addressService.createAddress(this.newAddress2)
+          .subscribe(
+            (res => console.log("endereco 3 cadastrado")),
+            (err => console.log(err))
+          )
+      }
 
 
-    }else if (this.enderecos.length === 2){
+
+
+    } else if (this.enderecos.length === 2) {
       this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
         .subscribe(
           (res => console.log("endereco 1 alterado")),
@@ -214,7 +221,7 @@ export class PerfilComponent implements OnInit {
           })
         )
 
-        this.addressService.putAddress(this.newAddress2, this.enderecos[1].id)
+      this.addressService.putAddress(this.newAddress2, this.enderecos[1].id)
         .subscribe(
           (res => console.log("endereco 2 alterado")),
           (err => {
@@ -223,16 +230,16 @@ export class PerfilComponent implements OnInit {
           })
         )
 
-        if(this.novoEnderecoForm3.valid){
-          this.addressService.createAddress(this.newAddress3)
-            .subscribe(
-              (res => console.log("endereco 3 cadastrado")),
-              (err => console.log(err))
-            )
-        }
+      if (this.novoEnderecoForm3.valid) {
+        this.addressService.createAddress(this.newAddress3)
+          .subscribe(
+            (res => console.log("endereco 3 cadastrado")),
+            (err => console.log(err))
+          )
+      }
 
 
-    } else if (this.enderecos.length === 3){
+    } else if (this.enderecos.length === 3) {
       this.addressService.putAddress(this.newAddress, this.enderecos[0].id)
         .subscribe(
           (res => console.log("endereco 1 alterado")),
@@ -242,20 +249,21 @@ export class PerfilComponent implements OnInit {
           })
         )
 
-        this.addressService.putAddress(this.newAddress2, this.enderecos[1].id)
+      this.addressService.putAddress(this.newAddress2, this.enderecos[1].id)
         .subscribe(
           (res => console.log("endereco 2 alterado")),
           (err => console.log(err))
         )
 
-        this.addressService.putAddress(this.newAddress3, this.enderecos[2].id)
+      this.addressService.putAddress(this.newAddress3, this.enderecos[2].id)
         .subscribe(
           (res => console.log("endereco 3 alterado")),
           (err => console.log(err))
         )
     }
 
- 
+    window.location.reload();
+
   }
 
   getEnderecos(user: User) {
@@ -289,8 +297,17 @@ export class PerfilComponent implements OnInit {
       );
   }
 
-  tratarRequisicao(){
-
+  openDialog(endereco: Address): void {
+    const dialogRef = this.dialog.open(DialogDeleteEnderecoComponent, {
+      data: { enderecoId: endereco.id }
+    });
   }
 
+  contentAddress(bairro: Bairro): string{
+    if(bairro.name === ''){
+      return "Selecione seu Bairro"
+    }else {
+      return bairro.name;
+    }
+  }
 }

@@ -3,6 +3,7 @@ export class Bairro{
         public name: string,
         public value: number,
         public id: number,
-        public deliveryTime: string
+        public deliveryTime: string,
+        public isEnable: boolean
     ){}
 }

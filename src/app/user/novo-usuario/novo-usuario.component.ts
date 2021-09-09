@@ -58,9 +58,9 @@ export class NovoUsuarioComponent implements OnInit {
 
   newUser: User = new User("", "", "", "", "", "", "",0);
   userAddress: User = new User("", "", "", "", "", "", "", 3);
-  newAddress: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
-  newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
-  newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0 }, "", "", "", "", this.userAddress, 0);
+  newAddress: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
+  newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
+  newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
   bairros: Bairro[] = [];
 
 

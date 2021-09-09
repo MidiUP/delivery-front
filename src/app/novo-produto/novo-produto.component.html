@@ -1,24 +1,26 @@
 <div class="container">
     
-    <mat-card class="produto">
-        <div class="row">
-            <div class="col-md-4 flex">
-                <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" alt="">
-            </div>
-            <div class="col-md-8">
-                <h2>{{product.name}}</h2>
-                <p>{{product.description}}</p>
-                <div class="d-flex">
-                    <p class="preco">
-                        Preço: <span>R${{product.price.toFixed(2)}}</span>
-
-                    </p>
-                    
+    <div class="d-flex justify-content-center">
+        <mat-card class="produto">
+            <div class="row">
+                <div class="col-md-4 flex">
+                    <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" alt="">
+                </div>
+                <div class="col-md-8">
+                    <h2>{{product.name}}</h2>
+                    <p>{{product.description}}</p>
+                    <div class="d-flex">
+                        <p class="preco">
+                            Preço: <span>R${{product.price.toFixed(2)}}</span>
+    
+                        </p>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </mat-card>
+    
+        </mat-card>
+    </div>
     
     
     <form [formGroup]="newProductForm" (ngSubmit)="createProduct()">
