@@ -28,7 +28,7 @@ export class NovoBairroComponent implements OnInit {
     this.novoBairroForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
       deliveryTime: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      taxa: this.formBuilder.control('', [Validators.required, Validators.min(1)]),
+      taxa: this.formBuilder.control('', [Validators.required]),
       isEnable: this.formBuilder.control('', [Validators.required])     
       }, { updateOn: 'change' });
   }

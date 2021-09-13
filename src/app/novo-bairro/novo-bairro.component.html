@@ -6,6 +6,12 @@
                     <mat-label>Nome do Bairro</mat-label>
                     <input matInput type="text" [(ngModel)]="bairro.name" formControlName="name"
                         placeholder="Ex: Centro">
+                    <mat-error *ngIf="novoBairroForm.controls.name.hasError('required')">
+                        Por favor insira um nome.
+                    </mat-error>
+                    <mat-error *ngIf="novoBairroForm.controls.name.hasError('minlength')">
+                        Por favor insira um nome com dois ou mais caracteres.
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -14,6 +20,9 @@
                     <mat-label for="nome-produto" class="form-label">Taxa de Entrega</mat-label>
                     <input matInput type="number" [(ngModel)]="bairro.value" formControlName="taxa"
                         placeholder="Ex: 0,00">
+                    <mat-error *ngIf="novoBairroForm.controls.taxa.hasError('required')">
+                        Por favor insira um valor.
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -26,6 +35,9 @@
                     <mat-label>Tempo Médio de Entrega(min)</mat-label>
                     <input matInput type="text" [(ngModel)]="bairro.deliveryTime" formControlName="deliveryTime"
                         placeholder="Ex: Centro">
+                    <mat-error *ngIf="novoBairroForm.controls.deliveryTime.hasError('required')">
+                        Por favor insira um tempo de entrega.
+                    </mat-error>
                 </mat-form-field>
             </div>
 

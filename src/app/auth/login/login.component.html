@@ -1,31 +1,37 @@
-<div class="container login">
-    <div class="row campo-login">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+<body>
+    <div class="container login">
+        <div class="row campo-login">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
 
-            <h1>LOGIN</h1>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <mat-form-field appearance="outline">
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="username" formControlName="username" [(ngModel)]="user.username" type="text">
-                </mat-form-field>
-
-                <div class="example-container">
-                    <mat-form-field appearance="outline" id="campo-senha">
-                        <mat-label>Senha</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [(ngModel)]="user.password">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                            [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
+                <h1>LOGIN</h1>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="username" formControlName="username" [(ngModel)]="user.username"
+                            type="text">
                     </mat-form-field>
-                </div>
-                <div class="d-flex">
-                    <a href="">Esqueci minha senha</a><br>
-                </div>
-                <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Entrar</button>
-            </form>
-        </div>
 
-        <div class="col-md-3"></div>
-    </div>
+                    <div class="example-container">
+                        <mat-form-field appearance="outline" id="campo-senha">
+                            <mat-label>Senha</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                [(ngModel)]="user.password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex">
+                        <a href="">Esqueci minha senha</a><br>
+                    </div>
+                    <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Entrar</button>
+                </form>
+            </div>
+
+            <div class="col-md-3"></div>
+        </div>
+        </div>
+        
+    </body>

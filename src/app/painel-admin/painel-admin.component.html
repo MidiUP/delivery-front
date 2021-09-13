@@ -74,8 +74,8 @@
 
 
     <div class="col-md-9 conteudo">
-      <section id="navbar-painel">
-        <div class="d-flex" style="background: rgba(0, 0, 0, 0.1);;">
+      <section class="navbar-painel">
+        <div class="d-flex div-navbar-panel" style="background: rgba(0, 0, 0, 0.1);;">
 
           <h1 *ngIf="content==''">Painel</h1>
           <h1 *ngIf="content=='info'">Informações</h1>
@@ -93,7 +93,7 @@
 
           <ul class="d-flex">
             <li>
-              <a href="#" class="link-navbar">Aplicação</a>
+              <a [routerLink]="['/']" class="link-navbar">Aplicação</a>
             </li>
 
             <li>
@@ -107,42 +107,44 @@
 
         </div>
       </section>
-      <div *ngIf="content=='info'">
-        <app-info-empresa></app-info-empresa>
-      </div>
-      <div *ngIf="content=='novo-produto'">
-        <app-novo-produto></app-novo-produto>
-      </div>
-      <div *ngIf="content=='editar-produto'">
-        <app-editar-produto></app-editar-produto>
-      </div>
-      <div *ngIf="content=='categorias'">
-        <app-categorias></app-categorias>
-      </div>
-      <div *ngIf="content=='bairros'">
-        <app-bairros></app-bairros>
-      </div>
-      <div *ngIf="content=='novo-bairro'">
-        <app-novo-bairro></app-novo-bairro>
-      </div>
-      <div *ngIf="content=='editar-bairro'">
-        <app-editar-bairro></app-editar-bairro>
-      </div>
-      <div *ngIf="content=='personalizacao'">
-        <app-personalizacao></app-personalizacao>
-      </div>
-      <div *ngIf="content=='painel-pedidos'">
-        <app-painel-pedidos></app-painel-pedidos>
-      </div>
-      <div *ngIf="content=='metodos-pagamentos'">
-        <app-metodo-pagamento></app-metodo-pagamento>
-      </div>
-      <div *ngIf="content=='novos-metodos-pagamentos'">
-        <app-novo-metodo-pagamento></app-novo-metodo-pagamento>
-      </div>
-      <div *ngIf="content=='editar-metodos-pagamentos'">
-        <app-editar-metodo-pagamento></app-editar-metodo-pagamento>
-      </div>
+      <section class="content">
+        <div *ngIf="content=='info'">
+          <app-info-empresa></app-info-empresa>
+        </div>
+        <div *ngIf="content=='novo-produto'">
+          <app-novo-produto></app-novo-produto>
+        </div>
+        <div *ngIf="content=='editar-produto'">
+          <app-editar-produto></app-editar-produto>
+        </div>
+        <div *ngIf="content=='categorias'">
+          <app-categorias></app-categorias>
+        </div>
+        <div *ngIf="content=='bairros'">
+          <app-bairros></app-bairros>
+        </div>
+        <div *ngIf="content=='novo-bairro'">
+          <app-novo-bairro></app-novo-bairro>
+        </div>
+        <div *ngIf="content=='editar-bairro'">
+          <app-editar-bairro></app-editar-bairro>
+        </div>
+        <div *ngIf="content=='personalizacao'">
+          <app-personalizacao></app-personalizacao>
+        </div>
+        <div *ngIf="content=='painel-pedidos'">
+          <app-painel-pedidos></app-painel-pedidos>
+        </div>
+        <div *ngIf="content=='metodos-pagamentos'">
+          <app-metodo-pagamento></app-metodo-pagamento>
+        </div>
+        <div *ngIf="content=='novos-metodos-pagamentos'">
+          <app-novo-metodo-pagamento></app-novo-metodo-pagamento>
+        </div>
+        <div *ngIf="content=='editar-metodos-pagamentos'">
+          <app-editar-metodo-pagamento></app-editar-metodo-pagamento>
+        </div>
+      </section>
 
     </div>
 

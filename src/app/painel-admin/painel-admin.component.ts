@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-painel-admin',
@@ -12,7 +13,7 @@ export class PainelAdminComponent implements OnInit {
   contador:number;
   content:String="painel-pedidos";
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     let parametro = window.location.search;
@@ -35,7 +36,6 @@ export class PainelAdminComponent implements OnInit {
       let altura = window.innerHeight;
       console.log(altura);
     
-
   }
 
 
@@ -87,6 +87,7 @@ export class PainelAdminComponent implements OnInit {
   contentEditMetodosPagamentos(){
     this.content="editar-metodos-pagamentos"
   }
+
 
 
 }

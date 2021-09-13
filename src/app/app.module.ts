@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ROUTES } from './app.routes'
+import { routes } from './app.routes'
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -118,7 +118,7 @@ import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/d
     FontAwesomeModule,
     MatExpansionModule,
     MatInputModule,
-    RouterModule.forRoot(ROUTES),
+    RouterModule.forRoot(routes),
     FontAwesomeModule,
     MatSidenavModule,
     MatExpansionModule,

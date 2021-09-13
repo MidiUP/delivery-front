@@ -19,99 +19,108 @@
 
     <section class="menu">
         <div class="select-lista-pedidos">
-            <select class="form-select">
-                <option selected disabled>Pedidos de hoje</option>
-                <option value="1">Pedidos em preparo</option>
-                <option value="2">Novos Pedidos</option>
-                <option value="3">Saiu para entrega</option>
-                <option value="4">Pedidos Entregues</option>
-            </select>
+            <mat-form-field appearance="outline">
+                <mat-label>{{filtro}}</mat-label>
+                <mat-select>
+                    <mat-option value="0" (click)="getPedidosByDate()">Todos os Pedidos</mat-option>
+                    <mat-option value="1" (click)="filtroPedidos('Novo Pedido')">Novos Pedidos</mat-option>
+                    <mat-option value="2" (click)="filtroPedidos('Em Preparo')">Em Preparo</mat-option>
+                    <mat-option value="3" (click)="filtroPedidos('Saiu para Entrega')">Saiu para Entrega</mat-option>
+                    <mat-option value="2" (click)="filtroPedidos('Pedido Entregue')">Pedido Entregue</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="div-botao-mute">
+            <button mat-icon-button class="botao-mute" [color]="corIconeMute" (click)="alternarVolume()">
+                <mat-icon>{{iconVolume()}}</mat-icon>
+            </button>
         </div>
     </section>
 
     <section class="cards-pedido">
         <div class="card-pedido" *ngFor="let pedido of pedidos">
-            <form [formGroup]="statusForm">
-                <div class="header-card" [style]="colorHeader(pedido)">
-                    <span>PEDIDO #{{pedido.id}}</span>
-                    <div class="controlers">
-                        <button mat-icon-button>
-                            <mat-icon>highlight_off</mat-icon>
-                        </button>
-                        <button mat-icon-button (click)="alterarStatus(statusForm, pedido)">
-                            <mat-icon>check_circle_outline</mat-icon>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="info-pedido">
-                        <div class="col-4">
-                            <h5 class="bold">Cliente:</h5>
-                        </div>
-                        <div class="col-8">
-                            <h5> {{pedido.user.name}}</h5>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="info-pedido">
-                        <div class="col-4">
-                            <h5 class="bold">Endereço:</h5>
-                        </div>
-                        <div class="col-8">
-                            <h5> {{pedido.address}}</h5>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="info-pedido">
-                        <div class="col-4">
-                            <h5 class="bold">Pagamento:</h5>
-                        </div>
-                        <div class="col-8">
-                            <h5>{{pedido.paymentMethod}}</h5>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="info-pedido">
-                        <div class="col-4">
-                            <h5 class="bold">Valor:</h5>
-                        </div>
-                        <div class="col-8">
-                            <h5> R${{pedido.total.toFixed(2)}}</h5>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="info-pedido">
-                        <div class="col-4">
-                            <h5 class="bold">Itens:</h5>
-                        </div>
-                        <div class="col-8">
-                            <h5 *ngFor="let item of tratarVetor(pedido)"> {{item.product.name}}
-                                {{item.quantityProduct}}x</h5>
-                        </div>
-                    </div>
-
-                    <div class="status">
-
-                        <select class="form-select" formControlName="status">
-                            <option selected disabled>Status do Pedido</option>
-                            <option value="1">Pedido Aceito</option>
-                            <option value="2">Em Preparo</option>
-                            <option value="3">Saiu para Entrega</option>
-                            <option value="4">Pedido Entregue</option>
-                        </select>
-                    </div>
+            <div class="header-card" [style]="colorHeader(pedido)">
+                <span>PEDIDO #{{pedido.id}}</span>
+                <div class="controlers">
+                    <button mat-icon-button>
+                        <mat-icon>highlight_off</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>check_circle_outline</mat-icon>
+                    </button>
 
                 </div>
-            </form>
+            </div>
+            <div class="content-card">
+                <div class="info-pedido">
+                    <div class="col-4">
+                        <h5 class="bold">Cliente:</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5> {{pedido.user.name}}</h5>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="info-pedido">
+                    <div class="col-4">
+                        <h5 class="bold">Endereço:</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5> {{pedido.address}}</h5>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="info-pedido">
+                    <div class="col-4">
+                        <h5 class="bold">Pagamento:</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>{{pedido.paymentMethod}}</h5>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="info-pedido">
+                    <div class="col-4">
+                        <h5 class="bold">Valor:</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5> R${{pedido.total.toFixed(2)}}</h5>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="info-pedido">
+                    <div class="col-4">
+                        <h5 class="bold">Itens:</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5 *ngFor="let item of tratarVetor(pedido)"> {{item.product.name}}
+                            {{item.quantityProduct}}x</h5>
+                    </div>
+                </div>
+
+                <div class="status">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{pedido.status.description}}</mat-label>
+                        <mat-select>
+                            <mat-option value="1" (click)="alterarStatus(3,pedido)"><a>Em Preparo</a></mat-option>
+                            <mat-option value="2" (click)="alterarStatus(4,pedido)"><a>Saiu para Entrega</a>
+                            </mat-option>
+                            <mat-option value="3" (click)="alterarStatus(5,pedido)"><a>Pedido Entregue</a></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
         </div>
     </section>
 </div>

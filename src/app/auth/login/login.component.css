@@ -1,3 +1,9 @@
+body{
+  overflow: hidden;
+  background: url(../../../assets/img/BackgroundTheliveryWhite.jpg) no-repeat fixed;
+  background-size: cover;
+}
+
 .example-container .mat-form-field + .mat-form-field {
     margin-left: 8px;
   }
@@ -22,8 +28,10 @@
   .login{
     height: 100vh;
     display: flex;
-      flex-direction: column;
-      justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+    
+    
   }
 
   button{
@@ -45,6 +53,13 @@
   .mat-flat-button{
       width: 80px ;
       height: 40px;
+  }
+
+  .col-md-6{
+    background: white;
+    padding: 20px;
+    box-shadow: 3px 3px 3px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 0.8em;
   }
 
   

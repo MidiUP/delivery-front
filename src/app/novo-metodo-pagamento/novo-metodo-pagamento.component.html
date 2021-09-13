@@ -5,6 +5,9 @@
             <mat-form-field appearance="outline">
                 <mat-label>Método de pagamento</mat-label>
                 <input matInput type="text" [(ngModel)]="pagamento.description" formControlName="description" placeholder="Ex: Cartão de Débito">
+                <mat-error *ngIf="novoMetodoForm.controls.description.hasError('required')">
+                    Por favor insira um novo método de pagamento.
+                </mat-error>
             </mat-form-field>
         </div>
 
