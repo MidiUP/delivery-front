@@ -12,7 +12,7 @@ export class PainelPedidosComponent implements OnInit {
   pedidos: Order[];
   status: string;
   audio = new Audio('../../assets/audio/alert.mp3');
-  filtro: string;
+  filtro: string = "Todos os Pedidos";
   mute: boolean = false;
   corIconeMute: string = 'primary';
 
@@ -22,7 +22,7 @@ export class PainelPedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPedidosByDate();
-    setInterval(() => this.getPedidosByDate(), 60000);
+    setInterval(() => this.filtroPedidos(this.filtro), 60000);
   }
 
 
@@ -80,9 +80,9 @@ export class PainelPedidosComponent implements OnInit {
       .subscribe(
         (res => {
           console.log("status alterado");
-          if(this.filtro !== 'Todos os Pedidos'){
+          if (this.filtro !== 'Todos os Pedidos') {
             this.filtroPedidos(this.filtro);
-          }else {
+          } else {
             this.getPedidosByDate();
           }
         }),
@@ -93,44 +93,60 @@ export class PainelPedidosComponent implements OnInit {
   alerta() {
     let loop: boolean = true;
     this.pedidos.forEach(item => {
-      if (item.status.id === 1 && loop === true && this.mute !== true) {
+      if (item.status.description === "Novo Pedido" && loop === true && this.mute !== true) {
         this.audio.play();
         loop = false;
       }
     })
   }
 
-  filtroPedidos(filtro: string){
+  filtroPedidos(filtro: string) {
     this.filtro = filtro;
     let pedidosFiltrados: Order[] = [];
+    let pedidosEmAberto: Order[] = [];
     this.orderService.getOrdersByDate()
       .subscribe(
         data => {
           data.forEach(item => {
-            if(item.status.description === filtro){
+            if (item.status.description === "Novo Pedido") {
+              pedidosEmAberto.push(item);
+            }
+            if (item.status.description === filtro) {
               pedidosFiltrados.push(item);
             }
           });
-          this.pedidos = pedidosFiltrados;
+          if (pedidosEmAberto.length > 0) {
+            this.filtro = "Novo Pedido";
+            this.pedidos = pedidosEmAberto;
+            if (!this.mute) {
+              this.audio.play();
+            }
+          } else {
+            this.pedidos = pedidosFiltrados;
+          }
         }
-      ) 
+      )
   }
 
-  iconVolume(): string{
-    if (this.mute){
+  iconVolume(): string {
+    if (this.mute) {
       return 'volume_off';
-    }else {
+    } else {
       return 'volume_up';
     }
   }
 
-  alternarVolume(){
+  alternarVolume() {
     this.mute = !this.mute;
-    if(this.mute){
-      this.corIconeMute =  'warn';
-    }else {
+    if (this.mute) {
+      this.corIconeMute = 'warn';
+    } else {
       this.corIconeMute = 'primary';
     }
+  }
+
+  whatsappCliente(whatsapp: string) {
+    window.open(`https://api.whatsapp.com/send?phone=55${whatsapp}`);
   }
 
 

@@ -66,11 +66,13 @@ export class HomeComponent implements OnInit {
 
   bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min",true);
 
-  status: Status = new Status(1, "Pedido feito, aguardando estabelecimento aceitar");
+  status: Status = new Status(1, "Faça o seu Pedido");
 
   pesquisaName = new FormControl();
 
-  carrinhoMobileOpen: boolean = false
+  carrinhoMobileOpen: boolean = false;
+
+  ultimoPedido: Order = new Order(0, this.user, "","", this.status,0, this.cupom,this.items);
 
 
 
@@ -99,6 +101,8 @@ export class HomeComponent implements OnInit {
             this.user = data;
             this.filtroEnderecos(this.user);
             this.userLogado.id = this.user.id;
+            this.ultimoPedidoByCliente(this.user.id);
+            this.carrinhoService.setUserLogado(this.user.id);
           })
         )
 
@@ -123,25 +127,12 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  // onClickEnderecoItem(endereco: Address): void {
-  //   this.enderecoSelecionado = endereco;
-  //   this.totalPedido -= this.frete;
-  //   this.frete = this.enderecoSelecionado.neighborhood.value;
-  //   this.totalPedido += this.frete;
-
-  // }
-
   alterarEndereco(endereco: Address){
     this.carrinhoService.onClickEnderecoItem(endereco);
     this.totalPedido=this.carrinhoService.getTotalPedido();
     this.enderecoSelecionado=this.carrinhoService.getEnderecoSelecionado();
     this.frete=endereco.neighborhood.value;
   }
-
-  // onClickTipoPagamento(pagamento: MetodoPagamento): void {
-  //   this.pagamento = pagamento;
-  //   this.order.paymentMethod = pagamento.description;
-  // }
 
   alterarMetodoPagamento(metodo: MetodoPagamento){
     this.carrinhoService.selecionarMetodoPagamento(metodo);
@@ -190,34 +181,6 @@ export class HomeComponent implements OnInit {
         }
       )
   }
-
-  // exportarPedido() {
-
-  //   this.itensCarrinho.forEach(item => {
-  //     this.items.push(new Items(item.quantityCar, item))
-  //   })
-
-  //   this.order.user = this.userLogado;
-  //   this.order.paymentMethod = this.pagamento.description;
-  //   this.order.status = this.status;
-  //   this.order.total = this.totalPedido;
-  //   this.order.coupon = this.cupom;
-  //   this.order.items = this.items;
-  //   this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`
-
-  //   this.orderService.createOrder(this.order)
-  //     .subscribe(
-  //       (res => {
-  //         console.log("pedido concluido");
-  //       }),
-  //       (err => {
-  //         console.log(err);
-  //         console.log(this.order);
-  //       })
-  //     )
-
-  //   // window.location.reload();
-  // }
 
   exportarPedido(){
     this.carrinhoService.exportarPedido();
@@ -300,6 +263,17 @@ export class HomeComponent implements OnInit {
             )
         }),
       ).subscribe();
+  }
+
+  ultimoPedidoByCliente(id: number){
+    this.orderService.getOrdersByUserInDate(id)
+      .subscribe(
+        (res => {
+          if(res.length>0){
+          this.ultimoPedido = res[res.length-1]}
+        }),
+        (err => console.log(err))
+      )
   }
 
 

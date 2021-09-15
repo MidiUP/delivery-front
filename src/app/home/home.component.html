@@ -51,11 +51,11 @@
         <div class="estado-estabelecimento">
           <div class="d-flex align-items-center">
             <mat-icon class="icon-open">shopping_bag</mat-icon>
-            <h5 class="titulo-infos">PEDIDO #20</h5>
+            <h5 class="titulo-infos">PEDIDO #{{ultimoPedido.id}}</h5>
           </div>
-          <p class="v-desktop-infos">Em Preparo ( Previsão de entrega: 20h30 )</p>
+          <p class="v-desktop-infos">{{ultimoPedido.status.description}} ( Previsão de entrega: 20h30 )</p>
           <div class="v-mobile-infos">
-            <p>Em Preparo</p>
+            <p>{{ultimoPedido.status.description}}</p>
             <!-- <p>Entrega: 20h30</p> -->
 
           </div>

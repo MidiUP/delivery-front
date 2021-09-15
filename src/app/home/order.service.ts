@@ -36,4 +36,7 @@ export class orderService{
         return this.http.get<Order[]>(`${this.baseUrl}/date`);
     }
 
+    getOrdersByUserInDate(id: number){
+        return this.http.get<Order[]>(`${this.baseUrl}/user/find/${id}`);
+    }
 }

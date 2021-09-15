@@ -175,5 +175,9 @@ export class carrinhoService {
     });
   }
 
+  setUserLogado(id: number){
+    this.userLogado.id = id;
+  }
+
 }
 

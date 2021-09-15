@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import { categoriaService } from '../categorias/categoria.service';
 import { Categoria } from '../categorias/categoria.model';
+import { DialogInfoComponent } from './dialog-info/dialog-info.component';
 
 
 @Component({
@@ -42,15 +43,6 @@ export class EditarProdutoComponent implements OnInit {
       availability: this.formBuilder.control('', [])
     }, { updateOn: 'change' });
 
-
-    // this.editProductForm = this.formbuilder.group({
-    //   name:[null],
-    //   description:[null],
-    //   quantity:[null],
-    //   price:[null],
-    //   availability:[null]
-    // })
-
   }
 
   getProducts(): void {
@@ -76,8 +68,6 @@ export class EditarProdutoComponent implements OnInit {
         }
       );
   }
-
-
 
   edit(product: Product): void {
     this.product = product;
@@ -120,6 +110,21 @@ export class EditarProdutoComponent implements OnInit {
           this.categorias = data;
         }
       );
+  }
+
+  openDialogInfo(produto: Product) {
+    const dialogRef = this.dialog.open(DialogInfoComponent, {
+      data: { name: produto.name, description: produto.description, price: produto.price }
+    });
+  }
+
+  filtroProdutos(categoria: string){
+    this.productService.searchProduct(categoria, "")
+      .subscribe(
+        (data => {
+          this.products = data;
+        })
+      )
   }
 
 }

@@ -71,6 +71,7 @@ import { CarrinhoVazioComponent } from './snack-bars/carrinho-vazio/carrinho-vaz
 import { MetodoPagamentoNullComponent } from './snack-bars/metodo-pagamento-null/metodo-pagamento-null.component';
 import { AddressNullComponent } from './snack-bars/address-null/address-null.component';
 import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/dialog-delete-endereco.component';
+import { DialogInfoComponent } from './editar-produto/dialog-info/dialog-info.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/d
     MetodoPagamentoNullComponent,
     AddressNullComponent,
     DialogDeleteEnderecoComponent,
+    DialogInfoComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,17 +1,30 @@
 <div class="container">
 
+    <section class="menu">
+        <div class="select-lista-pedidos">
+            <mat-form-field appearance="outline">
+                <mat-label>Filtro</mat-label>
+                <mat-select>
+                    <mat-option value="0" (click)="getProducts()">Todos os Produtos</mat-option>
+                    <mat-option value="0" *ngFor="let categoria of categorias" (click)="filtroProdutos(categoria.description)">{{categoria.description}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </section>
+
     <div class="all-products">
         <mat-card class="produto" *ngFor="let produto of products">
             <div class="row">
                 <div class="col-md-4 flex">
-                    <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" alt="">
+                    <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" (click)="openDialogInfo(produto)" style="cursor: pointer;">
                 </div>
                 <div class="col-md-8">
-                    <h2>{{produto.name}}</h2>
-                    <p>{{produto.description}}</p>
+                    <h2 (click)="openDialogInfo(produto)" style="cursor: pointer;">{{produto.name.substring(0,14)}}<span style="color: black; margin-left: 0; padding-left: 0;" *ngIf="produto.description.length > 20">...</span></h2>
+                    <p>{{produto.description.substring(0,35)}}<span style="color: black; margin-left: 0; padding-left: 0;" *ngIf="produto.description.length > 35">...</span>
+                    </p>
                     <div class="d-flex">
                         <p class="preco">
-                            Preço: <span>R${{produto.price}}</span>
+                            Preço: <span>R${{produto.price.toFixed(2).replace('.',',')}}</span>
 
                         </p>
                         <div class="botoes">
@@ -31,8 +44,11 @@
         </mat-card>
     </div>
 
+</div>
 
-    <hr>
+
+
+<!-- <hr>
     <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-md-6">
@@ -124,6 +140,4 @@
             <button class="btn btn-primary" type="submit" [disabled]="!editProductForm.valid">Salvar</button>
         </div>
 
-    </form>
-
-</div>
+    </form> -->
