@@ -6,7 +6,7 @@ import { Empresa } from "./empresa.model";
 @Injectable()
 export class EmpresaService{
 
-    baseUrl = "http://localhost:8080/v1/establishments"
+    baseUrl = "https://teste-api-delivery.herokuapp.com/v1/establishments"
 
     constructor(private http: HttpClient){}
 

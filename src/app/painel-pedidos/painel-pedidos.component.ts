@@ -101,31 +101,35 @@ export class PainelPedidosComponent implements OnInit {
   }
 
   filtroPedidos(filtro: string) {
-    this.filtro = filtro;
-    let pedidosFiltrados: Order[] = [];
-    let pedidosEmAberto: Order[] = [];
-    this.orderService.getOrdersByDate()
-      .subscribe(
-        data => {
-          data.forEach(item => {
-            if (item.status.description === "Novo Pedido") {
-              pedidosEmAberto.push(item);
+    if (filtro !== "Todos os Pedidos") {
+      this.filtro = filtro;
+      let pedidosFiltrados: Order[] = [];
+      let pedidosEmAberto: Order[] = [];
+      this.orderService.getOrdersByDate()
+        .subscribe(
+          data => {
+            data.forEach(item => {
+              if (item.status.description === "Novo Pedido") {
+                pedidosEmAberto.push(item);
+              }
+              if (item.status.description === filtro) {
+                pedidosFiltrados.push(item);
+              }
+            });
+            if (pedidosEmAberto.length > 0) {
+              this.filtro = "Novo Pedido";
+              this.pedidos = pedidosEmAberto;
+              if (!this.mute) {
+                this.audio.play();
+              }
+            } else {
+              this.pedidos = pedidosFiltrados;
             }
-            if (item.status.description === filtro) {
-              pedidosFiltrados.push(item);
-            }
-          });
-          if (pedidosEmAberto.length > 0) {
-            this.filtro = "Novo Pedido";
-            this.pedidos = pedidosEmAberto;
-            if (!this.mute) {
-              this.audio.play();
-            }
-          } else {
-            this.pedidos = pedidosFiltrados;
           }
-        }
-      )
+        )
+    } else {
+      this.getPedidosByDate();
+    }
   }
 
   iconVolume(): string {

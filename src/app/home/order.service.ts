@@ -8,7 +8,7 @@ import { Order } from "./order.model";
 @Injectable()
 export class orderService{
     
-    baseUrl = "http://localhost:8080/v1/orders"
+    baseUrl = "https://teste-api-delivery.herokuapp.com/v1/orders"
 
     constructor(private http: HttpClient){}
 
