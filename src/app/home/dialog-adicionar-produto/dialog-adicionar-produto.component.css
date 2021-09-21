@@ -1,0 +1,121 @@
+body{
+    width: 800px;
+    /* min-height: 60vh; */
+    max-height: 65vh;
+}
+
+.banner{
+    width: 100%;
+    height: 150px;
+}
+
+.icone-produto{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: black;
+}
+
+.produto{
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: solid 5px white;
+    border-radius: 100%;
+
+}
+
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+}
+
+.confirmacao{
+    font-size: 1.5em ;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-left: 0;
+    
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titulo h2{
+    font-size: 1em;
+}
+
+.conteudo{
+    display: flex;
+    flex-direction: row;
+}
+
+.produto{
+    width: 100px;
+    height: 100px;
+}
+
+.botao{
+    display: flex;
+    justify-content: end;
+    padding-bottom: 10px;
+}
+
+h5{
+    font-size: 1em;
+    margin-left: 10px;
+}
+
+span{
+    margin: 0px 15px;
+}
+
+.valores{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-bottom: 0;
+    
+}
+
+.resumoPedido{
+    margin-bottom: 5px;
+
+}
+.valoress{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.valoress span{
+    margin-left: 5px;
+}
+
+h6{
+    margin: 0;
+}
+
+h3{
+    font-size: 1.4em;
+}
+
+h4{
+    font-size: 1em;
+    margin: 0;
+}
+
+.valorAdicional{
+    display: flex;
+    align-items: center;    
+}
+
+.valorAdicional span{
+    font-size: 1em;
+    margin: 0px 5px;
+}
+

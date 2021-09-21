@@ -73,6 +73,7 @@ import { AddressNullComponent } from './snack-bars/address-null/address-null.com
 import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/dialog-delete-endereco.component';
 import { DialogInfoComponent } from './editar-produto/dialog-info/dialog-info.component';
 import { DialogEditarProdutoComponent } from './editar-produto/dialog-editar-produto/dialog-editar-produto.component';
+import { DialogAdicionarProdutoComponent } from './home/dialog-adicionar-produto/dialog-adicionar-produto.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { DialogEditarProdutoComponent } from './editar-produto/dialog-editar-pro
     DialogDeleteEnderecoComponent,
     DialogInfoComponent,
     DialogEditarProdutoComponent,
+    DialogAdicionarProdutoComponent,
   ],
   imports: [
     BrowserModule,

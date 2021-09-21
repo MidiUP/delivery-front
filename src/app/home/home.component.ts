@@ -22,6 +22,7 @@ import { authService } from '../auth/auth.service/auth.service';
 import { UserService } from '../user/user.service';
 import { DialogCarrinhoMobileComponent } from './dialog-carrinho-mobile/dialog-carrinho-mobile.component';
 import { carrinhoService } from './carrinho.service';
+import { DialogAdicionarProdutoComponent } from './dialog-adicionar-produto/dialog-adicionar-produto.component';
 
 @Component({
   selector: 'app-home',
@@ -140,9 +141,10 @@ export class HomeComponent implements OnInit {
   }
 
   addItem(produto: Product): void {
-    this.carrinhoService.addItem(produto);
-    this.itensCarrinho = this.carrinhoService.getItensCarrinho();
-    this.totalPedido = this.carrinhoService.getTotalPedido();
+    this.openDialogAddProduto(produto);
+    // this.carrinhoService.addItem(produto);
+    // this.itensCarrinho = this.carrinhoService.getItensCarrinho();
+    // this.totalPedido = this.carrinhoService.getTotalPedido();
 
   }
 
@@ -156,6 +158,12 @@ export class HomeComponent implements OnInit {
   openDialog(produto: Product) {
     const dialogRef = this.dialog.open(DialogProdutoComponent, {
       data: { name: produto.name, description: produto.description, price: produto.price }
+    });
+  }
+
+  openDialogAddProduto(produto: Product) {
+    const dialogRef = this.dialog.open(DialogAdicionarProdutoComponent, {
+      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price }
     });
   }
 

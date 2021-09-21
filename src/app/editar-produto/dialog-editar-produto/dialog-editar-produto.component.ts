@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Adicional } from 'src/app/novo-produto/adicional.model';
 import { Product } from 'src/app/novo-produto/product.model';
-import { Adicional } from '../adicional.model';
+
 @Component({
   selector: 'app-dialog-editar-produto',
   templateUrl: './dialog-editar-produto.component.html',
@@ -21,7 +22,7 @@ export class DialogEditarProdutoComponent implements OnInit {
   }
 
   addAdicional(){
-    let adicional : Adicional = new Adicional("",0);
+    let adicional : Adicional = new Adicional("",0,"",0,0);
     this.adicionais.push(adicional);
   }
 
