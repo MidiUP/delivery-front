@@ -7,7 +7,7 @@ import { Bairro } from "./bairro.model";
 @Injectable()
 export class bairroService{
     
-    baseUrl = "https://localhost:8080/v1/neighborhoods"
+    baseUrl = "https://teste-api-delivery.herokuapp.com/v1/neighborhoods"
 
     constructor(private http: HttpClient){}
 

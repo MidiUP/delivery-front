@@ -1,0 +1,90 @@
+<body>
+    <section>
+        <div class="titulo">
+            <h1>Editar Produto</h1>
+        </div>
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nome</mat-label>
+                        <input matInput placeholder="Ex. Pizza">
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descrição</mat-label>
+                        <input matInput placeholder="Ex. 5.00">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Preço</mat-label>
+                        <input matInput placeholder="Ex. 10,00">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Quantidade</mat-label>
+                        <input matInput placeholder="Ex. 10,00">
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
+                    <h2 style="margin-bottom: 5px;">Disponibilidade do produto</h2>
+                    <mat-radio-group>
+                        <mat-radio-button value="1" style="margin-right: 10px;">Disponível</mat-radio-button>
+                        <mat-radio-button value="2">Não Disponível</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
+                    
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-6 adicionais">
+                    <h2>Cadastrar Adicionais</h2>
+                    <button mat-icon-button color="primary" (click)="addAdicional()">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" (click)="removeAdicional()">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="col-12 adicional" *ngFor="let adicional of adicionais">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Adicional</mat-label>
+                                <input matInput placeholder="Ex. Bacon">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Valor</mat-label>
+                                <input matInput placeholder="Ex. 5.00">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botoes">
+                <button mat-flat-button color="primary" style="margin-right: 10px;">Salvar</button>
+                <button mat-flat-button color="warn">Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+</body>

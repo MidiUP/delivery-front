@@ -476,6 +476,7 @@ body{
      
      .produtos-mobile{
         width: 100%;
+        margin-bottom: 41px;
      }
 
      mat-card{
@@ -589,6 +590,11 @@ body{
         margin-left: auto;
     }
 
+    .link-categoria{
+        font-size: 1em;
+        margin-top: 9px;
+    } 
+
     /* Formatação card produto */
 
     .opcoes-endereco-pagamento{
@@ -615,6 +621,7 @@ body{
      
     .produtos-mobile{
         width: 100%;
+        margin-bottom: 0px;
      }
 
      mat-card{

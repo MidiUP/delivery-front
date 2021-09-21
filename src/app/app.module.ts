@@ -72,6 +72,7 @@ import { MetodoPagamentoNullComponent } from './snack-bars/metodo-pagamento-null
 import { AddressNullComponent } from './snack-bars/address-null/address-null.component';
 import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/dialog-delete-endereco.component';
 import { DialogInfoComponent } from './editar-produto/dialog-info/dialog-info.component';
+import { DialogEditarProdutoComponent } from './editar-produto/dialog-editar-produto/dialog-editar-produto.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { DialogInfoComponent } from './editar-produto/dialog-info/dialog-info.co
     AddressNullComponent,
     DialogDeleteEnderecoComponent,
     DialogInfoComponent,
+    DialogEditarProdutoComponent,
   ],
   imports: [
     BrowserModule,

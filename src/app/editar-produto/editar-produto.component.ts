@@ -10,6 +10,7 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import { categoriaService } from '../categorias/categoria.service';
 import { Categoria } from '../categorias/categoria.model';
 import { DialogInfoComponent } from './dialog-info/dialog-info.component';
+import { DialogEditarProdutoComponent } from './dialog-editar-produto/dialog-editar-produto.component';
 
 
 @Component({
@@ -70,7 +71,7 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   edit(product: Product): void {
-    this.product = product;
+    this.openDialogEditProduct(product);
   }
 
   delete(key: number) {
@@ -115,6 +116,12 @@ export class EditarProdutoComponent implements OnInit {
   openDialogInfo(produto: Product) {
     const dialogRef = this.dialog.open(DialogInfoComponent, {
       data: { name: produto.name, description: produto.description, price: produto.price }
+    });
+  }
+
+  openDialogEditProduct(produto: Product) {
+    const dialogRef = this.dialog.open(DialogEditarProdutoComponent, {
+      data: { product: produto }
     });
   }
 
