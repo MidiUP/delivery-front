@@ -4,6 +4,8 @@ export class Adicional{
         public price: number,
         public description: string,
         public quantity: number,
-        public total: number
+        public quantityCar: number = 0,
+        public total: number,
+        public id: number
     ){}
 }

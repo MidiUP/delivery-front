@@ -1,0 +1,71 @@
+<body>
+    <div class="container cabecalho">
+        <div class="titulo">
+            <h1 class="confirmacao">Resumo</h1>
+            <h2> | do pedido</h2>
+        </div>
+        <div class="fechar" style="margin-left: auto;">
+            <button mat-icon-button color="warn" mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row " *ngFor="let item of itensCarrinho">
+            <div class="col-md-8 descricao-item">
+                <div class="produto-quantidade">
+                    <h3>{{item.name}}</h3>
+                    <h6 class="quantidade">({{item.quantityCar}}x)</h6>
+                </div>
+                <p>Bacon (1x), Cheddar (1x), Coca-Cola lata (2x)</p>
+            </div>
+
+            <div class="col-md-4 descricao-item">
+                <div class="produto-quantidade">
+                    <h4>Valor:</h4>
+                    <h4 style="margin-left: 5px;">R${{item.total.toFixed(2).replace('.',',')}}</h4>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+    </div>
+
+    <div class="container" style="margin-bottom: 32px;">
+        <div class="row resumoPedido">
+            <div class="col-md-8">
+                <div class="info-pedido">
+                    <h6>Endereço Selecionado: </h6>
+                    <h6 class="valor">{{enderecoSelecionado.street}}, {{enderecoSelecionado.number}},
+                        {{enderecoSelecionado.neighborhood.name}}</h6>
+                </div>
+                <div class="info-pedido">
+                    <h6>Método de Pagamento: </h6>
+                    <h6 class="valor">{{pagamentoSelecionado.description}}</h6>
+                </div>
+            </div>
+            <div class="col-md-4 valores">
+                <div class="valoress">
+                    <h6>Valor Total:</h6>
+                    <h6 class="valor">R${{totalPedido.toFixed(2).replace('.',',')}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="ObservacaoForm">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 finalizar-pedido">
+                    <input class="form-control" type="text" placeholder="Observações" formControlName="description"
+                        [(ngModel)]="observacao">
+                </div>
+                <div class="col-6 botao">
+                    <button mat-flat-button color="primary" mat-dialog-close (click)="finalizarPedido()">Finalizar
+                        Pedido</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

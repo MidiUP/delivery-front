@@ -5,20 +5,20 @@
             <h2> | {{produto.name}}</h2>
         </div>
         <div class="fechar" style="margin-left: auto;">
-            <button mat-icon-button color="warn">
+            <button mat-icon-button color="warn" mat-dialog-close>
                 <mat-icon>close</mat-icon>
             </button>
         </div>
     </div>
 
     <div class="container">
-        <div class="row" *ngFor="let adicional of adicionais" style="margin-top: 10px;">
+        <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
             <div class="col-md-2 adicionais" style="padding: 0;">
                 <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
                     <mat-icon>add</mat-icon>
                 </button>
 
-                <span>{{adicional.quantity}}</span>
+                <span>{{adicional.quantityCar}}</span>
 
                 <button mat-icon-button color="warn" (click)="removeQuantityAdicional(adicional)">
                     <mat-icon>remove</mat-icon>
@@ -73,6 +73,6 @@
     </div>
 
     <div class="container botao">
-        <button mat-flat-button color="primary">Adicionar</button>
+        <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close>Adicionar</button>
     </div>
 </body>

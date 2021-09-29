@@ -1,0 +1,43 @@
+.menu{
+    margin: 15px 10px 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+
+.select-lista-pedidos{
+    display: flex;
+    flex-direction: row;
+}
+
+.subtitulo{
+    font-size: 1.2em;
+    margin: 0px 10px 0px 0px;
+    padding: 0;
+}
+
+.adicionais{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.adicional{
+    width: 31%;
+    margin: 0px 1% 10px 1%;
+}
+
+.preco{
+    color: red;
+}
+
+.adicional p{
+    margin: 4px 0px;
+}
+
+.preco-botoes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

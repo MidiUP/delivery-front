@@ -81,13 +81,15 @@ export class PainelAdminComponent implements OnInit {
   }
 
   contentNewMetodosPagamentos(){
-    this.content="novos-metodos-pagamentos"
+    this.content="novos-metodos-pagamentos";
   }
 
   contentEditMetodosPagamentos(){
-    this.content="editar-metodos-pagamentos"
+    this.content="editar-metodos-pagamentos";
   }
 
-
+  contentAdicionais(){
+    this.content = "adicionais";
+  }
 
 }

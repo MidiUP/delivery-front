@@ -11,7 +11,7 @@ import { MetodoPagamentoNullComponent } from "../snack-bars/metodo-pagamento-nul
 import { User } from "../user/user.model";
 import { UserService } from "../user/user.service";
 import { Cupom } from "./cupom.model";
-import { Items } from "./items.model";
+import { additionalPedidos, Items } from "./items.model";
 import { Order } from "./order.model";
 import { orderService } from "./order.service";
 import { Status } from "./status.model";
@@ -36,17 +36,27 @@ export class carrinhoService {
   userLogado: User = new User("", "", "", "", "", "", "", 0);
   cupom: Cupom = new Cupom(1, "Frete off", 15);
   status: Status = new Status(1, "Novo Pedido");
-  order: Order = new Order(0, this.userLogado, "", "", this.status, 0, this.cupom, this.items);
+  order: Order = new Order(0, this.userLogado, "", "", this.status, 0, this.cupom, this.items, "");
 
   addItem(produto: Product): void {
-    if (!this.itensCarrinho.includes(produto)) {
+    let itemExistente: boolean = false;
+    this.itensCarrinho.forEach(item => {
+      if (item.name === produto.name && item.price === produto.price) {
+        item.quantityCar += produto.quantityCar;
+        item.total = item.quantityCar * item.price;
+        this.totalPedido += produto.total;
+        itemExistente = true;
+        console.log("entrei");
+        
+      }
+    })
+
+    if (!itemExistente) {
       this.itensCarrinho.push(produto);
-      produto.quantityCar = 1;
-    } else {
-      produto.quantityCar++;
+      // produto.quantityCar = 1;
+      produto.total = produto.quantityCar * produto.price;
+      this.totalPedido += produto.total;
     }
-    produto.total = produto.quantityCar * produto.price;
-    this.totalPedido += produto.price;
 
   }
 
@@ -71,6 +81,24 @@ export class carrinhoService {
       this.totalPedido -= produto.price;
     }
 
+  }
+
+  aumentarItem(produto: Product): void {
+    produto.quantityCar ++;
+    this.totalPedido += produto.price;
+    produto.total = produto.price * produto.quantityCar
+  }
+
+  diminuirItem(produto: Product): void {
+    if (produto.quantityCar === 1){
+      this.itensCarrinho.splice(this.itensCarrinho.indexOf(produto), 1);
+      this.totalPedido -= produto.price;
+      produto.total = produto.price * produto.quantityCar
+    } else {
+      produto.quantityCar --;
+      this.totalPedido -= produto.price;
+      produto.total = produto.price * produto.quantityCar
+    }
   }
 
   public getTotalPedido(): number {
@@ -105,13 +133,19 @@ export class carrinhoService {
     return this.frete;
   }
 
-  exportarPedido(): boolean {
+  exportarPedido(observacao: string): boolean {
 
     if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoSelecionado != null && this.enderecoSelecionado != null) {
 
 
       this.itensCarrinho.forEach(item => {
-        this.items.push(new Items(item.quantityCar, item))
+        let adicionais: additionalPedidos[] = [];
+        item.additional?.forEach(item => {
+          if(item.quantityCar>0){
+            adicionais.push(new additionalPedidos(item, item.quantityCar))
+          }
+        })
+        this.items.push(new Items(item.quantityCar, item, adicionais))
       })
 
       this.order.user = this.userLogado;
@@ -121,6 +155,7 @@ export class carrinhoService {
       this.order.coupon = this.cupom;
       this.order.items = this.items;
       this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`;
+      this.order.note = observacao;
 
       this.orderService.createOrder(this.order)
         .subscribe(
@@ -175,7 +210,7 @@ export class carrinhoService {
     });
   }
 
-  setUserLogado(id: number){
+  setUserLogado(id: number) {
     this.userLogado.id = id;
   }
 

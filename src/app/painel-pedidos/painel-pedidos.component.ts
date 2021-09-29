@@ -74,7 +74,8 @@ export class PainelPedidosComponent implements OnInit {
       status: { id: newStatus, description: '' },
       total: pedido.total,
       coupon: { id: pedido.coupon.id, name: '', value: 0 },
-      items: pedido.items
+      items: pedido.items,
+      note: ""
     };
     this.orderService.putOrder(pedidoAualizado, pedido.id)
       .subscribe(
@@ -151,6 +152,21 @@ export class PainelPedidosComponent implements OnInit {
 
   whatsappCliente(whatsapp: string) {
     window.open(`https://api.whatsapp.com/send?phone=55${whatsapp}`);
+  }
+
+  imprimir() {
+    // var printContents = document.getElementById('div-id-selector').innerHTML;
+    let printContents = document.getElementById('pedido')?.innerHTML;
+    let popupWin = window.open('', '_blank', 'width=800,height=800,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no,top=50');
+    popupWin?.window.focus();
+    popupWin?.document.open();
+    popupWin?.document.write('<!DOCTYPE html><html><head><title>TITLE OF THE PRINT OUT</title>'
+      + '<link rel="stylesheet" type="text/css" href="app/directory/file.css" />'
+      + '</head><body onload="window.print(); window.close();"><div>'
+      + printContents + '</div></html>');
+    popupWin?.document.close();
+
+
   }
 
 

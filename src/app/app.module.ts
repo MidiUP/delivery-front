@@ -74,6 +74,12 @@ import { DialogDeleteEnderecoComponent } from './perfil/dialog-delete-endereco/d
 import { DialogInfoComponent } from './editar-produto/dialog-info/dialog-info.component';
 import { DialogEditarProdutoComponent } from './editar-produto/dialog-editar-produto/dialog-editar-produto.component';
 import { DialogAdicionarProdutoComponent } from './home/dialog-adicionar-produto/dialog-adicionar-produto.component';
+import { DialogFinalizarPedidoComponent } from './home/dialog-finalizar-pedido/dialog-finalizar-pedido.component';
+import { AdicionaisComponent } from './adicionais/adicionais.component';
+import { AdicionalService } from './adicionais/adicional.service';
+import { DialogCriarAdicionalComponent } from './adicionais/dialog-criar-adicional/dialog-criar-adicional.component';
+import { DialogEditarAdicionalComponent } from './adicionais/dialog-editar-adicional/dialog-editar-adicional.component';
+import { DialogDeleteAdicionalComponent } from './adicionais/dialog-delete-adicional/dialog-delete-adicional.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +117,11 @@ import { DialogAdicionarProdutoComponent } from './home/dialog-adicionar-produto
     DialogInfoComponent,
     DialogEditarProdutoComponent,
     DialogAdicionarProdutoComponent,
+    DialogFinalizarPedidoComponent,
+    AdicionaisComponent,
+    DialogCriarAdicionalComponent,
+    DialogEditarAdicionalComponent,
+    DialogDeleteAdicionalComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,7 +147,7 @@ import { DialogAdicionarProdutoComponent } from './home/dialog-adicionar-produto
     MatCheckboxModule,
     MatRadioModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService, AdicionalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

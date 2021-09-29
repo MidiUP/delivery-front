@@ -141,37 +141,39 @@
               </div>
             </mat-card>
           </div>
-          <div class="vazio">⠀⠀⠀⠀⠀⠀⠀⠀⠀</div> <!-- Caracter invisivel para correção de bug no home com apenas um produto ou menos para exibição-->
+          <div class="vazio">⠀⠀⠀⠀⠀⠀⠀⠀⠀</div>
+          <!-- Caracter invisivel para correção de bug no home com apenas um produto ou menos para exibição-->
 
           <div class="produtos-mobile">
             <mat-card class="produto-mobile" *ngFor="let produto of products">
-             
-                <div class="row " style="width:100%">
 
-                  <div class="col-8 infos-produto-mobile">
-                    <div class="detalhes-produto">
-                      <div class="div-nome-produto-mobile">
-                        <h4 class="nome-produto-mobile" (click)="openDialog(produto)">{{produto.name}}</h4>
-                      </div>
-                      <div class= "div-descricao-produto-mobile">
-                        <p>{{produto.description}}</p>
-                      </div>
-                      <div class="preco-botoes-mobile">
-                        <span class="preco-produto-mobile">R${{produto.price.toFixed(2)}}</span>
-                        <div class="botoes-carrinho-mobile">
-                          <mat-icon style="margin-left: 25px;" (click)="addItem(produto)">add</mat-icon> 
-                          <mat-icon style="margin-left: 20px; color: red;" (click)="removeItem(produto)">delete</mat-icon>
-                        </div>
+              <div class="row " style="width:100%">
+
+                <div class="col-8 infos-produto-mobile">
+                  <div class="detalhes-produto">
+                    <div class="div-nome-produto-mobile">
+                      <h4 class="nome-produto-mobile" (click)="openDialog(produto)">{{produto.name}}</h4>
+                    </div>
+                    <div class="div-descricao-produto-mobile">
+                      <p>{{produto.description}}</p>
+                    </div>
+                    <div class="preco-botoes-mobile">
+                      <span class="preco-produto-mobile">R${{produto.price.toFixed(2)}}</span>
+                      <div class="botoes-carrinho-mobile">
+                        <mat-icon style="margin-left: 25px;" (click)="addItem(produto)">add</mat-icon>
+                        <mat-icon style="margin-left: 20px; color: red;" (click)="removeItem(produto)">delete</mat-icon>
                       </div>
                     </div>
                   </div>
-  
-                  <div class="col-4 d-flex align-items-center">
-                    <img class="img-produto-mobile" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" (click)="openDialog(produto)">
-                  </div>
-  
                 </div>
-              
+
+                <div class="col-4 d-flex align-items-center">
+                  <img class="img-produto-mobile" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png"
+                    (click)="openDialog(produto)">
+                </div>
+
+              </div>
+
             </mat-card>
           </div>
 
@@ -224,12 +226,17 @@
 
                   <div class="row item-carrinho">
                     <div class="col-5 nome-produto-carrinho">
-                      <span class="nome-produto">{{item.name}}</span>
-                      <span class="quantidade-produto">{{item.quantityCar}}x</span>
+                      <div>
+                        <span class="nome-produto">{{item.name}}</span>
+                        <span class="quantidade-produto">{{item.quantityCar}}x</span>
+                      </div>
+                      <div>
+                        <p class="adicionais-item">{{item.additionalsString}}</p>
+                      </div>
                     </div>
 
                     <div class="col-4 botoes-produto-carrinho">
-                      <a class="cor-verde botao-carrinho" (click)="addItem(item)">
+                      <a class="cor-verde botao-carrinho" (click)="aumentarQuantidade(item)">
                         <mat-icon class="botao-carrinho">add</mat-icon>
                       </a>
                       <a (click)="removeItem(item)" style="margin-left: 10px;">
@@ -409,6 +416,10 @@
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                               <li *ngFor="let pagamento of pagamentos"><a class="dropdown-item"
                                   (click)="alterarMetodoPagamento(pagamento)">{{ pagamento.description }}</a></li>
+                              <li>
+                                <hr class="dropdown-divider">
+                              </li>
+                              <li><a class="dropdown-item" (click)="pagamentoDinheiro(true)">Dinheiro</a></li>
                             </ul>
                           </li>
                         </ul>
@@ -418,8 +429,14 @@
                   </div>
                 </nav>
               </div>
-              <p *ngIf="pagamentoSelecionado != null" class="opcao-selecionada">{{ pagamentoSelecionado.description }}
+              <p *ngIf="pagamentoSelecionado != null && pagamentoPorDinheiro != true" class="opcao-selecionada">{{
+                pagamentoSelecionado.description }}
               </p>
+              <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
+                <p class="opcao-selecionada-dinheiro"> Dinheiro </p>
+                <input class="form-control troco" type="text" placeholder="Troco para quanto?">
+              </div>
+
             </div>
 
             <div class="campo-opcoes-pedido">

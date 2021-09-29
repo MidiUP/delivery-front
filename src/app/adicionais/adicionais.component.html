@@ -1,0 +1,41 @@
+<div class="container d-flex align-items-center" style="margin-top: 20px;">
+    <h1 class="subtitulo">Cadastrar Adicional</h1>
+    <button mat-mini-fab color="primary" (click)="openDialogAddAdicional()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+
+
+<div class="container">
+    <hr>
+    <section class="menu">
+        <div class="select-lista-pedidos">
+            <mat-form-field appearance="outline" style="margin-right: 10px;">
+                <mat-label>Pesquise por um adicional</mat-label>
+                <input matInput placeholder="Ex. Bacon" [formControl]="pesquisaName">
+            </mat-form-field>
+        </div>
+    </section>
+</div>
+
+<div class="container adicionais">
+    <mat-card class="adicional" *ngFor="let adicional of adicionais">
+        <mat-card-title>{{adicional.name}}</mat-card-title>
+        <p>{{adicional.description}}</p>
+        <div class="row preco-botoes">
+            <div class="col-4">
+                <span class="preco">R${{adicional.price.toFixed(2).replace('.',',')}}</span>
+            </div>
+            <div class="col-8 d-flex">
+                <button mat-icon-button color="primary" (click)="openDialogEditAdicional(adicional)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="warn" (click)="openDialogDeleteAdicional(adicional)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-card>
+</div>

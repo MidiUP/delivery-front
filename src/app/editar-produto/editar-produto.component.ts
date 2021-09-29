@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../novo-produto/product.model';
 import { ProductService } from '../novo-produto/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +11,7 @@ import { categoriaService } from '../categorias/categoria.service';
 import { Categoria } from '../categorias/categoria.model';
 import { DialogInfoComponent } from './dialog-info/dialog-info.component';
 import { DialogEditarProdutoComponent } from './dialog-editar-produto/dialog-editar-produto.component';
+import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class EditarProdutoComponent implements OnInit {
   product: Product = new Product("", 0, "", true, 0, 0, 0, 0, 0, {id: 0, description:""});
   editProductForm: FormGroup;
   categorias: Categoria[];
+  pesquisaName = new FormControl();
   
   
   constructor(private formBuilder: FormBuilder,
@@ -34,6 +36,7 @@ export class EditarProdutoComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
     this.getCategorias();
+    this.autoComplete();
 
     this.editProductForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
@@ -121,7 +124,7 @@ export class EditarProdutoComponent implements OnInit {
 
   openDialogEditProduct(produto: Product) {
     const dialogRef = this.dialog.open(DialogEditarProdutoComponent, {
-      data: { product: produto }
+      data: { id: produto.id, name: produto.name, quantity: produto.quantity, price: produto.price, description: produto.description, additional: produto.additional, availability: produto.availability, rate: 5, category: produto.category }
     });
   }
 
@@ -132,6 +135,37 @@ export class EditarProdutoComponent implements OnInit {
           this.products = data;
         })
       )
+  }
+
+  autoComplete() {
+    this.pesquisaName.valueChanges
+      .pipe(
+        map(value => value.trim()),
+        filter(value => value.length > 2),
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(value => {
+          this.productService.searchProduct("", value)
+            .subscribe(
+              (data => this.products = data)
+            )
+          console.log("requisição");
+        }),
+      ).subscribe();
+
+    this.pesquisaName.valueChanges
+      .pipe(
+        map(value => value.trim()),
+        filter(value => value.length < 3),
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(value => {
+          this.productService.searchProduct("", "")
+            .subscribe(
+              (data => this.products = data)
+            )
+        }),
+      ).subscribe();
   }
 
 }

@@ -1,0 +1,111 @@
+body{
+    width: 800px;
+    /* min-height: 60vh; */
+    max-height: 65vh;
+}
+
+
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+}
+
+.confirmacao{
+    font-size: 1.5em ;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-left: 0;
+    
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titulo h2{
+    font-size: 1em;
+}
+
+.botao{
+    display: flex;
+    justify-content: end;
+}
+
+.valores{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-bottom: 0;
+    
+}
+
+.resumoPedido{
+    margin-bottom: 5px;
+
+}
+.valoress{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.valoress span{
+    margin-left: 5px;
+}
+
+h6{
+    margin: 0;
+}
+
+h3{
+    font-size: 1.4em;
+}
+
+h4{
+    font-size: 1em;
+    margin: 0;
+}
+
+.produto-quantidade{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.produto-quantidade h3{
+    margin: 0;
+    padding: 0;
+}
+
+.quantidade{
+    margin: 0px 5px;
+    padding: 0;
+}
+
+.descricao-item p{
+    font-size: 0.8em;
+}
+
+.info-pedido{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.valor{
+    margin: 0px 0px 0px 5px;
+    padding: 0;
+    font-weight: normal;
+}
+
+
+
+
+.finalizar-pedido{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -23,6 +23,12 @@ import { UserService } from '../user/user.service';
 import { DialogCarrinhoMobileComponent } from './dialog-carrinho-mobile/dialog-carrinho-mobile.component';
 import { carrinhoService } from './carrinho.service';
 import { DialogAdicionarProdutoComponent } from './dialog-adicionar-produto/dialog-adicionar-produto.component';
+import { DialogFinalizarPedidoComponent } from './dialog-finalizar-pedido/dialog-finalizar-pedido.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CarrinhoVazioComponent } from '../snack-bars/carrinho-vazio/carrinho-vazio.component';
+import { MetodoPagamentoNullComponent } from '../snack-bars/metodo-pagamento-null/metodo-pagamento-null.component';
+import { AddressNullComponent } from '../snack-bars/address-null/address-null.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -65,7 +71,7 @@ export class HomeComponent implements OnInit {
 
   cupom: Cupom = new Cupom(1, "Frete off", 15);
 
-  bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min",true);
+  bairro: Bairro = new Bairro("Lourival Peixoto", 3, 1, "30 Min", true);
 
   status: Status = new Status(1, "Faça o seu Pedido");
 
@@ -73,11 +79,13 @@ export class HomeComponent implements OnInit {
 
   carrinhoMobileOpen: boolean = false;
 
-  ultimoPedido: Order = new Order(0, this.user, "","", this.status,0, this.cupom,this.items);
+  ultimoPedido: Order = new Order(0, this.user, "", "", this.status, 0, this.cupom, this.items, "");
+
+  pagamentoPorDinheiro: boolean = false;
 
 
 
-  order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items);
+  order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items, "");
 
 
   constructor(private productService: ProductService,
@@ -88,12 +96,14 @@ export class HomeComponent implements OnInit {
     private categoriaService: categoriaService,
     private authService: authService,
     private userService: UserService,
-    private carrinhoService: carrinhoService) {
+    private carrinhoService: carrinhoService,
+    private _snackBar: MatSnackBar,
+    private router: Router) {
 
   }
 
   ngOnInit(): void {
-    
+
     if (this.authService.isAuthenticated()) {
       let username: string = this.authService.getUsername();
       this.userService.findByUsername(username)
@@ -108,7 +118,7 @@ export class HomeComponent implements OnInit {
         )
 
     }
-    
+
     this.getProducts();
     this.filtroEnderecos(this.user);
     this.getPagamentos();
@@ -128,16 +138,17 @@ export class HomeComponent implements OnInit {
       );
   }
 
-  alterarEndereco(endereco: Address){
+  alterarEndereco(endereco: Address) {
     this.carrinhoService.onClickEnderecoItem(endereco);
-    this.totalPedido=this.carrinhoService.getTotalPedido();
-    this.enderecoSelecionado=this.carrinhoService.getEnderecoSelecionado();
-    this.frete=endereco.neighborhood.value;
+    this.totalPedido = this.carrinhoService.getTotalPedido();
+    this.enderecoSelecionado = this.carrinhoService.getEnderecoSelecionado();
+    this.frete = endereco.neighborhood.value;
   }
 
-  alterarMetodoPagamento(metodo: MetodoPagamento){
+  alterarMetodoPagamento(metodo: MetodoPagamento) {
     this.carrinhoService.selecionarMetodoPagamento(metodo);
     this.pagamentoSelecionado = metodo;
+    this.pagamentoPorDinheiro = false;
   }
 
   addItem(produto: Product): void {
@@ -148,8 +159,14 @@ export class HomeComponent implements OnInit {
 
   }
 
+  aumentarQuantidade(produto: Product) {
+    this.carrinhoService.aumentarItem(produto);
+    this.itensCarrinho = this.carrinhoService.getItensCarrinho();
+    this.totalPedido = this.carrinhoService.getTotalPedido();
+  }
+
   removeItem(produto: Product): void {
-    this.carrinhoService.removeItem(produto);
+    this.carrinhoService.diminuirItem(produto);
     this.itensCarrinho = this.carrinhoService.getItensCarrinho();
     this.totalPedido = this.carrinhoService.getTotalPedido();
 
@@ -163,13 +180,19 @@ export class HomeComponent implements OnInit {
 
   openDialogAddProduto(produto: Product) {
     const dialogRef = this.dialog.open(DialogAdicionarProdutoComponent, {
-      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price }
+      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price, additional: produto.additional }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.totalPedido = this.carrinhoService.getTotalPedido();
+      this.itensCarrinho = this.carrinhoService.getItensCarrinho();
+    });
+    console.log(produto);
   }
 
   openDialogCarMobile() {
     const dialogRef = this.dialog.open(DialogCarrinhoMobileComponent, {
-      data: {user: this.user} 
+      data: { user: this.user }
     });
 
     this.carrinhoMobileOpen = true;
@@ -178,6 +201,12 @@ export class HomeComponent implements OnInit {
       this.carrinhoMobileOpen = false;
       this.totalPedido = this.carrinhoService.getTotalPedido();
       this.itensCarrinho = this.carrinhoService.getItensCarrinho();
+    });
+  }
+
+  openDialogFinalPedido() {
+    const dialogRef = this.dialog.open(DialogFinalizarPedidoComponent, {
+      data: {}
     });
   }
 
@@ -190,10 +219,42 @@ export class HomeComponent implements OnInit {
       )
   }
 
-  exportarPedido(){
-    this.carrinhoService.exportarPedido();
+  exportarPedido() {
+    if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoSelecionado != null && this.enderecoSelecionado != null) {
+      this.openDialogFinalPedido();
     }
-  
+    else if (this.authService.isAuthenticated() != true) {
+      this.router.navigate(['login']);
+    } else if (this.itensCarrinho.length == 0) {
+      this.openSnackBarCarrinhoVazio();
+    } else if (this.enderecoSelecionado == null) {
+      this.openSnackBarEnderecoVazio();
+    } else if (this.pagamentoSelecionado == null) {
+      this.openSnackBarPagamentoVazio();
+    }
+    // this.carrinhoService.exportarPedido();
+  }
+
+  openSnackBarCarrinhoVazio() {
+    this._snackBar.openFromComponent(CarrinhoVazioComponent, {
+      duration: 5 * 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  openSnackBarPagamentoVazio() {
+    this._snackBar.openFromComponent(MetodoPagamentoNullComponent, {
+      duration: 5 * 1000,
+    });
+  }
+
+  openSnackBarEnderecoVazio() {
+    this._snackBar.openFromComponent(AddressNullComponent, {
+      duration: 5 * 1000,
+    });
+  }
+
 
   getPagamentos() {
     this.metodoPagamentoService.getMetodosPagamentos()
@@ -273,15 +334,20 @@ export class HomeComponent implements OnInit {
       ).subscribe();
   }
 
-  ultimoPedidoByCliente(id: number){
+  ultimoPedidoByCliente(id: number) {
     this.orderService.getOrdersByUserInDate(id)
       .subscribe(
         (res => {
-          if(res.length>0){
-          this.ultimoPedido = res[res.length-1]}
+          if (res.length > 0) {
+            this.ultimoPedido = res[res.length - 1]
+          }
         }),
         (err => console.log(err))
       )
+  }
+
+  pagamentoDinheiro(isDinheiro: boolean) {
+    this.pagamentoPorDinheiro = isDinheiro;
   }
 
 

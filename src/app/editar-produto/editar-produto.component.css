@@ -84,3 +84,8 @@ mat-form-field{
     justify-content: end;
 }
 
+.select-lista-pedidos{
+    display: flex;
+    flex-direction: row;
+}
+

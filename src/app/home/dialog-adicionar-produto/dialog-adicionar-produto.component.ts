@@ -11,45 +11,65 @@ import { carrinhoService } from '../carrinho.service';
 })
 export class DialogAdicionarProdutoComponent implements OnInit {
 
-  adicionais: Adicional[] = [
-    {name: "Bacon", price: 2.00, description: "250g de Bacon", quantity: 0, total: 0},
-    {name: "Batata Frita", price: 5.00, description: "1 cone de batata frita", quantity: 0, total: 0},
-    {name: "Cheddar", price: 3.00, description: "250g de Cheddar", quantity: 0, total: 0}
-  ];
+  adicionais: Adicional[] = [];
 
   constructor(public dialogRef: MatDialogRef<DialogAdicionarProdutoComponent>,
     @Inject(MAT_DIALOG_DATA) public produto: Product, private carrinhoService: carrinhoService) { }
 
   ngOnInit(): void {
-    
+    this.produto.additional?.forEach(item => {
+      item.quantityCar = 0;
+      item.total = 0;
+    })
+
   }
 
-  addQuantityCar(){
+  addQuantityCar() {
     this.produto.quantityCar++;
     this.produto.total = this.produto.price * this.produto.quantityCar;
   }
 
-  removeQuantityCar(){
-    if(this.produto.quantityCar > 0){
+  removeQuantityCar() {
+    if (this.produto.quantityCar > 0) {
       this.produto.quantityCar--;
     }
     this.produto.total = this.produto.price * this.produto.quantityCar;
   }
 
-  addQuantityAdicional(adicional: Adicional){
-    adicional.quantity++;
-    adicional.total = adicional.price * adicional.quantity;
+  addQuantityAdicional(adicional: Adicional) {
+    adicional.quantityCar++;
+    adicional.total = adicional.price * adicional.quantityCar;
     this.produto.price += adicional.price;
     this.produto.total = this.produto.price * this.produto.quantityCar;
   }
 
-  removeQuantityAdicional(adicional: Adicional){
-    if(adicional.quantity>0){
-      adicional.quantity--;
+  removeQuantityAdicional(adicional: Adicional) {
+    if (adicional.quantityCar > 0) {
+      adicional.quantityCar--;
       this.produto.price -= adicional.price;
       this.produto.total = this.produto.price * this.produto.quantityCar;
+      adicional.total = adicional.price * adicional.quantityCar;
     }
-    adicional.total = adicional.price * adicional.quantity;
+  }
+
+  addCarrinho() {
+    this.produto.additionalsString = this.lerAdicionais();
+    this.carrinhoService.addItem(this.produto);
+
+  }
+
+  lerAdicionais(): string {
+    let adicionais: string = "";
+    this.produto.additional?.forEach(item => {
+      if (item.quantityCar > 0) {
+        if (adicionais === "") {
+          adicionais = `${item.name} (${item.quantityCar})`;
+        } else {
+          adicionais = `${adicionais}, ${item.name} (${item.quantityCar})`;
+        }
+      }
+    })
+    return adicionais;
   }
 
 }

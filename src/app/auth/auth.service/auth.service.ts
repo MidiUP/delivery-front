@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 @Injectable()
 export class authService {
 
-    baseUrl = "https://teste-api-delivery.herokuapp.com"
+    baseUrl = "http://localhost:8080"
 
     private user: User = new User("", "", "", "", "", "", "", 0);
     private username: string;

@@ -19,7 +19,8 @@
             </mat-expansion-panel-header>
             <a (click)="contentNovoProduto()">Novo Produto</a><br><br>
             <a (click)="contentEditarProduto()">Editar Produto</a><br><br>
-            <a (click)="contentCategorias()">Categorias</a>
+            <a (click)="contentCategorias()">Categorias</a><br><br>
+            <a (click)="contentAdicionais()">Adicionais</a>
 
           </mat-expansion-panel>
           <mat-expansion-panel class="item-menu" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -90,6 +91,7 @@
           <h1 *ngIf="content=='metodos-pagamentos'">Formas de Pagamento</h1>
           <h1 *ngIf="content=='novos-metodos-pagamentos'">Novo Método de Pagamento</h1>
           <h1 *ngIf="content=='editar-metodos-pagamentos'">Editar Método de Pagamento</h1>
+          <h1 *ngIf="content=='adicionais'">Adicionais</h1>
 
           <ul class="d-flex">
             <li>
@@ -143,6 +145,9 @@
         </div>
         <div *ngIf="content=='editar-metodos-pagamentos'">
           <app-editar-metodo-pagamento></app-editar-metodo-pagamento>
+        </div>
+        <div *ngIf="content=='adicionais'">
+          <app-adicionais></app-adicionais>
         </div>
       </section>
 

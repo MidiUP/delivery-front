@@ -3,46 +3,57 @@
         <div class="titulo">
             <h1>Editar Produto</h1>
         </div>
+        <form [formGroup]="novoProdutoForm">
         <div class="container">
             <div class="row d-flex">
                 <div class="col-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Ex. Pizza">
+                        <input matInput placeholder="Ex. Pizza" formControlName="name"
+                        [(ngModel)]="produto.name">
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Descrição</mat-label>
-                        <input matInput placeholder="Ex. 5.00">
+                        <input matInput placeholder="Ex. Calabreza, tomate, cebola, serve até 04 pessoas" formControlName="description"
+                        [(ngModel)]="produto.description">
                     </mat-form-field>
                 </div>
 
                 <div class="col-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Preço</mat-label>
-                        <input matInput placeholder="Ex. 10,00">
+                        <input matInput placeholder="Ex. 10,00" formControlName="price"
+                        [(ngModel)]="produto.price">
                     </mat-form-field>
                 </div>
 
                 <div class="col-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Quantidade</mat-label>
-                        <input matInput placeholder="Ex. 10,00">
-                    </mat-form-field>
+
                 </div>
 
 
                 <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
-                    <h2 style="margin-bottom: 5px;">Disponibilidade do produto</h2>
-                    <mat-radio-group>
-                        <mat-radio-button value="1" style="margin-right: 10px;">Disponível</mat-radio-button>
-                        <mat-radio-button value="2">Não Disponível</mat-radio-button>
+                    <h2 style="margin-bottom: 25px;">Disponibilidade do produto</h2>
+                    <mat-radio-group formControlName="availability"
+                    [(ngModel)]="produto.availability">
+                        <mat-radio-button [value]="true" style="margin-right: 10px;">Disponível</mat-radio-button>
+                        <mat-radio-button [value]="false" selected>Não Disponível</mat-radio-button>
                     </mat-radio-group>
                 </div>
 
                 <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
-                    
+                    <h2 style="margin-bottom: 5px;">Categoria do produto</h2>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{produto.category.description}}</mat-label>
+                        <mat-select formControlName="category"
+                        [(ngModel)]="produto.category">
+                          <mat-option *ngFor="let categoria of categorias" [value]="{id: categoria.id}">
+                            {{categoria.description}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                 </div>
 
             </div>
@@ -55,36 +66,37 @@
                     <button mat-icon-button color="primary" (click)="addAdicional()">
                         <mat-icon>add</mat-icon>
                       </button>
-                      <button mat-icon-button color="warn" (click)="removeAdicional()">
-                        <mat-icon>remove</mat-icon>
-                      </button>
                 </div>
             </div>
 
             <div class="row" >
-                <div class="col-12 adicional" *ngFor="let adicional of adicionais">
+                <div class="col-12 adicional" *ngFor="let adicional of produto.additional">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-8">
                             <mat-form-field appearance="outline">
-                                <mat-label>Adicional</mat-label>
-                                <input matInput placeholder="Ex. Bacon">
-                            </mat-form-field>
+                                <mat-label>{{adicional.name}}</mat-label>
+                                <mat-select >
+                                  <mat-option *ngFor="let adicional of todosAdicionais" [value]="adicional" (click)="cadastrarAdicional(adicional)">
+                                    {{adicional.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
                         </div>
-                        <div class="col-6">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Valor</mat-label>
-                                <input matInput placeholder="Ex. 5.00">
-                            </mat-form-field>
+                        <div class="col-4">
+                            <button mat-mini-fab color="warn" style="margin-top: 10px;" (click) ="removeAdicional(adicional)">
+                                <mat-icon>delete</mat-icon>
+                              </button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="botoes">
-                <button mat-flat-button color="primary" style="margin-right: 10px;">Salvar</button>
+                <button mat-flat-button color="primary" style="margin-right: 10px;" (click) ="editProduct()">Salvar</button>
                 <button mat-flat-button color="warn">Cancelar</button>
             </div>
         </div>
+    </form>
     </section>
 
 </body>

@@ -34,9 +34,6 @@ export class HeaderComponent implements OnInit {
       this.authenticated = false;
     }
 
-  }
-
-  ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
       let username: string = this.authService.getUsername();
       this.userService.findByUsername(username)
@@ -47,6 +44,11 @@ export class HeaderComponent implements OnInit {
         )
 
     }
+
+  }
+
+  ngOnInit(): void {
+    
   }
 
   logout() {

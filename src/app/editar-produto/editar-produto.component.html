@@ -2,11 +2,17 @@
 
     <section class="menu">
         <div class="select-lista-pedidos">
+            <mat-form-field  appearance="outline" style="margin-right: 10px;">
+                <mat-label>Pesquise por um produto</mat-label>
+                <input matInput placeholder="Ex. Hambúrguer" [formControl]="pesquisaName">
+            </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Filtro</mat-label>
                 <mat-select>
                     <mat-option value="0" (click)="getProducts()">Todos os Produtos</mat-option>
-                    <mat-option value="0" *ngFor="let categoria of categorias" (click)="filtroProdutos(categoria.description)">{{categoria.description}}</mat-option>
+                    <mat-option value="0" *ngFor="let categoria of categorias"
+                        (click)="filtroProdutos(categoria.description)">{{categoria.description}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -16,11 +22,16 @@
         <mat-card class="produto" *ngFor="let produto of products">
             <div class="row">
                 <div class="col-md-4 flex">
-                    <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" (click)="openDialogInfo(produto)" style="cursor: pointer;">
+                    <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png"
+                        (click)="openDialogInfo(produto)" style="cursor: pointer;">
                 </div>
                 <div class="col-md-8">
-                    <h2 (click)="openDialogInfo(produto)" style="cursor: pointer;">{{produto.name.substring(0,14)}}<span style="color: black; margin-left: 0; padding-left: 0;" *ngIf="produto.description.length > 20">...</span></h2>
-                    <p>{{produto.description.substring(0,35)}}<span style="color: black; margin-left: 0; padding-left: 0;" *ngIf="produto.description.length > 35">...</span>
+                    <h2 (click)="openDialogInfo(produto)" style="cursor: pointer;">{{produto.name.substring(0,14)}}<span
+                            style="color: black; margin-left: 0; padding-left: 0;"
+                            *ngIf="produto.description.length > 20">...</span></h2>
+                    <p>{{produto.description.substring(0,35)}}<span
+                            style="color: black; margin-left: 0; padding-left: 0;"
+                            *ngIf="produto.description.length > 35">...</span>
                     </p>
                     <div class="d-flex">
                         <p class="preco">

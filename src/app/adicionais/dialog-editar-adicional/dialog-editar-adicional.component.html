@@ -1,0 +1,91 @@
+<body>
+    <section>
+        <div class="titulo">
+            <h1>Cadastrar Adicional</h1>
+        </div>
+        <div class="container">
+            <form [formGroup]="novoAdicionalForm">
+                <div class="row d-flex">
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput placeholder="Ex. Bacon" formControlName="name"
+                            [(ngModel)]="newAdicional.name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Descrição</mat-label>
+                            <input matInput placeholder="Ex. 250g de Bacon" formControlName="description"
+                            [(ngModel)]="newAdicional.description">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Preço</mat-label>
+                            <input matInput placeholder="Ex. 2,00" formControlName="price"
+                            [(ngModel)]="newAdicional.price">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6">
+                       
+                    </div>
+
+
+                    <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
+                        <!-- <h2 style="margin-bottom: 5px;">Disponibilidade do adicional</h2>
+                        <mat-radio-group formControlName="name"
+                        [(ngModel)]="newAdicional.name">
+                            <mat-radio-button value="true" style="margin-right: 10px;">Disponível</mat-radio-button>
+                            <mat-radio-button value="false">Não Disponível</mat-radio-button>
+                        </mat-radio-group> -->
+                    </div>
+
+                    <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
+
+                    </div>
+
+                </div>
+            </form>
+
+            <!-- <div class="row">
+                <div class="col-6 adicionais">
+                    <h2>Cadastrar Adicionais</h2>
+                    <button mat-icon-button color="primary" (click)="addAdicional()">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" (click)="removeAdicional()">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="col-12 adicional" *ngFor="let adicional of adicionais">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Adicional</mat-label>
+                                <input matInput placeholder="Ex. Bacon">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Valor</mat-label>
+                                <input matInput placeholder="Ex. 5.00">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="botoes">
+                <button mat-flat-button color="primary" style="margin-right: 10px;" [disabled]="!novoAdicionalForm.valid" (click)="salvarAdicional()" mat-dialog-close>Salvar</button>
+                <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+            </div>
+        </div>
+    </section>
+
+</body>

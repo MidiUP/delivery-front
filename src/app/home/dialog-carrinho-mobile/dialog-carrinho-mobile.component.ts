@@ -79,7 +79,7 @@ export class DialogCarrinhoMobileComponent implements OnInit {
   }
 
   exportarPedido(){
-    if(this.carrinhoService.exportarPedido()==true){
+    if(this.carrinhoService.exportarPedido("")==true){
       this.dialogRef.close();
     }
   }
