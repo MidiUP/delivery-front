@@ -98,9 +98,7 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private carrinhoService: carrinhoService,
     private _snackBar: MatSnackBar,
-    private router: Router) {
-
-  }
+    private router: Router) {  }
 
   ngOnInit(): void {
 
@@ -119,11 +117,11 @@ export class HomeComponent implements OnInit {
 
     }
 
+    this.autoComplete();
     this.getProducts();
     this.filtroEnderecos(this.user);
     this.getPagamentos();
     this.getCategorias();
-    this.autoComplete();
 
     // setInterval(() => console.log(this.itensCarrinho), 10000)
 

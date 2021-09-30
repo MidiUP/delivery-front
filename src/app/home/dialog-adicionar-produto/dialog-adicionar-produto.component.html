@@ -1,78 +1,167 @@
 <body>
-    <div class="container cabecalho">
-        <div class="titulo">
-            <h1 class="confirmacao">Confirmação</h1>
-            <h2> | {{produto.name}}</h2>
-        </div>
-        <div class="fechar" style="margin-left: auto;">
-            <button mat-icon-button color="warn" mat-dialog-close>
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
-            <div class="col-md-2 adicionais" style="padding: 0;">
-                <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
-                    <mat-icon>add</mat-icon>
-                </button>
-
-                <span>{{adicional.quantityCar}}</span>
-
-                <button mat-icon-button color="warn" (click)="removeQuantityAdicional(adicional)">
-                    <mat-icon>remove</mat-icon>
+    <div class="desktop">
+        <div class="container cabecalho">
+            <div class="titulo">
+                <h1 class="confirmacao">Confirmação</h1>
+                <h2> | {{produto.name}}</h2>
+            </div>
+            <div class="fechar" style="margin-left: auto;">
+                <button mat-icon-button color="warn" mat-dialog-close>
+                    <mat-icon>close</mat-icon>
                 </button>
             </div>
-
-            <div class="col-md-5 adicional">
-                <h3>{{adicional.name}}</h3>
-                <p>{{adicional.description}}</p>
-            </div>
-
-            <div class="col-md-4 ">
-                <div class="valorAdicional">
-                    <h4>Valor: </h4><span>R${{adicional.price.toFixed(2).replace('.',',')}}</span>
+        </div>
+    
+        <div class="container">
+            <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
+                <div class="col-2 adicionais" style="padding: 0;">
+                    <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+    
+                    <span>{{adicional.quantityCar}}</span>
+    
+                    <button mat-icon-button color="warn" (click)="removeQuantityAdicional(adicional)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
                 </div>
-                <div class="valorAdicional">
-                    <h4>Valor Total: </h4><span>R${{adicional.total.toFixed(2).replace('.',',')}}</span>
+    
+                <div class="col-5 adicional">
+                    <h3>{{adicional.name}}</h3>
+                    <p>{{adicional.description}}</p>
+                </div>
+    
+                <div class="col-4 ">
+                    <div class="valorAdicional">
+                        <h4>Valor: </h4><span>R${{adicional.price.toFixed(2).replace('.',',')}}</span>
+                    </div>
+                    <div class="valorAdicional">
+                        <h4>Valor Total: </h4><span>R${{adicional.total.toFixed(2).replace('.',',')}}</span>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    
+        <div class="container">
+    
+        </div>
+    
+        <div class="row resumoPedido">
+            <div class="col-8">
+                <h5>Quantidade</h5>
+                <div class="quantidade">
+                    <button mat-icon-button color="primary" (click)="addQuantityCar()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+    
+                    <span>{{produto.quantityCar}}</span>
+    
+                    <button mat-icon-button color="warn" (click)="removeQuantityCar()">
+                        <mat-icon>remove</mat-icon>
+                    </button>
                 </div>
             </div>
-            <hr>
+            <div class="col-4 valores">
+                <div class="valoress">
+                    <h6 style="font-size: 0.7em;">Valor Unitário:</h6><span
+                        style="font-size: 0.8em;">R${{produto.price.toFixed(2).replace('.',',')}}</span>
+                </div>
+                <div class="valoress">
+                    <h6>Valor Total:</h6><span>R${{produto.total.toFixed(2).replace('.',',')}}</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container botao">
+            <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close>Adicionar</button>
         </div>
     </div>
 
-    <div class="container">
 
-    </div>
 
-    <div class="row resumoPedido">
-        <div class="col-md-8">
-            <h5>Quantidade</h5>
-            <div class="quantidade">
-                <button mat-icon-button color="primary" (click)="addQuantityCar()">
-                    <mat-icon>add</mat-icon>
+
+
+
+
+    <div class="mobile">
+        <div class="cabecalho">
+            <div class="titulo">
+                <h1 class="confirmacao">Confirmação</h1>
+                <h2> | {{produto.name}}</h2>
+            </div>
+            <div class="fechar" style="margin-left: auto;">
+                <button mat-icon-button color="warn" mat-dialog-close>
+                    <mat-icon>close</mat-icon>
                 </button>
-
-                <span>{{produto.quantityCar}}</span>
-
-                <button mat-icon-button color="warn" (click)="removeQuantityCar()">
-                    <mat-icon>remove</mat-icon>
-                </button>
             </div>
         </div>
-        <div class="col-md-4 valores">
-            <div class="valoress">
-                <h6 style="font-size: 0.7em;">Valor Unitário:</h6><span
-                    style="font-size: 0.8em;">R${{produto.price.toFixed(2).replace('.',',')}}</span>
-            </div>
-            <div class="valoress">
-                <h6>Valor Total:</h6><span>R${{produto.total.toFixed(2).replace('.',',')}}</span>
+    
+        <div class="">
+            <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
+                <div class="col-5 adicionais" style="padding: 0;">
+                    <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+    
+                    <span>{{adicional.quantityCar}}</span>
+    
+                    <button mat-icon-button color="warn" (click)="removeQuantityAdicional(adicional)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+    
+                <div class="col-7 adicional">
+                    <h3>{{adicional.name}}</h3>
+                    <p>{{adicional.description}}</p>
+                </div>
+    
+                <div class="col-12 valores-mobile">
+                    <div class="valorAdicional">
+                        <h4>Valor: </h4><span> R${{adicional.price.toFixed(2).replace('.',',')}}</span>
+                        
+                    </div>
+                    <div class="valorAdicional">
+                        <h4 class="valor-total-mobile">Valor Total: </h4><span> R${{adicional.total.toFixed(2).replace('.',',')}}</span>
+                        
+                    </div>
+                </div>
+                <hr style="margin-top: 5px;">
             </div>
         </div>
-    </div>
-
-    <div class="container botao">
-        <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close>Adicionar</button>
+    
+        <div class="">
+    
+        </div>
+    
+        <div class="row resumoPedido">
+            <div class="col-5" style="padding: 0;">
+                <h5>Quantidade</h5>
+                <div class="quantidade">
+                    <button mat-icon-button color="primary" (click)="addQuantityCar()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+    
+                    <span>{{produto.quantityCar}}</span>
+    
+                    <button mat-icon-button color="warn" (click)="removeQuantityCar()">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="col-7 valores" style="padding: 0;">
+                <div class="valoress">
+                    <h6 style="font-size: 0.8em;">Valor Unitário:</h6><span
+                        style="font-size: 0.9em;">R${{produto.price.toFixed(2).replace('.',',')}}</span>
+                </div>
+                <div class="valoress">
+                    <h6>Valor Total:</h6><span>R${{produto.total.toFixed(2).replace('.',',')}}</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="botao">
+            <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close>Adicionar</button>
+        </div>
     </div>
 </body>

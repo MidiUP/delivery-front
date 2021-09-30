@@ -1,5 +1,5 @@
 <div class="container">
-    
+
     <div class="d-flex justify-content-center">
         <mat-card class="produto">
             <div class="row">
@@ -12,29 +12,30 @@
                     <div class="d-flex">
                         <p class="preco">
                             Preço: <span>R${{product.price.toFixed(2)}}</span>
-    
+
                         </p>
-                        
+
                     </div>
                 </div>
             </div>
-    
+
         </mat-card>
     </div>
-    
-    
-    <form [formGroup]="newProductForm" (ngSubmit)="createProduct()">
+
+
+    <form [formGroup]="newProductForm">
         <div class="row">
             <div class="col-md-6">
                 <mat-form-field appearance="outline">
-                    <mat-label for="nome-produto" >Nome do Produto</mat-label>
-                <input matInput  [(ngModel)]="product.name" formControlName="name" type="text" placeholder="Ex: Hambúrguer" >
-                <mat-error *ngIf="newProductForm.controls.name.hasError('required')">
-                    Por favor insira um nome.
-                </mat-error>
-                <mat-error *ngIf="newProductForm.controls.name.hasError('minlength')">
-                    Por favor insira um nome com dois ou mais caracteres.
-                </mat-error>
+                    <mat-label for="nome-produto">Nome do Produto</mat-label>
+                    <input matInput [(ngModel)]="product.name" formControlName="name" type="text"
+                        placeholder="Ex: Hambúrguer">
+                    <mat-error *ngIf="newProductForm.controls.name.hasError('required')">
+                        Por favor insira um nome.
+                    </mat-error>
+                    <mat-error *ngIf="newProductForm.controls.name.hasError('minlength')">
+                        Por favor insira um nome com dois ou mais caracteres.
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-6">
@@ -42,37 +43,12 @@
                     <mat-label for="descricao">Descrição do produto</mat-label>
                     <input matInput [(ngModel)]="product.description" formControlName="description" type="text"
                         placeholder="Ex: Carne, queijo, ovo, alface e tomate">
-                        <mat-error *ngIf="newProductForm.controls.description.hasError('required')">
-                            Por favor insira uma descrição.
-                        </mat-error>
-                        <mat-error *ngIf="newProductForm.controls.description.hasError('minlength')">
-                            Sua descrição deve conter pelo menos 04 caracteres.
-                        </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>Escolha uma Categoria</mat-label>
-                    <mat-select [(ngModel)]="product.category" formControlName="category">
-                      <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria.description}}</mat-option>
-                    </mat-select>
-                  </mat-form-field> 
-            </div>
-            <div class="col-md-6">
-                <mat-form-field appearance="outline">
-                    <mat-label for="quantidade" >Quantidade no estoque</mat-label>
-                    <input matInput [(ngModel)]="product.quantity" formControlName="quantity" type="number" id="quantidadeProduto" 
-                        placeholder="Ex: 25">
-                        <mat-error *ngIf="newProductForm.controls.quantity.hasError('required')">
-                            Deve haver pelo menos 01 item no estoque.
-                        </mat-error>
-                        <mat-error *ngIf="newProductForm.controls.quantity.hasError('min')">
-                            Deve haver pelo menos 01 item no estoque.
-                        </mat-error>
+                    <mat-error *ngIf="newProductForm.controls.description.hasError('required')">
+                        Por favor insira uma descrição.
+                    </mat-error>
+                    <mat-error *ngIf="newProductForm.controls.description.hasError('minlength')">
+                        Sua descrição deve conter pelo menos 04 caracteres.
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -84,34 +60,78 @@
                     <mat-label for="preco-produto" class="form-label">Preço</mat-label>
                     <input matInput [(ngModel)]="product.price" formControlName="price" type="number" placeholder="0,00"
                         aria-describedby="basic-addon1">
-                        <mat-error *ngIf="newProductForm.controls.price.hasError('required')">
-                            Seu produto deve ter o valor minímo de R$1,00.
-                        </mat-error>
-                        <mat-error *ngIf="newProductForm.controls.price.hasError('min')">
-                            Seu produto deve ter o valor minímo de R$1,00.
-                        </mat-error>
+                    <mat-error *ngIf="newProductForm.controls.price.hasError('required')">
+                        Seu produto deve ter o valor minímo de R$1,00.
+                    </mat-error>
+                    <mat-error *ngIf="newProductForm.controls.price.hasError('min')">
+                        Seu produto deve ter o valor minímo de R$1,00.
+                    </mat-error>
                 </mat-form-field>
-                
-                    
-                
             </div>
             <div class="col-md-6">
-                    <label for="nome-produto" style="margin-top: 25px;" class="form-label">Disponibilidade</label>
-                    <div class="form-check">
-                        <input [(ngModel)]="product.availability" formControlName="availability" class="form-check-input" type="checkbox" value="true"
-                            id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Disponível no estoque
-                        </label>
+                <mat-form-field appearance="outline">
+                    <mat-label>Escolha uma Categoria</mat-label>
+                    <mat-select [(ngModel)]="product.category" formControlName="category">
+                        <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <h2 style="margin-bottom: 25px;">Disponibilidade do produto</h2>
+                <mat-radio-group formControlName="availability" [(ngModel)]="product.availability">
+                    <mat-radio-button [value]="true" style="margin-right: 10px;">Disponível</mat-radio-button>
+                    <mat-radio-button [value]="false" selected>Não Disponível</mat-radio-button>
+                </mat-radio-group>
+
+
+            </div>
+            <div class="col-md-6">
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 adicionais" style="margin-top: 20px;">
+                <h2>Cadastrar Adicionais</h2>
+                <button mat-icon-button color="primary" (click)="addAdicional()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+            </div>
+        </div>
+
+        <div class="row" >
+            <div class="col-12 adicional" *ngFor="let adicional of product.additional">
+                <div class="row">
+                    <div class="col-8">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{adicional.name}}</mat-label>
+                            <mat-select >
+                              <mat-option *ngFor="let adicional of todosAdicionais" [value]="adicional" (click)="cadastrarAdicional(adicional)">
+                                {{adicional.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <button mat-mini-fab color="warn" style="margin-top: 20px;" (click) ="removeAdicional(adicional)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="d-flex justify-content-center mt-2">
-            <button class="btn btn-primary" type="submit" [disabled]="!newProductForm.valid">Salvar</button>
+            <button class="btn btn-primary" [disabled]="!newProductForm.valid" (click)="createProduct()">Salvar</button>
         </div>
 
-        
+
 
     </form>
 </div>

@@ -109,3 +109,118 @@ h4{
     flex-direction: row;
     align-items: center;
 }
+
+.itens-mobile{
+    margin-top: 10px;
+}
+.adicionais-mobile{
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+}
+
+
+
+
+
+
+/* Extra small devices (portrait phones, less than 400px) */
+@media (max-width: 400px) {
+    
+    body{
+        width: 250px;
+        /* min-height: 60vh; */
+        max-height: 60vh;
+    }
+
+    .desktop{
+        display: none;
+    }
+
+    .titulo{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .confirmacao{
+        margin-bottom: 0;
+    }
+
+    .descricao-item{
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    h3{
+        font-size: 1em;
+    }
+
+    .botao-mobile{
+        margin-top: 10px;
+    }
+
+    .info-pedido{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    
+    }
+
+    .valor{
+        margin: 0;
+        margin-left: 3px;
+        padding: 0;
+        font-weight: normal;
+    }
+
+    .valores{
+        align-items: flex-start;
+    }
+    
+
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+    @media (min-width: 401px) and (max-width: 575px) {
+        .desktop{
+            display: none;
+        }
+    
+    }
+    
+    
+    /* Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) and (max-width: 767.98px) {
+        .desktop{
+            display: none;
+        }
+       
+    }
+    
+    
+    
+    /* Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) and (max-width: 991.98px) {
+       .mobile{
+           display: none;
+       }
+    }
+    
+    
+    
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+        .mobile{
+            display: none;
+        }
+    
+    }
+    
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        .mobile{
+            display: none;
+        }
+    }

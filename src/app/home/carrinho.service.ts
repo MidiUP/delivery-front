@@ -91,10 +91,11 @@ export class carrinhoService {
 
   diminuirItem(produto: Product): void {
     if (produto.quantityCar === 1){
+      produto.quantityCar = 0;
       this.itensCarrinho.splice(this.itensCarrinho.indexOf(produto), 1);
       this.totalPedido -= produto.price;
       produto.total = produto.price * produto.quantityCar
-    } else {
+    } else if (produto.quantityCar > 0) {
       produto.quantityCar --;
       this.totalPedido -= produto.price;
       produto.total = produto.price * produto.quantityCar

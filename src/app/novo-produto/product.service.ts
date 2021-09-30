@@ -34,5 +34,9 @@ export class ProductService{
         return this.http.get<Product[]>(`${this.baseUrl}/filter?category=${category}&productName=${productName}`);
     }
 
+    postImage(file: File){
+        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload`, file);
+    }
+
 
 }

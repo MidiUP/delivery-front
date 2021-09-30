@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { authService } from 'src/app/auth/auth.service/auth.service';
 import { Address } from 'src/app/enderecos/address.model';
 import { addressService } from 'src/app/enderecos/address.service';
 import { MetodoPagamento } from 'src/app/metodo-pagamento/metodoPagamento.model';
@@ -7,6 +8,8 @@ import { metodoPagamentoService } from 'src/app/metodo-pagamento/metodoPagamento
 import { Product } from 'src/app/novo-produto/product.model';
 import { User } from 'src/app/user/user.model';
 import { carrinhoService } from '../carrinho.service';
+import { DialogFinalizarPedidoComponent } from '../dialog-finalizar-pedido/dialog-finalizar-pedido.component';
+import { Items } from '../items.model';
 
 export interface Carrinho {
   user: User,
@@ -33,7 +36,7 @@ export class DialogCarrinhoMobileComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogCarrinhoMobileComponent>,
     @Inject(MAT_DIALOG_DATA) public carrinho: Carrinho, private addressService: addressService,
-                            private metodoPagamentoService: metodoPagamentoService, private carrinhoService: carrinhoService) { }
+                            private metodoPagamentoService: metodoPagamentoService, private carrinhoService: carrinhoService, public dialog: MatDialog, private authService: authService) { }
 
   ngOnInit(): void {
     this.getEnderecos();
@@ -56,12 +59,14 @@ export class DialogCarrinhoMobileComponent implements OnInit {
   }
 
   addItem(produto: Product): void {
-    this.carrinhoService.addItem(produto);
+    this.carrinhoService.aumentarItem(produto);
+    this.itensCarrinho = this.carrinhoService.getItensCarrinho();
     this.totalPedido = this.carrinhoService.getTotalPedido();
   }
 
   removeItem(produto: Product): void {
-    this.carrinhoService.removeItem(produto);
+    this.carrinhoService.diminuirItem(produto);
+    this.itensCarrinho = this.carrinhoService.getItensCarrinho();
     this.totalPedido = this.carrinhoService.getTotalPedido();
 
   }
@@ -79,9 +84,19 @@ export class DialogCarrinhoMobileComponent implements OnInit {
   }
 
   exportarPedido(){
-    if(this.carrinhoService.exportarPedido("")==true){
-      this.dialogRef.close();
+    if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoEscolhido != null && this.enderecoEscolhido != null) {
+      this.openDialogFinalPedido();
     }
+
+    // if(this.carrinhoService.exportarPedido("")==true){
+    //   this.dialogRef.close();
+    // }
+  }
+
+  openDialogFinalPedido() {
+    const dialogRef = this.dialog.open(DialogFinalizarPedidoComponent, {
+      data: {}
+    });
   }
 
 

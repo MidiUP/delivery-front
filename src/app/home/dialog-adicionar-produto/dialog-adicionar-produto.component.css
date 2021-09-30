@@ -119,3 +119,169 @@ h4{
     margin: 0px 5px;
 }
 
+/* Extra small devices (portrait phones, less than 400px) */
+@media (max-width: 400px) {
+    .desktop{
+        display: none;
+    }
+    
+    body{
+        width: 250px;
+        /* min-height: 60vh; */
+        max-height: 60vh;
+    }
+
+    .confirmacao{
+        font-size: 1.2em ;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-right: 3px;
+        margin-left: 0;
+    }
+
+    .titulo{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .titulo h2{
+        font-size: 1em;
+    }
+
+    span{
+        margin: 0px 8px;
+    }
+
+    .valorAdicional{
+        display: flex;
+        flex-direction: row; 
+    }
+
+    .valorAdicional span{
+        font-size: 1em;
+        margin: 0px;
+    }
+
+    .valores-mobile{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .valor-total-mobile{
+        margin-left: 10px;
+    }
+
+    h3{
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    p{
+        font-size: 0.8em;
+    }
+
+    h4{
+        font-size: 0.9em;
+        margin: 0;
+    }
+
+    .valorAdicional span{
+        font-size: 0.9em;
+        margin: 0px 5px;
+    }
+
+    h6{
+        margin: 0;
+        font-size: 1em;
+    }
+
+    .resumoPedido{
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    
+    }
+    
+
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+    @media (min-width: 401px) and (max-width: 575px) {
+        .desktop{
+            display: none;
+        }
+        body{
+            width: 300px;
+            /* min-height: 60vh; */
+            max-height: 65vh;
+        }
+
+        .valorAdicional{
+            display: flex;
+            flex-direction: row;  
+        }
+
+        
+        .adicionais{
+            margin: 0px;
+        }
+    
+    }
+    
+    
+    /* Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) and (max-width: 767.98px) {
+
+        .desktop{
+            display: none;
+        }
+        body{
+            width: 500px;
+            /* min-height: 60vh; */
+            max-height: 57vh;
+        }
+
+        .valores-mobile{
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .adicionais{
+            margin: 0px;
+        }
+    
+    }
+    
+    
+    
+    /* Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        body{
+            width: 600px;
+            /* min-height: 60vh; */
+            max-height: 65vh;
+        }
+
+        .mobile{
+            display: none;
+        }
+    }
+    
+    
+    
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+    
+        .mobile{
+            display: none;
+        }
+    
+    }
+    
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        .mobile{
+            display: none;
+        }
+    }

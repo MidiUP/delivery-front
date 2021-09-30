@@ -61,6 +61,18 @@
             <hr>
 
             <div class="row">
+                <div class="col-12">
+                    <h2>Imagem do Produto</h2>
+                    <div class="dropzone-off" (dragover)="onDragOverEvent($event)" (dragleave)="onDragLeaveEvent($event)" [class.dropzone-on]="isDraggingOver" (drop)="onDropEvent($event)"> 
+                        <span *ngIf="!existeIMagem">Arraste sua imagem</span>
+                        <span *ngIf="existeIMagem">{{imagens[0].name}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
                 <div class="col-6 adicionais">
                     <h2>Cadastrar Adicionais</h2>
                     <button mat-icon-button color="primary" (click)="addAdicional()">

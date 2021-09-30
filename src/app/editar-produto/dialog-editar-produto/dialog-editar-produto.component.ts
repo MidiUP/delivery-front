@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter } from 'rxjs/operators';
 import { AdicionalService } from 'src/app/adicionais/adicional.service';
 import { AlertaErrorComponent } from 'src/app/alerta-error/alerta-error.component';
 import { AlertaSuccesComponent } from 'src/app/alerta-succes/alerta-succes.component';
@@ -20,8 +21,11 @@ export class DialogEditarProdutoComponent implements OnInit {
 
   adicionais: Adicional[] = [];
   categorias: Categoria[] = [];
-  todosAdicionais: Adicional[] = []
-  
+  todosAdicionais: Adicional[] = [];
+  isDraggingOver: boolean = false;
+  imagens: FileList;
+  existeIMagem: boolean = false;
+
 
   novoProdutoForm: FormGroup = this.formBuilder.group({
     'name': ['', [Validators.required, Validators.minLength(3)]],
@@ -43,31 +47,26 @@ export class DialogEditarProdutoComponent implements OnInit {
     this.adicionalService.getAdicionals()
       .subscribe(data => this.todosAdicionais = data);
 
-      console.log(this.produto);
-      
+    console.log(this.produto);
+
   }
 
   addAdicional() {
     let itemVazio: boolean = false;
     let adicional: Adicional = new Adicional("", 0, "", 0, 0, 0, 0);
     this.produto.additional?.forEach(item => {
-      if(item.name === ""){
+      if (item.name === "") {
         itemVazio = true;
       }
     });
-    if(!itemVazio){
+    if (!itemVazio) {
       this.produto.additional?.push(adicional);
     }
     console.log(itemVazio);
-    
-
-
-
-
   }
 
-  removeAdicional( adicional: Adicional) {
-    this.produto.additional?.splice(this.produto.additional?.indexOf(adicional),1);
+  removeAdicional(adicional: Adicional) {
+    this.produto.additional?.splice(this.produto.additional?.indexOf(adicional), 1);
   }
 
   editProduct() {
@@ -82,6 +81,19 @@ export class DialogEditarProdutoComponent implements OnInit {
 
         })
       )
+    if (this.imagens[0]) {
+      console.log("tentando enviar");
+
+      this.productService.postImage(this.imagens[0])
+        .subscribe(
+          (res => {
+            console.log("deu certo");
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
 
   }
 
@@ -97,26 +109,45 @@ export class DialogEditarProdutoComponent implements OnInit {
     });
   }
 
-  cadastrarAdicional(adicional: Adicional){
+  cadastrarAdicional(adicional: Adicional) {
     let jaExiste: boolean = false;
 
     this.produto.additional?.forEach(item => {
-      if(item.name === adicional.name && item.price === adicional.price && item.description === adicional.description){
+      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
         jaExiste = true;
       }
     })
 
-    if (!jaExiste){
+    if (!jaExiste) {
       this.produto.additional?.forEach(item => {
-        if(item.name === "" && item.price === 0){
+        if (item.name === "" && item.price === 0) {
           item.name = adicional.name;
           item.id = adicional.id;
           item.price = adicional.price;
-          item.description = adicional.description; 
+          item.description = adicional.description;
         }
       });
     }
-    
+
   }
+
+  onDragOverEvent(event: DragEvent) {
+    this.isDraggingOver = true;
+    event.preventDefault();
+  }
+
+  onDragLeaveEvent(event: DragEvent) {
+    this.isDraggingOver = false;
+    event.preventDefault();
+  }
+
+  onDropEvent(event: DragEvent) {
+    event.preventDefault();
+    this.imagens = event.dataTransfer?.files || new FileList;
+    this.existeIMagem = true;
+    console.log(this.imagens[0].name);
+
+  }
+
 
 }
