@@ -136,7 +136,9 @@
                 </div>
                 <div class="col-md-4" style="padding: 0;">
                   <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto titulo-produto"
-                    (click)="openDialog(produto)">
+                    (click)="openDialog(produto)" *ngIf="!produto.imagePath">
+                    <img [src]="produto.imagePath" class="img-produto titulo-produto"
+                    (click)="openDialog(produto)" *ngIf="produto.imagePath">
                 </div>
               </div>
             </mat-card>

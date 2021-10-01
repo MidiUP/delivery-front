@@ -58,20 +58,20 @@ export class EditarProdutoComponent implements OnInit {
       );
   }
 
-  onSubmit() {
-    this.productService.putProduct(this.product, this.product.id)
-      .subscribe(
-        (res) => {
-          console.log("editou");
-          this.openSnackBarSuccess();
-        },
-        (err) => {
-          console.log(err);
-          console.log(this.product);
-          this.openSnackBarError();
-        }
-      );
-  }
+  // onSubmit() {
+  //   this.productService.putProduct(this.product, this.product.id)
+  //     .subscribe(
+  //       (res) => {
+  //         console.log("editou");
+  //         this.openSnackBarSuccess();
+  //       },
+  //       (err) => {
+  //         console.log(err);
+  //         console.log(this.product);
+  //         this.openSnackBarError();
+  //       }
+  //     );
+  // }
 
   edit(product: Product): void {
     this.openDialogEditProduct(product);

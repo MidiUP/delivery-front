@@ -14,6 +14,7 @@ export class Product{
         public id: number,
         public category: Categoria,
         public additional?: Adicional[],
-        public additionalsString?: string
+        public additionalsString?: string,
+        public imagePath?: string
     ){}
 }
