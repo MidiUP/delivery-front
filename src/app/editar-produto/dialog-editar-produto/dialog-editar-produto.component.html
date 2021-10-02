@@ -104,7 +104,7 @@
             </div>
 
             <div class="botoes">
-                <button mat-flat-button color="primary" style="margin-right: 10px;" (click) ="editProduct()">Salvar</button>
+                <button mat-flat-button color="primary" style="margin-right: 10px;" (click) ="editProduct()" [disabled]="!novoProdutoForm.valid">Salvar</button>
                 <button mat-flat-button color="warn">Cancelar</button>
             </div>
         </div>

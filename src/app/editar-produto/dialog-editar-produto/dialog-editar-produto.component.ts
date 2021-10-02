@@ -70,14 +70,18 @@ export class DialogEditarProdutoComponent implements OnInit {
   }
 
   editProduct() {
-    if (this.imagens[0] !== null){
-      let formData = new FormData;
+    let formData = new FormData;
+    if (this.imagens){
       formData.append('file', this.imagens[0])
     }
     
     this.productService.putProduct(this.produto, this.produto.id)
       .subscribe(
         (res => {
+          if (this.imagens){
+            this.postarImagem(formData, this.produto)
+          }
+          
         }),
         (err => {
           this.openSnackBarError();
