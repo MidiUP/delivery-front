@@ -26,16 +26,16 @@ export class ProductService{
         return this.http.delete<Product>(`${this.baseUrl}/${id}`);
     }
 
-    putProduct(product: Product, id:number, file: FormData){
-        return this.http.put(`${this.baseUrl}/${id}`,[product, file])
+    putProduct(product: Product, id:number){
+        return this.http.put(`${this.baseUrl}/${id}`, product)
     }
 
     searchProduct(category: string, productName: string){
         return this.http.get<Product[]>(`${this.baseUrl}/filter?category=${category}&productName=${productName}`);
     }
 
-    postImage(file: FormData){
-        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload`, file);
+    postImage(file: FormData, id: number){
+        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload/${id}`, file);
     }
 
 

@@ -70,13 +70,14 @@ export class DialogEditarProdutoComponent implements OnInit {
   }
 
   editProduct() {
-    let formData = new FormData;
-    formData.append('file', this.imagens[0])
+    if (this.imagens[0] !== null){
+      let formData = new FormData;
+      formData.append('file', this.imagens[0])
+    }
     
-    this.productService.putProduct(this.produto, this.produto.id, formData)
+    this.productService.putProduct(this.produto, this.produto.id)
       .subscribe(
         (res => {
-          this.openSnackBarSuccess();
         }),
         (err => {
           this.openSnackBarError();
@@ -84,19 +85,7 @@ export class DialogEditarProdutoComponent implements OnInit {
 
         })
       )
-    if (this.imagens[0]) {
-      console.log("tentando enviar");
-
-      this.productService.postImage(formData)
-        .subscribe(
-          (res => {
-            console.log("deu certo");
-          }),
-          (err => {
-            console.log(err);
-          })
-        )
-    }
+    
 
   }
 
@@ -149,6 +138,22 @@ export class DialogEditarProdutoComponent implements OnInit {
     this.imagens = event.dataTransfer?.files || new FileList;
     this.existeIMagem = true;
     console.log(this.imagens[0].name);
+  }
+
+  postarImagem(formData: FormData, produto: Product) {
+    if (this.imagens[0]) {
+      console.log("tentando enviar");
+
+      this.productService.postImage(formData, produto.id)
+        .subscribe(
+          (res => {
+            this.openSnackBarSuccess();
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
   }
 
 
