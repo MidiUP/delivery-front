@@ -37,11 +37,12 @@ export class carrinhoService {
   cupom: Cupom = new Cupom(1, "Frete off", 15);
   status: Status = new Status(1, "Novo Pedido");
   order: Order = new Order(0, this.userLogado, "", "", this.status, 0, this.cupom, this.items, "");
+  valorDinheiro: number = 0;
 
   addItem(produto: Product): void {
     let itemExistente: boolean = false;
     this.itensCarrinho.forEach(item => {
-      if (item.name === produto.name && item.price === produto.price) {
+      if (item.name === produto.name && item.price === produto.price && produto.additionalsString === item.additionalsString) {
         item.quantityCar += produto.quantityCar;
         item.total = item.quantityCar * item.price;
         this.totalPedido += produto.total;
@@ -148,14 +149,16 @@ export class carrinhoService {
         })
         this.items.push(new Items(item.quantityCar, item, adicionais))
       })
-
+      if(this.valorDinheiro>this.totalPedido){
+        this.order.thing = this.valorDinheiro;
+      }
       this.order.user = this.userLogado;
       this.order.paymentMethod = this.pagamentoSelecionado.description;
       this.order.status = this.status;
       this.order.total = this.totalPedido;
       this.order.coupon = this.cupom;
       this.order.items = this.items;
-      this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`;
+      this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name} / ${this.enderecoSelecionado.complement}`;
       this.order.note = observacao;
 
       this.orderService.createOrder(this.order)

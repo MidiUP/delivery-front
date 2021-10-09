@@ -80,6 +80,9 @@ import { AdicionalService } from './adicionais/adicional.service';
 import { DialogCriarAdicionalComponent } from './adicionais/dialog-criar-adicional/dialog-criar-adicional.component';
 import { DialogEditarAdicionalComponent } from './adicionais/dialog-editar-adicional/dialog-editar-adicional.component';
 import { DialogDeleteAdicionalComponent } from './adicionais/dialog-delete-adicional/dialog-delete-adicional.component';
+import { DialogPedidoComponent } from './painel-pedidos/dialog-pedido/dialog-pedido.component';
+import { DialogHistoricoComponent } from './home/dialog-historico/dialog-historico.component';
+import { TrocoErradoComponent } from './snack-bars/troco-errado/troco-errado.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +125,9 @@ import { DialogDeleteAdicionalComponent } from './adicionais/dialog-delete-adici
     DialogCriarAdicionalComponent,
     DialogEditarAdicionalComponent,
     DialogDeleteAdicionalComponent,
+    DialogPedidoComponent,
+    DialogHistoricoComponent,
+    TrocoErradoComponent,
   ],
   imports: [
     BrowserModule,

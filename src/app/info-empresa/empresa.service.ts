@@ -18,6 +18,11 @@ export class EmpresaService{
         return this.http.get<Empresa[]>(`${this.baseUrl}`);
     }
 
+    getEmpresaById():Observable<Empresa>{
+        return this.http.get<Empresa>(`${this.baseUrl}/1`);
+    }
+
+
     getProduct(id: number):Observable<Empresa>{
         return this.http.get<Empresa>(`${this.baseUrl}/${id}`);
     }
@@ -28,6 +33,10 @@ export class EmpresaService{
 
     putEmpresa(empresa: Empresa, id:number){
         return this.http.put(`${this.baseUrl}/${id}`,empresa)
+    }
+
+    postImage(file: FormData){
+        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload/establishment/1`, file);
     }
 
 

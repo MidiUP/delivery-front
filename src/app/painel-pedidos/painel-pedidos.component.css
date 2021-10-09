@@ -40,6 +40,14 @@ mat-card{
     padding: 0;
 }
 
+.content-card h6{
+    font-size: 0.8em;
+    font-style: italic;
+
+    margin-bottom: 1px;
+    padding: 0;
+}
+
 .content-card span{
     font-size: 1em;
     padding: 0;

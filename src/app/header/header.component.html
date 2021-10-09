@@ -4,13 +4,14 @@
     
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="../../assets/img/canto-da-pizza-logo.png" class="" id="logo-empresa">
+        <img src="../../assets/img/canto-da-pizza-logo.png" *ngIf="!empresa.logoPath" class="" id="logo-empresa">
+        <img [src]="empresa.logoPath" *ngIf="empresa.logoPath" class="" id="logo-empresa">
       </a>
 
       <div class="container-titulo d-flex ">
         <span class="navbar-brand">
-        <h4>Canto da Pizza</h4>
-        <p>Qualidade e sabor</p>
+        <h4>{{empresa.name}}</h4>
+        <p>{{empresa.slogan}}</p>
         </span> 
         
       </div>
@@ -53,12 +54,12 @@
               <nav class="navbar navbar-expand-md">
                 <ul class="navbar-nav">
                   <li class="">
-                    <a href="" style="margin: 0px 0px;" class="btn-sub-menu">
+                    <a [routerLink]="['']" style="margin: 0px 0px;" class="btn-sub-menu">
                       <fa-icon [icon]="faHamburger" class="mr-1"></fa-icon>
                         Cardápio</a>
                   </li>
                   <li class="margin-botoes">
-                    <a href="" style="margin: 0px 0px;" class="btn-sub-menu">
+                    <a [href]="whatsapp" target="_blank" style="margin: 0px 0px;" class="btn-sub-menu">
                       <fa-icon [icon]="faMobileAlt" class="mr-1"></fa-icon>
                       Contato</a>
                   </li>
@@ -68,7 +69,7 @@
                       Sobre</a>
                   </li>    
                   <li class="margin-botoes">
-                    <a href="" style="margin: 0px 0px;" class="btn-sub-menu">
+                    <a [href]="empresa.linkGoogleMaps" target="_blank" style="margin: 0px 0px;" class="btn-sub-menu">
                       <fa-icon [icon]="faHome" class="mr-1"></fa-icon>
                       Endereço</a>
                   </li>  

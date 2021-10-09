@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faHamburger, faMobileAlt, faAddressCard, faHome } from '@fortawesome/free-solid-svg-icons';
 import { authService } from '../auth/auth.service/auth.service';
+import { Empresa } from '../info-empresa/empresa.model';
+import { EmpresaService } from '../info-empresa/empresa.service';
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
 
@@ -17,12 +19,17 @@ export class HeaderComponent implements OnInit {
   faAddressCard = faAddressCard;
   faHome = faHome;
 
+
+  empresa: Empresa = new Empresa(0, "", "", "", "", "", "", "", "", "")
+
+
   user: User = new User("Visitante", "", "", "", "", "", "", 0)
   authenticated: boolean;
   admin: boolean;
+  whatsapp: string = "";
 
 
-  constructor(private authService: authService, private userService: UserService, private router: Router) {
+  constructor(private authService: authService, private userService: UserService, private router: Router, private empresaService: EmpresaService) {
     if (this.authService.isAuthenticated()) {
       this.authenticated = true;
       if (this.authService.isAdmin()) {
@@ -48,7 +55,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.empresaService.getEmpresaById()
+      .subscribe(res => {
+        this.empresa = res;
+        this.whatsapp = `https://api.whatsapp.com/send?phone=55${res.whatsapp}`;
+
+      });
+
+
+
+
   }
 
   logout() {

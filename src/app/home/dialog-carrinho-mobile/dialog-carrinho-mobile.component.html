@@ -36,7 +36,7 @@
             <h5 class="produto">FRETE</h5>
             <h5 class="produto valor-resumo">{{frete.toFixed(2)}}</h5>
         </div>
-        
+
         <div class="item-resumo">
             <h5 class="produto" style="color: red;">TOTAL</h5>
             <h5 class="produto valor-resumo">{{totalPedido.toFixed(2)}}</h5>
@@ -63,13 +63,15 @@
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li *ngFor="let endereco of enderecos">
                                     <a class="dropdown-item" (click)="alterarEndereco(endereco)">{{endereco.street}},
-                                        {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
+                                        {{endereco.number}}, {{endereco.neighborhood.name}}</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
-            <p *ngIf="enderecoEscolhido!=null">{{enderecoEscolhido.street}}, {{enderecoEscolhido.number}}, {{enderecoEscolhido.neighborhood.name}}</p>
+            <p *ngIf="enderecoEscolhido!=null">{{enderecoEscolhido.street}}, {{enderecoEscolhido.number}},
+                {{enderecoEscolhido.neighborhood.name}}</p>
         </nav>
 
         <nav class="navbar navbar-expand navbar-dark">
@@ -88,14 +90,23 @@
                                 Método
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li *ngFor="let metodo of pagamentos"><a
-                                        class="dropdown-item" (click)="alterarMetodoPagamento(metodo)">{{metodo.description}}</a></li>
+                                <li *ngFor="let metodo of pagamentos"><a class="dropdown-item"
+                                        (click)="alterarMetodoPagamento(metodo)">{{metodo.description}}</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" (click)="pagamentoDinheiro(true)">Dinheiro</a></li>
+
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
-            <p *ngIf="pagamentoEscolhido!=null">{{pagamentoEscolhido.description}}</p>
+            <p *ngIf="pagamentoSelecionado != null && pagamentoPorDinheiro != true">{{pagamentoSelecionado.description}}</p>
+            <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
+                <p class="opcao-selecionada-dinheiro"> Troco para: </p>
+                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro">
+              </div>
         </nav>
     </div>
 

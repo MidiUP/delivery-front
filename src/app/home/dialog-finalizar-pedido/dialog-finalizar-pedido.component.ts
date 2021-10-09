@@ -17,6 +17,7 @@ export class DialogFinalizarPedidoComponent implements OnInit {
   enderecoSelecionado: Address;
   pagamentoSelecionado: MetodoPagamento;
   observacao: string = "";
+  valorDinheiro: number = 0;
 
   ObservacaoForm: FormGroup = this.formBuilder.group({
     'description': ['', []]
@@ -27,6 +28,8 @@ export class DialogFinalizarPedidoComponent implements OnInit {
     this.totalPedido = carrinhoService.totalPedido;
     this.enderecoSelecionado = carrinhoService.enderecoSelecionado;
     this.pagamentoSelecionado = carrinhoService.pagamentoSelecionado;
+    this.valorDinheiro = carrinhoService.valorDinheiro;
+
    }
 
   ngOnInit(): void {

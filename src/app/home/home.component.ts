@@ -29,6 +29,8 @@ import { CarrinhoVazioComponent } from '../snack-bars/carrinho-vazio/carrinho-va
 import { MetodoPagamentoNullComponent } from '../snack-bars/metodo-pagamento-null/metodo-pagamento-null.component';
 import { AddressNullComponent } from '../snack-bars/address-null/address-null.component';
 import { Router } from '@angular/router';
+import { DialogHistoricoComponent } from './dialog-historico/dialog-historico.component';
+import { TrocoErradoComponent } from '../snack-bars/troco-errado/troco-errado.component';
 
 @Component({
   selector: 'app-home',
@@ -63,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   user: User = new User("", ".", "", "", "", "", "", 0);
 
-  userLogado: User = new User("", ".", "", "", "", "", "", 1);
+  userLogado: User = new User("", ".", "", "", "", "", "", 0);
 
   pagamento: MetodoPagamento = new MetodoPagamento(1, "");
 
@@ -82,6 +84,8 @@ export class HomeComponent implements OnInit {
   ultimoPedido: Order = new Order(0, this.user, "", "", this.status, 0, this.cupom, this.items, "");
 
   pagamentoPorDinheiro: boolean = false;
+
+  valorDinheiro: number = 0;
 
 
 
@@ -146,7 +150,11 @@ export class HomeComponent implements OnInit {
   alterarMetodoPagamento(metodo: MetodoPagamento) {
     this.carrinhoService.selecionarMetodoPagamento(metodo);
     this.pagamentoSelecionado = metodo;
-    this.pagamentoPorDinheiro = false;
+    if(metodo.description === "Dinheiro"){
+      this.pagamentoPorDinheiro = true;
+    }else {
+      this.pagamentoPorDinheiro = false;
+    }
   }
 
   addItem(produto: Product): void {
@@ -172,7 +180,7 @@ export class HomeComponent implements OnInit {
 
   openDialog(produto: Product) {
     const dialogRef = this.dialog.open(DialogProdutoComponent, {
-      data: { name: produto.name, description: produto.description, price: produto.price }
+      data: { name: produto.name, description: produto.description, price: produto.price, imagePath: produto.imagePath }
     });
   }
 
@@ -208,6 +216,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  openHistorico(){
+    const dialogRef = this.dialog.open(DialogHistoricoComponent, {
+      data: {id: this.userLogado.id}
+    });
+  }
+
   filtroEnderecos(user: User) {
     this.addressService.findAddressByUser(user)
       .subscribe(
@@ -219,7 +233,16 @@ export class HomeComponent implements OnInit {
 
   exportarPedido() {
     if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoSelecionado != null && this.enderecoSelecionado != null) {
-      this.openDialogFinalPedido();
+      if(this.pagamentoSelecionado.description === "Dinheiro"){
+        if(this.valorDinheiro >= this.carrinhoService.totalPedido){
+          this.carrinhoService.valorDinheiro = this.valorDinheiro;
+          this.openDialogFinalPedido();
+        }else {
+          this.openSnackBarDinheiroMenorQueTotal();
+        }
+      } else {
+        this.openDialogFinalPedido();
+      }
     }
     else if (this.authService.isAuthenticated() != true) {
       this.router.navigate(['login']);
@@ -235,6 +258,14 @@ export class HomeComponent implements OnInit {
 
   openSnackBarCarrinhoVazio() {
     this._snackBar.openFromComponent(CarrinhoVazioComponent, {
+      duration: 5 * 1000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  openSnackBarDinheiroMenorQueTotal() {
+    this._snackBar.openFromComponent(TrocoErradoComponent, {
       duration: 5 * 1000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
@@ -346,6 +377,7 @@ export class HomeComponent implements OnInit {
 
   pagamentoDinheiro(isDinheiro: boolean) {
     this.pagamentoPorDinheiro = isDinheiro;
+    this.alterarMetodoPagamento(new MetodoPagamento (0,"Dinheiro"))
   }
 
 

@@ -57,52 +57,13 @@
 
       <div class="row">
 
-        <!--<label for="nome-produto" class="form-label">Dias de Funcionamento</label>
-       <div class="checkbox">
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Domingo</label>
-        </div>
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Segunda</label>
-        </div>
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Terça</label>
-        </div>
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Quarta</label>
-        </div>
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Quinta</label>
-        </div>
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Sexta</label>
-        </div>
-        <div class="form-check">
-          <input formControlName="availability" class="form-check-input" type="checkbox" value="true"
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Sábado</label>
-        </div>
-  
-      </div>-->
+        <div class="col-12">
+          <h2>Imagem do Produto</h2>
+          <div class="dropzone-off" (dragover)="onDragOverEvent($event)" (dragleave)="onDragLeaveEvent($event)" [class.dropzone-on]="isDraggingOver" (drop)="onDropEvent($event)"> 
+              <span *ngIf="!existeIMagem">Arraste sua imagem</span>
+              <span *ngIf="existeIMagem">{{imagens[0].name}}</span>
+          </div>
+      </div>
 
       </div>
       <hr>

@@ -141,3 +141,26 @@ hr{
     justify-content: center;
     margin-top: 10px;
 }
+
+.dinheiro{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+ }
+
+ .troco{
+    width: 60%;
+    height: 15%;
+    margin-bottom: 10px;
+    margin-left: auto;
+}
+
+.navbar .opcao-selecionada-dinheiro {
+    margin: 0;
+    padding: 0;
+    font-size: 0.6em;
+    color: white;
+    margin-right: 10px;
+    margin-top: 8px;
+    font-weight: 500;
+}

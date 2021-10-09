@@ -1,0 +1,118 @@
+<body>
+    <div class="desktop">
+        <div class="container cabecalho">
+            <div class="titulo">
+                <h1 class="confirmacao">Seus Pedidos</h1>
+                <h2> | {{data.getDate()}}/{{(data.getMonth() + 1)}}/{{data.getFullYear()}}</h2>
+            </div>
+            <div class="fechar" style="margin-left: auto;">
+                <button mat-icon-button color="warn" mat-dialog-close>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="container historico" *ngFor="let pedido of pedidos">
+            <h3>Pedido #{{pedido.id}}</h3>
+            <div class="row">
+                <div class="col-8">
+                    <div class="itens">
+                        <div class="item" *ngFor="let item of lerItens(pedido)">
+                            <h4>{{item.product.name}}</h4>
+                            <h5>({{item.quantityProduct}}x)</h5> 
+                            <div class="adicionais">
+                                <h6>{{lerAdicionais(item)}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 conteudo">
+                    <div class="status">
+                        <h4>{{pedido.status.description}}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12" style="margin-top: 10px;">
+                    <div class="info-pedido">
+                        <h4>Endereço: </h4><h4 style="margin-left: 5px;">{{pedido.address}}</h4>
+                    </div>
+                    <div class="info-pedido">
+                        <h4>Método de Pagamento: </h4><h4 style="margin-left: 5px;">{{pedido.paymentMethod}}</h4>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    
+        
+    </div>
+
+
+
+
+    <div class="mobile">
+        <div class="container cabecalho">
+            <div class="titulo">
+                <h1 class="confirmacao">Seus Pedidos</h1>
+                <h2> | {{data.getDate()}}/{{(data.getMonth() + 1)}}/{{data.getFullYear()}}</h2>
+            </div>
+            <div class="fechar" style="margin-left: auto;">
+                <button mat-icon-button color="warn" mat-dialog-close>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="container historico" *ngFor="let pedido of pedidos">
+            <h3>Pedido #{{pedido.id}}</h3>
+            <div class="row">
+                <div class="col-12">
+                    <div class="itens-mobile">
+                        <div class="item-mobile" *ngFor="let item of lerItens(pedido)">
+                            <div class="d-flex">
+                                <h4>{{item.product.name}}</h4>
+                            <h5>({{item.quantityProduct}}x)</h5> 
+                            </div>
+                            <div class="adicionais-mobile">
+                                <h6>{{lerAdicionais(item)}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 conteudo-mobile">
+                    <div class="status">
+                        <h4>{{pedido.status.description}}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12" style="margin-top: 10px;">
+                    <div class="info-pedido-mobile">
+                        <h4 style="font-weight: bold;">Endereço:</h4><h4 >{{pedido.address}}</h4>
+                    </div>
+                    <div class="info-pedido-mobile">
+                        <h4 style="font-weight: bold;">Método de Pagamento: </h4><h4>{{pedido.paymentMethod}}</h4>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    
+        
+    </div>
+
+
+
+
+
+
+
+    
+        
+    
+</body>

@@ -35,7 +35,7 @@ export class ProductService{
     }
 
     postImage(file: FormData, id: number){
-        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload/${id}`, file);
+        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload/product/${id}`, file);
     }
 
 

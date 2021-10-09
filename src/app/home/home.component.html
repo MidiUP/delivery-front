@@ -51,12 +51,15 @@
         <div class="estado-estabelecimento">
           <div class="d-flex align-items-center">
             <mat-icon class="icon-open">shopping_bag</mat-icon>
-            <h5 class="titulo-infos">PEDIDO #{{ultimoPedido.id}}</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id != 0">PEDIDO #{{ultimoPedido.id}}</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0">COMPRE JÁ</h5>
           </div>
-          <p class="v-desktop-infos">{{ultimoPedido.status.description}} ( Previsão de entrega: 20h30 )</p>
+          <p class="v-desktop-infos" *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
+          <p class="v-desktop-infos" *ngIf="ultimoPedido.id == 0">Temos ótimas opções</p>
           <div class="v-mobile-infos">
-            <p>{{ultimoPedido.status.description}}</p>
-            <!-- <p>Entrega: 20h30</p> -->
+            <p *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
+            <p *ngIf="ultimoPedido.id == 0">Ótimas opções</p>
+            
 
           </div>
         </div>
@@ -112,6 +115,9 @@
           </nav>
 
           <div class="container produtos">
+            <div *ngIf="products.length==0" class="produtos-vazio">
+              <img src="../../assets/img/NÃO ENCONTRAMOS ITENS.svg">
+            </div>
             <mat-card class="produto" *ngFor="let produto of products">
               <div class="row" style="margin: 0;">
                 <div class="col-md-8" style="padding: 0;">
@@ -128,8 +134,8 @@
                       <mat-icon>add</mat-icon>
                     </button>
 
-                    <button mat-icon-button color="warn" (click)="removeItem(produto)">
-                      <mat-icon id="botao-delete">delete</mat-icon>
+                    <button mat-icon-button  (click)="openDialog(produto)">
+                      <mat-icon id="botao-delete">info</mat-icon>
                     </button>
                   </div>
 
@@ -143,10 +149,13 @@
               </div>
             </mat-card>
           </div>
-          <div class="vazio">⠀⠀⠀⠀⠀⠀⠀⠀⠀</div>
+          <!-- <div class="vazio">⠀⠀⠀⠀⠀⠀⠀⠀⠀</div> -->
           <!-- Caracter invisivel para correção de bug no home com apenas um produto ou menos para exibição-->
 
           <div class="produtos-mobile">
+            <div *ngIf="products.length==0" class="produtos-vazio">
+              <img src="../../assets/img/NÃO ENCONTRAMOS ITENS.svg">
+            </div>
             <mat-card class="produto-mobile" *ngFor="let produto of products">
 
               <div class="row " style="width:100%">
@@ -163,7 +172,7 @@
                       <span class="preco-produto-mobile">R${{produto.price.toFixed(2)}}</span>
                       <div class="botoes-carrinho-mobile">
                         <mat-icon style="margin-left: 25px;" (click)="addItem(produto)">add</mat-icon>
-                        <mat-icon style="margin-left: 20px; color: red;" (click)="removeItem(produto)">delete</mat-icon>
+                        <mat-icon style="margin-left: 20px;" (click)="openDialog(produto)">info</mat-icon>
                       </div>
                     </div>
                   </div>
@@ -171,7 +180,9 @@
 
                 <div class="col-4 d-flex align-items-center">
                   <img class="img-produto-mobile" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png"
-                    (click)="openDialog(produto)">
+                    (click)="openDialog(produto)" *ngIf="!produto.imagePath">
+                    <img class="img-produto-mobile" [src]="produto.imagePath"
+                    (click)="openDialog(produto)" *ngIf="produto.imagePath">
                 </div>
 
               </div>
@@ -436,7 +447,7 @@
               </p>
               <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
                 <p class="opcao-selecionada-dinheiro"> Dinheiro </p>
-                <input class="form-control troco" type="text" placeholder="Troco para quanto?">
+                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro">
               </div>
 
             </div>

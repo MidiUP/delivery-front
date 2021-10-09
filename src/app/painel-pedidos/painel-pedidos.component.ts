@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Items } from '../home/items.model';
+import { MatDialog } from '@angular/material/dialog';
+import { additionalPedidos, Items } from '../home/items.model';
 import { Order } from '../home/order.model';
 import { orderService } from '../home/order.service';
+import { Product } from '../novo-produto/product.model';
+import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
 
 @Component({
   selector: 'app-painel-pedidos',
@@ -19,7 +22,7 @@ export class PainelPedidosComponent implements OnInit {
 
 
 
-  constructor(private orderService: orderService) { }
+  constructor(private orderService: orderService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getPedidosByDate();
@@ -67,18 +70,11 @@ export class PainelPedidosComponent implements OnInit {
   }
 
   alterarStatus(newStatus: number, pedido: Order) {
-    let pedidoAualizado: Order = {
-      id: pedido.id,
-      user: { id: pedido.user.id, name: '', username: '', email: '', password: '', cpf: '', rg: '', phone: '' },
-      paymentMethod: pedido.paymentMethod,
-      address: pedido.address,
-      status: { id: newStatus, description: '' },
-      total: pedido.total,
-      coupon: { id: pedido.coupon.id, name: '', value: 0 },
-      items: pedido.items,
-      note: ""
-    };
-    this.orderService.putOrder(pedidoAualizado, pedido.id)
+  
+      pedido.user = { id: pedido.user.id, name: '', username: '', email: '', password: '', cpf: '', rg: '', phone: '' };
+      pedido.status = { id: newStatus, description: '' };
+
+    this.orderService.putOrder(pedido, pedido.id)
       .subscribe(
         (res => {
           console.log("status alterado");
@@ -155,8 +151,37 @@ export class PainelPedidosComponent implements OnInit {
     window.open(`https://api.whatsapp.com/send?phone=55${whatsapp}`);
   }
 
+
+    openDialog( order: Order ) {
+      const dialogRef = this.dialog.open(DialogPedidoComponent, {
+        data: { id: order.id, address: order.address, items: order.items, note: order.note, paymentMethod: order.paymentMethod, status: order.status, total: order.total, user: order.user }
+      });
+    }
+
+    lerAdicionais(adicionais: additionalPedidos[]): string {
+  
+      let adicionaisString: string = "";
+      let primeiro: boolean = true;
+
+      adicionais.forEach(item => {
+        if(primeiro){
+          adicionaisString = adicionaisString + `${item.additional.name} (${item.quantity})`;
+          primeiro = false;
+        } else {
+          adicionaisString = adicionaisString + `, ${item.additional.name} (${item.quantity})`;
+        }
+      })
+      
+      if(adicionaisString !== ""){
+        return adicionaisString;
+      }else{
+        return ""
+      }
+    }
+  
+
   imprimir(pedido: Order) {
-    console.log(pedido);
+    let data = new Date();
 
     let popupWin = window.open('', '_blank', 'width=800,height=500,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no,top=50');
     popupWin?.window.focus();
@@ -259,7 +284,8 @@ export class PainelPedidosComponent implements OnInit {
     
       
       
-          + this.itensPedidoImpressao(pedido.items)
+          + this.itensPedidoImpressao(pedido.items) 
+          
 
       
       
@@ -278,6 +304,9 @@ export class PainelPedidosComponent implements OnInit {
       
           +'<section class="container notaColumn">'
           +'<div class="infos">'
+              +'<h3>Taxa de Entrega: </h3> <h3>R$ ' + pedido.total.toFixed(2).replace('.', ',') + '</h3>'
+                  +'</div>'
+          +'<div class="infos">'
               +'<h3>Valor Total: </h3> <h3>R$ ' + pedido.total.toFixed(2).replace('.', ',') + '</h3>'
                   +'</div>'
               +'<div class="infos">'
@@ -292,13 +321,13 @@ export class PainelPedidosComponent implements OnInit {
           +'<h3> cliente cpf: ' + pedido.user.cpf + '</h3>'
               +'<h3>' + pedido.user.name + '</h3>'
               +'<h3>' + pedido.address + '</h3>'
-              +'<h3> ao lado do colégio são José</h3>'
+              // +'<h3> ao lado do colégio são José</h3>'
               +' </section>'
       
           +'<hr>'
       
           +'<section class="container notaColumn">'
-          +'<h3> emissão: 01/10/2021 - 13:06:55</h3>'
+          +'<h3> emissão: ' + data.getDate() + '/' + (data.getMonth() + 1) + '/' + data.getFullYear() + '-' + data.getHours() + ':' + data.getMinutes() + ':' + data.getSeconds() + '</h3>'
               +'</section>'
       
           +'</body>'
@@ -319,6 +348,16 @@ export class PainelPedidosComponent implements OnInit {
     }
   }
 
+  calcularValorItem(item: Items): number{
+    let total = 0;
+    let precoAdicionais = 0;
+    item.additionalPedidos.forEach(item => {
+      precoAdicionais = precoAdicionais + (item.additional.price * item.quantity);
+    })
+    total = (item.product.price + precoAdicionais) * item.quantityProduct
+    return total;
+  }
+
 
   itensPedidoImpressao(itens: Items[]): string {
     let stringItens: string = '';
@@ -328,12 +367,27 @@ export class PainelPedidosComponent implements OnInit {
       +'<div class="infos">'
           +'<div class="produto">'
               +'<h3>' + item.product.name + '('+ item.quantityProduct +')' + '</h3>'
-                  +'<h3>cheddar(2x), Coca lata(3x)</h3>'
+                  + '<h3>' + this.lerAdicionais(item.additionalPedidos) + '<h3>'
                   +'</div>'
-              +'<h3>valor: R$' + item.product.price.toFixed(2).replace('.', ',') + '</h3>'
+              +'<h3>valor: R$' + this.calcularValorItem(item).toFixed(2).replace('.', ',') + '</h3>'
               +'</div>'
           +'</section>'
     })
+
+  // itensPedidoImpressao(itens: Items[]): string {
+  //   let stringItens: string = '';
+
+  //   itens.forEach(item => {
+  //     stringItens = stringItens +'<section class="container notaColumn" style="margin-bottom: 7px;">'
+  //     +'<div class="infos">'
+  //         +'<div class="produto">'
+  //             +'<h3>' + item.product.name + '('+ item.quantityProduct +')' + '</h3>'
+  //                 +'<h3>cheddar(2x), Coca lata(3x)</h3>'
+  //                 +'</div>'
+  //             +'<h3>valor: R$' + item.product.price.toFixed(2).replace('.', ',') + '</h3>'
+  //             +'</div>'
+  //         +'</section>'
+  //   })
     
     
     
@@ -349,6 +403,8 @@ export class PainelPedidosComponent implements OnInit {
     //         +'</div>'
     //     +'</section>'
   }
+
+
 
 
 

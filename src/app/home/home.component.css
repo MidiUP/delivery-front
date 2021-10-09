@@ -56,6 +56,7 @@ img {
     display: flex;
     direction: row;
     flex-wrap: wrap;
+    height: auto;
 }
 .campo-pedido{
     background: blanchedalmond;
@@ -91,6 +92,23 @@ img {
     margin-bottom: 8px;
     transition: 1s;
     
+}
+
+.vazio{
+    width: 100%;
+    
+}
+
+.produtos-vazio{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produtos-vazio img{
+    width: 200px; 
+    height: 200px;
 }
 
 .link-endereco{
@@ -160,7 +178,7 @@ img {
 }
 
 #cardapio {
-    height: auto;
+    height:max-content;
 }
 
 #cardapio h4, h5, p{
@@ -255,6 +273,11 @@ img {
     border: 1px solid white;
     color: white;
 }
+
+/* .clicavel:hover{
+    cursor: pointer;
+
+} */
 
 #navbarDropdown{
     color: white;
@@ -408,6 +431,10 @@ body{
 
 }
 
+.produtos-mobile{
+    padding-bottom: 41px;
+ }
+
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 377px) {
     
@@ -540,6 +567,7 @@ body{
     #cardapio h4{
         padding: 0;
     }
+    
 
     .detalhes-produto{
         display: flex;
@@ -575,6 +603,10 @@ body{
         margin-bottom: 5px;
     }
      /*Produtos mobile*/
+
+     app-footer{
+        display: none;
+    }
 }
 
 /* personalizado */
@@ -720,6 +752,10 @@ body{
         margin-bottom: 5px;
     }
      /*Produtos mobile*/
+
+     app-footer{
+        display: none;
+    }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -734,6 +770,10 @@ body{
     img {
         width: 60px;
         height: 200px;
+    }
+
+    .produtos{
+        padding-bottom: 41px;
     }
 
      /* Formatação card produto */
@@ -789,6 +829,10 @@ body{
     }
 
     .v-desktop-infos{
+        display: none;
+    }
+
+    app-footer{
         display: none;
     }
 }

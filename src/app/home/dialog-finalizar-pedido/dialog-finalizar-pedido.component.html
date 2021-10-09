@@ -45,6 +45,10 @@
                         <h6>Método de Pagamento: </h6>
                         <h6 class="valor">{{pagamentoSelecionado.description}}</h6>
                     </div>
+                    <div class="info-pedido" *ngIf="pagamentoSelecionado.description === 'Dinheiro'">
+                        <h6>Troco para: </h6>
+                        <h6 class="valor">R${{valorDinheiro}}</h6>
+                    </div>
                 </div>
                 <div class="col-md-4 valores">
                     <div class="valoress">
@@ -129,6 +133,10 @@
                     <div class="info-pedido">
                         <h6>Método de Pagamento: </h6>
                         <h6 class="valor">{{pagamentoSelecionado.description}}</h6>
+                    </div>
+                    <div class="info-pedido" *ngIf="pagamentoSelecionado.description === 'Dinheiro'">
+                        <h6>Troco para: </h6>
+                        <h6 class="valor">R${{valorDinheiro}}</h6>
                     </div>
                 </div>
                 <div class="col-12 valores">

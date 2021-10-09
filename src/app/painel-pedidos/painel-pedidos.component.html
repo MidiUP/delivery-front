@@ -41,23 +41,23 @@
     <section class="cards-pedido">
         <div class="card-pedido" *ngFor="let pedido of pedidos" id="pedido">
             <div class="header-card" [style]="colorHeader(pedido)">
-                <span>PEDIDO #{{pedido.id}}</span>
+                <span (click)="openDialog(pedido)">PEDIDO #{{pedido.id}}</span>
                 <div class="controlers">
                     <button mat-icon-button (click)="whatsappCliente(pedido.user.phone)">
                         <mat-icon>whatsapp</mat-icon>
                     </button>
                     <button mat-icon-button (click)="imprimir(pedido)">
-                        <mat-icon>check_circle_outline</mat-icon>
+                        <mat-icon>print</mat-icon>
                     </button>
 
                 </div>
             </div>
             <div class="content-card">
                 <div class="info-pedido">
-                    <div class="col-4">
+                    <div class="col-5">
                         <h5 class="bold">Cliente:</h5>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <h5> {{pedido.user.name}}</h5>
                     </div>
                 </div>
@@ -65,10 +65,10 @@
                 <hr>
 
                 <div class="info-pedido">
-                    <div class="col-4">
+                    <div class="col-5">
                         <h5 class="bold">Endereço:</h5>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <h5> {{pedido.address}}</h5>
                     </div>
                 </div>
@@ -76,34 +76,59 @@
                 <hr>
 
                 <div class="info-pedido">
-                    <div class="col-4">
+                    <div class="col-5">
                         <h5 class="bold">Pagamento:</h5>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <h5>{{pedido.paymentMethod}}</h5>
                     </div>
                 </div>
 
                 <hr>
 
+                <div class="info-pedido" *ngIf="pedido.paymentMethod === 'Dinheiro'">
+                    <div class="col-5">
+                        <h5 class="bold">Troco para:</h5>
+                    </div>
+                    <div class="col-7">
+                        <h5>R${{pedido.thing}}</h5>
+                    </div>
+                </div>
+
+                <hr *ngIf="pedido.paymentMethod === 'Dinheiro'">
+
                 <div class="info-pedido">
-                    <div class="col-4">
+                    <div class="col-5">
                         <h5 class="bold">Valor:</h5>
                     </div>
-                    <div class="col-8">
-                        <h5> R${{pedido.total.toFixed(2)}}</h5>
+                    <div class="col-7">
+                        <h5> R${{pedido.total.toFixed(2).replace('.', ',')}}</h5>
                     </div>
                 </div>
 
                 <hr>
 
                 <div class="info-pedido">
-                    <div class="col-4">
+                    <div class="col-5">
                         <h5 class="bold">Itens:</h5>
                     </div>
-                    <div class="col-8">
+                    <div class="col-7">
                         <h5 *ngFor="let item of tratarVetor(pedido)"> {{item.product.name}}
-                            {{item.quantityProduct}}x</h5>
+                            {{item.quantityProduct}}x
+                            <br>
+                            <h6>{{lerAdicionais(item.additionalPedidos)}}</h6>
+                            
+                        </h5>
+                            
+                    </div>
+                </div>
+
+                <div class="info-pedido">
+                    <div class="col-5">
+                        <h5 class="bold">Observações:</h5>
+                    </div>
+                    <div class="col-7">
+                        <h5 > {{pedido.note}}</h5>
                     </div>
                 </div>
 
