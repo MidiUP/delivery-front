@@ -6,7 +6,8 @@
     "start": "ng server",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build --prod"
   },
   "engines": {
     "node": "14.17.3",
