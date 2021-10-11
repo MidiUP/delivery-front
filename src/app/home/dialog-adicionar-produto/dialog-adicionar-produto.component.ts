@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Adicional } from 'src/app/novo-produto/adicional.model';
 import { Product } from 'src/app/novo-produto/product.model';
 import { carrinhoService } from '../carrinho.service';
+import { additionalPedidos } from '../items.model';
 
 @Component({
   selector: 'app-dialog-adicionar-produto',
@@ -54,6 +55,13 @@ export class DialogAdicionarProdutoComponent implements OnInit {
 
   addCarrinho() {
     this.produto.additionalsString = this.lerAdicionais();
+    let adicionais: additionalPedidos[] = [];
+    this.produto.additional?.forEach(item => {
+      if(item.quantityCar>0){
+        adicionais.push(new additionalPedidos(item, item.quantityCar))
+      }
+    })
+    this.produto.arrayAdicionais = adicionais;
     this.carrinhoService.addItem(this.produto);
 
   }

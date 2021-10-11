@@ -252,7 +252,7 @@ h4{
     body{
         width: 250px;
         /* min-height: 60vh; */
-        max-height: 60vh;
+        max-height: 50vh;
     }
 
     .confirmacao{
@@ -356,7 +356,7 @@ h4{
         body{
             width: 280px;
             /* min-height: 60vh; */
-            max-height: 60vh;
+            max-height: 50vh;
         }
     
         .confirmacao{

@@ -131,7 +131,7 @@ h4{
     body{
         width: 250px;
         /* min-height: 60vh; */
-        max-height: 60vh;
+        max-height: 50vh;
     }
 
     .desktop{
@@ -192,7 +192,7 @@ h4{
         body{
             width: 300px;
             /* min-height: 60vh; */
-            max-height: 60vh;
+            max-height: 50vh;
         }
     
         .desktop{

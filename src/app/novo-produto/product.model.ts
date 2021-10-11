@@ -1,4 +1,5 @@
 import { Categoria } from "../categorias/categoria.model";
+import { additionalPedidos } from "../home/items.model";
 import { Adicional } from "./adicional.model";
 
 export class Product{
@@ -15,6 +16,7 @@ export class Product{
         public category: Categoria,
         public additional?: Adicional[],
         public additionalsString?: string,
-        public imagePath?: string
+        public imagePath?: string,
+        public arrayAdicionais?: additionalPedidos[] 
     ){}
 }

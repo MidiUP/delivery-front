@@ -47,13 +47,13 @@ export class carrinhoService {
         item.total = item.quantityCar * item.price;
         this.totalPedido += produto.total;
         itemExistente = true;
-        console.log("entrei");
         
       }
     })
 
     if (!itemExistente) {
       this.itensCarrinho.push(produto);
+      console.log(produto);
       // produto.quantityCar = 1;
       produto.total = produto.quantityCar * produto.price;
       this.totalPedido += produto.total;
@@ -140,13 +140,14 @@ export class carrinhoService {
     if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoSelecionado != null && this.enderecoSelecionado != null) {
 
 
+      this.items = [];
+      let adicionais: additionalPedidos[] = [];
+      // console.log(this.itensCarrinho)
+
       this.itensCarrinho.forEach(item => {
-        let adicionais: additionalPedidos[] = [];
-        item.additional?.forEach(item => {
-          if(item.quantityCar>0){
-            adicionais.push(new additionalPedidos(item, item.quantityCar))
-          }
-        })
+        if(item.arrayAdicionais){
+          adicionais = item.arrayAdicionais;
+        }
         this.items.push(new Items(item.quantityCar, item, adicionais))
       })
       if(this.valorDinheiro>this.totalPedido){
@@ -160,6 +161,7 @@ export class carrinhoService {
       this.order.items = this.items;
       this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name} / ${this.enderecoSelecionado.complement}`;
       this.order.note = observacao;
+
 
       this.orderService.createOrder(this.order)
         .subscribe(
