@@ -6,7 +6,7 @@ import { Adicional } from "../novo-produto/adicional.model";
 @Injectable()
 export class AdicionalService{
 
-    baseUrl = "https://teste-api-delivery-1-2.herokuapp.com/v1/additionals"
+    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/additionals"
 
     constructor(private http: HttpClient){}
 

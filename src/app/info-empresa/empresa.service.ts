@@ -6,7 +6,7 @@ import { Empresa } from "./empresa.model";
 @Injectable()
 export class EmpresaService{
 
-    baseUrl = "https://teste-api-delivery-1-2.herokuapp.com/v1/establishments"
+    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/establishments"
 
     constructor(private http: HttpClient){}
 
@@ -36,7 +36,7 @@ export class EmpresaService{
     }
 
     postImage(file: FormData){
-        return this.http.post<File>(`https://teste-api-delivery-1-2.herokuapp.com/v1/amazons3/upload/establishment/1`, file);
+        return this.http.post<File>(`https://teste-api-delivery-v1-3.herokuapp.com/v1/amazons3/upload/establishment/1`, file);
     }
 
 

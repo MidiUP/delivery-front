@@ -9,7 +9,7 @@ import { Address } from "./address.model";
 @Injectable()
 export class addressService{
     
-    baseUrl = "https://teste-api-delivery-1-2.herokuapp.com/v1/addresses"
+    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/addresses"
 
     constructor(private http: HttpClient){}
 

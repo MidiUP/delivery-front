@@ -6,7 +6,7 @@ import { Product } from "./product.model";
 @Injectable()
 export class ProductService{
 
-    baseUrl = "https://teste-api-delivery-1-2.herokuapp.com/v1/products"
+    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/products"
 
     constructor(private http: HttpClient){}
 
@@ -35,7 +35,7 @@ export class ProductService{
     }
 
     postImage(file: FormData, id: number){
-        return this.http.post<File>(`https://teste-api-delivery-1-2.herokuapp.com/v1/amazons3/upload/product/${id}`, file);
+        return this.http.post<File>(`https://teste-api-delivery-v1-3.herokuapp.com/v1/amazons3/upload/product/${id}`, file);
     }
 
 

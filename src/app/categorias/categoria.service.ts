@@ -6,7 +6,7 @@ import { Categoria } from "./categoria.model";
 @Injectable()
 export class categoriaService{
     
-    baseUrl = "https://teste-api-delivery-1-2.herokuapp.com/v1/categories"
+    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/categories"
 
     constructor(private http: HttpClient){}
 
