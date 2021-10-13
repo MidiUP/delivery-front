@@ -20,7 +20,7 @@ export class NovoProdutoComponent implements OnInit {
 
   categorias: Categoria[];
   newProductForm: FormGroup;
-  product: Product = new Product("", 0, "", true, 50, 5, 0, 0, 0, {id:0, description: ""}, []);
+  product: Product = new Product("", 0, "", true, 50, 5, 0, 0, 0, {id:0, description: ""}, [], "", "");
   todosAdicionais: Adicional[] = []
 
   constructor(private formBuilder: FormBuilder,
