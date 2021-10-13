@@ -304,7 +304,7 @@ export class PainelPedidosComponent implements OnInit {
       
           +'<section class="container notaColumn">'
           +'<div class="infos">'
-              +'<h3>Taxa de Entrega: </h3> <h3>R$ ' + pedido.total.toFixed(2).replace('.', ',') + '</h3>'
+              +'<h3>Taxa de Entrega: </h3> <h3>R$ ' + pedido.deliveryFee.toFixed(2).replace('.', ',') + '</h3>'
                   +'</div>'
           +'<div class="infos">'
               +'<h3>Valor Total: </h3> <h3>R$ ' + pedido.total.toFixed(2).replace('.', ',') + '</h3>'

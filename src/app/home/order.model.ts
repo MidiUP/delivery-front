@@ -16,6 +16,7 @@ export class Order{
         public coupon: Cupom,
         public items: Items[],
         public note: string,
+        public deliveryFee: number,
         public thing?: number
     ){}
 }
