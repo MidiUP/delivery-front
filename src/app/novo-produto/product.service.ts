@@ -1,12 +1,14 @@
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { Properties } from "../Properties";
 import { Product } from "./product.model";
 
 @Injectable()
 export class ProductService{
 
-    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/products"
+    baseUrl: string = 'http://localhost:8080/v1/products'
 
     constructor(private http: HttpClient){}
 
@@ -35,7 +37,7 @@ export class ProductService{
     }
 
     postImage(file: FormData, id: number){
-        return this.http.post<File>(`https://teste-api-delivery-v1-3.herokuapp.com/v1/amazons3/upload/product/${id}`, file);
+        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload/product/${id}`, file);
     }
 
 

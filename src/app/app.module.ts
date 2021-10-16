@@ -83,6 +83,8 @@ import { DialogDeleteAdicionalComponent } from './adicionais/dialog-delete-adici
 import { DialogPedidoComponent } from './painel-pedidos/dialog-pedido/dialog-pedido.component';
 import { DialogHistoricoComponent } from './home/dialog-historico/dialog-historico.component';
 import { TrocoErradoComponent } from './snack-bars/troco-errado/troco-errado.component';
+import { CpfCadastradoComponent } from './snack-bars/cpf-cadastrado/cpf-cadastrado.component';
+import { NumeroCadastradoComponent } from './snack-bars/numero-cadastrado/numero-cadastrado.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +130,8 @@ import { TrocoErradoComponent } from './snack-bars/troco-errado/troco-errado.com
     DialogPedidoComponent,
     DialogHistoricoComponent,
     TrocoErradoComponent,
+    CpfCadastradoComponent,
+    NumeroCadastradoComponent,
   ],
   imports: [
     BrowserModule,

@@ -59,8 +59,8 @@ export class PerfilComponent implements OnInit {
   });
 
   edit: boolean = false;
-  newUser: User = new User("", "", "", "", "", "", "", 0);
-  userAddress: User = new User("", "", "", "", "", "", "", 3);
+  newUser: User = new User("", "", "", "", "", 0);
+  userAddress: User = new User("", "", "", "", "", 3);
   newAddress: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
   newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
   newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
@@ -89,8 +89,6 @@ export class PerfilComponent implements OnInit {
           this.newUser.name = data.name;
           this.newUser.password = data.password;
           this.newUser.phone = data.phone;
-          this.newUser.rg = data.rg;
-          this.newUser.username = data.username;
           // this.newUser.password = "***";
           this.getEnderecos(this.newUser);
           this.userAddress.id = data.id;

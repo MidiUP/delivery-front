@@ -21,7 +21,7 @@ import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/opera
 })
 export class EditarProdutoComponent implements OnInit {
   products: Product[];
-  product: Product = new Product("", 0, "", true, 0, 0, 0, 0, 0, {id: 0, description:""});
+  product: Product = new Product("", 0, "", true, 0, 0, 0, 0, 0, {id: 0, description:""}, "");
   editProductForm: FormGroup;
   categorias: Categoria[];
   pesquisaName = new FormControl();

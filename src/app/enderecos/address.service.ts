@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { Properties } from "../Properties";
 import { User } from "../user/user.model";
 import { Address } from "./address.model";
 
@@ -9,7 +11,7 @@ import { Address } from "./address.model";
 @Injectable()
 export class addressService{
     
-    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/addresses"
+    baseUrl = "http://localhost:8080/v1/addresses"
 
     constructor(private http: HttpClient){}
 

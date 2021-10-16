@@ -51,6 +51,8 @@ export class DialogCarrinhoMobileComponent implements OnInit {
   ngOnInit(): void {
     this.getEnderecos();
     this.getPagamentos();
+    console.log(this.itensCarrinho);
+    
   }
 
   getEnderecos() {

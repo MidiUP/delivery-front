@@ -6,7 +6,7 @@ import { User } from "./user.model";
 @Injectable()
 export class UserService {
 
-    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/users";
+    baseUrl = "http://localhost:8080/users";
 
     constructor(private http: HttpClient){}
 
@@ -32,6 +32,14 @@ export class UserService {
 
     findByUsername(username:string): Observable<User>{
         return this.http.get<User>(`${this.baseUrl}/find?username=${username}`);
+    }
+
+    cpfCheck(cpf: string): Observable<boolean> {
+        return this.http.get<boolean>(`${this.baseUrl}/check-cpf?cpf=${cpf}`);
+    }
+
+    phoneCheck(phone: string): Observable<boolean> {
+        return this.http.get<boolean>(`${this.baseUrl}/check-phone?phone=${phone}`);
     }
 
 }

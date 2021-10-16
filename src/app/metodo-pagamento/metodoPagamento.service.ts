@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { Properties } from "../Properties";
 import { MetodoPagamento } from "./metodoPagamento.model";
 
 
@@ -8,7 +10,7 @@ import { MetodoPagamento } from "./metodoPagamento.model";
 @Injectable()
 export class metodoPagamentoService{
     
-    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/paymentMethods"
+    baseUrl =  "http://localhost:8080/v1/paymentMethods"
 
     constructor(private http: HttpClient){}
 

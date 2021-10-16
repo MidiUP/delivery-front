@@ -33,7 +33,7 @@ export class carrinhoService {
   pagamentoSelecionado: MetodoPagamento;
   frete: number = 0;
   items: Items[] = [];
-  userLogado: User = new User("", "", "", "", "", "", "", 0);
+  userLogado: User = new User("", "", "", "", "", 0);
   cupom: Cupom = new Cupom(1, "Frete off", 15);
   status: Status = new Status(1, "Novo Pedido");
   order: Order = new Order(0, this.userLogado, "", "", this.status, 0, this.cupom, this.items, "", 0);

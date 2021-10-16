@@ -71,7 +71,7 @@ export class PainelPedidosComponent implements OnInit {
 
   alterarStatus(newStatus: number, pedido: Order) {
   
-      pedido.user = { id: pedido.user.id, name: '', username: '', email: '', password: '', cpf: '', rg: '', phone: '' };
+      pedido.user = { id: pedido.user.id, name: '', email: '', password: '', cpf: '', phone: '' };
       pedido.status = { id: newStatus, description: '' };
 
     this.orderService.putOrder(pedido, pedido.id)

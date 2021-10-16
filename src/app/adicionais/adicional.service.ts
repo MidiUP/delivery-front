@@ -1,12 +1,14 @@
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 import { Adicional } from "../novo-produto/adicional.model";
+import { Properties } from "../Properties";
 
 @Injectable()
 export class AdicionalService{
 
-    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com/v1/additionals"
+    baseUrl: string = "http://localhost:8080/v1/additionals"
 
     constructor(private http: HttpClient){}
 

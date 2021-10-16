@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   empresa: Empresa = new Empresa(0, "", "", "", "", "", "", "", "", "")
 
 
-  user: User = new User("Visitante", "", "", "", "", "", "", 0)
+  user: User = new User("Visitante", "", "", "", "", 0)
   authenticated: boolean;
   admin: boolean;
   whatsapp: string = "";

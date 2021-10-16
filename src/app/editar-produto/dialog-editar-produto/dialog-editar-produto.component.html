@@ -103,9 +103,102 @@
                 </div>
             </div>
 
+
+
+            <div class="row">
+                <div class="col-6 adicionais">
+                    <h2>Cadastrar Adicionais Obrigatórios</h2>
+                    <button mat-icon-button color="primary" (click)="addAdicionalObrigatorio()">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                </div>
+            </div>
+
+
+
+            <div class="row" >
+                <div class="col-12 adicional adicional-obrigatorio" *ngFor="let adicionalObrigatorio of adicionaisObrigatorios">
+
+                    <div class="row">
+                        <div class="col-8 titulo-adicional-obrigatorio">
+                            <h2>Adicional {{adicionaisObrigatorios.indexOf(adicionalObrigatorio)+1}}</h2>
+                            <button mat-mini-fab color="warn" style="margin-top: 10px;" (click) ="removeAdicionalObrigatorio(adicionalObrigatorio)">
+                                <mat-icon>delete</mat-icon>
+                              </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nome</mat-label>
+                                <input matInput placeholder="Ex. Sabores">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-4">
+                            
+                        </div>
+
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Quantidade mínima</mat-label>
+                                <input matInput placeholder="Ex. 0">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Quantidade Máxima</mat-label>
+                                <input matInput placeholder="Ex. 3">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-6 adicionais">
+                            <h2>Opções</h2>
+                            <button mat-icon-button color="primary" (click)="addAdicionalEmObrigatorio(adicionalObrigatorio)">
+                                <mat-icon>add</mat-icon>
+                              </button>
+                        </div>
+                    </div>
+
+
+                    <div class="row" >
+                        <div class="col-12 adicional" *ngFor="let adicional of adicionalObrigatorio.additionals">
+                            <div class="row">
+                                <div class="col-8">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>{{adicional.name}}</mat-label>
+                                        <mat-select >
+                                          <mat-option *ngFor="let adicional of todosAdicionais" [value]="adicional" (click)="cadastrarAdicionalEmObrigatorio(adicionalObrigatorio, adicional)">
+                                            {{adicional.name}}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <button mat-mini-fab color="warn" style="margin-top: 10px;" (click) ="removeAdicionalEmObrigatorio(adicionalObrigatorio, adicional)">
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            
+
             <div class="botoes">
                 <button mat-flat-button color="primary" style="margin-right: 10px;" (click) ="editProduct()" [disabled]="!novoProdutoForm.valid">Salvar</button>
-                <button mat-flat-button color="warn">Cancelar</button>
+                <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
             </div>
         </div>
     </form>

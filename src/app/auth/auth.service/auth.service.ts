@@ -8,13 +8,15 @@ import { UserLogin } from "../login/userLogin.model";
 import { Token } from "./token.model";
 import jwt_decode from 'jwt-decode';
 import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
+import { Properties } from "src/app/Properties";
 
 @Injectable()
 export class authService {
 
-    baseUrl = "https://teste-api-delivery-v1-3.herokuapp.com"
+    baseUrl = 'http://localhost:8080';
 
-    private user: User = new User("", "", "", "", "", "", "", 0);
+    private user: User = new User("", "", "", "", "", 0);
     private username: string;
     private subjUser$: BehaviorSubject<User> = new BehaviorSubject(this.user);
 

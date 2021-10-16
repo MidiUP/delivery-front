@@ -63,9 +63,9 @@ export class HomeComponent implements OnInit {
 
   buscaNome: string = "";
 
-  user: User = new User("", ".", "", "", "", "", "", 0);
+  user: User = new User("", ".", "", "", "", 0);
 
-  userLogado: User = new User("", ".", "", "", "", "", "", 0);
+  userLogado: User = new User("", ".", "", "", "", 0);
 
   pagamento: MetodoPagamento = new MetodoPagamento(1, "");
 
@@ -186,7 +186,7 @@ export class HomeComponent implements OnInit {
 
   openDialogAddProduto(produto: Product) {
     const dialogRef = this.dialog.open(DialogAdicionarProdutoComponent, {
-      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price, additional: produto.additional }
+      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price, additional: produto.additional, imagePath: produto.imagePath }
     });
 
     dialogRef.afterClosed().subscribe(result => {

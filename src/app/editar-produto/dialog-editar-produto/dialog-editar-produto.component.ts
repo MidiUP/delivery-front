@@ -8,6 +8,7 @@ import { AlertaErrorComponent } from 'src/app/alerta-error/alerta-error.componen
 import { AlertaSuccesComponent } from 'src/app/alerta-succes/alerta-succes.component';
 import { Categoria } from 'src/app/categorias/categoria.model';
 import { categoriaService } from 'src/app/categorias/categoria.service';
+import { AdicionalObrigatorio } from 'src/app/novo-produto/additionalObrigatorios.model';
 import { Adicional } from 'src/app/novo-produto/adicional.model';
 import { Product } from 'src/app/novo-produto/product.model';
 import { ProductService } from 'src/app/novo-produto/product.service';
@@ -25,6 +26,7 @@ export class DialogEditarProdutoComponent implements OnInit {
   isDraggingOver: boolean = false;
   imagens: FileList;
   existeIMagem: boolean = false;
+  adicionaisObrigatorios: AdicionalObrigatorio[] = [];
 
 
   novoProdutoForm: FormGroup = this.formBuilder.group({
@@ -65,9 +67,58 @@ export class DialogEditarProdutoComponent implements OnInit {
     console.log(itemVazio);
   }
 
+  addAdicionalEmObrigatorio(AdicionalObrigatorio: AdicionalObrigatorio) {
+    let itemVazio: boolean = false;
+    let adicional: Adicional = new Adicional("", 0, "", 0, 0, 0, 0);
+    AdicionalObrigatorio.additionals.forEach(item => {
+      if (item.name === "") {
+        itemVazio = true;
+      }
+    });
+    if (!itemVazio) {
+      AdicionalObrigatorio.additionals.push(adicional);
+    }
+    console.log(itemVazio);
+  }
+
+
+
+
+
+
+  addAdicionalObrigatorio() {
+    let itemVazio: boolean = false;
+    let adicionalObrigatorio: AdicionalObrigatorio = new AdicionalObrigatorio("",0,0,[])
+    this.produto.additional?.forEach(item => {
+      if (item.name === "") {
+        itemVazio = true;
+      }
+    });
+    if (!itemVazio) {
+      this.adicionaisObrigatorios.push(adicionalObrigatorio);
+    }
+    console.log(itemVazio);
+  }
+
+  removeAdicionalObrigatorio(adicional: AdicionalObrigatorio) {
+    this.adicionaisObrigatorios.splice(this.adicionaisObrigatorios.indexOf(adicional), 1);
+  }
+
+
+  
+
+
+
+
+
   removeAdicional(adicional: Adicional) {
     this.produto.additional?.splice(this.produto.additional?.indexOf(adicional), 1);
   }
+
+  removeAdicionalEmObrigatorio(adicionalObrigatorio: AdicionalObrigatorio, adicional: Adicional) {
+    adicionalObrigatorio.additionals.splice(adicionalObrigatorio.additionals.indexOf(adicional), 1);
+  }
+
 
   editProduct() {
     let formData = new FormData;
@@ -126,6 +177,31 @@ export class DialogEditarProdutoComponent implements OnInit {
     }
 
   }
+  
+  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: AdicionalObrigatorio ,adicional: Adicional) {
+    let jaExiste: boolean = false;
+
+    adicionalObrigatorio.additionals.forEach(item => {
+      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
+        jaExiste = true;
+      }
+    })
+
+    if (!jaExiste) {
+      adicionalObrigatorio.additionals.forEach(item => {
+        if (item.name === "" && item.price === 0) {
+          item.name = adicional.name;
+          item.id = adicional.id;
+          item.price = adicional.price;
+          item.description = adicional.description;
+        }
+      });
+    }
+
+  }
+
+
+
 
   onDragOverEvent(event: DragEvent) {
     this.isDraggingOver = true;
@@ -159,6 +235,7 @@ export class DialogEditarProdutoComponent implements OnInit {
         )
     }
   }
+
 
 
 }
