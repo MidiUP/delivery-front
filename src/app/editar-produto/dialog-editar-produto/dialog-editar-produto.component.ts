@@ -8,8 +8,7 @@ import { AlertaErrorComponent } from 'src/app/alerta-error/alerta-error.componen
 import { AlertaSuccesComponent } from 'src/app/alerta-succes/alerta-succes.component';
 import { Categoria } from 'src/app/categorias/categoria.model';
 import { categoriaService } from 'src/app/categorias/categoria.service';
-import { AdicionalObrigatorio } from 'src/app/novo-produto/additionalObrigatorios.model';
-import { Adicional } from 'src/app/novo-produto/adicional.model';
+import { additionalRequired, Adicional } from 'src/app/novo-produto/adicional.model';
 import { Product } from 'src/app/novo-produto/product.model';
 import { ProductService } from 'src/app/novo-produto/product.service';
 
@@ -26,7 +25,7 @@ export class DialogEditarProdutoComponent implements OnInit {
   isDraggingOver: boolean = false;
   imagens: FileList;
   existeIMagem: boolean = false;
-  adicionaisObrigatorios: AdicionalObrigatorio[] = [];
+  adicionaisObrigatorios: additionalRequired[] = [];
 
 
   novoProdutoForm: FormGroup = this.formBuilder.group({
@@ -67,16 +66,16 @@ export class DialogEditarProdutoComponent implements OnInit {
     console.log(itemVazio);
   }
 
-  addAdicionalEmObrigatorio(AdicionalObrigatorio: AdicionalObrigatorio) {
+  addAdicionalEmObrigatorio(AdicionalObrigatorio: additionalRequired) {
     let itemVazio: boolean = false;
     let adicional: Adicional = new Adicional("", 0, "", 0, 0, 0, 0);
-    AdicionalObrigatorio.additionals.forEach(item => {
+    AdicionalObrigatorio.additional.forEach(item => {
       if (item.name === "") {
         itemVazio = true;
       }
     });
     if (!itemVazio) {
-      AdicionalObrigatorio.additionals.push(adicional);
+      AdicionalObrigatorio.additional.push(adicional);
     }
     console.log(itemVazio);
   }
@@ -88,7 +87,7 @@ export class DialogEditarProdutoComponent implements OnInit {
 
   addAdicionalObrigatorio() {
     let itemVazio: boolean = false;
-    let adicionalObrigatorio: AdicionalObrigatorio = new AdicionalObrigatorio("",0,0,[])
+    let adicionalObrigatorio: additionalRequired = new additionalRequired("",0,0,[],0)
     this.produto.additional?.forEach(item => {
       if (item.name === "") {
         itemVazio = true;
@@ -100,7 +99,7 @@ export class DialogEditarProdutoComponent implements OnInit {
     console.log(itemVazio);
   }
 
-  removeAdicionalObrigatorio(adicional: AdicionalObrigatorio) {
+  removeAdicionalObrigatorio(adicional: additionalRequired) {
     this.adicionaisObrigatorios.splice(this.adicionaisObrigatorios.indexOf(adicional), 1);
   }
 
@@ -115,8 +114,8 @@ export class DialogEditarProdutoComponent implements OnInit {
     this.produto.additional?.splice(this.produto.additional?.indexOf(adicional), 1);
   }
 
-  removeAdicionalEmObrigatorio(adicionalObrigatorio: AdicionalObrigatorio, adicional: Adicional) {
-    adicionalObrigatorio.additionals.splice(adicionalObrigatorio.additionals.indexOf(adicional), 1);
+  removeAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicional: Adicional) {
+    adicionalObrigatorio.additional.splice(adicionalObrigatorio.additional.indexOf(adicional), 1);
   }
 
 
@@ -178,17 +177,17 @@ export class DialogEditarProdutoComponent implements OnInit {
 
   }
   
-  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: AdicionalObrigatorio ,adicional: Adicional) {
+  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired ,adicional: Adicional) {
     let jaExiste: boolean = false;
 
-    adicionalObrigatorio.additionals.forEach(item => {
+    adicionalObrigatorio.additional.forEach(item => {
       if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
         jaExiste = true;
       }
     })
 
     if (!jaExiste) {
-      adicionalObrigatorio.additionals.forEach(item => {
+      adicionalObrigatorio.additional.forEach(item => {
         if (item.name === "" && item.price === 0) {
           item.name = adicional.name;
           item.id = adicional.id;

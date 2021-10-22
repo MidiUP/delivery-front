@@ -12,6 +12,7 @@ export class Items{
     constructor(
         public quantityProduct: number,
         public product: Product,
-        public additionalPedidos: additionalPedidos[]
+        public additionalPedidos: additionalPedidos[],
+        public additionalPedidosRequired: additionalPedidos[]
     ){}
 }

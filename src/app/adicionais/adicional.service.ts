@@ -29,7 +29,7 @@ export class AdicionalService{
     }
 
     putAdicional(adicional: Adicional, id:number){
-        return this.http.put(`${this.baseUrl}/${id}`,adicional)
+        return this.http.put(`${this.baseUrl}/${id}`,adicional);
     }
 
 }

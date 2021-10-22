@@ -1,6 +1,6 @@
 import { Categoria } from "../categorias/categoria.model";
 import { additionalPedidos } from "../home/items.model";
-import { Adicional } from "./adicional.model";
+import { additionalRequired, Adicional } from "./adicional.model";
 
 export class Product{
     constructor(
@@ -17,6 +17,8 @@ export class Product{
         public imagePath: string,
         public additional?: Adicional[],
         public additionalsString?: string,
-        public arrayAdicionais?: additionalPedidos[] 
+        public arrayAdicionais?: additionalPedidos[],
+        public arrayAdicionaisRequired?: additionalPedidos[],
+        public additionalRequired?: additionalRequired[]
     ){}
 }

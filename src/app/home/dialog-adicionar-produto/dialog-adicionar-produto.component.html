@@ -11,26 +11,83 @@
                 </button>
             </div>
         </div>
-    
+
+
+
+
+        <!-- Itens Obrigatórios -->
+
         <div class="container">
+            <div class="row" *ngFor="let adicionalRequired of produto.additionalRequired" style="margin-top: 10px;">
+                <div class="col-6 cabecalho-adicional-obrigatorio">
+                    <div class="titulo-adicional-obrigatorio">
+                        <h2>{{adicionalRequired.name}}</h2>
+                    </div>
+                    <span *ngIf="adicionalRequired.quantityMin>0">(min: {{adicionalRequired.quantityMin}})</span>
+                    <span *ngIf="adicionalRequired.quantityMax>0">(máx: {{adicionalRequired.quantityMax}})</span>
+                </div>
+                <div class="col-6 cabecalho-adicional-obrigatorio">
+                    <h5>Escolhidos: {{adicionalRequired.totalAdditionals}}</h5>
+                    <mat-icon style="color: red;"
+                        *ngIf="adicionalRequired.quantityMin>adicionalRequired.totalAdditionals">error_outline
+                    </mat-icon>
+                    <mat-icon style="color: green;"
+                        *ngIf="adicionalRequired.totalAdditionals>=adicionalRequired.quantityMin">check_circle
+                    </mat-icon>
+
+                </div>
+                <div class="row" *ngFor="let adicional of adicionalRequired.additional" style="margin-top: 10px;">
+                    <div class="col-3 adicionais" style="padding: 0;">
+                        <button mat-icon-button color="primary"
+                            (click)="addQuantityAdicionalObrigatorio(adicional, adicionalRequired)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+
+                        <span>{{adicional.quantityCar}}</span>
+
+                        <button mat-icon-button color="warn"
+                            (click)="removeQuantityAdicionalObrigatorio(adicional, adicionalRequired)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+
+                    <div class="col-5 adicional">
+                        <h3>{{adicional.name}}</h3>
+                        <p>{{adicional.description}}</p>
+                    </div>
+
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Itens Não Obrigatórios -->
+
+        <div class="container">
+            <h2>Adicionais</h2>
             <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
                 <div class="col-3 adicionais" style="padding: 0;">
                     <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
                         <mat-icon>add</mat-icon>
                     </button>
-    
+
                     <span>{{adicional.quantityCar}}</span>
-    
+
                     <button mat-icon-button color="warn" (click)="removeQuantityAdicional(adicional)">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>
-    
+
                 <div class="col-5 adicional">
                     <h3>{{adicional.name}}</h3>
                     <p>{{adicional.description}}</p>
                 </div>
-    
+
                 <div class="col-4 ">
                     <div class="valorAdicional">
                         <h4>Valor: </h4><span>R${{adicional.price.toFixed(2).replace('.',',')}}</span>
@@ -42,11 +99,11 @@
                 <hr>
             </div>
         </div>
-    
+
         <div class="container">
-    
+
         </div>
-    
+
         <div class="row resumoPedido">
             <div class="col-8">
                 <h5>Quantidade</h5>
@@ -54,9 +111,9 @@
                     <button mat-icon-button color="primary" (click)="addQuantityCar()">
                         <mat-icon>add</mat-icon>
                     </button>
-    
+
                     <span>{{produto.quantityCar}}</span>
-    
+
                     <button mat-icon-button color="warn" (click)="removeQuantityCar()">
                         <mat-icon>remove</mat-icon>
                     </button>
@@ -72,17 +129,14 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="container botao">
-            <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close>Adicionar</button>
+            <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close
+                [disabled]="!produtoOk">Adicionar</button>
         </div>
     </div>
 
-
-
-
-
-
+    <!-- Versão Mobile -->
 
     <div class="mobile">
         <div class="cabecalho">
@@ -96,44 +150,97 @@
                 </button>
             </div>
         </div>
+
+
+        <div class="row cabecalho-titulo-infos-adicional-mobile" *ngFor="let adicionalRequired of produto.additionalRequired" style="margin-top: 10px;">
+            <div class="col-6 cabecalho-adicional-obrigatorio">
+                <div class="titulo-adicional-obrigatorio">
+                    <h2>{{adicionalRequired.name}}</h2>
+                    <div style="height: auto;">
+                        <span *ngIf="adicionalRequired.quantityMin>0">(min: {{adicionalRequired.quantityMin}})</span>
+                        <span *ngIf="adicionalRequired.quantityMax>0">(máx: {{adicionalRequired.quantityMax}})</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6 cabecalho-adicional-obrigatorio" style="padding: 0;">
+                <h5>Escolhidos: {{adicionalRequired.totalAdditionals}}</h5>
+                <mat-icon style="color: red;" *ngIf="adicionalRequired.quantityMin>adicionalRequired.totalAdditionals">
+                    error_outline</mat-icon>
+                <mat-icon style="color: green;"
+                    *ngIf="adicionalRequired.totalAdditionals>=adicionalRequired.quantityMin">check_circle</mat-icon>
+
+            </div>
+            <div class="">
+                <div class="row" *ngFor="let adicional of adicionalRequired.additional" style="margin-top: 10px;">
+                    <div class="col-5 adicionais" style="padding: 0;">
+                        <button mat-icon-button color="primary" (click)="addQuantityAdicionalObrigatorio(adicional, adicionalRequired)">
+                            <mat-icon>add</mat-icon>
+                        </button>
     
+                        <span>{{adicional.quantityCar}}</span>
+    
+                        <button mat-icon-button color="warn" (click)="removeQuantityAdicionalObrigatorio(adicional, adicionalRequired)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                    </div>
+    
+                    <div class="col-7 adicional">
+                        <h3>{{adicional.name}}</h3>
+                        <p>{{adicional.description}}</p>
+                    </div>
+    
+                    <div class="col-12 valores-mobile">
+                        
+                    </div>
+                    <hr style="margin-top: 5px;">
+     
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Itens não obrigatórios -->
+
         <div class="">
+            <h2>Adicionais</h2>
             <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
                 <div class="col-5 adicionais" style="padding: 0;">
                     <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
                         <mat-icon>add</mat-icon>
                     </button>
-    
+
                     <span>{{adicional.quantityCar}}</span>
-    
+
                     <button mat-icon-button color="warn" (click)="removeQuantityAdicional(adicional)">
                         <mat-icon>remove</mat-icon>
                     </button>
                 </div>
-    
+
                 <div class="col-7 adicional">
                     <h3>{{adicional.name}}</h3>
                     <p>{{adicional.description}}</p>
                 </div>
-    
+
                 <div class="col-12 valores-mobile">
                     <div class="valorAdicional">
                         <h4>Valor: </h4><span> R${{adicional.price.toFixed(2).replace('.',',')}}</span>
-                        
+
                     </div>
                     <div class="valorAdicional">
-                        <h4 class="valor-total-mobile">Valor Total: </h4><span> R${{adicional.total.toFixed(2).replace('.',',')}}</span>
-                        
+                        <h4 class="valor-total-mobile">Valor Total: </h4><span>
+                            R${{adicional.total.toFixed(2).replace('.',',')}}</span>
+
                     </div>
                 </div>
                 <hr style="margin-top: 5px;">
             </div>
         </div>
-    
+
         <div class="">
-    
+
         </div>
-    
+
         <div class="row resumoPedido">
             <div class="col-5" style="padding: 0;">
                 <h5>Quantidade</h5>
@@ -141,9 +248,9 @@
                     <button mat-icon-button color="primary" (click)="addQuantityCar()">
                         <mat-icon>add</mat-icon>
                     </button>
-    
+
                     <span>{{produto.quantityCar}}</span>
-    
+
                     <button mat-icon-button color="warn" (click)="removeQuantityCar()">
                         <mat-icon>remove</mat-icon>
                     </button>
@@ -159,9 +266,9 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="botao">
-            <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close>Adicionar</button>
+            <button mat-flat-button color="primary" (click)="addCarrinho()" mat-dialog-close [disabled]="!produtoOk">Adicionar</button>
         </div>
     </div>
 </body>

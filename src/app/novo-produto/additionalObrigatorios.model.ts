@@ -1,10 +1,10 @@
 import { Adicional } from "./adicional.model";
 
-export class AdicionalObrigatorio{
+export class additionalRequired{
     constructor(
         public name: string,
-        public QuantidadeMax: number,
-        public QuantidadeMin: number,
-        public additionals: Adicional[]
+        public quantityMax: number,
+        public quantityMin: number,
+        public additional: Adicional[]
     ){}
 }

@@ -119,6 +119,38 @@ h4{
     margin: 0px 5px;
 }
 
+.cabecalho-adicional-obrigatorio{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.cabecalho-adicional-obrigatorio h2{
+    margin: 0;
+}
+
+.cabecalho-adicional-obrigatorio span{
+    font-size: 0.7em;
+    color: red;
+    margin: 0 3px;
+}
+
+.cabecalho-adicional-obrigatorio h5{
+    margin: 0;
+}
+.cabecalho-adicional-obrigatorio mat-icon{
+    font-size: 1.4em;
+    margin: 0;
+    margin-left: 5px;
+    padding-top: 3px;
+}
+
+.cabecalho-titulo-infos-adicional-mobile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 /* Extra small devices (portrait phones, less than 400px) */
 @media (max-width: 400px) {
     .desktop{
@@ -202,6 +234,12 @@ h4{
         margin-bottom: 5px;
     
     }
+
+    .cabecalho-adicional-obrigatorio h5{
+        font-size: 0.9em;
+    }
+
+    
     
 
 }

@@ -2,13 +2,13 @@
     <div class="container login">
         <div class="row campo-login">
             <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="!esqueciSenha">
 
                 <h1>LOGIN</h1>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline">
-                        <mat-label>Username</mat-label>
-                        <input matInput placeholder="username" formControlName="username" [(ngModel)]="user.username"
+                        <mat-label>Telefone</mat-label>
+                        <input matInput placeholder="86999999999" formControlName="username" [(ngModel)]="user.username"
                             type="text">
                     </mat-form-field>
 
@@ -24,10 +24,39 @@
                         </mat-form-field>
                     </div>
                     <div class="d-flex">
-                        <a [routerLink]="['/novoUsuario']" style="margin-right: 15px; margin-left: auto;">Cadastrar-se</a><br>
-                        <a href="">Esqueci minha senha</a>
+                        <a class="link-redefinir-senha" [routerLink]="['/novoUsuario']" style="margin-right: 15px; margin-left: auto;">Cadastrar-se</a><br>
+                        <a class="link-redefinir-senha" (click)="esqueciMinhaSenha()">Esqueci minha senha</a>
                     </div>
                     <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Entrar</button>
+                </form>
+            </div>
+
+            <div class="col-md-6" *ngIf="esqueciSenha">
+
+                <h1>Redefinir Senha</h1>
+                <form [formGroup]="esqueciSenhaForm" (ngSubmit)="redefinirSenha()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Digite seu email cadastrado em nosso sistema!</mat-label>
+                        <input matInput placeholder="username" formControlName="email" [(ngModel)]="emailRedefinirSenha"
+                            type="text">
+                    </mat-form-field>
+
+                    <!-- <div class="example-container">
+                        <mat-form-field appearance="outline" id="campo-senha">
+                            <mat-label>Senha</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                                [(ngModel)]="user.password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex">
+                        <a [routerLink]="['/novoUsuario']" style="margin-right: 15px; margin-left: auto;">Cadastrar-se</a><br>
+                        <a (click)="esqueciMinhaSenha()">Esqueci minha senha</a>
+                    </div> -->
+                    <button mat-flat-button color="primary" type="submit" [disabled]="!esqueciSenhaForm.valid">Enviar</button>
                 </form>
             </div>
 

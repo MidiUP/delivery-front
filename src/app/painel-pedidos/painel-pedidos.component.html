@@ -116,7 +116,7 @@
                         <h5 *ngFor="let item of tratarVetor(pedido)"> {{item.product.name}}
                             {{item.quantityProduct}}x
                             <br>
-                            <h6>{{lerAdicionais(item.additionalPedidos)}}</h6>
+                            <h6>{{lerAdicionais(item.additionalPedidos, item.additionalPedidosRequired)}}</h6>
                             
                         </h5>
                             

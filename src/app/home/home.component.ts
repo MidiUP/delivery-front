@@ -186,7 +186,7 @@ export class HomeComponent implements OnInit {
 
   openDialogAddProduto(produto: Product) {
     const dialogRef = this.dialog.open(DialogAdicionarProdutoComponent, {
-      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price, additional: produto.additional, imagePath: produto.imagePath }
+      data: { name: produto.name, description: produto.description, id: produto.id, price: produto.price, quantityCar: 1, total: produto.price, additional: produto.additional, imagePath: produto.imagePath, additionalRequired: produto.additionalRequired }
     });
 
     dialogRef.afterClosed().subscribe(result => {

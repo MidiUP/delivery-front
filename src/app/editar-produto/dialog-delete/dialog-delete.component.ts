@@ -18,7 +18,7 @@ export class DialogDeleteComponent implements OnInit {
             @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
-    console.log(this.data.id);
+
   }
 
   delete() {

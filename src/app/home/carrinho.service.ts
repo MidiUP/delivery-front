@@ -142,13 +142,19 @@ export class carrinhoService {
 
       this.items = [];
       let adicionais: additionalPedidos[] = [];
+      let adicionaisObrigatorios: additionalPedidos[] = [];
       // console.log(this.itensCarrinho)
 
       this.itensCarrinho.forEach(item => {
+        adicionais = [];
+        adicionaisObrigatorios = [];
         if(item.arrayAdicionais){
           adicionais = item.arrayAdicionais;
         }
-        this.items.push(new Items(item.quantityCar, item, adicionais))
+        if(item.arrayAdicionaisRequired){
+          adicionaisObrigatorios = item.arrayAdicionaisRequired;
+        }
+        this.items.push(new Items(item.quantityCar, item, adicionais, adicionaisObrigatorios))
       })
       if(this.valorDinheiro>this.totalPedido){
         this.order.thing = this.valorDinheiro;

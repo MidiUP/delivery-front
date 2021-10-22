@@ -158,10 +158,19 @@ export class PainelPedidosComponent implements OnInit {
       });
     }
 
-    lerAdicionais(adicionais: additionalPedidos[]): string {
+    lerAdicionais(adicionais: additionalPedidos[], adicionaisObrigatorios: additionalPedidos[]): string {
   
       let adicionaisString: string = "";
       let primeiro: boolean = true;
+
+      adicionaisObrigatorios.forEach(item => {
+        if(primeiro){
+          adicionaisString = adicionaisString + `${item.additional.name} (${item.quantity})`;
+          primeiro = false;
+        } else {
+          adicionaisString = adicionaisString + `, ${item.additional.name} (${item.quantity})`;
+        }
+      })
 
       adicionais.forEach(item => {
         if(primeiro){
@@ -367,7 +376,7 @@ export class PainelPedidosComponent implements OnInit {
       +'<div class="infos">'
           +'<div class="produto">'
               +'<h3>' + item.product.name + '('+ item.quantityProduct +')' + '</h3>'
-                  + '<h3>' + this.lerAdicionais(item.additionalPedidos) + '<h3>'
+                  + '<h3>' + this.lerAdicionais(item.additionalPedidos, item.additionalPedidosRequired) + '<h3>'
                   +'</div>'
               +'<h3>valor: R$' + this.calcularValorItem(item).toFixed(2).replace('.', ',') + '</h3>'
               +'</div>'

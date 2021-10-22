@@ -9,3 +9,13 @@ export class Adicional{
         public id: number
     ){}
 }
+
+export class additionalRequired {
+    constructor(
+        public name: string,
+        public quantityMin: number,
+        public quantityMax: number,
+        public additional: Adicional[],
+        public totalAdditionals: number
+    ){}
+}

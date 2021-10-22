@@ -1,0 +1,27 @@
+<body>
+    <div class="titulo">
+        <h1>Editar Categoria</h1>
+    </div>
+    <div class="container">
+        <form [formGroup]="editCategoriaForm">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nome</mat-label>
+                        <input matInput placeholder="Ex. Pizza" formControlName="name" [(ngModel)]="categoria.description">
+                        <mat-error *ngIf="editCategoriaForm.controls.name.hasError('required')">
+                            Por favor insira um nome.
+                        </mat-error>
+                        <mat-error *ngIf="editCategoriaForm.controls.name.hasError('minlength')">
+                            Por favor insira um nome com dois ou mais caracteres.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="botoes">
+                <button mat-flat-button color="primary" style="margin-right: 10px;" [disabled]="!editCategoriaForm.valid" (click)="editCategoria()">Salvar</button>
+                <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>

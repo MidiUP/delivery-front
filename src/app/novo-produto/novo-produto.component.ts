@@ -6,7 +6,8 @@ import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
 import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component';
 import { Categoria } from '../categorias/categoria.model';
 import { categoriaService } from '../categorias/categoria.service';
-import { Adicional } from './adicional.model';
+
+import { additionalRequired, Adicional } from './adicional.model';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 
@@ -20,8 +21,10 @@ export class NovoProdutoComponent implements OnInit {
 
   categorias: Categoria[];
   newProductForm: FormGroup;
-  product: Product = new Product("", 0, "", true, 50, 5, 0, 0, 0, {id:0, description: ""},"",  [], "", []);
-  todosAdicionais: Adicional[] = []
+  additionalRequired: FormGroup;
+  product: Product = new Product("", 0, "", true, 50, 5, 0, 0, 0, { id: 0, description: "" }, "", [], "", [], [], []);
+  todosAdicionais: Adicional[] = [];
+  adicionaisObrigatorios: additionalRequired[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -36,31 +39,39 @@ export class NovoProdutoComponent implements OnInit {
     this.newProductForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
       description: this.formBuilder.control('', [Validators.required, Validators.minLength(4)]),
-      category: this.formBuilder.control('', ),
+      category: this.formBuilder.control('',),
       quantity: this.formBuilder.control('', []),
       price: this.formBuilder.control('', [Validators.required, Validators.min(1)]),
       availability: this.formBuilder.control('', [])
-    }, {updateOn: 'change'});
+    }, { updateOn: 'change' });
+
+    this.additionalRequired = new FormGroup({
+      name: this.formBuilder.control( [Validators.required]),
+      quantityMin: this.formBuilder.control( [Validators.required]),
+      quantityMax: this.formBuilder.control( [Validators.required]),
+
+    }, { updateOn: 'change' });
 
     this.adicionalService.getAdicionals()
       .subscribe(data => this.todosAdicionais = data);
   }
 
-  createProduct():void{
+  createProduct(): void {
 
-    let categoria: Categoria = new Categoria (this.product.category.description, this.product.category.id);
+    let categoria: Categoria = new Categoria(this.product.category.description, this.product.category.id);
     this.product.category = categoria;
     this.productService.createProduct(this.product)
-    .subscribe(
-      (res) => {
-        this.openSnackBarSuccess();
-        window.location.href= "/admin?newProduct"
+      .subscribe(
+        (res) => {
+          this.openSnackBarSuccess();
+          window.location.href = "/admin?newProduct"
 
-      },
-      (err) => {
-        this.openSnackBarError();
-      }
-    );
+        },
+        (err) => {
+          this.openSnackBarError();
+        }
+      );
+    
   }
 
   openSnackBarSuccess() {
@@ -88,42 +99,93 @@ export class NovoProdutoComponent implements OnInit {
     let itemVazio: boolean = false;
     let adicional: Adicional = new Adicional("", 0, "", 0, 0, 0, 0);
     this.product.additional?.forEach(item => {
-      if(item.name === ""){
+      if (item.name === "") {
         itemVazio = true;
       }
     });
-    if(!itemVazio){
+    if (!itemVazio) {
       this.product.additional?.push(adicional);
     }
     console.log(itemVazio);
 
-    
+
   }
 
-  cadastrarAdicional(adicional: Adicional){
+  cadastrarAdicional(adicional: Adicional) {
     let jaExiste: boolean = false;
 
     this.product.additional?.forEach(item => {
-      if(item.name === adicional.name && item.price === adicional.price && item.description === adicional.description){
+      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
         jaExiste = true;
       }
     })
 
-    if (!jaExiste){
+    if (!jaExiste) {
       this.product.additional?.forEach(item => {
-        if(item.name === "" && item.price === 0){
+        if (item.name === "" && item.price === 0) {
           item.name = adicional.name;
           item.id = adicional.id;
           item.price = adicional.price;
-          item.description = adicional.description; 
+          item.description = adicional.description;
         }
       });
     }
+
+  }
+
+  removeAdicional(adicional: Adicional) {
+    this.product.additional?.splice(this.product.additional?.indexOf(adicional), 1);
+  }
+
+  addAdicionalObrigatorio() {
+    let adicionalObrigatorio: additionalRequired = new additionalRequired("", 0, 0, [],0);
+    this.product.additionalRequired?.push(adicionalObrigatorio);
     
   }
 
-  removeAdicional( adicional: Adicional) {
-    this.product.additional?.splice(this.product.additional?.indexOf(adicional),1);
+  removeAdicionalObrigatorio(adicional: additionalRequired) {
+    // this.product.additionalRequired.splice(this.product.additionalRequired.indexOf(adicional), 1);
+    this.product.additionalRequired?.splice(this.product.additionalRequired.indexOf(adicional),1)
+  }
+
+  addAdicionalEmObrigatorio(AdicionalObrigatorio: additionalRequired) {
+    let itemVazio: boolean = false;
+    let adicional: Adicional = new Adicional("", 0, "", 0, 0, 0, 0);
+    AdicionalObrigatorio.additional.forEach(item => {
+      if (item.name === "") {
+        itemVazio = true;
+      }
+    });
+    if (!itemVazio) {
+      AdicionalObrigatorio.additional.push(adicional);
+    }
+    console.log(itemVazio);
+  }
+
+  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicional: Adicional) {
+    let jaExiste: boolean = false;
+
+    adicionalObrigatorio.additional.forEach(item => {
+      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
+        jaExiste = true;
+      }
+    })
+
+    if (!jaExiste) {
+      adicionalObrigatorio.additional.forEach(item => {
+        if (item.name === "" && item.price === 0) {
+          item.name = adicional.name;
+          item.id = adicional.id;
+          item.price = adicional.price;
+          item.description = adicional.description;
+        }
+      });
+    }
+
+  }
+
+  removeAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicional: Adicional) {
+    adicionalObrigatorio.additional.splice(adicionalObrigatorio.additional.indexOf(adicional), 1);
   }
 
 

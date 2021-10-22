@@ -2,19 +2,24 @@
     <mat-card class="categorias" *ngFor="let categoria of categorias">
         <mat-card-title>
             {{categoria.description}}
+            <a>
+                <mat-icon style="margin-left: 15px;" (click)="editCategory(categoria.id)" color="primary">edit
+                </mat-icon>
+            </a>
+
+            <a>
+                <mat-icon (click)="delete(categoria.id)" color="warn">delete</mat-icon>
+            </a>
         </mat-card-title>
         <mat-card-content>
             <div class="d-flex">
-                <p>
-                    Produtos: <span>10</span>
-                </p>
-                <a>
-                    <mat-icon style="margin-left: 15px;" (click)="buttonEdit(categoria)">edit</mat-icon>
+                <!-- <a>
+                    <mat-icon style="margin-left: 15px;" (click)="editCategory(categoria.id)" color="primary">edit</mat-icon>
                 </a>
 
                 <a>
-                    <mat-icon (click)="delete(categoria.id)">delete</mat-icon>
-                </a>
+                    <mat-icon (click)="delete(categoria.id)" color="warn">delete</mat-icon>
+                </a> -->
             </div>
         </mat-card-content>
     </mat-card>
@@ -38,6 +43,12 @@
                             <mat-label for="nome-produto">Nome da Categoria</mat-label>
                             <input matInput formControlName="name" [(ngModel)]="categoriaNew.description" type="text"
                                 placeholder="Ex: Hambúrguer">
+                            <mat-error *ngIf="newCategoriaForm.controls.name.hasError('required')">
+                                Por favor insira um nome.
+                            </mat-error>
+                            <mat-error *ngIf="newCategoriaForm.controls.name.hasError('minlength')">
+                                Por favor insira um nome com dois ou mais caracteres.
+                            </mat-error>
                         </mat-form-field>
 
                     </div>
@@ -57,7 +68,7 @@
 
 <div class="container">
 
-    <hr>
+    <!-- <hr>
 
     <h1 style="margin-bottom: 10px;">Editar Categoria</h1>
 
@@ -90,5 +101,5 @@
             </div>
 
         </form>
-    </div>
+    </div> -->
 </div>

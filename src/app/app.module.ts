@@ -85,6 +85,9 @@ import { DialogHistoricoComponent } from './home/dialog-historico/dialog-histori
 import { TrocoErradoComponent } from './snack-bars/troco-errado/troco-errado.component';
 import { CpfCadastradoComponent } from './snack-bars/cpf-cadastrado/cpf-cadastrado.component';
 import { NumeroCadastradoComponent } from './snack-bars/numero-cadastrado/numero-cadastrado.component';
+import { DialogDeleteCategoryComponent } from './categorias/dialog-delete-category/dialog-delete-category.component';
+import { DialogEditCategoryComponent } from './categorias/dialog-edit-category/dialog-edit-category.component';
+import { FalhaLoginComponent } from './snack-bars/falha-login/falha-login.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +135,9 @@ import { NumeroCadastradoComponent } from './snack-bars/numero-cadastrado/numero
     TrocoErradoComponent,
     CpfCadastradoComponent,
     NumeroCadastradoComponent,
+    DialogDeleteCategoryComponent,
+    DialogEditCategoryComponent,
+    FalhaLoginComponent,
   ],
   imports: [
     BrowserModule,
