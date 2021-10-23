@@ -9,6 +9,7 @@ import { bairroService } from '../novo-bairro/bairro.service';
 import { User } from '../user/user.model';
 import { UserService } from '../user/user.service';
 import { DialogDeleteEnderecoComponent } from './dialog-delete-endereco/dialog-delete-endereco.component';
+import { DialogRedefinirSenhaComponent } from './dialog-redefinir-senha/dialog-redefinir-senha.component';
 
 @Component({
   selector: 'app-perfil',
@@ -298,6 +299,12 @@ export class PerfilComponent implements OnInit {
   openDialog(endereco: Address): void {
     const dialogRef = this.dialog.open(DialogDeleteEnderecoComponent, {
       data: { enderecoId: endereco.id }
+    });
+  }
+
+  openDialogRedefinirSenha(): void {
+    const dialogRef = this.dialog.open(DialogRedefinirSenhaComponent, {
+      data: { id: this.newUser.id}
     });
   }
 

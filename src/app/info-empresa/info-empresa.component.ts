@@ -1,6 +1,9 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
+import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component';
 import { Empresa } from './empresa.model';
 import { EmpresaService } from './empresa.service';
 
@@ -13,13 +16,23 @@ export class InfoEmpresaComponent implements OnInit {
 
   infoEmpresaForm: FormGroup;
   empresa = new Empresa(0, "", "", "", "", "", "", "", "");
-  isDraggingOver: boolean = false;
-  imagens: FileList;
-  existeIMagem: boolean = false;
+  isDraggingOverLogo: boolean = false;
+  isDraggingOverBanner1: boolean = false;
+  isDraggingOverBanner2: boolean = false;
+  isDraggingOverBanner3: boolean = false;
+  imagensLogo: FileList;
+  imagensBanner01: FileList;
+  imagensBanner02: FileList;
+  imagensBanner03: FileList;
+  existeIMagemLogo: boolean = false;
+  existeIMagemBanner1: boolean = false;
+  existeIMagemBanner2: boolean = false;
+  existeIMagemBanner3: boolean = false;
 
 
   constructor(private formBuilder: FormBuilder,
-    private empresaService: EmpresaService) {
+    private empresaService: EmpresaService,
+    private _snackBar: MatSnackBar) {
     this.empresaService.getEmpresaById()
       .subscribe(res => this.empresa = res);
   }
@@ -49,43 +62,78 @@ export class InfoEmpresaComponent implements OnInit {
     //     }
     //   )
 
-    let formData = new FormData;
-    if (this.imagens) {
-      formData.append('file', this.imagens[0])
+    let formDataImagemLogo = new FormData;
+    if (this.imagensLogo) {
+      formDataImagemLogo.append('file', this.imagensLogo[0])
+    }
+
+    let formDataImagemBanner1 = new FormData;
+    if (this.imagensBanner01) {
+      formDataImagemBanner1.append('file', this.imagensBanner01[0])
+    }
+
+    let formDataImagemBanner2 = new FormData;
+    if (this.imagensBanner02) {
+      formDataImagemBanner2.append('file', this.imagensBanner02[0])
+    }
+
+    let formDataImagemBanner3 = new FormData;
+    if (this.imagensBanner03) {
+      formDataImagemBanner3.append('file', this.imagensBanner03[0])
     }
 
     this.empresaService.putEmpresa(this.empresa, 1)
       .subscribe(
         (res) => {
-          console.log("Alterado");
-          this.postarImagem(formData);
+          this.openSnackBarSuccess();
+          this.postarImagem(formDataImagemLogo, this.imagensLogo);
         },
         (err) => {
-          console.log(err);
-          console.log(this.empresa)
+          this.openSnackBarError();
         }
       )
   }
 
-  onDragOverEvent(event: DragEvent) {
-    this.isDraggingOver = true;
+  onDragOverEvent(event: DragEvent, isDraggingOver: string) {
+    if(isDraggingOver === "isDraggingOverLogo"){
+      this.isDraggingOverLogo = true;
+    }
+
+    if(isDraggingOver === "isDraggingOverBanner1"){
+      this.isDraggingOverBanner1 = true;
+    }
     event.preventDefault();
   }
 
-  onDragLeaveEvent(event: DragEvent) {
-    this.isDraggingOver = false;
+  onDragLeaveEvent(event: DragEvent, isDraggingOver: string) {
+    if(isDraggingOver === "isDraggingOverLogo"){
+      this.isDraggingOverLogo = false;
+    }
+
+    if(isDraggingOver === "isDraggingOverBanner1"){
+      this.isDraggingOverBanner1 = false;
+    }
     event.preventDefault();
   }
 
-  onDropEvent(event: DragEvent) {
+  onDropEvent(event: DragEvent, controlador: string) {
     event.preventDefault();
-    this.imagens = event.dataTransfer?.files || new FileList;
-    this.existeIMagem = true;
-    console.log(this.imagens[0].name);
+    // imagens = event.dataTransfer?.files || new FileList;
+
+    if(controlador == 'existeIMagemLogo'){
+      this.existeIMagemLogo = true;
+      this.imagensLogo = event.dataTransfer?.files || new FileList;
+    }
+
+    if(controlador == 'existeIMagemBanner1'){
+      this.existeIMagemBanner1 = true;
+      this.imagensBanner01 = event.dataTransfer?.files || new FileList;
+    }
+    // console.log(this.imagens[0].name);
   }
 
-  postarImagem(formData: FormData, ) {
-    if (this.imagens[0]) {
+  postarImagem(formData: FormData, imagens: FileList) {
+    if (imagens) {
       console.log("tentando enviar");
 
       this.empresaService.postImage(formData)
@@ -98,5 +146,17 @@ export class InfoEmpresaComponent implements OnInit {
           })
         )
     }
+  }
+
+  openSnackBarSuccess() {
+    this._snackBar.openFromComponent(AlertaSuccesComponent, {
+      duration: 5000,
+    });
+  }
+
+  openSnackBarError() {
+    this._snackBar.openFromComponent(AlertaErrorComponent, {
+      duration: 5000,
+    });
   }
 }

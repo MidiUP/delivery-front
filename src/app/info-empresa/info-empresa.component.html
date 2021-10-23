@@ -58,12 +58,20 @@
       <div class="row">
 
         <div class="col-12">
-          <h2>Imagem do Produto</h2>
-          <div class="dropzone-off" (dragover)="onDragOverEvent($event)" (dragleave)="onDragLeaveEvent($event)" [class.dropzone-on]="isDraggingOver" (drop)="onDropEvent($event)"> 
-              <span *ngIf="!existeIMagem">Arraste sua imagem</span>
-              <span *ngIf="existeIMagem">{{imagens[0].name}}</span>
+          <h2>Logo</h2>
+          <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverLogo')" (dragleave)="onDragLeaveEvent($event, 'isDraggingOverLogo')" [class.dropzone-on]="isDraggingOverLogo" (drop)="onDropEvent($event, 'existeIMagemLogo')"> 
+              <span *ngIf="!existeIMagemLogo">Arraste sua imagem</span>
+              <span *ngIf="existeIMagemLogo">{{imagensLogo[0].name}}</span>
           </div>
       </div>
+
+      <div class="col-12">
+        <h2>Banner 01</h2>
+        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner1')" (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner1')" [class.dropzone-on]="isDraggingOverBanner1" (drop)="onDropEvent($event, 'existeIMagemBanner1')"> 
+            <span *ngIf="!existeIMagemBanner1">Arraste sua imagem</span>
+            <span *ngIf="existeIMagemBanner1">{{imagensBanner01[0].name}}</span>
+        </div>
+    </div>
 
       </div>
       <hr>

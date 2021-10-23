@@ -1,0 +1,24 @@
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.titulo h1{
+    font-size: 2em;
+}
+
+body{
+    width: 800px;
+    max-height: 80vh;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.botoes{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    padding-bottom: 15px;
+}

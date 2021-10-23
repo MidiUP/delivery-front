@@ -88,6 +88,8 @@ import { NumeroCadastradoComponent } from './snack-bars/numero-cadastrado/numero
 import { DialogDeleteCategoryComponent } from './categorias/dialog-delete-category/dialog-delete-category.component';
 import { DialogEditCategoryComponent } from './categorias/dialog-edit-category/dialog-edit-category.component';
 import { FalhaLoginComponent } from './snack-bars/falha-login/falha-login.component';
+import { DialogRedefinirSenhaComponent } from './perfil/dialog-redefinir-senha/dialog-redefinir-senha.component';
+import { SenhaDiferenteRepetirComponent } from './snack-bars/senha-diferente-repetir/senha-diferente-repetir.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +140,8 @@ import { FalhaLoginComponent } from './snack-bars/falha-login/falha-login.compon
     DialogDeleteCategoryComponent,
     DialogEditCategoryComponent,
     FalhaLoginComponent,
+    DialogRedefinirSenhaComponent,
+    SenhaDiferenteRepetirComponent,
   ],
   imports: [
     BrowserModule,

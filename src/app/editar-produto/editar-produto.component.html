@@ -22,7 +22,9 @@
         <mat-card class="produto" *ngFor="let produto of products">
             <div class="row">
                 <div class="col-md-4 flex">
-                    <img class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png"
+                    <img *ngIf="produto.imagePath" class="img-produto" [src]="produto.imagePath"
+                        (click)="openDialogInfo(produto)" style="cursor: pointer;">
+                    <img *ngIf="!produto.imagePath" class="img-produto" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png"
                         (click)="openDialogInfo(produto)" style="cursor: pointer;">
                 </div>
                 <div class="col-md-8">

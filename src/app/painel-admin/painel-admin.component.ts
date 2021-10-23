@@ -31,10 +31,8 @@ export class PainelAdminComponent implements OnInit {
     if(parametro === "newBairro"){
       this.content= "novo-bairro";
     }
+
     
-   
-      let altura = window.innerHeight;
-      console.log(altura);
     
   }
 
@@ -90,6 +88,10 @@ export class PainelAdminComponent implements OnInit {
 
   contentAdicionais(){
     this.content = "adicionais";
+  }
+
+  contentPainelPedidos(){
+    this.content = "painel-pedidos"
   }
 
 }

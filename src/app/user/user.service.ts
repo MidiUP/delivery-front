@@ -42,4 +42,8 @@ export class UserService {
         return this.http.get<boolean>(`${this.baseUrl}/check-phone?phone=${phone}`);
     }
 
+    recoveryPassword(id: number, newPassword: string): Observable<User>{
+        return this.http.post<User>(`${this.baseUrl}/changePassword/${id}`, {newPassword: newPassword});
+    }
+
 }

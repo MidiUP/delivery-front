@@ -67,13 +67,13 @@
                     </div>
                 </div>
 
-                <hr>
+                <!-- <hr> -->
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="subtitulo">
                         <h2>Login</h2>
                         <mat-icon>login</mat-icon>
-                    </div>
+                    </div> -->
                     <!-- <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Username</mat-label>
@@ -82,7 +82,7 @@
                         </mat-form-field>
                     </div> -->
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Senha Atual</mat-label>
                             <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
@@ -114,7 +114,7 @@
                             </button>
                         </mat-form-field>
                     </div>
-                </div>
+                </div> -->
             </form>
 
             <hr>
@@ -316,6 +316,8 @@
                     [disabled]="!formsValid()">Atualizar Cadastro</button>
                 <button mat-flat-button color="primary" style="margin-left: 5px;" (click)="newCampoEndereco()"
                     [disabled]="campoEndereco > 2">Adicionar outro Endereço</button>
+                    <button mat-flat-button color="primary" style="margin-left: 5px;" (click)="openDialogRedefinirSenha()"
+                    [disabled]="campoEndereco > 2">Trocar Senha</button>
             </div>
         </div>
     </mat-card>

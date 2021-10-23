@@ -38,7 +38,7 @@ export class EmpresaService{
     }
 
     postImage(file: FormData){
-        return this.http.post<File>(`${Properties}/v1/amazons3/upload/establishment/1`, file);
+        return this.http.post<File>(`http://localhost:8080/v1/amazons3/upload/establishment/1`, file);
     }
 
 
