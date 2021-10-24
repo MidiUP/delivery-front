@@ -11,7 +11,7 @@
                     <p>{{product.description}}</p>
                     <div class="d-flex">
                         <p class="preco">
-                            Preço: <span>R${{product.price.toFixed(2)}}</span>
+                            Preço: <span style="color: red;">R${{product.price.toFixed(2)}}</span>
 
                         </p>
 
@@ -91,9 +91,20 @@
 
 
             </div>
-            <div class="col-md-6">
+            <hr>
 
-            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Imagem do Produto</h2>
+                        <div class="dropzone-off" (dragover)="onDragOverEvent($event)"
+                            (dragleave)="onDragLeaveEvent($event)" [class.dropzone-on]="isDraggingOver"
+                            (drop)="onDropEvent($event)">
+                            <span *ngIf="!existeIMagem">Arraste sua imagem</span>
+                            <span *ngIf="existeIMagem">{{imagens[0].name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
         </div>
 
         <div class="row">
@@ -146,17 +157,18 @@
 
         <div class="row">
             <form [formGroup]="additionalRequired">
-                <div class="col-12 adicional adicional-obrigatorio"
-                    *ngFor="let adicionalObrigatorio of product.additionalRequired">
+                <mat-card *ngFor="let adicionalObrigatorio of product.additionalRequired" style="background: #DCDCDC;">
 
                     <div class="row">
-                        <div class="col-8 titulo-adicional-obrigatorio">
-                            <h2>Adicional {{product.additionalRequired?.indexOf(adicionalObrigatorio)}}</h2>
-                            <button mat-mini-fab color="warn" style="margin-top: 10px;"
-                                (click)="removeAdicionalObrigatorio(adicionalObrigatorio)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </div>
+                        <mat-card-title style="background: #DCDCDC;">
+                            <div class="col-8 titulo-adicional-obrigatorio">
+                                <h2>Adicional {{product.additionalRequired?.indexOf(adicionalObrigatorio)}}</h2>
+                                <button mat-mini-fab color="warn" style="margin-top: 10px;"
+                                    (click)="removeAdicionalObrigatorio(adicionalObrigatorio)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-card-title>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -219,8 +231,8 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </mat-card>
+                
             </form>
         </div>
 

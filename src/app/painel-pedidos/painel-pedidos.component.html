@@ -22,11 +22,11 @@
             <mat-form-field appearance="outline">
                 <mat-label>{{filtro}}</mat-label>
                 <mat-select>
-                    <mat-option value="0" (click)="getPedidosByDate()">Todos os Pedidos</mat-option>
-                    <mat-option value="1" (click)="filtroPedidos('Novo Pedido')">Novos Pedidos</mat-option>
-                    <mat-option value="2" (click)="filtroPedidos('Em Preparo')">Em Preparo</mat-option>
-                    <mat-option value="3" (click)="filtroPedidos('Saiu para Entrega')">Saiu para Entrega</mat-option>
-                    <mat-option value="2" (click)="filtroPedidos('Pedido Entregue')">Pedido Entregue</mat-option>
+                    <mat-option value="0" (click)="getPedidosByDate(true)">Todos os Pedidos</mat-option>
+                    <mat-option value="1" (click)="filtroPedidos('Novo Pedido', true)">Novos Pedidos</mat-option>
+                    <mat-option value="2" (click)="filtroPedidos('Em Preparo', true)">Em Preparo</mat-option>
+                    <mat-option value="3" (click)="filtroPedidos('Saiu para Entrega', true)">Saiu para Entrega</mat-option>
+                    <mat-option value="2" (click)="filtroPedidos('Pedido Entregue', true)">Pedido Entregue</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

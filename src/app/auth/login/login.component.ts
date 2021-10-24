@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { EmailEnviadoComponent } from 'src/app/snack-bars/email-enviado/email-enviado.component';
+import { EmailNaoExisteComponent } from 'src/app/snack-bars/email-nao-existe/email-nao-existe.component';
 import { FalhaLoginComponent } from 'src/app/snack-bars/falha-login/falha-login.component';
 import { authService } from '../auth.service/auth.service';
 import { UserLogin } from './userLogin.model';
@@ -64,9 +66,25 @@ export class LoginComponent implements OnInit {
   redefinirSenha(){
     this.requisicaoRedefinirSenha()
       .subscribe(
-        (res => {}),
-        (err => {console.log(err)})
+        (res => {
+          this.openSnackBarEmailEnviado();
+        }),
+        (err => {
+          this.openSnackBarEmailNaoExiste();
+        })
       )
+  }
+
+  openSnackBarEmailEnviado() {
+    this._snackBar.openFromComponent(EmailEnviadoComponent, {
+      duration: 5000,
+    });
+  }
+
+  openSnackBarEmailNaoExiste() {
+    this._snackBar.openFromComponent(EmailNaoExisteComponent, {
+      duration: 5000,
+    });
   }
 
   requisicaoRedefinirSenha(): Observable<any>{

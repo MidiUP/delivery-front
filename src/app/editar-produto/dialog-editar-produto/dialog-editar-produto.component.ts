@@ -25,7 +25,6 @@ export class DialogEditarProdutoComponent implements OnInit {
   isDraggingOver: boolean = false;
   imagens: FileList;
   existeIMagem: boolean = false;
-  adicionaisObrigatorios: additionalRequired[] = [];
 
 
   novoProdutoForm: FormGroup = this.formBuilder.group({
@@ -48,8 +47,6 @@ export class DialogEditarProdutoComponent implements OnInit {
     this.adicionalService.getAdicionals()
       .subscribe(data => this.todosAdicionais = data);
 
-    console.log(this.produto);
-
   }
 
   addAdicional() {
@@ -63,7 +60,7 @@ export class DialogEditarProdutoComponent implements OnInit {
     if (!itemVazio) {
       this.produto.additional?.push(adicional);
     }
-    console.log(itemVazio);
+
   }
 
   addAdicionalEmObrigatorio(AdicionalObrigatorio: additionalRequired) {
@@ -77,13 +74,8 @@ export class DialogEditarProdutoComponent implements OnInit {
     if (!itemVazio) {
       AdicionalObrigatorio.additional.push(adicional);
     }
-    console.log(itemVazio);
+ 
   }
-
-
-
-
-
 
   addAdicionalObrigatorio() {
     let itemVazio: boolean = false;
@@ -94,20 +86,14 @@ export class DialogEditarProdutoComponent implements OnInit {
       }
     });
     if (!itemVazio) {
-      this.adicionaisObrigatorios.push(adicionalObrigatorio);
+      this.produto.additionalRequired?.push(adicionalObrigatorio);
     }
     console.log(itemVazio);
   }
 
   removeAdicionalObrigatorio(adicional: additionalRequired) {
-    this.adicionaisObrigatorios.splice(this.adicionaisObrigatorios.indexOf(adicional), 1);
+    this.produto.additionalRequired?.splice(this.produto.additionalRequired.indexOf(adicional), 1);
   }
-
-
-  
-
-
-
 
 
   removeAdicional(adicional: Adicional) {
@@ -128,8 +114,9 @@ export class DialogEditarProdutoComponent implements OnInit {
     this.productService.putProduct(this.produto, this.produto.id)
       .subscribe(
         (res => {
+          this.openSnackBarSuccess();
           if (this.imagens){
-            this.postarImagem(formData, this.produto)
+            this.postarImagem(formData, this.produto);
           }
           
         }),
@@ -140,7 +127,6 @@ export class DialogEditarProdutoComponent implements OnInit {
         })
       )
     
-
   }
 
   openSnackBarSuccess() {
@@ -199,9 +185,6 @@ export class DialogEditarProdutoComponent implements OnInit {
 
   }
 
-
-
-
   onDragOverEvent(event: DragEvent) {
     this.isDraggingOver = true;
     event.preventDefault();
@@ -221,8 +204,6 @@ export class DialogEditarProdutoComponent implements OnInit {
 
   postarImagem(formData: FormData, produto: Product) {
     if (this.imagens[0]) {
-      console.log("tentando enviar");
-
       this.productService.postImage(formData, produto.id)
         .subscribe(
           (res => {

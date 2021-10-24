@@ -5,6 +5,12 @@
         <mat-form-field appearance="outline">
           <mat-label>Nome da Empresa</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.name" formControlName="name" placeholder="Ex: Mc Donalds">
+          <mat-error *ngIf="infoEmpresaForm.controls.name.hasError('required')">
+            Por favor insira um nome.
+          </mat-error>
+          <mat-error *ngIf="infoEmpresaForm.controls.name.hasError('minlength')">
+            Por favor insira um nome com dois ou mais caracteres.
+          </mat-error>
         </mat-form-field>
 
       </div>
@@ -12,81 +18,135 @@
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Slogan da Empresa</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.slogan" formControlName="slogan" placeholder="Ex: Amo muito tudo isso">
+          <input matInput type="text" [(ngModel)]="empresa.slogan" formControlName="slogan"
+            placeholder="Ex: Amo muito tudo isso">
+          <mat-error *ngIf="infoEmpresaForm.controls.slogan.hasError('required')">
+            Por favor insira um slogan.
+          </mat-error>
+          <mat-error *ngIf="infoEmpresaForm.controls.slogan.hasError('minlength')">
+            Por favor insira um nome com cinco ou mais caracteres.
+          </mat-error>
         </mat-form-field>
         <!--<div class="form-text">
           Um slogan deve ser uma frase curta que irá aparecer em baixo de sua logo. Então evite frases com mais de 06
           palavras
         </div>-->
       </div>
-      </div>
+    </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field appearance="outline">
-            <mat-label>CNPJ</mat-label>
-            <input matInput type="text" [(ngModel)]="empresa.cnpj" formControlName="cnpj" placeholder="Ex: 69.411.320/0001-30">
-          </mat-form-field>
-
-        </div>
-        <div class="col-md-6">
-          <mat-form-field appearance="outline">
-            <mat-label>Endereço</mat-label>
-            <input matInput type="text" [(ngModel)]="empresa.endereco" formControlName="endereco" placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente">
-          </mat-form-field>
-        </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>CNPJ</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.cnpj" formControlName="cnpj"
+            placeholder="Ex: 69.411.320/0001-30">
+          <mat-error *ngIf="infoEmpresaForm.controls.cnpj.hasError('required')">
+            Por favor insira um CNPJ.
+          </mat-error>
+        </mat-form-field>
 
       </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field appearance="outline">
-            <mat-label>Telefone</mat-label>
-            <input matInput type="text" [(ngModel)]="empresa.telefone" formControlName="telefone" placeholder="(86)9 9808-0092" aria-describedby="basic-addon1">
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field appearance="outline">
-            <mat-label>Whatsapp</mat-label>
-            <input matInput type="text" [(ngModel)]="empresa.whatsapp" formControlName="whatsapp" placeholder="Ex: (86)9 9808-0092">
-          </mat-form-field>
-        </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Endereço</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.endereco" formControlName="endereco"
+            placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente">
+          <mat-error *ngIf="infoEmpresaForm.controls.endereco.hasError('required')">
+            Por favor insira um Endereço.
+          </mat-error>
+          <mat-error *ngIf="infoEmpresaForm.controls.endereco.hasError('minlength')">
+            Por favor insira um nome com dez ou mais caracteres.
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <hr>
+    </div>
 
-      <div class="row">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.telefone" formControlName="telefone"
+            placeholder="(XX)9 9999-9999" aria-describedby="basic-addon1">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Whatsapp</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.whatsapp" formControlName="whatsapp"
+            placeholder="Ex: (XX)9 9999-9999">
+          <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('required')">
+            Por favor insira um número de Whatsapp.
+          </mat-error>
+          <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('minlength')">
+            Por favor insira um número com dez caracteres.
+          </mat-error>
+          <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('maxlength')">
+            Por favor insira um número com dez caracteres.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-        <div class="col-12">
-          <h2>Logo</h2>
-          <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverLogo')" (dragleave)="onDragLeaveEvent($event, 'isDraggingOverLogo')" [class.dropzone-on]="isDraggingOverLogo" (drop)="onDropEvent($event, 'existeIMagemLogo')"> 
-              <span *ngIf="!existeIMagemLogo">Arraste sua imagem</span>
-              <span *ngIf="existeIMagemLogo">{{imagensLogo[0].name}}</span>
-          </div>
+    <hr>
+
+    <div class="row">
+
+      <div class="col-12">
+        <h2>Logo</h2>
+        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverLogo')"
+          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverLogo')" [class.dropzone-on]="isDraggingOverLogo"
+          (drop)="onDropEvent($event, 'existeIMagemLogo')">
+          <span *ngIf="!existeIMagemLogo">Arraste sua imagem</span>
+          <span *ngIf="existeIMagemLogo">{{imagensLogo[0].name}}</span>
+        </div>
       </div>
 
       <div class="col-12">
         <h2>Banner 01</h2>
-        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner1')" (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner1')" [class.dropzone-on]="isDraggingOverBanner1" (drop)="onDropEvent($event, 'existeIMagemBanner1')"> 
-            <span *ngIf="!existeIMagemBanner1">Arraste sua imagem</span>
-            <span *ngIf="existeIMagemBanner1">{{imagensBanner01[0].name}}</span>
+        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner1')"
+          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner1')" [class.dropzone-on]="isDraggingOverBanner1"
+          (drop)="onDropEvent($event, 'existeIMagemBanner1')">
+          <span *ngIf="!existeIMagemBanner1">Arraste sua imagem</span>
+          <span *ngIf="existeIMagemBanner1">{{imagensBanner01[0].name}}</span>
         </div>
+      </div>
+      
+      <div class="col-12">
+        <h2>Banner 02</h2>
+        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner2')"
+          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner2')" [class.dropzone-on]="isDraggingOverBanner2"
+          (drop)="onDropEvent($event, 'existeIMagemBanner2')">
+          <span *ngIf="!existeIMagemBanner2">Arraste sua imagem</span>
+          <span *ngIf="existeIMagemBanner2">{{imagensBanner02[0].name}}</span>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <h2>Banner 03</h2>
+        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner3')"
+          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner3')" [class.dropzone-on]="isDraggingOverBanner3"
+          (drop)="onDropEvent($event, 'existeIMagemBanner3')">
+          <span *ngIf="!existeIMagemBanner3">Arraste sua imagem</span>
+          <span *ngIf="existeIMagemBanner3">{{imagensBanner03[0].name}}</span>
+        </div>
+      </div>
+
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label for="quantidade">Link Google Maps</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.linkGoogleMaps" formControlName="linkGoogleMaps"
+            placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
+        </mat-form-field>
+      </div>
     </div>
 
-      </div>
-      <hr>
-
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field appearance="outline">
-            <mat-label for="quantidade">Link Google Maps</mat-label>
-            <input matInput type="text" [(ngModel)]="empresa.linkGoogleMaps" formControlName="linkGoogleMaps" placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
-          </mat-form-field>
-        </div>
-      </div>
 
 
-    
 
     <div class="d-flex justify-content-center mt-4">
       <button class="btn btn-primary" [disabled]="!infoEmpresaForm.valid" type="submit">Salvar</button>

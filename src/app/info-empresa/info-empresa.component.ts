@@ -45,10 +45,11 @@ export class InfoEmpresaComponent implements OnInit {
       cnpj: this.formBuilder.control('', [Validators.required,]),
       endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
       telefone: this.formBuilder.control('', []),
-      whatsapp: this.formBuilder.control('', [Validators.required,]),
+      whatsapp: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       linkGoogleMaps: this.formBuilder.control('', [Validators.minLength(10)])
     }, { updateOn: 'change' });
   }
+
 
   onSubmit() {
     // this.empresaService.putEmpresa(this.empresa, 1)
@@ -87,6 +88,9 @@ export class InfoEmpresaComponent implements OnInit {
         (res) => {
           this.openSnackBarSuccess();
           this.postarImagem(formDataImagemLogo, this.imagensLogo);
+          this.postarBanner1(formDataImagemBanner1, this.imagensBanner01);
+          this.postarBanner2(formDataImagemBanner2, this.imagensBanner02);
+          this.postarBanner3(formDataImagemBanner3, this.imagensBanner03);
         },
         (err) => {
           this.openSnackBarError();
@@ -102,6 +106,14 @@ export class InfoEmpresaComponent implements OnInit {
     if(isDraggingOver === "isDraggingOverBanner1"){
       this.isDraggingOverBanner1 = true;
     }
+
+    if(isDraggingOver === "isDraggingOverBanner2"){
+      this.isDraggingOverBanner2 = true;
+    }
+
+    if(isDraggingOver === "isDraggingOverBanner3"){
+      this.isDraggingOverBanner3 = true;
+    }
     event.preventDefault();
   }
 
@@ -112,6 +124,14 @@ export class InfoEmpresaComponent implements OnInit {
 
     if(isDraggingOver === "isDraggingOverBanner1"){
       this.isDraggingOverBanner1 = false;
+    }
+
+    if(isDraggingOver === "isDraggingOverBanner2"){
+      this.isDraggingOverBanner2 = false;
+    }
+
+    if(isDraggingOver === "isDraggingOverBanner3"){
+      this.isDraggingOverBanner3 = false;
     }
     event.preventDefault();
   }
@@ -129,17 +149,74 @@ export class InfoEmpresaComponent implements OnInit {
       this.existeIMagemBanner1 = true;
       this.imagensBanner01 = event.dataTransfer?.files || new FileList;
     }
+
+    if(controlador == 'existeIMagemBanner2'){
+      this.existeIMagemBanner2 = true;
+      this.imagensBanner02 = event.dataTransfer?.files || new FileList;
+    }
+
+    if(controlador == 'existeIMagemBanner3'){
+      this.existeIMagemBanner3 = true;
+      this.imagensBanner03 = event.dataTransfer?.files || new FileList;
+    }
+
+
+    
     // console.log(this.imagens[0].name);
   }
 
   postarImagem(formData: FormData, imagens: FileList) {
     if (imagens) {
-      console.log("tentando enviar");
 
       this.empresaService.postImage(formData)
         .subscribe(
           (res => {
-            console.log("upload concluido");
+            this.openSnackBarSuccess();
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
+  }
+
+  postarBanner1(formData: FormData, imagens: FileList) {
+    if (imagens) {
+
+      this.empresaService.postBanner1(formData)
+        .subscribe(
+          (res => {
+            this.openSnackBarSuccess();
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
+  }
+
+  postarBanner2(formData: FormData, imagens: FileList) {
+    if (imagens) {
+
+      this.empresaService.postBanner2(formData)
+        .subscribe(
+          (res => {
+            this.openSnackBarSuccess();
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
+  }
+
+  postarBanner3(formData: FormData, imagens: FileList) {
+    if (imagens) {
+
+      this.empresaService.postBanner3(formData)
+        .subscribe(
+          (res => {
+            this.openSnackBarSuccess();
           }),
           (err => {
             console.log(err);

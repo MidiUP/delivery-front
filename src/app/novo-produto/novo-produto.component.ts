@@ -25,6 +25,9 @@ export class NovoProdutoComponent implements OnInit {
   product: Product = new Product("", 0, "", true, 50, 5, 0, 0, 0, { id: 0, description: "" }, "", [], "", [], [], []);
   todosAdicionais: Adicional[] = [];
   adicionaisObrigatorios: additionalRequired[] = [];
+  isDraggingOver: boolean = false;
+  imagens: FileList;
+  existeIMagem: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -58,11 +61,17 @@ export class NovoProdutoComponent implements OnInit {
 
   createProduct(): void {
 
+    let formData = new FormData;
+    if (this.imagens){
+      formData.append('file', this.imagens[0])
+    }
+
     let categoria: Categoria = new Categoria(this.product.category.description, this.product.category.id);
     this.product.category = categoria;
     this.productService.createProduct(this.product)
       .subscribe(
         (res) => {
+          this.postarImagem(formData, res);
           this.openSnackBarSuccess();
           window.location.href = "/admin?newProduct"
 
@@ -186,6 +195,37 @@ export class NovoProdutoComponent implements OnInit {
 
   removeAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicional: Adicional) {
     adicionalObrigatorio.additional.splice(adicionalObrigatorio.additional.indexOf(adicional), 1);
+  }
+
+  onDragOverEvent(event: DragEvent) {
+    this.isDraggingOver = true;
+    event.preventDefault();
+  }
+
+  onDragLeaveEvent(event: DragEvent) {
+    this.isDraggingOver = false;
+    event.preventDefault();
+  }
+
+  onDropEvent(event: DragEvent) {
+    event.preventDefault();
+    this.imagens = event.dataTransfer?.files || new FileList;
+    this.existeIMagem = true;
+    console.log(this.imagens[0].name);
+  }
+
+  postarImagem(formData: FormData, produto: Product) {
+    if (this.imagens[0]) {
+      this.productService.postImage(formData, produto.id)
+        .subscribe(
+          (res => {
+            this.openSnackBarSuccess();
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
   }
 
 

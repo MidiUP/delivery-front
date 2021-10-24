@@ -4,204 +4,216 @@
             <h1>Editar Produto</h1>
         </div>
         <form [formGroup]="novoProdutoForm">
-        <div class="container">
-            <div class="row d-flex">
-                <div class="col-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Ex. Pizza" formControlName="name"
-                        [(ngModel)]="produto.name">
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Descrição</mat-label>
-                        <input matInput placeholder="Ex. Calabreza, tomate, cebola, serve até 04 pessoas" formControlName="description"
-                        [(ngModel)]="produto.description">
-                    </mat-form-field>
-                </div>
-
-                <div class="col-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Preço</mat-label>
-                        <input matInput placeholder="Ex. 10,00" formControlName="price"
-                        [(ngModel)]="produto.price">
-                    </mat-form-field>
-                </div>
-
-                <div class="col-6">
-
-                </div>
-
-
-                <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
-                    <h2 style="margin-bottom: 25px;">Disponibilidade do produto</h2>
-                    <mat-radio-group formControlName="availability"
-                    [(ngModel)]="produto.availability">
-                        <mat-radio-button [value]="true" style="margin-right: 10px;">Disponível</mat-radio-button>
-                        <mat-radio-button [value]="false" selected>Não Disponível</mat-radio-button>
-                    </mat-radio-group>
-                </div>
-
-                <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
-                    <h2 style="margin-bottom: 5px;">Categoria do produto</h2>
-                    <mat-form-field appearance="outline">
-                        <mat-label>{{produto.category.description}}</mat-label>
-                        <mat-select formControlName="category"
-                        [(ngModel)]="produto.category">
-                          <mat-option *ngFor="let categoria of categorias" [value]="{id: categoria.id}">
-                            {{categoria.description}}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                </div>
-
-            </div>
-
-            <hr>
-
-            <div class="row">
-                <div class="col-12">
-                    <h2>Imagem do Produto</h2>
-                    <div class="dropzone-off" (dragover)="onDragOverEvent($event)" (dragleave)="onDragLeaveEvent($event)" [class.dropzone-on]="isDraggingOver" (drop)="onDropEvent($event)"> 
-                        <span *ngIf="!existeIMagem">Arraste sua imagem</span>
-                        <span *ngIf="existeIMagem">{{imagens[0].name}}</span>
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput placeholder="Ex. Pizza" formControlName="name" [(ngModel)]="produto.name">
+                        </mat-form-field>
                     </div>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row">
-                <div class="col-6 adicionais">
-                    <h2>Cadastrar Adicionais</h2>
-                    <button mat-icon-button color="primary" (click)="addAdicional()">
-                        <mat-icon>add</mat-icon>
-                      </button>
-                </div>
-            </div>
-
-            <div class="row" >
-                <div class="col-12 adicional" *ngFor="let adicional of produto.additional">
-                    <div class="row">
-                        <div class="col-8">
-                            <mat-form-field appearance="outline">
-                                <mat-label>{{adicional.name}}</mat-label>
-                                <mat-select >
-                                  <mat-option *ngFor="let adicional of todosAdicionais" [value]="adicional" (click)="cadastrarAdicional(adicional)">
-                                    {{adicional.name}}
-                                  </mat-option>
-                                </mat-select>
-                              </mat-form-field>
-                        </div>
-                        <div class="col-4">
-                            <button mat-mini-fab color="warn" style="margin-top: 10px;" (click) ="removeAdicional(adicional)">
-                                <mat-icon>delete</mat-icon>
-                              </button>
-                        </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Descrição</mat-label>
+                            <input matInput placeholder="Ex. Calabreza, tomate, cebola, serve até 04 pessoas"
+                                formControlName="description" [(ngModel)]="produto.description">
+                        </mat-form-field>
                     </div>
-                </div>
-            </div>
 
-
-
-            <div class="row">
-                <div class="col-6 adicionais">
-                    <h2>Cadastrar Adicionais Obrigatórios</h2>
-                    <button mat-icon-button color="primary" (click)="addAdicionalObrigatorio()">
-                        <mat-icon>add</mat-icon>
-                      </button>
-                </div>
-            </div>
-
-
-
-            <div class="row" >
-                <div class="col-12 adicional adicional-obrigatorio" *ngFor="let adicionalObrigatorio of adicionaisObrigatorios">
-
-                    <div class="row">
-                        <div class="col-8 titulo-adicional-obrigatorio">
-                            <h2>Adicional {{adicionaisObrigatorios.indexOf(adicionalObrigatorio)+1}}</h2>
-                            <button mat-mini-fab color="warn" style="margin-top: 10px;" (click) ="removeAdicionalObrigatorio(adicionalObrigatorio)">
-                                <mat-icon>delete</mat-icon>
-                              </button>
-                        </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Preço</mat-label>
+                            <input matInput placeholder="Ex. 10,00" formControlName="price" [(ngModel)]="produto.price">
+                        </mat-form-field>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Nome</mat-label>
-                                <input matInput placeholder="Ex. Sabores">
-                            </mat-form-field>
-                        </div>
 
-                        <div class="col-4">
-                            
-                        </div>
+                    <div class="col-6">
 
-                        <div class="col-6">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Quantidade mínima</mat-label>
-                                <input matInput placeholder="Ex. 0">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-6">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Quantidade Máxima</mat-label>
-                                <input matInput placeholder="Ex. 3">
-                            </mat-form-field>
-                        </div>
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-6 adicionais">
-                            <h2>Opções</h2>
-                            <button mat-icon-button color="primary" (click)="addAdicionalEmObrigatorio(adicionalObrigatorio)">
-                                <mat-icon>add</mat-icon>
-                              </button>
-                        </div>
+                    <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
+                        <h2 style="margin-bottom: 25px;">Disponibilidade do produto</h2>
+                        <mat-radio-group formControlName="availability" [(ngModel)]="produto.availability">
+                            <mat-radio-button [value]="true" style="margin-right: 10px;">Disponível</mat-radio-button>
+                            <mat-radio-button [value]="false" selected>Não Disponível</mat-radio-button>
+                        </mat-radio-group>
                     </div>
 
+                    <div class="col-6" style="display: flex; align-items: start; flex-direction: column;">
+                        <h2 style="margin-bottom: 5px;">Categoria do produto</h2>
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{produto.category.description}}</mat-label>
+                            <mat-select formControlName="category" [(ngModel)]="produto.category">
+                                <mat-option *ngFor="let categoria of categorias" [value]="{id: categoria.id}">
+                                    {{categoria.description}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
 
-                    <div class="row" >
-                        <div class="col-12 adicional" *ngFor="let adicional of adicionalObrigatorio.additional">
-                            <div class="row">
-                                <div class="col-8">
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>{{adicional.name}}</mat-label>
-                                        <mat-select >
-                                          <mat-option *ngFor="let adicional of todosAdicionais" [value]="adicional" (click)="cadastrarAdicionalEmObrigatorio(adicionalObrigatorio, adicional)">
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Imagem do Produto</h2>
+                        <div class="dropzone-off" (dragover)="onDragOverEvent($event)"
+                            (dragleave)="onDragLeaveEvent($event)" [class.dropzone-on]="isDraggingOver"
+                            (drop)="onDropEvent($event)">
+                            <span *ngIf="!existeIMagem">Arraste sua imagem</span>
+                            <span *ngIf="existeIMagem">{{imagens[0].name}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-6 adicionais">
+                        <h2>Cadastrar Adicionais</h2>
+                        <button mat-icon-button color="primary" (click)="addAdicional()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 adicional" *ngFor="let adicional of produto.additional">
+                        <div class="row">
+                            <div class="col-8">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{adicional.name}}</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let adicional of todosAdicionais" [value]="adicional"
+                                            (click)="cadastrarAdicional(adicional)">
                                             {{adicional.name}}
-                                          </mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-4">
-                                    <button mat-mini-fab color="warn" style="margin-top: 10px;" (click) ="removeAdicionalEmObrigatorio(adicionalObrigatorio, adicional)">
-                                        <mat-icon>delete</mat-icon>
-                                      </button>
-                                </div>
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                                <button mat-mini-fab color="warn" style="margin-top: 10px;"
+                                    (click)="removeAdicional(adicional)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+                <div class="row">
+                    <div class="col-6 adicionais">
+                        <h2>Cadastrar Adicionais Obrigatórios</h2>
+                        <button mat-icon-button color="primary" (click)="addAdicionalObrigatorio()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <mat-card *ngFor="let adicionalObrigatorio of produto.additionalRequired">
+
+                            <div class="row">
+                                <mat-card-title>
+                                    <div class="col-8 titulo-adicional-obrigatorio">
+                                        <h2>Adicional {{produto.additionalRequired?.indexOf(adicionalObrigatorio)}}</h2>
+                                        <button mat-mini-fab color="warn" style="margin-top: 10px;"
+                                            (click)="removeAdicionalObrigatorio(adicionalObrigatorio)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </mat-card-title>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Nome</mat-label>
+                                        <input matInput placeholder="Ex. Sabores" [ngModelOptions]="{standalone: true}"
+                                            [(ngModel)]="adicionalObrigatorio.name">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-4">
+
+                                </div>
+
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Quantidade mínima</mat-label>
+                                        <input matInput placeholder="Ex. 0" [ngModelOptions]="{standalone: true}"
+                                            [(ngModel)]="adicionalObrigatorio.quantityMin">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Quantidade Máxima</mat-label>
+                                        <input matInput placeholder="Ex. 3" [ngModelOptions]="{standalone: true}"
+                                            [(ngModel)]="adicionalObrigatorio.quantityMax">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-6 adicionais">
+                                    <h2>Opções</h2>
+                                    <button mat-icon-button color="primary"
+                                        (click)="addAdicionalEmObrigatorio(adicionalObrigatorio)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-12 adicional" *ngFor="let adicional of adicionalObrigatorio.additional">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>{{adicional.name}}</mat-label>
+                                                <mat-select>
+                                                    <mat-option *ngFor="let adicional of todosAdicionais"
+                                                        [value]="adicional"
+                                                        (click)="cadastrarAdicionalEmObrigatorio(adicionalObrigatorio, adicional)">
+                                                        {{adicional.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <button mat-mini-fab color="warn" style="margin-top: 10px;"
+                                                (click)="removeAdicionalEmObrigatorio(adicionalObrigatorio, adicional)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    </mat-card>
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="botoes">
+                    <button mat-flat-button color="primary" style="margin-right: 10px;" (click)="editProduct()"
+                        [disabled]="!novoProdutoForm.valid">Salvar</button>
+                    <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+                </div>
             </div>
-
-
-
-
-
-
-
-            
-
-            <div class="botoes">
-                <button mat-flat-button color="primary" style="margin-right: 10px;" (click) ="editProduct()" [disabled]="!novoProdutoForm.valid">Salvar</button>
-                <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
-            </div>
-        </div>
-    </form>
+        </form>
     </section>
 
 </body>

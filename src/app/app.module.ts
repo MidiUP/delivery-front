@@ -90,6 +90,8 @@ import { DialogEditCategoryComponent } from './categorias/dialog-edit-category/d
 import { FalhaLoginComponent } from './snack-bars/falha-login/falha-login.component';
 import { DialogRedefinirSenhaComponent } from './perfil/dialog-redefinir-senha/dialog-redefinir-senha.component';
 import { SenhaDiferenteRepetirComponent } from './snack-bars/senha-diferente-repetir/senha-diferente-repetir.component';
+import { EmailEnviadoComponent } from './snack-bars/email-enviado/email-enviado.component';
+import { EmailNaoExisteComponent } from './snack-bars/email-nao-existe/email-nao-existe.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +144,8 @@ import { SenhaDiferenteRepetirComponent } from './snack-bars/senha-diferente-rep
     FalhaLoginComponent,
     DialogRedefinirSenhaComponent,
     SenhaDiferenteRepetirComponent,
+    EmailEnviadoComponent,
+    EmailNaoExisteComponent,
   ],
   imports: [
     BrowserModule,

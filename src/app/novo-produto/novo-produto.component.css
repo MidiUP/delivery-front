@@ -54,13 +54,25 @@ mat-card{
     margin-top: 13px;
 }
 
-span{
-    color: red;
-}
-
 .adicionais{
     display: flex;
     align-items: center;
+}
+
+.adicional-obrigatorio{
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.titulo-adicional-obrigatorio{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.titulo-adicional-obrigatorio h2{
+    margin-right: 10px;
 }
 
 .dropzone-off{
@@ -100,19 +112,6 @@ span{
     background: #f9fdff;
 }
 
-.adicional-obrigatorio{
-    margin-bottom: 20px;
-    padding: 10px;
-    background: #F8F8FF;
-}
-
-.titulo-adicional-obrigatorio{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.titulo-adicional-obrigatorio h2{
-    margin-right: 10px;
+hr{
+    margin-top: 20px;
 }

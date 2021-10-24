@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { additionalPedidos, Items } from '../home/items.model';
 import { Order } from '../home/order.model';
@@ -6,12 +6,13 @@ import { orderService } from '../home/order.service';
 import { Product } from '../novo-produto/product.model';
 import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
 
+
 @Component({
   selector: 'app-painel-pedidos',
   templateUrl: './painel-pedidos.component.html',
   styleUrls: ['./painel-pedidos.component.css']
 })
-export class PainelPedidosComponent implements OnInit {
+export class PainelPedidosComponent implements OnInit, OnDestroy {
 
   pedidos: Order[];
   status: string;
@@ -19,17 +20,20 @@ export class PainelPedidosComponent implements OnInit {
   filtro: string = "Todos os Pedidos";
   mute: boolean = false;
   corIconeMute: string = 'primary';
+  intervalo: any;
 
 
 
   constructor(private orderService: orderService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getPedidosByDate();
-    setInterval(() => this.filtroPedidos(this.filtro), 60000);
+    this.getPedidosByDate(true);
+    this.intervalo = setInterval(() => this.filtroPedidos(this.filtro, true), 60000);
   }
 
-
+  ngOnDestroy(): void {
+    clearInterval(this.intervalo);
+  }
 
   getPedidos(): void {
     this.orderService.getOrders()
@@ -40,13 +44,15 @@ export class PainelPedidosComponent implements OnInit {
       )
   }
 
-  getPedidosByDate(): void {
+  getPedidosByDate(tocar: boolean): void {
     this.filtro = "Todos os Pedidos"
     this.orderService.getOrdersByDate()
       .subscribe(
         data => {
           this.pedidos = data;
-          this.alerta();
+          if(tocar){
+            this.alerta();
+          }
         }
       )
   }
@@ -77,11 +83,10 @@ export class PainelPedidosComponent implements OnInit {
     this.orderService.putOrder(pedido, pedido.id)
       .subscribe(
         (res => {
-          console.log("status alterado");
           if (this.filtro !== 'Todos os Pedidos') {
-            this.filtroPedidos(this.filtro);
+            this.filtroPedidos(this.filtro, false);
           } else {
-            this.getPedidosByDate();
+            this.getPedidosByDate(false);
           }
         }),
         (err => console.log(err))
@@ -98,7 +103,7 @@ export class PainelPedidosComponent implements OnInit {
     })
   }
 
-  filtroPedidos(filtro: string) {
+  filtroPedidos(filtro: string, tocar: boolean) {
     if (filtro !== "Todos os Pedidos") {
       this.filtro = filtro;
       let pedidosFiltrados: Order[] = [];
@@ -117,8 +122,10 @@ export class PainelPedidosComponent implements OnInit {
             if (pedidosEmAberto.length > 0) {
               this.filtro = "Novo Pedido";
               this.pedidos = pedidosEmAberto;
-              if (!this.mute) {
+              if (!this.mute && tocar) {
                 this.audio.play();
+                console.log("entrei");
+                
               }
             } else {
               this.pedidos = pedidosFiltrados;
@@ -126,7 +133,7 @@ export class PainelPedidosComponent implements OnInit {
           }
         )
     } else {
-      this.getPedidosByDate();
+      this.getPedidosByDate(true);
     }
   }
 
