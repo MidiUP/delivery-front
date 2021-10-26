@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   faHome = faHome;
 
 
-  empresa: Empresa = new Empresa(0, "", "", "", "", "", "", "", "", "")
+  empresa: Empresa = new Empresa(0, "", "", "", "", "", "", "", "", true)
 
 
   user: User = new User("Visitante", "", "", "", "", 0)

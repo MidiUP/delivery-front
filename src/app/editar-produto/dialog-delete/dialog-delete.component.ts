@@ -25,12 +25,10 @@ export class DialogDeleteComponent implements OnInit {
     this.productService.deleteProduct(this.data.id)
       .subscribe(
         (data) => {
-          console.log(data); 
-          window.location.reload();        
+        
         },
         (error) => {
-          console.log("error");
-          
+
         }
       )
   }

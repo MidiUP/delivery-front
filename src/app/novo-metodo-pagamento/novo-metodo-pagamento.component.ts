@@ -32,7 +32,6 @@ export class NovoMetodoPagamentoComponent implements OnInit {
       .subscribe(
         (res => {
           this.openSnackBarSuccess();
-          window.location.href= "/admin?newMetodoPagamento"
         }),
         (err => {
           this.openSnackBarError();

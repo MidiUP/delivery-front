@@ -6,9 +6,10 @@ export class Empresa{
         public password: string,
         public slogan: string,
         public cnpj: string,
-        public endereco: string,
+        public address: string,
         public telefone: string,
         public whatsapp: string,
+        public open: boolean,
         public linkGoogleMaps?: string,
         public logoPath?: string
     ){}

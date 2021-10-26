@@ -77,17 +77,17 @@ export class EditarProdutoComponent implements OnInit {
     this.openDialogEditProduct(product);
   }
 
-  delete(key: number) {
-    this.productService.deleteProduct(key)
-      .subscribe(
-        (res) => {
-          console.log("apagou");
-        },
-        (err) => {
-          console.log(err);
-        }
-      )
-  }
+  // delete(key: number) {
+  //   this.productService.deleteProduct(key)
+  //     .subscribe(
+  //       (res) => {
+  //         console.log("apagou");
+  //       },
+  //       (err) => {
+  //         console.log(err);
+  //       }
+  //     )
+  // }
 
   openSnackBarSuccess() {
     this._snackBar.openFromComponent(AlertaSuccesComponent, {
@@ -104,6 +104,9 @@ export class EditarProdutoComponent implements OnInit {
   openDialog(id:number) {
     const dialogRef = this.dialog.open(DialogDeleteComponent,{
       data:{id: id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProducts();
     });
   }
 
@@ -125,6 +128,9 @@ export class EditarProdutoComponent implements OnInit {
   openDialogEditProduct(produto: Product) {
     const dialogRef = this.dialog.open(DialogEditarProdutoComponent, {
       data: { id: produto.id, name: produto.name, quantity: produto.quantity, price: produto.price, description: produto.description, additional: produto.additional, availability: produto.availability, rate: 5, category: produto.category, imagePath: produto.imagePath, additionalRequired: produto.additionalRequired }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProducts();
     });
   }
 

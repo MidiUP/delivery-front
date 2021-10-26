@@ -177,6 +177,11 @@ img {
 
 }
 
+.icon-close{
+    color: red;
+
+}
+
 #cardapio {
     height:max-content;
 }

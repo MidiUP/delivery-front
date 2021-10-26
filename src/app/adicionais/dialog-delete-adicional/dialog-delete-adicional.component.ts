@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertaErrorComponent } from 'src/app/alerta-error/alerta-error.component';
 import { AlertaSuccesComponent } from 'src/app/alerta-succes/alerta-succes.component';
@@ -13,7 +13,7 @@ import { AdicionalService } from '../adicional.service';
 })
 export class DialogDeleteAdicionalComponent implements OnInit {
 
-  constructor(private adicionalService: AdicionalService, @Inject(MAT_DIALOG_DATA) public adicional: Adicional, private _snackBar: MatSnackBar) { }
+  constructor(private adicionalService: AdicionalService,public dialogRef: MatDialogRef<DialogDeleteAdicionalComponent>,  @Inject(MAT_DIALOG_DATA) public adicional: Adicional, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +23,7 @@ export class DialogDeleteAdicionalComponent implements OnInit {
     .subscribe(
       (res => {
         this.openSnackBarSuccess();
+        this.dialogRef.close();
       }),
       (err => {
         this.openSnackBarError();

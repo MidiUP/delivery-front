@@ -15,39 +15,46 @@ import { EmpresaService } from './empresa.service';
 export class InfoEmpresaComponent implements OnInit {
 
   infoEmpresaForm: FormGroup;
-  empresa = new Empresa(0, "", "", "", "", "", "", "", "");
+  empresa = new Empresa(0, "", "", "", "", "", "", "", "", true);
   isDraggingOverLogo: boolean = false;
   isDraggingOverBanner1: boolean = false;
   isDraggingOverBanner2: boolean = false;
   isDraggingOverBanner3: boolean = false;
+  isDraggingOverBackground: boolean = false;
+
   imagensLogo: FileList;
   imagensBanner01: FileList;
   imagensBanner02: FileList;
   imagensBanner03: FileList;
+  imagensBackground: FileList;
   existeIMagemLogo: boolean = false;
+
   existeIMagemBanner1: boolean = false;
   existeIMagemBanner2: boolean = false;
   existeIMagemBanner3: boolean = false;
+  existeIMagemBackground: boolean = false;
 
 
   constructor(private formBuilder: FormBuilder,
     private empresaService: EmpresaService,
-    private _snackBar: MatSnackBar) {
-    this.empresaService.getEmpresaById()
-      .subscribe(res => this.empresa = res);
-  }
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-
     this.infoEmpresaForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
       slogan: this.formBuilder.control('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
       cnpj: this.formBuilder.control('', [Validators.required,]),
-      endereco: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
+      address: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
       telefone: this.formBuilder.control('', []),
       whatsapp: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-      linkGoogleMaps: this.formBuilder.control('', [Validators.minLength(10)])
+      linkGoogleMaps: this.formBuilder.control('', [Validators.minLength(10)]),
+      open: this.formBuilder.control('', [Validators.required])
     }, { updateOn: 'change' });
+
+    this.empresaService.getEmpresaById()
+    .subscribe(res => {
+      this.empresa = res;
+      });
   }
 
 

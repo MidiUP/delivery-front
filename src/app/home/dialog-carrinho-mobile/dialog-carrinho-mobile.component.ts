@@ -21,6 +21,7 @@ export interface Carrinho {
   user: User,
   products: Product[],
   total: number;
+  open: boolean;
 }
 
 @Component({
@@ -51,8 +52,6 @@ export class DialogCarrinhoMobileComponent implements OnInit {
   ngOnInit(): void {
     this.getEnderecos();
     this.getPagamentos();
-    console.log(this.itensCarrinho);
-    
   }
 
   getEnderecos() {

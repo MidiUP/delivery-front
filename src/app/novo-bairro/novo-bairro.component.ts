@@ -27,9 +27,9 @@ export class NovoBairroComponent implements OnInit {
 
     this.novoBairroForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
-      deliveryTime: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      // deliveryTime: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       taxa: this.formBuilder.control('', [Validators.required]),
-      isEnable: this.formBuilder.control('', [Validators.required])     
+      isEnable: this.formBuilder.control('', [])     
       }, { updateOn: 'change' });
   }
 
@@ -38,7 +38,6 @@ export class NovoBairroComponent implements OnInit {
       .subscribe(
         (res) => {
           this.openSnackBarSuccess();
-          window.location.href= "/admin?newBairro"
         },
         (err) => {
           this.openSnackBarError();

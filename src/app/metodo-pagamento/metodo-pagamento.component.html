@@ -1,7 +1,10 @@
 <div class="container">
     <mat-card class="bairro" *ngFor="let metodo of metodos">
         <mat-card-title>
-            {{metodo.description}}
+            <div class="titulo">
+                {{metodo.description}}
+                <mat-icon style="margin-left: auto;" color="warn" (click)="openDialogDelete(metodo.id)">delete</mat-icon>
+            </div>
         </mat-card-title>
         <mat-card-content>
             <div class="d-flex">

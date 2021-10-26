@@ -8,6 +8,9 @@
                 <mat-error *ngIf="novoMetodoForm.controls.description.hasError('required')">
                     Por favor insira um novo método de pagamento.
                 </mat-error>
+                <mat-error *ngIf="novoMetodoForm.controls.description.hasError('minLength')">
+                    Por favor insira um novo método de pagamento com dois ou mais caracteres.
+                </mat-error>
             </mat-form-field>
         </div>
 

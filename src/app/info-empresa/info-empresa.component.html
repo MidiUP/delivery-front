@@ -49,12 +49,12 @@
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Endereço</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.endereco" formControlName="endereco"
+          <input matInput type="text" [(ngModel)]="empresa.address" formControlName="address"
             placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente">
-          <mat-error *ngIf="infoEmpresaForm.controls.endereco.hasError('required')">
+          <mat-error *ngIf="infoEmpresaForm.controls.address.hasError('required')">
             Por favor insira um Endereço.
           </mat-error>
-          <mat-error *ngIf="infoEmpresaForm.controls.endereco.hasError('minlength')">
+          <mat-error *ngIf="infoEmpresaForm.controls.address.hasError('minlength')">
             Por favor insira um nome com dez ou mais caracteres.
           </mat-error>
         </mat-form-field>
@@ -86,6 +86,35 @@
           </mat-error>
         </mat-form-field>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Horário de Funcionamento</mat-label>
+          <input matInput type="text"
+            placeholder="09:00 às 16:00" aria-describedby="basic-addon1">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label for="quantidade">Link Google Maps</mat-label>
+          <input matInput type="text" [(ngModel)]="empresa.linkGoogleMaps" formControlName="linkGoogleMaps"
+            placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <h6>
+          Estado do Estabelecimento
+        </h6>
+        <mat-radio-group aria-label="Select an option" formControlName="open" [(ngModel)]="empresa.open" >
+          <mat-radio-button [value]="true">Aberto</mat-radio-button>
+          <mat-radio-button [value]="false">Fechado</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
     </div>
 
     <hr>
@@ -132,23 +161,25 @@
         </div>
       </div>
 
+      <div class="col-12">
+        <h2>Background</h2>
+        <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBackground')"
+          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBackground')" [class.dropzone-on]="isDraggingOverBackground"
+          (drop)="onDropEvent($event, 'existeIMagemBackground')">
+          <span *ngIf="!existeIMagemBackground">Arraste sua imagem</span>
+          <span *ngIf="existeIMagemBackground">{{imagensBackground[0].name}}</span>
+        </div>
+      </div>
+
     </div>
     <hr>
 
-    <div class="row">
-      <div class="col-md-6">
-        <mat-form-field appearance="outline">
-          <mat-label for="quantidade">Link Google Maps</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.linkGoogleMaps" formControlName="linkGoogleMaps"
-            placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
-        </mat-form-field>
-      </div>
-    </div>
+    
 
 
 
 
-    <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center mt-4"  style="padding-bottom: 15px;">
       <button class="btn btn-primary" [disabled]="!infoEmpresaForm.valid" type="submit">Salvar</button>
     </div>
 

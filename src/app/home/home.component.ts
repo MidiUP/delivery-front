@@ -31,6 +31,8 @@ import { AddressNullComponent } from '../snack-bars/address-null/address-null.co
 import { Router } from '@angular/router';
 import { DialogHistoricoComponent } from './dialog-historico/dialog-historico.component';
 import { TrocoErradoComponent } from '../snack-bars/troco-errado/troco-errado.component';
+import { EmpresaService } from '../info-empresa/empresa.service';
+import { Empresa } from '../info-empresa/empresa.model';
 
 @Component({
   selector: 'app-home',
@@ -87,6 +89,8 @@ export class HomeComponent implements OnInit {
 
   valorDinheiro: number = 0;
 
+  empresa: Empresa = new Empresa(0,"","","","","","","","", true);
+
 
 
   order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items, "", 0);
@@ -102,7 +106,8 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private carrinhoService: carrinhoService,
     private _snackBar: MatSnackBar,
-    private router: Router) {  }
+    private router: Router,
+    private empresaService: EmpresaService) {  }
 
   ngOnInit(): void {
 
@@ -126,9 +131,7 @@ export class HomeComponent implements OnInit {
     this.filtroEnderecos(this.user);
     this.getPagamentos();
     this.getCategorias();
-
-    // setInterval(() => console.log(this.itensCarrinho), 10000)
-
+    this.getEmpresa();
   }
 
   getProducts(): void {
@@ -138,6 +141,11 @@ export class HomeComponent implements OnInit {
           this.products = data
         }
       );
+  }
+
+  getEmpresa(){
+    this.empresaService.getEmpresaById()
+      .subscribe(res => this.empresa = res);
   }
 
   alterarEndereco(endereco: Address) {
@@ -198,7 +206,7 @@ export class HomeComponent implements OnInit {
 
   openDialogCarMobile() {
     const dialogRef = this.dialog.open(DialogCarrinhoMobileComponent, {
-      data: { user: this.user }
+      data: { user: this.user, open: this.empresa.open }
     });
 
     this.carrinhoMobileOpen = true;

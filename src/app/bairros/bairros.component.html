@@ -1,7 +1,11 @@
 <div class="container">
     <mat-card class="bairro" *ngFor="let bairro of bairros">
         <mat-card-title>
-            {{bairro.name}}
+            <div class="titulo">
+                {{bairro.name}}
+                <mat-icon style="margin-left: auto;" color="warn" (click)="openDialogDelete(bairro.id)">delete</mat-icon>
+            </div>
+
         </mat-card-title>
         <mat-card-content>
             <div class="d-flex">

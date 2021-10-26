@@ -41,24 +41,29 @@
       <div class="col-6">
         <div class="estado-estabelecimento">
           <div class="d-flex align-items-center">
-            <mat-icon class="icon-open">circle</mat-icon>
-            <h5 class="titulo-infos">ABERTO</h5>
+            <mat-icon *ngIf="empresa.open" class="icon-open">circle</mat-icon>
+            <mat-icon *ngIf="!empresa.open" class="icon-close">circle</mat-icon>
+            <h5 *ngIf="empresa.open" class="titulo-infos">ABERTO</h5>
+            <h5 *ngIf="!empresa.open" class="titulo-infos">FECHADO</h5>
           </div>
-          <p>Faça seu Pedido</p>
+          <p *ngIf="empresa.open">Faça seu Pedido</p>
+          <!-- <p *ngIf="!empresa.open">09:00 às 16:00</p> -->
         </div>
       </div>
       <div class="col-6">
         <div class="estado-estabelecimento">
           <div class="d-flex align-items-center">
-            <mat-icon class="icon-open">shopping_bag</mat-icon>
+            <mat-icon class="icon-open" *ngIf="empresa.open">shopping_bag</mat-icon>
+            <mat-icon class="icon-close" *ngIf="!empresa.open">schedule</mat-icon>
             <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id != 0">PEDIDO #{{ultimoPedido.id}}</h5>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0">COMPRE JÁ</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0 && empresa.open">COMPRE JÁ</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="!empresa.open">09:00 às 16:00</h5>
           </div>
           <p class="v-desktop-infos" *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
-          <p class="v-desktop-infos" *ngIf="ultimoPedido.id == 0">Temos ótimas opções</p>
+          <p class="v-desktop-infos" *ngIf="ultimoPedido.id == 0 && empresa.open">Temos ótimas opções</p>
           <div class="v-mobile-infos">
             <p *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
-            <p *ngIf="ultimoPedido.id == 0">Ótimas opções</p>
+            <p *ngIf="ultimoPedido.id == 0 && empresa.open">Ótimas opções</p>
             
 
           </div>
@@ -457,7 +462,7 @@
                 <nav class="navbar navbar-expand opcoes-pedido" style="margin-top: 10px">
                   <div class="container-fluid" style="padding-bottom:0">
                     <h4 class="navbar-brand titulo-opcoes">Finalizar Pedido</h4>
-                    <button class=" btn finalizar-pedido" (click)="exportarPedido()">Compra</button>
+                    <button class=" btn finalizar-pedido" (click)="exportarPedido()" [disabled]="!empresa.open">Compra</button>
 
                   </div>
                 </nav>

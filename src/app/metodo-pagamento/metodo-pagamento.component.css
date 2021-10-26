@@ -24,3 +24,15 @@ a:hover{
     cursor: pointer;
 
 }
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.titulo mat-icon{
+    font-size: 1em;
+    cursor: pointer;
+}

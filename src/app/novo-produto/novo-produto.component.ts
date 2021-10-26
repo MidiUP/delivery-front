@@ -71,10 +71,8 @@ export class NovoProdutoComponent implements OnInit {
     this.productService.createProduct(this.product)
       .subscribe(
         (res) => {
-          this.postarImagem(formData, res);
           this.openSnackBarSuccess();
-          window.location.href = "/admin?newProduct"
-
+          this.postarImagem(formData, res);
         },
         (err) => {
           this.openSnackBarError();
@@ -215,14 +213,16 @@ export class NovoProdutoComponent implements OnInit {
   }
 
   postarImagem(formData: FormData, produto: Product) {
-    if (this.imagens[0]) {
+    if (this.imagens) {
       this.productService.postImage(formData, produto.id)
         .subscribe(
           (res => {
             this.openSnackBarSuccess();
+            window.location.href = "/admin?newProduct";
           }),
           (err => {
             console.log(err);
+            window.location.href = "/admin?newProduct";
           })
         )
     }

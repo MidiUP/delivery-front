@@ -92,6 +92,8 @@ import { DialogRedefinirSenhaComponent } from './perfil/dialog-redefinir-senha/d
 import { SenhaDiferenteRepetirComponent } from './snack-bars/senha-diferente-repetir/senha-diferente-repetir.component';
 import { EmailEnviadoComponent } from './snack-bars/email-enviado/email-enviado.component';
 import { EmailNaoExisteComponent } from './snack-bars/email-nao-existe/email-nao-existe.component';
+import { DialogDeleteBairroComponent } from './bairros/dialog-delete-bairro/dialog-delete-bairro.component';
+import { DialogDeleteMetodoPagamentoComponent } from './metodo-pagamento/dialog-delete-metodo-pagamento/dialog-delete-metodo-pagamento.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +148,8 @@ import { EmailNaoExisteComponent } from './snack-bars/email-nao-existe/email-nao
     SenhaDiferenteRepetirComponent,
     EmailEnviadoComponent,
     EmailNaoExisteComponent,
+    DialogDeleteBairroComponent,
+    DialogDeleteMetodoPagamentoComponent,
   ],
   imports: [
     BrowserModule,

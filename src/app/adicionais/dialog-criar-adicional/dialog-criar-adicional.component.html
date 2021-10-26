@@ -11,6 +11,12 @@
                             <mat-label>Nome</mat-label>
                             <input matInput placeholder="Ex. Bacon" formControlName="name"
                             [(ngModel)]="newAdicional.name">
+                            <mat-error *ngIf="novoAdicionalForm.controls.name.hasError('required')">
+                                Por favor insira um nome.
+                            </mat-error>
+                            <mat-error *ngIf="novoAdicionalForm.controls.name.hasError('minlength')">
+                                Por favor insira um nome com três ou mais caracteres.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-6">
@@ -18,6 +24,12 @@
                             <mat-label>Descrição</mat-label>
                             <input matInput placeholder="Ex. 250g de Bacon" formControlName="description"
                             [(ngModel)]="newAdicional.description">
+                            <mat-error *ngIf="novoAdicionalForm.controls.description.hasError('required')">
+                                Por favor insira um nome.
+                            </mat-error>
+                            <mat-error *ngIf="novoAdicionalForm.controls.description.hasError('minlength')">
+                                Por favor insira uma descrição com três ou mais caracteres.
+                            </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -26,6 +38,12 @@
                             <mat-label>Preço</mat-label>
                             <input matInput placeholder="Ex. 2,00" formControlName="price"
                             [(ngModel)]="newAdicional.price">
+                            <mat-error *ngIf="novoAdicionalForm.controls.price.hasError('required')">
+                                Por favor insira um valor.
+                            </mat-error>
+                            <mat-error *ngIf="novoAdicionalForm.controls.price.hasError('min')">
+                                Por favor insira valor acima de R$1,00.
+                            </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -82,7 +100,7 @@
             </div> -->
 
             <div class="botoes">
-                <button mat-flat-button color="primary" style="margin-right: 10px;" [disabled]="!novoAdicionalForm.valid" (click)="salvarAdicional()" mat-dialog-close>Salvar</button>
+                <button mat-flat-button color="primary" style="margin-right: 10px;" [disabled]="!novoAdicionalForm.valid" (click)="salvarAdicional()">Salvar</button>
                 <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
             </div>
         </div>

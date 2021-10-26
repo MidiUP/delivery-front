@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
+import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component';
 import { Bairro } from '../novo-bairro/bairro.model';
 import { bairroService } from '../novo-bairro/bairro.service';
 
@@ -13,15 +16,15 @@ export class EditarBairroComponent implements OnInit {
   bairros: Bairro[];
   bairro: Bairro = new Bairro("",0,0,"",true);
   constructor(private bairroService: bairroService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getBairros();
 
     this.editBairroForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(2)]),
-      value: this.formBuilder.control('', [Validators.required, Validators.min(1)]), 
-      deliveryTime: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
+      value: this.formBuilder.control('', [Validators.required]), 
+      deliveryTime: this.formBuilder.control('', [])
       }, { updateOn: 'change' });
 
   }
@@ -39,11 +42,24 @@ export class EditarBairroComponent implements OnInit {
     this.bairroService.putBairro(this.bairro, this.bairro.id)
       .subscribe(
         (res) => {
-          console.log("Bairro Alterado");
+          this.openSnackBarSuccess();
         },
         (err) => {
-          console.log(err);
+          this.openSnackBarError();
         }
       )
   }
+
+  openSnackBarSuccess() {
+    this._snackBar.openFromComponent(AlertaSuccesComponent, {
+      duration: 5000,
+    });
+  }
+
+  openSnackBarError() {
+    this._snackBar.openFromComponent(AlertaErrorComponent, {
+      duration: 5000,
+    });
+  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertaErrorComponent } from 'src/app/alerta-error/alerta-error.component';
 import { AlertaSuccesComponent } from 'src/app/alerta-succes/alerta-succes.component';
@@ -21,7 +22,7 @@ export class DialogCriarAdicionalComponent implements OnInit {
 
   newAdicional: Adicional = new Adicional("", 0, "", 10, 0, 0, 0);
 
-  constructor(private adicionalService: AdicionalService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<DialogCriarAdicionalComponent>,private adicionalService: AdicionalService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +32,7 @@ export class DialogCriarAdicionalComponent implements OnInit {
       .subscribe(
         (res => {
           this.openSnackBarSuccess();
+          this.dialogRef.close();
         }),
         (err => {
           this.openSnackBarError();
