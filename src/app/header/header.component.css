@@ -108,6 +108,7 @@ html, body{
 
 .container-titulo h4{
     margin: auto;
+    cursor: pointer;
 
 }
 

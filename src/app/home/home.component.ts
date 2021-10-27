@@ -91,6 +91,8 @@ export class HomeComponent implements OnInit {
 
   empresa: Empresa = new Empresa(0,"","","","","","","","", true);
 
+  isLogged: boolean = false; 
+
 
 
   order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items, "", 0);
@@ -112,6 +114,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
       let username: string = this.authService.getUsername();
       this.userService.findByUsername(username)
         .subscribe(

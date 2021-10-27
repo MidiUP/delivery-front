@@ -36,7 +36,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>CPF</mat-label>
                             <input matInput placeholder="Ex. 120.686.940-26" formControlName="cpf"
-                                [(ngModel)]="newUser.cpf">
+                                [ngModel]="newUser.cpf | cpf" (ngModelChange)="newUser.cpf=$event">
                                 <mat-error *ngIf="novoUsuarioForm.controls.cpf.hasError('cpfInvalid')">
                                     Por favor insira um cpf válido.
                                 </mat-error>
@@ -80,7 +80,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Celular</mat-label>
                             <input matInput placeholder="Ex. (86)9 9999-9999" formControlName="phone"
-                                [(ngModel)]="newUser.phone">
+                                [ngModel]="newUser.phone | phone" (ngModelChange)="newUser.phone=$event" appOnlyNumbers>
                                 <mat-error *ngIf="novoUsuarioForm.controls.phone.hasError('required')">
                                     Por favor insira número de celular.
                                 </mat-error>
@@ -115,6 +115,12 @@
                                 [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
+                            <mat-error *ngIf="novoUsuarioForm.controls.password.hasError('required')">
+                                Por favor insira uma senha
+                            </mat-error>
+                            <mat-error *ngIf="novoUsuarioForm.controls.password.hasError('minlength')">
+                                Por favor insira uma senha com no mínimo oito caracteres.
+                            </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -123,11 +129,17 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Confirme sua Senha</mat-label>
-                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmationPassword">
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmationPassword" [(ngModel)]="confirmacaoSenha">
                             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                                 [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
+                            <mat-error *ngIf="novoUsuarioForm.controls.confirmationPassword.hasError('required')">
+                                Por favor insira uma senha
+                            </mat-error>
+                            <mat-error *ngIf="novoUsuarioForm.controls.confirmationPassword.hasError('minlength')">
+                                Por favor insira uma senha com no mínimo oito caracteres.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -147,6 +159,12 @@
                             <mat-label>Rua</mat-label>
                             <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
                                 [(ngModel)]="newAddress.street">
+                                <mat-error *ngIf="novoEnderecoForm.controls.street.hasError('required')">
+                                    Por favor insira uma rua.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm.controls.street.hasError('minlength')">
+                                    Por favor insira uma rua com três ou mais caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -155,6 +173,12 @@
                             <mat-label>Número</mat-label>
                             <input matInput placeholder="Ex. 25" formControlName="number"
                                 [(ngModel)]="newAddress.number">
+                                <mat-error *ngIf="novoEnderecoForm.controls.number.hasError('required')">
+                                    Por favor insira um número.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm.controls.number.hasError('minlength')">
+                                    Por favor insira um número com um ou mais caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -163,6 +187,12 @@
                             <mat-label>Complemento</mat-label>
                             <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
                                 [(ngModel)]="newAddress.complement">
+                                <mat-error *ngIf="novoEnderecoForm.controls.complement.hasError('required')">
+                                    Por favor insira um complemento.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm.controls.complement.hasError('minlength')">
+                                    Por favor insira um complemento com um ou três caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -170,7 +200,16 @@
                         <mat-form-field appearance="outline">
                             <mat-label>CEP</mat-label>
                             <input matInput placeholder="Ex. 89210-070" formControlName="cep"
-                                [(ngModel)]="newAddress.cep">
+                                [(ngModel)]="newAddress.cep" appOnlyNumbers>
+                                <mat-error *ngIf="novoEnderecoForm.controls.cep.hasError('required')">
+                                    Por favor insira um cep.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm.controls.cep.hasError('minlength')">
+                                    Por favor insira um cep com oito caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm.controls.cep.hasError('maxlength')">
+                                    Por favor insira um cep com oito caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -210,6 +249,12 @@
                             <mat-label>Rua</mat-label>
                             <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
                                 [(ngModel)]="newAddress2.street">
+                                <mat-error *ngIf="novoEnderecoForm2.controls.street.hasError('required')">
+                                    Por favor insira uma rua.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm2.controls.street.hasError('minlength')">
+                                    Por favor insira uma rua com três ou mais caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -218,6 +263,12 @@
                             <mat-label>Número</mat-label>
                             <input matInput placeholder="Ex. 25" formControlName="number"
                                 [(ngModel)]="newAddress2.number">
+                                <mat-error *ngIf="novoEnderecoForm2.controls.number.hasError('required')">
+                                    Por favor insira um número.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm2.controls.number.hasError('minlength')">
+                                    Por favor insira um número com um ou mais caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -226,6 +277,12 @@
                             <mat-label>Complemento</mat-label>
                             <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
                                 [(ngModel)]="newAddress2.complement">
+                                <mat-error *ngIf="novoEnderecoForm2.controls.complement.hasError('required')">
+                                    Por favor insira um complemento.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm2.controls.complement.hasError('minlength')">
+                                    Por favor insira um complemento com um ou três caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -234,6 +291,15 @@
                             <mat-label>CEP</mat-label>
                             <input matInput placeholder="Ex. 89210-070" formControlName="cep"
                                 [(ngModel)]="newAddress2.cep">
+                                <mat-error *ngIf="novoEnderecoForm2.controls.cep.hasError('required')">
+                                    Por favor insira um cep.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm2.controls.cep.hasError('minlength')">
+                                    Por favor insira um cep com oito caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm2.controls.cep.hasError('maxlength')">
+                                    Por favor insira um cep com oito caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -273,6 +339,12 @@
                             <mat-label>Rua</mat-label>
                             <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
                                 [(ngModel)]="newAddress3.street">
+                                <mat-error *ngIf="novoEnderecoForm3.controls.street.hasError('required')">
+                                    Por favor insira uma rua.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm3.controls.street.hasError('minlength')">
+                                    Por favor insira uma rua com três ou mais caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -281,6 +353,13 @@
                             <mat-label>Número</mat-label>
                             <input matInput placeholder="Ex. 25" formControlName="number"
                                 [(ngModel)]="newAddress3.number">
+                                <mat-error *ngIf="novoEnderecoForm3.controls.number.hasError('required')">
+                                    Por favor insira um número.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm3.controls.number.hasError('minlength')">
+                                    Por favor insira um número com um ou mais caracteres.
+                                </mat-error>
+                                
                         </mat-form-field>
                     </div>
 
@@ -289,6 +368,12 @@
                             <mat-label>Complemento</mat-label>
                             <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
                                 [(ngModel)]="newAddress3.complement">
+                                <mat-error *ngIf="novoEnderecoForm3.controls.complement.hasError('required')">
+                                    Por favor insira um complemento.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm3.controls.complement.hasError('minlength')">
+                                    Por favor insira um complemento com um ou três caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -297,6 +382,15 @@
                             <mat-label>CEP</mat-label>
                             <input matInput placeholder="Ex. 89210-070" formControlName="cep"
                                 [(ngModel)]="newAddress3.cep">
+                                <mat-error *ngIf="novoEnderecoForm3.controls.cep.hasError('required')">
+                                    Por favor insira um cep.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm3.controls.cep.hasError('minlength')">
+                                    Por favor insira um cep com oito caracteres.
+                                </mat-error>
+                                <mat-error *ngIf="novoEnderecoForm3.controls.cep.hasError('maxlength')">
+                                    Por favor insira um cep com oito caracteres.
+                                </mat-error>
                         </mat-form-field>
                     </div>
 

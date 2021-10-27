@@ -3,14 +3,14 @@
   <nav class="navbar navbar-expand-md fixed-top" id="navbar">
     
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" [routerLink]="['']">
         <!-- <img src="../../assets/img/canto-da-pizza-logo.png" *ngIf="!empresa.logoPath" class="" id="logo-empresa"> -->
         <img [src]="empresa.logoPath" *ngIf="empresa.logoPath" class="" id="logo-empresa">
       </a>
 
       <div class="container-titulo d-flex ">
         <span class="navbar-brand">
-        <h4>{{empresa.name}}</h4>
+        <h4 [routerLink]="['']">{{empresa.name}}</h4>
         <p>{{empresa.slogan}}</p>
         </span> 
         
@@ -64,7 +64,7 @@
                       Contato</a>
                   </li>
                   <li class="margin-botoes">
-                    <a href="" style="margin: 0px 0px;" class="btn-sub-menu">
+                    <a [routerLink]="['/sobre']" style="margin: 0px 0px;" class="btn-sub-menu">
                       <fa-icon [icon]="faAddressCard" class="mr-1"></fa-icon>
                       Sobre</a>
                   </li>    

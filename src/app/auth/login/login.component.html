@@ -8,7 +8,7 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline">
                         <mat-label>Telefone</mat-label>
-                        <input matInput placeholder="86999999999" formControlName="username" [(ngModel)]="user.username"
+                        <input matInput placeholder="86999999999" formControlName="username" [ngModel]="user.username | phone" (ngModelChange)="user.username=$event" appOnlyNumbers
                             type="text">
                     </mat-form-field>
 

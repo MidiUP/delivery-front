@@ -28,6 +28,9 @@ export class DialogCriarAdicionalComponent implements OnInit {
   }
 
   salvarAdicional() {
+    let number = this.newAdicional.price.toString().replace(',', '.');
+    this.newAdicional.price = parseFloat(number);
+    
     this.adicionalService.createAdicional(this.newAdicional)
       .subscribe(
         (res => {

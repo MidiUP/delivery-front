@@ -94,6 +94,8 @@ import { EmailEnviadoComponent } from './snack-bars/email-enviado/email-enviado.
 import { EmailNaoExisteComponent } from './snack-bars/email-nao-existe/email-nao-existe.component';
 import { DialogDeleteBairroComponent } from './bairros/dialog-delete-bairro/dialog-delete-bairro.component';
 import { DialogDeleteMetodoPagamentoComponent } from './metodo-pagamento/dialog-delete-metodo-pagamento/dialog-delete-metodo-pagamento.component';
+import { SharedModule } from './shared/shared.module';
+import { SobreComponent } from './sobre/sobre.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +152,7 @@ import { DialogDeleteMetodoPagamentoComponent } from './metodo-pagamento/dialog-
     EmailNaoExisteComponent,
     DialogDeleteBairroComponent,
     DialogDeleteMetodoPagamentoComponent,
+    SobreComponent,
   ],
   imports: [
     BrowserModule,
@@ -173,7 +176,8 @@ import { DialogDeleteMetodoPagamentoComponent } from './metodo-pagamento/dialog-
     MatDialogModule,
     MatBadgeModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    SharedModule
   ],
   providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService, AdicionalService],
   bootstrap: [AppComponent]

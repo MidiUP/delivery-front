@@ -74,7 +74,7 @@
                         <h2>Login</h2>
                         <mat-icon>login</mat-icon>
                     </div> -->
-                    <!-- <div class="col-md-6">
+                <!-- <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Username</mat-label>
                             <input matInput placeholder="Ex. MateusMendes01" formControlName="username"
@@ -82,7 +82,7 @@
                         </mat-form-field>
                     </div> -->
 
-                    <!-- <div class="col-md-6">
+                <!-- <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Senha Atual</mat-label>
                             <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
@@ -162,7 +162,8 @@
                         <mat-form-field appearance="outline">
                             <mat-label>{{newAddress.neighborhood.name}}</mat-label>
                             <mat-select [(ngModel)]="newAddress.neighborhood" formControlName="neighborhood">
-                                <mat-option [value]="newAddress.neighborhood" selected >{{newAddress.neighborhood.name}}</mat-option>
+                                <mat-option [value]="newAddress.neighborhood" selected>{{newAddress.neighborhood.name}}
+                                </mat-option>
                                 <hr>
                                 <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
                             </mat-select>
@@ -225,9 +226,10 @@
 
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
-                            <mat-label >{{contentAddress(newAddress2.neighborhood)}}</mat-label>
+                            <mat-label>{{contentAddress(newAddress2.neighborhood)}}</mat-label>
                             <mat-select [(ngModel)]="newAddress2.neighborhood" formControlName="neighborhood">
-                                <mat-option [value]="" selected >{{contentAddress(newAddress2.neighborhood)}}</mat-option>
+                                <mat-option [value]="" selected>{{contentAddress(newAddress2.neighborhood)}}
+                                </mat-option>
                                 <hr>
                                 <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
                             </mat-select>
@@ -237,12 +239,13 @@
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Cidade</mat-label>
-                            <input matInput placeholder="Ex. Teresina" formControlName="city" [(ngModel)]="newAddress2.city">
+                            <input matInput placeholder="Ex. Teresina" formControlName="city"
+                                [(ngModel)]="newAddress2.city">
                         </mat-form-field>
                     </div>
                 </div>
             </form>
-            
+
 
             <form [formGroup]="novoEnderecoForm3">
                 <div class="row" *ngIf="campoEndereco > 2 || enderecos.length > 2">
@@ -290,9 +293,10 @@
 
                     <div class="col-md-6">
                         <mat-form-field appearance="outline">
-                            <mat-label >{{contentAddress(newAddress3.neighborhood)}}</mat-label>
+                            <mat-label>{{contentAddress(newAddress3.neighborhood)}}</mat-label>
                             <mat-select [(ngModel)]="newAddress3.neighborhood" formControlName="neighborhood">
-                                <mat-option [value]="" selected >{{contentAddress(newAddress3.neighborhood)}}</mat-option>
+                                <mat-option [value]="" selected>{{contentAddress(newAddress3.neighborhood)}}
+                                </mat-option>
                                 <hr>
                                 <mat-option *ngFor="let bairro of bairros" [value]="bairro">{{bairro.name}}</mat-option>
                             </mat-select>
@@ -312,11 +316,11 @@
 
 
             <div class="botoes">
-                <button mat-flat-button color="primary" (click)="onSubmit()"
-                    [disabled]="!formsValid()">Atualizar Cadastro</button>
+                <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!formsValid()" style="margin-left: 5px;">Atualizar
+                    Cadastro</button>
                 <button mat-flat-button color="primary" style="margin-left: 5px;" (click)="newCampoEndereco()"
                     [disabled]="campoEndereco > 2">Adicionar outro Endereço</button>
-                    <button mat-flat-button color="primary" style="margin-left: 5px;" (click)="openDialogRedefinirSenha()"
+                <button mat-flat-button color="primary" style="margin-left: 5px;" (click)="openDialogRedefinirSenha()"
                     [disabled]="campoEndereco > 2">Trocar Senha</button>
             </div>
         </div>

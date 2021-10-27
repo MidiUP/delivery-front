@@ -1,0 +1,42 @@
+<body>
+    <app-header></app-header>
+    
+    <div class="container sobre">
+        <mat-card>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img [src]="empresa.logoPath" class="logo-empresa">
+                        </div>
+                        <div class="col-md-8">
+                            <h1>
+                                {{empresa.name}}
+                            </h1>
+                            <h4>
+                                {{empresa.slogan}}
+                            </h4>
+                            <hr>
+                            <div id="infos">
+                                <div class="item">
+                                    <mat-icon>watch_later</mat-icon>
+                                    <h6>09:00 às 16:00</h6>
+                                </div>
+                                <div class="item">
+                                    <mat-icon>location_on</mat-icon>
+                                    <h6>{{empresa.address}}</h6>
+                                </div>
+                                <div class="item">
+                                    <mat-icon>whatsapp</mat-icon>
+                                    <h6>{{empresa.whatsapp | phone}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </mat-card>
+    </div>
+
+    <app-footer></app-footer>
+</body>

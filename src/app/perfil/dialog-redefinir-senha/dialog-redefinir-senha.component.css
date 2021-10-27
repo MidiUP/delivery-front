@@ -22,3 +22,71 @@ mat-form-field{
     margin-top: 15px;
     padding-bottom: 15px;
 }
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 400px) {
+    body{
+        width: 250px;
+        max-height: 50vh;
+    }
+
+    .titulo h1{
+        font-size: 1.3em;
+    }
+ }
+
+/* Extra small devices (portrait phones, less than 576px) */
+    @media (min-width: 401px) and (max-width: 575px) {
+
+        body{
+            width: 300px;
+            max-height: 50vh;
+        }
+    
+        .titulo h1{
+            font-size: 1.3em;
+        }
+
+    }
+    
+    
+    /* Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) and (max-width: 767.98px) {
+
+        body{
+            width: 400px;
+            max-height: 50vh;
+        }
+    
+        .titulo h1{
+            font-size: 1.3em;
+        }
+
+    }
+    
+    
+    
+    /* Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) and (max-width: 991.98px) {
+        body{
+            width: 550px;
+            max-height: 50vh;
+        }
+    
+        .titulo h1{
+            font-size: 1.3em;
+        }
+    }
+    
+    
+    
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+    
+    
+    }
+    
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        
+    }

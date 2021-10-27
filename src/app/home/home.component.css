@@ -35,7 +35,6 @@ img {
     overflow: auto;
     flex-wrap: wrap;
     padding: 0;
-    
 }
 
 .titulo-produto{
@@ -438,6 +437,7 @@ body{
 
 .produtos-mobile{
     padding-bottom: 41px;
+    min-height: 400px;
  }
 
 /* Extra small devices (portrait phones, less than 576px) */

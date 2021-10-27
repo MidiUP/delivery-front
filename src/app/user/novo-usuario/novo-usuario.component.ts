@@ -8,6 +8,7 @@ import { Bairro } from 'src/app/novo-bairro/bairro.model';
 import { bairroService } from 'src/app/novo-bairro/bairro.service';
 import { CpfCadastradoComponent } from 'src/app/snack-bars/cpf-cadastrado/cpf-cadastrado.component';
 import { NumeroCadastradoComponent } from 'src/app/snack-bars/numero-cadastrado/numero-cadastrado.component';
+import { SenhaDiferenteRepetirComponent } from 'src/app/snack-bars/senha-diferente-repetir/senha-diferente-repetir.component';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 
@@ -18,7 +19,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./novo-usuario.component.css']
 })
 export class NovoUsuarioComponent implements OnInit {
-
+  confirmacaoSenha: string;
   hide = true;
   campoEndereco: number = 1;
   novoUsuarioForm: FormGroup = this.formBuilder.group({
@@ -28,8 +29,8 @@ export class NovoUsuarioComponent implements OnInit {
     'email': ['', [Validators.required, Validators.email]],
     'phone': ['', [Validators.required, Validators.minLength(11)]],
     'username': ['', []],
-    'password': ['', [Validators.required, Validators.minLength(3)]],
-    'confirmationPassword': ['', [Validators.required, Validators.minLength(3)]]
+    'password': ['', [Validators.required, Validators.minLength(8)]],
+    'confirmationPassword': ['', [Validators.required, Validators.minLength(8)]]
   });
 
   validarCpf(input: FormControl) {
@@ -91,13 +92,13 @@ export class NovoUsuarioComponent implements OnInit {
     }
   }
 
-  
+
 
   novoEnderecoForm: FormGroup = this.formBuilder.group({
     'street': ['', [Validators.required, Validators.minLength(3)]],
     'number': ['', [Validators.required, Validators.minLength(1)]],
     'complement': ['', [Validators.required, Validators.minLength(3)]],
-    'cep': ['', [Validators.required, Validators.minLength(3)]],
+    'cep': ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     'neighborhood': ['', [Validators.required, Validators.minLength(3)]],
     'city': ['', [Validators.required, Validators.minLength(3)]]
   });
@@ -106,7 +107,7 @@ export class NovoUsuarioComponent implements OnInit {
     'street': ['', [Validators.required, Validators.minLength(3)]],
     'number': ['', [Validators.required, Validators.minLength(1)]],
     'complement': ['', [Validators.required, Validators.minLength(3)]],
-    'cep': ['', [Validators.required, Validators.minLength(3)]],
+    'cep': ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     'neighborhood': ['', [Validators.required, Validators.minLength(3)]],
     'city': ['', [Validators.required, Validators.minLength(3)]]
   });
@@ -115,7 +116,7 @@ export class NovoUsuarioComponent implements OnInit {
     'street': ['', [Validators.required, Validators.minLength(3)]],
     'number': ['', [Validators.required, Validators.minLength(1)]],
     'complement': ['', [Validators.required, Validators.minLength(3)]],
-    'cep': ['', [Validators.required, Validators.minLength(3)]],
+    'cep': ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     'neighborhood': ['', [Validators.required, Validators.minLength(3)]],
     'city': ['', [Validators.required, Validators.minLength(3)]]
   });
@@ -126,7 +127,7 @@ export class NovoUsuarioComponent implements OnInit {
   newAddress2: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
   newAddress3: Address = new Address("", { name: "", deliveryTime: "", value: 0, id: 0, isEnable: true }, "", "", "", "", this.userAddress, 0);
   bairros: Bairro[] = [];
-  
+
 
 
 
@@ -142,7 +143,7 @@ export class NovoUsuarioComponent implements OnInit {
     this.getBairros();
   }
 
-  
+
 
   newCampoEndereco() {
     if (this.campoEndereco > 2) {
@@ -171,19 +172,19 @@ export class NovoUsuarioComponent implements OnInit {
 
   formsValid(): boolean {
     if (this.campoEndereco < 2) {
-      if (this.novoUsuarioForm.valid === true && this.novoEnderecoForm.valid === true) {
+      if (this.novoUsuarioForm.valid === true && this.novoEnderecoForm.valid === true && this.newAddress.neighborhood.id !== 0) {
         return true;
       } else return false;
     }
 
     if (this.campoEndereco === 2) {
-      if (this.novoUsuarioForm.valid === true && this.novoEnderecoForm.valid === true && this.novoEnderecoForm2.valid === true) {
+      if (this.novoUsuarioForm.valid === true && this.novoEnderecoForm.valid === true && this.novoEnderecoForm2.valid === true && this.newAddress.neighborhood.id !== 0 && this.newAddress2.neighborhood.id !== 0) {
         return true;
       } else return false;
     }
 
     if (this.campoEndereco === 3) {
-      if (this.novoUsuarioForm.valid === true && this.novoEnderecoForm.valid === true && this.novoEnderecoForm2.valid === true && this.novoEnderecoForm3.valid === true) {
+      if (this.novoUsuarioForm.valid === true && this.novoEnderecoForm.valid === true && this.novoEnderecoForm2.valid === true && this.novoEnderecoForm3.valid === true && this.newAddress.neighborhood.id !== 0 && this.newAddress2.neighborhood.id !== 0 && this.newAddress3.neighborhood.id !== 0) {
         return true;
       } else return false;
     }
@@ -203,65 +204,77 @@ export class NovoUsuarioComponent implements OnInit {
         })
   }
 
-  onSubmit(){
+  onSubmit() {
 
-    this.userService.cpfCheck(this.newUser.cpf)
-      .subscribe(
-        data => {
-          if (data){
-            this.openSnackBarCpfExists();
-            
-          }else{
-            this.userService.phoneCheck(this.newUser.phone)
-              .subscribe( data => {
-                if(data){
-                  this.openSnackBarTelefoneExists();
-                }else {
-                  this.userService.createUser(this.newUser)
-      .subscribe(
-        (res) => {
-          console.log("usuario cadastrado");
-          this.userService.findByUsername(this.newUser.phone)
-            .subscribe(
-              (data => {
-                this.userService.findByUsername(this.newUser.phone)
+   if(this.newUser.password === this.confirmacaoSenha){
+    this.userService.cpfCheck(this.newUser.cpf.replace(/\D/g, ''))
+    .subscribe(
+      data => {
+        if (data) {
+          this.openSnackBarCpfExists();
+
+        } else {
+          this.userService.phoneCheck(this.newUser.phone.replace(/\D/g, ''))
+            .subscribe(data => {
+              if (data) {
+                this.openSnackBarTelefoneExists();
+              } else {
+                this.newUser.cpf = this.newUser.cpf.replace(/\D/g, '');
+                this.newUser.phone = this.newUser.phone.replace(/\D/g, '');
+                this.userService.createUser(this.newUser)
                   .subscribe(
-                    (data => {
-                      this.userAddress.id = data.id;
-                      this.cadastroEndereco(this.newAddress);
-                      if (this.campoEndereco === 2) {
-                        this.cadastroEndereco(this.newAddress2);
-                      }
-                      if (this.campoEndereco === 3) {
-                        this.cadastroEndereco(this.newAddress2);
-                        this.cadastroEndereco(this.newAddress3);
-                      }
-                      this.authService.login({ username: this.newUser.phone, password: this.newUser.password })
+                    (res) => {
+                      console.log("usuario cadastrado");
+                      this.userService.findByUsername(this.newUser.phone)
                         .subscribe(
-                          (res => console.log("chamei login")),
-                          (err => console.log(err))
-                        );
-                      console.log("cheguei")
-                    }),
-                    (err => console.log(err))
-                  )
-              }),
-              (err) => {
-                console.log(err)
-              })
-        },
-        (err) => {
-          console.log(err);
-          console.log(this.newUser)
-        })
-                  
+                          (data => {
+                            this.userService.findByUsername(this.newUser.phone)
+                              .subscribe(
+                                (data => {
+                                  this.userAddress.id = data.id;
+                                  this.cadastroEndereco(this.newAddress);
+                                  if (this.campoEndereco === 2) {
+                                    this.cadastroEndereco(this.newAddress2);
+                                  }
+                                  if (this.campoEndereco === 3) {
+                                    this.cadastroEndereco(this.newAddress2);
+                                    this.cadastroEndereco(this.newAddress3);
+                                  }
+                                  this.authService.login({ username: this.newUser.phone, password: this.newUser.password })
+                                    .subscribe(
+                                      (res => console.log("chamei login")),
+                                      (err => console.log(err))
+                                    );
+                                  console.log("cheguei")
+                                }),
+                                (err => console.log(err))
+                              )
+                          }),
+                          (err) => {
+                            console.log(err)
+                          })
+                    },
+                    (err) => {
+                      console.log(err);
+                      console.log(this.newUser)
+                    })
 
-                }
-              })
-          }
+
+              }
+            })
         }
-      )
-      
+      }
+    )
+   }else {
+    this.openSnackBarPasswordDiferenteConfirmacao()
+   }
+
+  }
+
+  openSnackBarPasswordDiferenteConfirmacao() {
+    this._snackBar.openFromComponent(SenhaDiferenteRepetirComponent, {
+      duration: 5 * 1000,
+    });
   }
 
   openSnackBarCpfExists() {

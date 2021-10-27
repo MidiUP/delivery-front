@@ -134,7 +134,7 @@
                   <div class="linha"></div>
 
                   <div id="links-produto">
-                    <h5>R$ {{produto.price.toFixed(2)}}</h5>
+                    <h5>R$ {{produto.price.toFixed(2).replace('.', ',')}}</h5>
                     <button mat-icon-button class="cor-verde" (click)="addItem(produto)">
                       <mat-icon>add</mat-icon>
                     </button>
@@ -174,7 +174,7 @@
                       <p>{{produto.description}}</p>
                     </div>
                     <div class="preco-botoes-mobile">
-                      <span class="preco-produto-mobile">R${{produto.price.toFixed(2)}}</span>
+                      <span class="preco-produto-mobile">R${{produto.price.toFixed(2).replace('.', ',')}}</span>
                       <div class="botoes-carrinho-mobile">
                         <mat-icon style="margin-left: 25px;" (click)="addItem(produto)">add</mat-icon>
                         <mat-icon style="margin-left: 20px;" (click)="openDialog(produto)">info</mat-icon>
@@ -220,7 +220,10 @@
                               <li>
                                 <hr class="dropdown-divider">
                               </li>
-                              <li><a class="dropdown-item" [routerLink]="['/novoEndereco']">Novo Endereço</a></li>
+                              <li>
+                                <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']">Editar Endereços</a>
+                                <a class="dropdown-item" *ngIf="!isLogged" [routerLink]="['/login']">Fazer Login</a>
+                              </li>
                             </ul>
                           </li>
                         </ul>
@@ -264,7 +267,7 @@
 
 
                     <div class="col-3 preco-produto-carrinho">
-                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
+                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2).replace('.', ',')}}</span>
                     </div>
 
                   </div>
@@ -278,7 +281,7 @@
                     <span>FRETE</span>
 
                     <div class="preco-total-carrinho">
-                      <span>R${{frete.toFixed(2)}}</span>
+                      <span>R${{frete.toFixed(2).replace('.', ',')}}</span>
                     </div>
                   </div>
                 </li>
@@ -288,7 +291,7 @@
                     <span class="total-produto">TOTAL</span>
 
                     <div class="preco-total-carrinho">
-                      <span>R${{totalPedido.toFixed(2)}}</span>
+                      <span>R${{totalPedido.toFixed(2).replace('.', ',')}}</span>
                     </div>
                   </div>
                 </li>
@@ -321,7 +324,7 @@
 
 
                     <div class="col-3 preco-produto-carrinho">
-                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2)}}</span>
+                      <span class="preco-produto-carrinho">R${{item.total.toFixed(2).replace('.', ',')}}</span>
                     </div>
 
                   </div>
@@ -335,7 +338,7 @@
                     <span>FRETE</span>
 
                     <div class="preco-total-carrinho">
-                      <span>R${{frete.toFixed(2)}}</span>
+                      <span>R${{frete.toFixed(2).replace('.', ',')}}</span>
                     </div>
                   </div>
                 </li>
@@ -345,7 +348,7 @@
                     <span class="total-produto">TOTAL</span>
 
                     <div class="preco-total-carrinho">
-                      <span>R${{totalPedido.toFixed(2)}}</span>
+                      <span>R${{totalPedido.toFixed(2).replace('.', ',')}}</span>
                     </div>
                   </div>
                 </li>
@@ -452,7 +455,7 @@
               </p>
               <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
                 <p class="opcao-selecionada-dinheiro"> Dinheiro </p>
-                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro">
+                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro" appOnlyNumbers >
               </div>
 
             </div>
@@ -501,7 +504,7 @@
 
       <div class="col-3 d-flex" style="padding: 0px 12px 0px 0px;">
         <span class="preco-final-carrinho-mobile" style="margin-left: auto;"
-          *ngIf="carrinhoMobileOpen==false">R${{totalPedido.toFixed(2)}}</span>
+          *ngIf="carrinhoMobileOpen==false">R${{totalPedido.toFixed(2).replace('.', ',')}}</span>
       </div>
     </div>
 

@@ -5,7 +5,7 @@
     <div class="container">
         <form [formGroup]="redefinirSenhaForm">
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Nova Senha</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha" [(ngModel)]="senha">
@@ -15,7 +15,7 @@
                         </button>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Repetir Senha</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" formControlName="repetirSenha"

@@ -9,7 +9,7 @@
             <div class="div-infos">
                 <span class="descricao-produto" *ngIf="item.additionalsString">{{item.additionalsString}}</span>
             </div>
-            <span class="preco">R${{item.total.toFixed(2)}}</span>
+            <span class="preco">R${{item.total.toFixed(2).replace('.', ',')}}</span>
         </div>
 
         <div class="col-3 botoes">
@@ -34,12 +34,12 @@
     <div class="resumo">
         <div class="item-resumo">
             <h5 class="produto">FRETE</h5>
-            <h5 class="produto valor-resumo">{{frete.toFixed(2)}}</h5>
+            <h5 class="produto valor-resumo">{{frete.toFixed(2).replace('.', ',')}}</h5>
         </div>
 
         <div class="item-resumo">
             <h5 class="produto" style="color: red;">TOTAL</h5>
-            <h5 class="produto valor-resumo">{{totalPedido.toFixed(2)}}</h5>
+            <h5 class="produto valor-resumo">{{totalPedido.toFixed(2).replace('.', ',')}}</h5>
         </div>
 
     </div>
@@ -105,7 +105,7 @@
             <p *ngIf="pagamentoSelecionado != null && pagamentoPorDinheiro != true">{{pagamentoSelecionado.description}}</p>
             <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
                 <p class="opcao-selecionada-dinheiro"> Troco para: </p>
-                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro">
+                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro" appOnlyNumbers>
               </div>
         </nav>
     </div>

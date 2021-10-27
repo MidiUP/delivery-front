@@ -8,6 +8,7 @@ import { NovoUsuarioComponent } from "./user/novo-usuario/novo-usuario.component
 import { PerfilComponent } from "./perfil/perfil.component";
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from "./auth/auth-guard.service";
+import { SobreComponent } from "./sobre/sobre.component";
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: 'admin', component: PainelAdminComponent, canActivate: [ AuthGuard ]},
     {path: 'login', component: LoginComponent},
     {path: 'perfil', component: PerfilComponent},
+    {path: 'sobre', component: SobreComponent},
     {path: '**', component: NotFoundComponent}
 
 ]
