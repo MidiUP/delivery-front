@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
 
   valorDinheiro: number = 0;
 
-  empresa: Empresa = new Empresa(0,"","","","","","","","", true);
+  empresa: Empresa = new Empresa(0,"","","","","","","","", true, [], "", "");
 
   isLogged: boolean = false; 
 
@@ -148,7 +148,11 @@ export class HomeComponent implements OnInit {
 
   getEmpresa(){
     this.empresaService.getEmpresaById()
-      .subscribe(res => this.empresa = res);
+      .subscribe(res => {
+        this.empresa = res
+        console.log(this.empresa);
+        
+      });
   }
 
   alterarEndereco(endereco: Address) {
@@ -204,7 +208,6 @@ export class HomeComponent implements OnInit {
       this.totalPedido = this.carrinhoService.getTotalPedido();
       this.itensCarrinho = this.carrinhoService.getItensCarrinho();
     });
-    console.log(produto);
   }
 
   openDialogCarMobile() {
@@ -333,11 +336,8 @@ export class HomeComponent implements OnInit {
         (data => {
           if (data.length > 0) {
             this.products = data;
-            console.log(data);
-            console.log(this.buscaNome);
           } else {
             this.products = [];
-            console.log("vazio")
           }
         })
       )
@@ -355,7 +355,6 @@ export class HomeComponent implements OnInit {
             .subscribe(
               (data => this.products = data)
             )
-          console.log("requisição");
         }),
       ).subscribe();
 
@@ -389,6 +388,14 @@ export class HomeComponent implements OnInit {
   pagamentoDinheiro(isDinheiro: boolean) {
     this.pagamentoPorDinheiro = isDinheiro;
     this.alterarMetodoPagamento(new MetodoPagamento (0,"Dinheiro"))
+  }
+
+  retornoBackground(): string{
+    if (this.empresa.backgroundPath == ""){
+      return "overflow: hidden; background: white;"
+    }else {
+      return "overflow: hidden; background: url(" + this.empresa.backgroundPath + ")" + "no-repeat fixed; background-size: cover;"
+    }
   }
 
 

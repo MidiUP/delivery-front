@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { delay } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Properties } from "../Properties";
 import { Empresa } from "./empresa.model";
@@ -38,17 +39,20 @@ export class EmpresaService{
     }
 
     postImage(file: FormData){
-        return this.http.post(`http://localhost:8080/v1/amazons3/upload/establishment/1`, file);
+        return this.http.post(`http://localhost:8080/v1/amazons3/upload/establishment/1`, file).pipe(delay(1000));
     }
 
     postBanner1(file: FormData){
-        return this.http.post(`http://localhost:8080/v1/amazons3/upload/banner/1`, file);
+        return this.http.post(`http://localhost:8080/v1/amazons3/upload/banner/1`, file).pipe(delay(1000));
     }
     postBanner2(file: FormData){
-        return this.http.post(`http://localhost:8080/v1/amazons3/upload/banner2/1`, file);
+        return this.http.post(`http://localhost:8080/v1/amazons3/upload/banner2/1`, file).pipe(delay(1000));
     }
     postBanner3(file: FormData){
-        return this.http.post(`http://localhost:8080/v1/amazons3/upload/banner3/1`, file);
+        return this.http.post(`http://localhost:8080/v1/amazons3/upload/banner3/1`, file).pipe(delay(1000));
+    }
+    postBackground(file: FormData){
+        return this.http.post(`http://localhost:8080/v1/amazons3/upload/establishment/1/background`, file).pipe(delay(1000));
     }
 
 

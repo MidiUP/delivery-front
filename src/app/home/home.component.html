@@ -1,4 +1,4 @@
-<body>
+<body [style]="retornoBackground()">
 
   <app-header></app-header>
 
@@ -14,13 +14,16 @@
       </div>
       <div class="carousel-inner center-block">
         <div class="carousel-item active">
-          <img src="../../assets/img/carrossel4.jpeg" class="d-block w-100" alt="...">
+          <img *ngIf="empresa.banners[0]" [src]="empresa.banners[0].imagePath" class="d-block w-100" alt="...">
+          <img *ngIf="!empresa.banners[0]" src="../../assets//img/si_pretomit.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../../assets/img/carrossel5.jpeg" class="d-block w-100" alt="...">
+          <img *ngIf="empresa.banners[1]" [src]="empresa.banners[1].imagePath" class="d-block w-100" alt="...">
+          <img *ngIf="!empresa.banners[1]" src="../../assets//img/si_pretomit.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="../../assets/img/carrossel3.jpeg" class="d-flex w-100" alt="...">
+          <img *ngIf="empresa.banners[2]" [src]="empresa.banners[2].imagePath" class="d-block w-100" alt="...">
+          <img *ngIf="!empresa.banners[2]" src="../../assets//img/si_pretomit.png" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -57,7 +60,7 @@
             <mat-icon class="icon-close" *ngIf="!empresa.open">schedule</mat-icon>
             <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id != 0">PEDIDO #{{ultimoPedido.id}}</h5>
             <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0 && empresa.open">COMPRE JÁ</h5>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="!empresa.open">09:00 às 16:00</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="!empresa.open">{{empresa.opening_hours}}</h5>
           </div>
           <p class="v-desktop-infos" *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
           <p class="v-desktop-infos" *ngIf="ultimoPedido.id == 0 && empresa.open">Temos ótimas opções</p>

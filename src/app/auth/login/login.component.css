@@ -1,8 +1,8 @@
-body{
+/* body{
   overflow: hidden;
   background: url(../../../assets/img/BackgroundTheliveryWhite.jpg) no-repeat fixed;
   background-size: cover;
-}
+} */
 
 .example-container .mat-form-field + .mat-form-field {
     margin-left: 8px;

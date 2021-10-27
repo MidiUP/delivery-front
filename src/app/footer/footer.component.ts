@@ -11,7 +11,7 @@ import { EmpresaService } from '../info-empresa/empresa.service';
 export class FooterComponent implements OnInit {
 
   faHeart = faHeart;
-  empresa: Empresa = new Empresa(0,"","","","","","","","",true)
+  empresa: Empresa = new Empresa(0,"","","","","","","","",true, [], "", "")
 
   constructor(private empresaService:EmpresaService) { }
 

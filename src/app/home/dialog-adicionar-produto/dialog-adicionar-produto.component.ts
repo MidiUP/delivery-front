@@ -14,6 +14,7 @@ export class DialogAdicionarProdutoComponent implements OnInit {
 
   adicionais: Adicional[] = [];
   produtoOk: boolean;
+  existeAdicionalId: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAdicionarProdutoComponent>,
     @Inject(MAT_DIALOG_DATA) public produto: Product, private carrinhoService: carrinhoService) { }
@@ -34,6 +35,7 @@ export class DialogAdicionarProdutoComponent implements OnInit {
     })
 
     this.conferirProduto();
+    this.existeAdicional();
 
   }
 
@@ -158,6 +160,14 @@ export class DialogAdicionarProdutoComponent implements OnInit {
       }
     })
     this.produtoOk = controlador;
+  }
+
+  existeAdicional(): void{
+    if(this.produto.additional?.length != 0){
+      this.existeAdicionalId = true;      
+    }else {
+      this.existeAdicionalId = false;
+    }
   }
 
 

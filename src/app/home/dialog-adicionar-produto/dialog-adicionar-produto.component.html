@@ -69,7 +69,7 @@
         <!-- Itens Não Obrigatórios -->
 
         <div class="container">
-            <h2>Adicionais</h2>
+            <h2 *ngIf="existeAdicionalId">Adicionais</h2>
             <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
                 <div class="col-3 adicionais" style="padding: 0;">
                     <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">
@@ -155,7 +155,7 @@
         <div class="row cabecalho-titulo-infos-adicional-mobile" *ngFor="let adicionalRequired of produto.additionalRequired" style="margin-top: 10px;">
             <div class="col-6 cabecalho-adicional-obrigatorio">
                 <div class="titulo-adicional-obrigatorio">
-                    <h2>{{adicionalRequired.name}}</h2>
+                    <h2 class="titulo-adicional-obrigatorio-mobile">{{adicionalRequired.name}}</h2>
                     <div style="height: auto;">
                         <span *ngIf="adicionalRequired.quantityMin>0">(min: {{adicionalRequired.quantityMin}})</span>
                         <span *ngIf="adicionalRequired.quantityMax>0">(máx: {{adicionalRequired.quantityMax}})</span>
@@ -203,7 +203,7 @@
         <!-- Itens não obrigatórios -->
 
         <div class="">
-            <h2>Adicionais</h2>
+            <h2 *ngIf="existeAdicionalId" class="titulo-adicional-obrigatorio-mobile">Adicionais</h2>
             <div class="row" *ngFor="let adicional of produto.additional" style="margin-top: 10px;">
                 <div class="col-5 adicionais" style="padding: 0;">
                     <button mat-icon-button color="primary" (click)="addQuantityAdicional(adicional)">

@@ -1,3 +1,5 @@
+import { Banner } from "./banner.model";
+
 export class Empresa{
     constructor(
         public id: number,
@@ -10,7 +12,10 @@ export class Empresa{
         public telefone: string,
         public whatsapp: string,
         public open: boolean,
+        public banners: Banner[],
+        public opening_hours: string,
+        public backgroundPath: string,
         public linkGoogleMaps?: string,
-        public logoPath?: string
+        public logoPath?: string,
     ){}
 }

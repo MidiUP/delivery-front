@@ -93,7 +93,13 @@
         <mat-form-field appearance="outline">
           <mat-label>Horário de Funcionamento</mat-label>
           <input matInput type="text"
-            placeholder="09:00 às 16:00" aria-describedby="basic-addon1">
+            placeholder="09:00 às 16:00" aria-describedby="basic-addon1" [(ngModel)]="empresa.opening_hours" formControlName="opening_hours">
+            <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('required')">
+              Por favor insira um horário de funcionamento.
+            </mat-error>
+            <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('minlength')">
+              Por favor insira um horário de funcionamento com dez ou mais caracteres.
+            </mat-error>
         </mat-form-field>
       </div>
 

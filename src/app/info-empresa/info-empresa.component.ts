@@ -15,7 +15,7 @@ import { EmpresaService } from './empresa.service';
 export class InfoEmpresaComponent implements OnInit {
 
   infoEmpresaForm: FormGroup;
-  empresa = new Empresa(0, "", "", "", "", "", "", "", "", true);
+  empresa = new Empresa(0, "", "", "", "", "", "", "", "", true, [], "", "");
   isDraggingOverLogo: boolean = false;
   isDraggingOverBanner1: boolean = false;
   isDraggingOverBanner2: boolean = false;
@@ -27,8 +27,8 @@ export class InfoEmpresaComponent implements OnInit {
   imagensBanner02: FileList;
   imagensBanner03: FileList;
   imagensBackground: FileList;
-  existeIMagemLogo: boolean = false;
 
+  existeIMagemLogo: boolean = false;
   existeIMagemBanner1: boolean = false;
   existeIMagemBanner2: boolean = false;
   existeIMagemBanner3: boolean = false;
@@ -48,6 +48,7 @@ export class InfoEmpresaComponent implements OnInit {
       telefone: this.formBuilder.control('', []),
       whatsapp: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       linkGoogleMaps: this.formBuilder.control('', [Validators.minLength(10)]),
+      opening_hours: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
       open: this.formBuilder.control('', [Validators.required])
     }, { updateOn: 'change' });
 
@@ -90,6 +91,11 @@ export class InfoEmpresaComponent implements OnInit {
       formDataImagemBanner3.append('file', this.imagensBanner03[0])
     }
 
+    let formDataImagemBackground = new FormData;
+    if (this.imagensBackground) {
+      formDataImagemBackground.append('file', this.imagensBackground[0])
+    }
+
     this.empresaService.putEmpresa(this.empresa, 1)
       .subscribe(
         (res) => {
@@ -98,6 +104,7 @@ export class InfoEmpresaComponent implements OnInit {
           this.postarBanner1(formDataImagemBanner1, this.imagensBanner01);
           this.postarBanner2(formDataImagemBanner2, this.imagensBanner02);
           this.postarBanner3(formDataImagemBanner3, this.imagensBanner03);
+          this.postarBackground(formDataImagemBackground, this.imagensBackground);
         },
         (err) => {
           this.openSnackBarError();
@@ -121,6 +128,10 @@ export class InfoEmpresaComponent implements OnInit {
     if(isDraggingOver === "isDraggingOverBanner3"){
       this.isDraggingOverBanner3 = true;
     }
+
+    if(isDraggingOver === "isDraggingOverBackground"){
+      this.isDraggingOverBackground = true;
+    }
     event.preventDefault();
   }
 
@@ -139,6 +150,10 @@ export class InfoEmpresaComponent implements OnInit {
 
     if(isDraggingOver === "isDraggingOverBanner3"){
       this.isDraggingOverBanner3 = false;
+    }
+
+    if(isDraggingOver === "isDraggingOverBackground"){
+      this.isDraggingOverBackground = false;
     }
     event.preventDefault();
   }
@@ -165,6 +180,11 @@ export class InfoEmpresaComponent implements OnInit {
     if(controlador == 'existeIMagemBanner3'){
       this.existeIMagemBanner3 = true;
       this.imagensBanner03 = event.dataTransfer?.files || new FileList;
+    }
+
+    if(controlador == 'existeIMagemBackground'){
+      this.existeIMagemBackground = true;
+      this.imagensBackground = event.dataTransfer?.files || new FileList;
     }
 
 
@@ -221,6 +241,21 @@ export class InfoEmpresaComponent implements OnInit {
     if (imagens) {
 
       this.empresaService.postBanner3(formData)
+        .subscribe(
+          (res => {
+            this.openSnackBarSuccess();
+          }),
+          (err => {
+            console.log(err);
+          })
+        )
+    }
+  }
+
+  postarBackground(formData: FormData, imagens: FileList) {
+    if (imagens) {
+
+      this.empresaService.postBackground(formData)
         .subscribe(
           (res => {
             this.openSnackBarSuccess();
