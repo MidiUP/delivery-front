@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.user.username.replace(/\D/g, '')
+    this.user.username = this.user.username.replace(/\D/g, '');
     this.authService.login(this.user)
       .subscribe(
         (res => {
