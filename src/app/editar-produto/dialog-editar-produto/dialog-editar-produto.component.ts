@@ -47,7 +47,6 @@ export class DialogEditarProdutoComponent implements OnInit {
     this.adicionalService.getAdicionals()
       .subscribe(data => this.todosAdicionais = data);
 
-    console.log(this.produto);
     
 
   }

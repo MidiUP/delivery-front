@@ -122,7 +122,7 @@
                             <div class="row">
                                 <mat-card-title>
                                     <div class="col-8 titulo-adicional-obrigatorio">
-                                        <h2>Adicional {{produto.additionalRequired?.indexOf(adicionalObrigatorio)}}</h2>
+                                        <h2>Adicional {{(produto.additionalRequired?.indexOf(adicionalObrigatorio) || 0) + 1}}</h2>
                                         <button mat-mini-fab color="warn" style="margin-top: 10px;"
                                             (click)="removeAdicionalObrigatorio(adicionalObrigatorio)">
                                             <mat-icon>delete</mat-icon>
