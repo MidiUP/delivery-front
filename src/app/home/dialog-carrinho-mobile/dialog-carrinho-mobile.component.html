@@ -23,7 +23,8 @@
         </div>
 
         <div class="col-3">
-            <img [src]="item.imagePath">
+            <img *ngIf="item.imagePath" [src]="item.imagePath">
+            <img *ngIf="!item.imagePath" src="../../../assets/img/Figura-Hamburguer-PNG-1280x720.png">
         </div>
 
         <div class="container">
