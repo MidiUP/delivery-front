@@ -41,7 +41,7 @@
     <section class="cards-pedido">
         <div class="card-pedido" *ngFor="let pedido of pedidos" id="pedido">
             <div class="header-card" [style]="colorHeader(pedido)">
-                <span (click)="openDialog(pedido)">PEDIDO #{{pedido.id}}</span>
+                <span>PEDIDO #{{pedido.id}}</span>
                 <div class="controlers">
                     <button mat-icon-button (click)="whatsappCliente(pedido.user.phone)">
                         <mat-icon>whatsapp</mat-icon>

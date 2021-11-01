@@ -46,7 +46,7 @@ export class InfoEmpresaComponent implements OnInit {
       cnpj: this.formBuilder.control('', [Validators.required,]),
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
       telefone: this.formBuilder.control('', []),
-      whatsapp: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      whatsapp: this.formBuilder.control('', [Validators.required, Validators.minLength(15), Validators.maxLength(15)]),
       linkGoogleMaps: this.formBuilder.control('', [Validators.minLength(10)]),
       opening_hours: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
       open: this.formBuilder.control('', [Validators.required])
@@ -70,6 +70,8 @@ export class InfoEmpresaComponent implements OnInit {
     //       console.log(this.empresa)
     //     }
     //   )
+
+    this.empresa.whatsapp = this.empresa.whatsapp.replace(/\D/g, '');
 
     let formDataImagemLogo = new FormData;
     if (this.imagensLogo) {

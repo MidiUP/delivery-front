@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "./user.model";
+import { RespostaModel, User } from "./user.model";
 
 @Injectable()
 export class UserService {
@@ -26,8 +26,8 @@ export class UserService {
         return this.http.delete<User>(`${this.baseUrl}/${id}`);
     }
 
-    putUser(user: User, id:number){
-        return this.http.put(`${this.baseUrl}/${id}`,user)
+    putUser(user: User, id:number): Observable<RespostaModel>{
+        return this.http.put<RespostaModel>(`${this.baseUrl}/${id}`,user)
     }
 
     findByUsername(username:string): Observable<User>{
@@ -40,6 +40,10 @@ export class UserService {
 
     phoneCheck(phone: string): Observable<boolean> {
         return this.http.get<boolean>(`${this.baseUrl}/check-phone?phone=${phone}`);
+    }
+
+    emailCheck(email: string): Observable<boolean> {
+        return this.http.get<boolean>(`${this.baseUrl}/check-email?email=${email}`);
     }
 
     recoveryPassword(id: number, newPassword: string): Observable<User>{

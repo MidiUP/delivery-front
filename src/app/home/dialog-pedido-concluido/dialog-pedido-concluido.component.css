@@ -1,0 +1,157 @@
+body{
+    width: 800px;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header h2{
+    font-size: 1.3em;
+}
+
+.fechar{
+    margin-left: auto;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.image{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji {
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+}
+
+h1{
+    font-size: 2em;
+    margin-top: 20px;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 400px) {
+    body{
+        width: 250px;
+    }
+
+    .header h2{
+        font-size: 0.8em;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 1.2em;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .fechar{
+        margin-left: auto;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (min-width: 401px) and (max-width: 575px) {
+
+    body{
+        width: 300px;
+    }
+
+    .header h2{
+        font-size: 0.8em;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 1.2em;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .fechar{
+        margin-left: auto;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+ 
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    body{
+        width: 400px;
+    }
+
+    .header h2{
+        font-size: 0.8em;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 1.2em;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .fechar{
+        margin-left: auto;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    body{
+        width: 500px;
+    }
+
+    .header h2{
+        font-size: 1em;
+        margin: 0;
+    }
+
+    h1{
+        font-size: 1.3em;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .fechar{
+        margin-left: auto;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+}
+
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    body{
+        width: 700px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    
+}

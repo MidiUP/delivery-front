@@ -67,22 +67,23 @@
         <mat-form-field appearance="outline">
           <mat-label>Telefone</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.telefone" formControlName="telefone"
-            placeholder="(XX)9 9999-9999" aria-describedby="basic-addon1">
+            placeholder="(XX)9 9999-9999" aria-describedby="basic-addon1" appOnlyNumbers>
         </mat-form-field>
       </div>
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Whatsapp</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.whatsapp" formControlName="whatsapp"
-            placeholder="Ex: (XX)9 9999-9999">
+          <input matInput type="text" formControlName="whatsapp"
+            placeholder="Ex: (XX)9 9999-9999" [ngModel]="empresa.whatsapp | phone" (ngModelChange)="empresa.whatsapp=$event" maxlength="15"
+            appOnlyNumbers>
           <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('required')">
             Por favor insira um número de Whatsapp.
           </mat-error>
           <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('minlength')">
-            Por favor insira um número com dez caracteres.
+            Por favor insira um número válido.
           </mat-error>
           <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('maxlength')">
-            Por favor insira um número com dez caracteres.
+            Por favor insira um número válido.
           </mat-error>
         </mat-form-field>
       </div>

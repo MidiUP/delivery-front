@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { additionalPedidos, Items } from '../home/items.model';
 import { Order } from '../home/order.model';
 import { orderService } from '../home/order.service';
+import { Empresa } from '../info-empresa/empresa.model';
+import { EmpresaService } from '../info-empresa/empresa.service';
 import { Product } from '../novo-produto/product.model';
 import { DialogPedidoComponent } from './dialog-pedido/dialog-pedido.component';
 
@@ -21,14 +23,16 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
   mute: boolean = false;
   corIconeMute: string = 'primary';
   intervalo: any;
+  empresa: Empresa = new Empresa(0,"","","","","","","","",true,[], "", "");
 
 
 
-  constructor(private orderService: orderService, public dialog: MatDialog) { }
+  constructor(private orderService: orderService, public dialog: MatDialog, private empresaService: EmpresaService) { }
 
   ngOnInit(): void {
     this.getPedidosByDate(true);
     this.intervalo = setInterval(() => this.filtroPedidos(this.filtro, true), 60000);
+    this.getEmpresa();
   }
 
   ngOnDestroy(): void {
@@ -55,6 +59,11 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
           }
         }
       )
+  }
+
+  getEmpresa(){
+    this.empresaService.getEmpresaById()
+      .subscribe(data => this.empresa = data)
   }
 
 
@@ -246,6 +255,14 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
                   +'justify-content: space-between;'
     
                   +'}'
+
+                  +'.infos-produto{'
+                  +'display: flex;'
+                      +'width: 100%;'
+                      +'flex-direction: row;'
+
+        
+                      +'}'
       
       
               +'h3 {'
@@ -282,11 +299,11 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
       +'<!-- onload=window.print(); window.close(); -->'
       +'<body onload="window.print(); window.close();" style="padding: 0px 5px;">'
       +'<header class="container nota">'
-              +'<img src="data:image/png;base64,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" width="60px" height="60px">'
+              +'<img src="'+this.empresa.logoPath+'" width="60px" height="60px">'
               +'<div>'
-              +'<h3>Nome do Estabelecimento</h3>'
-                  +'<h3> Av. Miguel Couto, 2395 - Teresina</h3>'
-                  +'<h3> cnpj: 50.432.057/0001-38</h3>'
+              +'<h3>'+ this.empresa.name + '</h3>'
+                  +'<h3>'+this.empresa.address+'</h3>'
+                  +'<h3> cnpj:'+this.empresa.cnpj+'</h3>'
                   +'</div>'
               +'</header>'
       
@@ -380,13 +397,28 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
 
     itens.forEach(item => {
       stringItens = stringItens +'<section class="container notaColumn" style="margin-bottom: 7px;">'
-      +'<div class="infos">'
-          +'<div class="produto">'
-              +'<h3>' + item.product.name + '('+ item.quantityProduct +')' + '</h3>'
-                  + '<h3>' + this.lerAdicionais(item.additionalPedidos, item.additionalPedidosRequired) + '<h3>'
-                  +'</div>'
-              +'<h3>valor: R$' + this.calcularValorItem(item).toFixed(2).replace('.', ',') + '</h3>'
-              +'</div>'
+      +'<div class="infos-produto" style="width: 100%;>'
+
+        +  '<div class="row" style="width: 100%">'
+              +  '<div class="col-7">'
+                
+                      +'<div class="produto">'
+                          +'<h3>' + item.product.name + '('+ item.quantityProduct +')' + '</h3>'
+                          + '<h3>' + this.lerAdicionais(item.additionalPedidos, item.additionalPedidosRequired) + '<h3>'
+                      +'</div>'
+                
+              +  '</div>'
+
+              +  '<div class="col-5" style="padding-right: 0; display: flex; flex-direction: row; justify-content: end">'              
+                      
+                      +'<h3 style="margin-left: auto; margin: 0; padding: 0">valor: R$' + this.calcularValorItem(item).toFixed(2).replace('.', ',') + '</h3>'
+                        
+              +  '</div>'          
+
+
+        +  '</div>'              
+
+      +'</div>'
           +'</section>'
     })
 

@@ -7,6 +7,7 @@ import { addressService } from 'src/app/enderecos/address.service';
 import { Bairro } from 'src/app/novo-bairro/bairro.model';
 import { bairroService } from 'src/app/novo-bairro/bairro.service';
 import { CpfCadastradoComponent } from 'src/app/snack-bars/cpf-cadastrado/cpf-cadastrado.component';
+import { EmailCadastradoComponent } from 'src/app/snack-bars/email-cadastrado/email-cadastrado.component';
 import { NumeroCadastradoComponent } from 'src/app/snack-bars/numero-cadastrado/numero-cadastrado.component';
 import { SenhaDiferenteRepetirComponent } from 'src/app/snack-bars/senha-diferente-repetir/senha-diferente-repetir.component';
 import { User } from '../user.model';
@@ -27,7 +28,7 @@ export class NovoUsuarioComponent implements OnInit {
     'cpf': ['', [this.validarCpf]],
     'rg': ['', []],
     'email': ['', [Validators.required, Validators.email]],
-    'phone': ['', [Validators.required, Validators.minLength(11)]],
+    'phone': ['', [Validators.required, Validators.minLength(15)]],
     'username': ['', []],
     'password': ['', [Validators.required, Validators.minLength(8)]],
     'confirmationPassword': ['', [Validators.required, Validators.minLength(8)]]
@@ -206,68 +207,74 @@ export class NovoUsuarioComponent implements OnInit {
 
   onSubmit() {
 
-   if(this.newUser.password === this.confirmacaoSenha){
-    this.userService.cpfCheck(this.newUser.cpf.replace(/\D/g, ''))
-    .subscribe(
-      data => {
-        if (data) {
-          this.openSnackBarCpfExists();
+    if (this.newUser.password === this.confirmacaoSenha) {
+      this.userService.cpfCheck(this.newUser.cpf.replace(/\D/g, ''))
+        .subscribe(
+          data => {
+            if (data) {
+              this.openSnackBarCpfExists();
+            } else {
+              this.userService.phoneCheck(this.newUser.phone.replace(/\D/g, ''))
+                .subscribe(data => {
+                  if (data) {
+                    this.openSnackBarTelefoneExists();
+                  }
 
-        } else {
-          this.userService.phoneCheck(this.newUser.phone.replace(/\D/g, ''))
-            .subscribe(data => {
-              if (data) {
-                this.openSnackBarTelefoneExists();
-              } else {
-                this.newUser.cpf = this.newUser.cpf.replace(/\D/g, '');
-                this.newUser.phone = this.newUser.phone.replace(/\D/g, '');
-                this.userService.createUser(this.newUser)
-                  .subscribe(
-                    (res) => {
-                      console.log("usuario cadastrado");
-                      this.userService.findByUsername(this.newUser.phone)
-                        .subscribe(
-                          (data => {
-                            this.userService.findByUsername(this.newUser.phone)
-                              .subscribe(
-                                (data => {
-                                  this.userAddress.id = data.id;
-                                  this.cadastroEndereco(this.newAddress);
-                                  if (this.campoEndereco === 2) {
-                                    this.cadastroEndereco(this.newAddress2);
-                                  }
-                                  if (this.campoEndereco === 3) {
-                                    this.cadastroEndereco(this.newAddress2);
-                                    this.cadastroEndereco(this.newAddress3);
-                                  }
-                                  this.authService.login({ username: this.newUser.phone, password: this.newUser.password })
-                                    .subscribe(
-                                      (res => console.log("chamei login")),
-                                      (err => console.log(err))
-                                    );
-                                  console.log("cheguei")
-                                }),
-                                (err => console.log(err))
-                              )
-                          }),
-                          (err) => {
-                            console.log(err)
-                          })
-                    },
-                    (err) => {
-                      console.log(err);
-                      console.log(this.newUser)
+
+                  else this.userService.emailCheck(this.newUser.email)
+                    .subscribe(data => {
+                      if (data) {
+                        this.openSnackBarEmailExists();
+                      } else {
+                        this.newUser.cpf = this.newUser.cpf.replace(/\D/g, '');
+                        this.newUser.phone = this.newUser.phone.replace(/\D/g, '');
+                        this.userService.createUser(this.newUser)
+                          .subscribe(
+                            (res) => {
+                              console.log("usuario cadastrado");
+                              this.userService.findByUsername(this.newUser.phone)
+                                .subscribe(
+                                  (data => {
+                                    this.userService.findByUsername(this.newUser.phone)
+                                      .subscribe(
+                                        (data => {
+                                          this.userAddress.id = data.id;
+                                          this.cadastroEndereco(this.newAddress);
+                                          if (this.campoEndereco === 2) {
+                                            this.cadastroEndereco(this.newAddress2);
+                                          }
+                                          if (this.campoEndereco === 3) {
+                                            this.cadastroEndereco(this.newAddress2);
+                                            this.cadastroEndereco(this.newAddress3);
+                                          }
+                                          this.authService.login({ username: this.newUser.phone, password: this.newUser.password })
+                                            .subscribe(
+                                              (res => console.log("chamei login")),
+                                              (err => console.log(err))
+                                            );
+                                          console.log("cheguei")
+                                        }),
+                                        (err => console.log(err))
+                                      )
+                                  }),
+                                  (err) => {
+                                    console.log(err)
+                                  })
+                            },
+                            (err) => {
+                              console.log(err);
+                              console.log(this.newUser)
+                            })
+                      }
                     })
 
-
-              }
-            })
-        }
-      }
-    )
-   }else {
-    this.openSnackBarPasswordDiferenteConfirmacao()
-   }
+                })
+            }
+          }
+        )
+    } else {
+      this.openSnackBarPasswordDiferenteConfirmacao()
+    }
 
   }
 
@@ -289,6 +296,11 @@ export class NovoUsuarioComponent implements OnInit {
     });
   }
 
+  openSnackBarEmailExists() {
+    this._snackBar.openFromComponent(EmailCadastradoComponent, {
+      duration: 5 * 1000,
+    });
+  }
 
   // onSubmit() {
   //   this.userService.createUser(this.newUser)

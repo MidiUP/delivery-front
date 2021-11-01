@@ -119,6 +119,8 @@ export class DialogEditarProdutoComponent implements OnInit {
           this.openSnackBarSuccess();
           if (this.imagens){
             this.postarImagem(formData, this.produto);
+          } else {
+            this.dialogRef.close();
           }
           
         }),
@@ -143,47 +145,24 @@ export class DialogEditarProdutoComponent implements OnInit {
     });
   }
 
-  cadastrarAdicional(adicional: Adicional) {
-    let jaExiste: boolean = false;
+  cadastrarAdicional(adicionalItem: Adicional, adicional: Adicional) {
 
-    this.produto.additional?.forEach(item => {
-      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
-        jaExiste = true;
-      }
-    })
+    adicional.name = adicionalItem.name;
+    adicional.description = adicionalItem.description;
+    adicional.id = adicionalItem.id;
+    adicional.price = adicionalItem.price;
 
-    if (!jaExiste) {
-      this.produto.additional?.forEach(item => {
-        if (item.name === "" && item.price === 0) {
-          item.name = adicional.name;
-          item.id = adicional.id;
-          item.price = adicional.price;
-          item.description = adicional.description;
-        }
-      });
-    }
+
 
   }
   
-  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired ,adicional: Adicional) {
-    let jaExiste: boolean = false;
+  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicionalItem: Adicional, adicional: Adicional) {
 
-    adicionalObrigatorio.additional.forEach(item => {
-      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
-        jaExiste = true;
-      }
-    })
+    adicional.name = adicionalItem.name;
+    adicional.description = adicionalItem.description;
+    adicional.id = adicionalItem.id;
+    adicional.price = adicionalItem.price;
 
-    if (!jaExiste) {
-      adicionalObrigatorio.additional.forEach(item => {
-        if (item.name === "" && item.price === 0) {
-          item.name = adicional.name;
-          item.id = adicional.id;
-          item.price = adicional.price;
-          item.description = adicional.description;
-        }
-      });
-    }
 
   }
 
@@ -210,6 +189,7 @@ export class DialogEditarProdutoComponent implements OnInit {
         .subscribe(
           (res => {
             this.openSnackBarSuccess();
+            this.dialogRef.close();
           }),
           (err => {
             console.log(err);

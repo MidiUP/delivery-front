@@ -12,3 +12,11 @@ export class User{
     ){}
 
 }
+
+export class RespostaModel{
+    constructor(
+        public cpfExiste: boolean,
+        public phoneExiste: boolean,
+        public emailExiste: boolean
+    ){}
+}

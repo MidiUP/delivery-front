@@ -66,6 +66,12 @@ export class authService {
     logout() {
         localStorage.removeItem('token');
         this.username = "";
+        if(this.router.url === "/"){
+            window.location.reload();
+        }else{
+            this.router.navigateByUrl("/")
+        }
+        
     }
 
     getTokenValid(token: any): boolean {
@@ -98,7 +104,7 @@ export class authService {
                         admin = true;
                     }
                 })
-                if(admin){
+                if (admin) {
                     return true;
                 } else {
                     return false;

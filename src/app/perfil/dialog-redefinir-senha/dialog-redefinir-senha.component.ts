@@ -38,6 +38,7 @@ export class DialogRedefinirSenhaComponent implements OnInit {
         .subscribe(
           (res => {
             this.openSnackBarSuccess();
+            this.dialogRef.close();
           }),
           (err => {
             console.log(err);

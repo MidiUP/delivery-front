@@ -110,6 +110,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  voltar(){
+    this.esqueciSenha = false;
+  }
+
   
 
 }

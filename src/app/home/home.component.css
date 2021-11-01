@@ -1,7 +1,7 @@
 
-/* body{
-    
-} */
+body{
+    height: 100%;   
+}
 
 #carousel {
     display: flex;
@@ -776,7 +776,7 @@ body{
     }
 
     .produtos{
-        padding-bottom: 41px;
+        padding-bottom: 200px;
     }
 
      /* Formatação card produto */
@@ -853,6 +853,9 @@ body{
         height: 200px;
     }
 
+    .produtos{
+        padding-bottom: 300px;
+    }
     /* Formatação card produto */
 
     .produto{
@@ -1023,6 +1026,10 @@ body{
 
     .botoes-produto-carrinho{
         padding-top: 5px;
+    }
+
+    .produtos{
+        padding-bottom: 600px;
     }
 }
 

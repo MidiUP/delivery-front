@@ -33,6 +33,7 @@ import { DialogHistoricoComponent } from './dialog-historico/dialog-historico.co
 import { TrocoErradoComponent } from '../snack-bars/troco-errado/troco-errado.component';
 import { EmpresaService } from '../info-empresa/empresa.service';
 import { Empresa } from '../info-empresa/empresa.model';
+import { DialogPedidoConcluidoComponent } from './dialog-pedido-concluido/dialog-pedido-concluido.component';
 
 @Component({
   selector: 'app-home',
@@ -246,6 +247,7 @@ export class HomeComponent implements OnInit {
   }
 
   exportarPedido() {
+    
     if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoSelecionado != null && this.enderecoSelecionado != null) {
       if(this.pagamentoSelecionado.description === "Dinheiro"){
         if(this.valorDinheiro >= this.carrinhoService.totalPedido){

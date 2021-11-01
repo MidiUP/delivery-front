@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { authService } from "../auth/auth.service/auth.service";
@@ -11,6 +12,7 @@ import { MetodoPagamentoNullComponent } from "../snack-bars/metodo-pagamento-nul
 import { User } from "../user/user.model";
 import { UserService } from "../user/user.service";
 import { Cupom } from "./cupom.model";
+import { DialogPedidoConcluidoComponent } from "./dialog-pedido-concluido/dialog-pedido-concluido.component";
 import { additionalPedidos, Items } from "./items.model";
 import { Order } from "./order.model";
 import { orderService } from "./order.service";
@@ -19,7 +21,7 @@ import { Status } from "./status.model";
 @Injectable()
 export class carrinhoService {
 
-  constructor(private authService: authService, private orderService: orderService, private router: Router, private _snackBar: MatSnackBar, private userService: UserService) {
+  constructor(private authService: authService, private orderService: orderService, private router: Router, private _snackBar: MatSnackBar, private userService: UserService, public dialog: MatDialog) {
     if (this.authService.isAuthenticated()) {
       let username: string = this.authService.getUsername();
       this.userService.findByUsername(username)
@@ -173,8 +175,7 @@ export class carrinhoService {
       this.orderService.createOrder(this.order)
         .subscribe(
           (res => {
-            console.log("pedido concluido");
-            window.location.reload();
+            this.openDialogPedidoConcluido();
           }),
           (err => {
             console.log(err);
@@ -225,6 +226,16 @@ export class carrinhoService {
 
   setUserLogado(id: number) {
     this.userLogado.id = id;
+  }
+
+  openDialogPedidoConcluido() {
+    const dialogRef = this.dialog.open(DialogPedidoConcluidoComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 
 }

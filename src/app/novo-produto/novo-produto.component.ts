@@ -49,9 +49,9 @@ export class NovoProdutoComponent implements OnInit {
     }, { updateOn: 'change' });
 
     this.additionalRequired = new FormGroup({
-      name: this.formBuilder.control( [Validators.required]),
-      quantityMin: this.formBuilder.control( [Validators.required]),
-      quantityMax: this.formBuilder.control( [Validators.required]),
+      name: this.formBuilder.control([Validators.required]),
+      quantityMin: this.formBuilder.control([Validators.required]),
+      quantityMax: this.formBuilder.control([Validators.required]),
 
     }, { updateOn: 'change' });
 
@@ -62,7 +62,7 @@ export class NovoProdutoComponent implements OnInit {
   createProduct(): void {
 
     let formData = new FormData;
-    if (this.imagens){
+    if (this.imagens) {
       formData.append('file', this.imagens[0])
     }
 
@@ -78,7 +78,8 @@ export class NovoProdutoComponent implements OnInit {
           this.openSnackBarError();
         }
       );
-    
+    // console.log(this.product)
+
   }
 
   openSnackBarSuccess() {
@@ -118,25 +119,30 @@ export class NovoProdutoComponent implements OnInit {
 
   }
 
-  cadastrarAdicional(adicional: Adicional) {
-    let jaExiste: boolean = false;
+  cadastrarAdicional(adicionalItem: Adicional, adicional: Adicional) {
+    // let jaExiste: boolean = false;
 
-    this.product.additional?.forEach(item => {
-      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
-        jaExiste = true;
-      }
-    })
+    // this.product.additional?.forEach(item => {
+    //   if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
+    //     jaExiste = true;
+    //   }
+    // })
 
-    if (!jaExiste) {
-      this.product.additional?.forEach(item => {
-        if (item.name === "" && item.price === 0) {
-          item.name = adicional.name;
-          item.id = adicional.id;
-          item.price = adicional.price;
-          item.description = adicional.description;
-        }
-      });
-    }
+    // if (!jaExiste) {
+    adicional.name = adicionalItem.name;
+    adicional.description = adicionalItem.description;
+    adicional.id = adicionalItem.id;
+    adicional.price = adicionalItem.price;
+
+    // this.product.additional?.forEach(item => {
+    //   if (item.id === adicional.id) {
+    //     item.name = adicional.name;
+    //     item.id = adicional.id;
+    //     item.price = adicional.price;
+    //     item.description = adicional.description;
+    //   }
+    // });
+    // }
 
   }
 
@@ -145,14 +151,14 @@ export class NovoProdutoComponent implements OnInit {
   }
 
   addAdicionalObrigatorio() {
-    let adicionalObrigatorio: additionalRequired = new additionalRequired("", 0, 0, [],0);
+    let adicionalObrigatorio: additionalRequired = new additionalRequired("", 0, 0, [], 0);
     this.product.additionalRequired?.push(adicionalObrigatorio);
-    
+
   }
 
   removeAdicionalObrigatorio(adicional: additionalRequired) {
     // this.product.additionalRequired.splice(this.product.additionalRequired.indexOf(adicional), 1);
-    this.product.additionalRequired?.splice(this.product.additionalRequired.indexOf(adicional),1)
+    this.product.additionalRequired?.splice(this.product.additionalRequired.indexOf(adicional), 1)
   }
 
   addAdicionalEmObrigatorio(AdicionalObrigatorio: additionalRequired) {
@@ -169,25 +175,30 @@ export class NovoProdutoComponent implements OnInit {
     console.log(itemVazio);
   }
 
-  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicional: Adicional) {
-    let jaExiste: boolean = false;
+  cadastrarAdicionalEmObrigatorio(adicionalObrigatorio: additionalRequired, adicionalItem: Adicional, adicional: Adicional) {
 
-    adicionalObrigatorio.additional.forEach(item => {
-      if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
-        jaExiste = true;
-      }
-    })
+    adicional.name = adicionalItem.name;
+    adicional.description = adicionalItem.description;
+    adicional.id = adicionalItem.id;
+    adicional.price = adicionalItem.price;
+    // let jaExiste: boolean = false;
 
-    if (!jaExiste) {
-      adicionalObrigatorio.additional.forEach(item => {
-        if (item.name === "" && item.price === 0) {
-          item.name = adicional.name;
-          item.id = adicional.id;
-          item.price = adicional.price;
-          item.description = adicional.description;
-        }
-      });
-    }
+    // adicionalObrigatorio.additional.forEach(item => {
+    //   if (item.name === adicional.name && item.price === adicional.price && item.description === adicional.description) {
+    //     jaExiste = true;
+    //   }
+    // })
+
+    // if (!jaExiste) {
+    //   adicionalObrigatorio.additional.forEach(item => {
+    //     if (item.name === "" && item.price === 0) {
+    //       item.name = adicional.name;
+    //       item.id = adicional.id;
+    //       item.price = adicional.price;
+    //       item.description = adicional.description;
+    //     }
+    //   });
+    // }
 
   }
 
@@ -225,6 +236,8 @@ export class NovoProdutoComponent implements OnInit {
             window.location.href = "/admin?newProduct";
           })
         )
+    } else {
+      window.location.href = "/admin?newProduct";
     }
   }
 

@@ -8,7 +8,7 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline">
                         <mat-label>Telefone</mat-label>
-                        <input matInput placeholder="86999999999" formControlName="username" [ngModel]="user.username | phone" (ngModelChange)="user.username=$event" appOnlyNumbers
+                        <input matInput placeholder="86999999999" formControlName="username" [ngModel]="user.username | phone" (ngModelChange)="user.username=$event" maxlength="15" appOnlyNumbers
                             type="text">
                     </mat-form-field>
 
@@ -57,6 +57,7 @@
                         <a (click)="esqueciMinhaSenha()">Esqueci minha senha</a>
                     </div> -->
                     <button mat-flat-button color="primary" type="submit" [disabled]="!esqueciSenhaForm.valid">Enviar</button>
+                    <button mat-flat-button color="warn" (click)="voltar()" style="margin-left: 10px;">Voltar</button>
                 </form>
             </div>
 
