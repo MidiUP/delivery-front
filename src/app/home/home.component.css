@@ -133,6 +133,11 @@ img {
     padding-bottom: 8px;
 }
 
+.valor-minimo{
+    font-size: 0.7em;
+    color: red;
+}
+
 .opcoes-endereco-pagamento{
     margin-left: auto;
 }

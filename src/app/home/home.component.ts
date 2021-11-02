@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
 
   valorDinheiro: number = 0;
 
-  empresa: Empresa = new Empresa(0,"","","","","","","","", true, [], "", "");
+  empresa: Empresa = new Empresa(0,"","","","","","","","", true, [], "", "", 0);
 
   isLogged: boolean = false; 
 
@@ -213,7 +213,7 @@ export class HomeComponent implements OnInit {
 
   openDialogCarMobile() {
     const dialogRef = this.dialog.open(DialogCarrinhoMobileComponent, {
-      data: { user: this.user, open: this.empresa.open }
+      data: { user: this.user, open: this.empresa.open, minValue: this.empresa.minValue }
     });
 
     this.carrinhoMobileOpen = true;

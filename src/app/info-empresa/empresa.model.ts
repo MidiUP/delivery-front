@@ -15,6 +15,7 @@ export class Empresa{
         public banners: Banner[],
         public opening_hours: string,
         public backgroundPath: string,
+        public minValue: number,
         public linkGoogleMaps?: string,
         public logoPath?: string,
     ){}

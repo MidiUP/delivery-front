@@ -137,9 +137,9 @@
                     <mat-form-field appearance="outline">
                         <mat-label>{{pedido.status.description}}</mat-label>
                         <mat-select>
+                            <mat-option value="1" (click)="alterarStatus(5,pedido)"><a>Indisponível</a></mat-option>
                             <mat-option value="1" (click)="alterarStatus(2,pedido)"><a>Em Preparo</a></mat-option>
-                            <mat-option value="2" (click)="alterarStatus(3,pedido)"><a>Saiu para Entrega</a>
-                            </mat-option>
+                            <mat-option value="2" (click)="alterarStatus(3,pedido)"><a>Saiu para Entrega</a></mat-option>
                             <mat-option value="3" (click)="alterarStatus(4,pedido)"><a>Pedido Entregue</a></mat-option>
                         </mat-select>
                     </mat-form-field>

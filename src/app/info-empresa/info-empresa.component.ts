@@ -15,7 +15,7 @@ import { EmpresaService } from './empresa.service';
 export class InfoEmpresaComponent implements OnInit {
 
   infoEmpresaForm: FormGroup;
-  empresa = new Empresa(0, "", "", "", "", "", "", "", "", true, [], "", "");
+  empresa = new Empresa(0, "", "", "", "", "", "", "", "", true, [], "", "", 10);
   isDraggingOverLogo: boolean = false;
   isDraggingOverBanner1: boolean = false;
   isDraggingOverBanner2: boolean = false;
@@ -49,6 +49,7 @@ export class InfoEmpresaComponent implements OnInit {
       whatsapp: this.formBuilder.control('', [Validators.required, Validators.minLength(15), Validators.maxLength(15)]),
       linkGoogleMaps: this.formBuilder.control('', [Validators.minLength(10)]),
       opening_hours: this.formBuilder.control('', [Validators.required, Validators.minLength(10)]),
+      minValue: this.formBuilder.control('', [Validators.required]),
       open: this.formBuilder.control('', [Validators.required])
     }, { updateOn: 'change' });
 

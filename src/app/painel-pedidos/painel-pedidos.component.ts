@@ -23,7 +23,7 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
   mute: boolean = false;
   corIconeMute: string = 'primary';
   intervalo: any;
-  empresa: Empresa = new Empresa(0,"","","","","","","","",true,[], "", "");
+  empresa: Empresa = new Empresa(0,"","","","","","","","",true,[], "", "", 0);
 
 
 
@@ -79,8 +79,10 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
       return 'background: orange';
     } else if (pedido.status.description === "Saiu para Entrega") {
       return 'background: #00BFFF'
-    } else {
-      return 'background: #32CD32'
+    } else if (pedido.status.description === "Pedido Entregue"){
+      return 'background: #32CD32';
+    }else {
+      return 'background: #565656';
     }
   }
 

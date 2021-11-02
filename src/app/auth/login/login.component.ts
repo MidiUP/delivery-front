@@ -19,7 +19,7 @@ import { UserLogin } from './userLogin.model';
 })
 export class LoginComponent implements OnInit {
 
-  empresa: Empresa = new Empresa (0, "", "", "", "", "", "", "", "", true, [], "", "");
+  empresa: Empresa = new Empresa (0, "", "", "", "", "", "", "", "", true, [], "", "", 0);
   esqueciSenha: boolean = false;
   emailRedefinirSenha: string;
   hide = true;

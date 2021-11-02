@@ -164,3 +164,15 @@ hr{
     margin-top: 8px;
     font-weight: 500;
 }
+
+.valor-minimo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.minValue{
+    color: red;
+    font-size: 0.7em;
+}

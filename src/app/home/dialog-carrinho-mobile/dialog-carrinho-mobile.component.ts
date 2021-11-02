@@ -20,8 +20,9 @@ import { Items } from '../items.model';
 export interface Carrinho {
   user: User,
   products: Product[],
-  total: number;
-  open: boolean;
+  minValue: number,
+  total: number,
+  open: boolean
 }
 
 @Component({

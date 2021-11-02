@@ -58,16 +58,19 @@
           <div class="d-flex align-items-center">
             <mat-icon class="icon-open" *ngIf="empresa.open">shopping_bag</mat-icon>
             <mat-icon class="icon-close" *ngIf="!empresa.open">schedule</mat-icon>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id != 0" style="cursor: pointer">PEDIDO #{{ultimoPedido.id}}</h5>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0 && empresa.open">COMPRE JÁ</h5>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="!empresa.open">{{empresa.opening_hours}}</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id != 0"
+              style="cursor: pointer">PEDIDO #{{ultimoPedido.id}}</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0 && empresa.open">
+              COMPRE JÁ</h5>
+            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="!empresa.open">{{empresa.opening_hours}}
+            </h5>
           </div>
           <p class="v-desktop-infos" *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
           <p class="v-desktop-infos" *ngIf="ultimoPedido.id == 0 && empresa.open">Temos ótimas opções</p>
           <div class="v-mobile-infos">
             <p *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
             <p *ngIf="ultimoPedido.id == 0 && empresa.open">Ótimas opções</p>
-            
+
 
           </div>
         </div>
@@ -142,7 +145,7 @@
                       <mat-icon>add</mat-icon>
                     </button>
 
-                    <button mat-icon-button  (click)="openDialog(produto)">
+                    <button mat-icon-button (click)="openDialog(produto)">
                       <mat-icon id="botao-delete">info</mat-icon>
                     </button>
                   </div>
@@ -151,8 +154,8 @@
                 <div class="col-md-4" style="padding: 0;">
                   <img src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png" class="img-produto titulo-produto"
                     (click)="openDialog(produto)" *ngIf="!produto.imagePath">
-                    <img [src]="produto.imagePath" class="img-produto titulo-produto"
-                    (click)="openDialog(produto)" *ngIf="produto.imagePath">
+                  <img [src]="produto.imagePath" class="img-produto titulo-produto" (click)="openDialog(produto)"
+                    *ngIf="produto.imagePath">
                 </div>
               </div>
             </mat-card>
@@ -189,8 +192,8 @@
                 <div class="col-4 d-flex align-items-center">
                   <img class="img-produto-mobile" src="../../assets/img/Figura-Hamburguer-PNG-1280x720.png"
                     (click)="openDialog(produto)" *ngIf="!produto.imagePath">
-                    <img class="img-produto-mobile" [src]="produto.imagePath"
-                    (click)="openDialog(produto)" *ngIf="produto.imagePath">
+                  <img class="img-produto-mobile" [src]="produto.imagePath" (click)="openDialog(produto)"
+                    *ngIf="produto.imagePath">
                 </div>
 
               </div>
@@ -224,7 +227,8 @@
                                 <hr class="dropdown-divider">
                               </li>
                               <li>
-                                <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']">Editar Endereços</a>
+                                <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']">Editar
+                                  Endereços</a>
                                 <a class="dropdown-item" *ngIf="!isLogged" [routerLink]="['/login']">Fazer Login</a>
                               </li>
                             </ul>
@@ -243,7 +247,8 @@
             <div class="carrinho d-none d-lg-block">
               <div class="d-flex align-items-center">
                 <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
-                <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
+                <h4 class="navbar-brand titulo-carrinho" style="margin-right: 5px;">Carrinho</h4>
+                <span *ngIf="empresa.minValue > totalPedido" class="valor-minimo">*Valor mínimo: R${{empresa.minValue.toFixed(2).replace('.',',')}}</span>
               </div>
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">
@@ -303,9 +308,12 @@
             </div>
 
             <div class="carrinho v-md">
-              <div class="d-flex align-items-center">
-                <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
-                <h4 class="navbar-brand titulo-carrinho">Carrinho</h4>
+              <div class="d-flex" style="flex-direction: column; justify-content: center;">
+                <div style="display: flex; margin: 0;">
+                  <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
+                  <h4 class="navbar-brand titulo-carrinho" style="margin-bottom: 0 ;">Carrinho</h4>
+                </div>
+                <span *ngIf="empresa.minValue > totalPedido" class="valor-minimo" style="margin: 0px 0px 10px 0px;">*Valor mínimo: R${{empresa.minValue.toFixed(2).replace('.',',')}}</span>
               </div>
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">
@@ -458,7 +466,8 @@
               </p>
               <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
                 <p class="opcao-selecionada-dinheiro"> Dinheiro </p>
-                <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro" appOnlyNumbers >
+                <input class="form-control troco" type="text" placeholder="Troco para quanto?"
+                  [(ngModel)]="valorDinheiro" appOnlyNumbers>
               </div>
 
             </div>
@@ -468,7 +477,8 @@
                 <nav class="navbar navbar-expand opcoes-pedido" style="margin-top: 10px">
                   <div class="container-fluid" style="padding-bottom:0">
                     <h4 class="navbar-brand titulo-opcoes">Finalizar Pedido</h4>
-                    <button class=" btn finalizar-pedido" (click)="exportarPedido()" [disabled]="!empresa.open">Compra</button>
+                    <button class=" btn finalizar-pedido" (click)="exportarPedido()"
+                      [disabled]="!empresa.open || empresa.minValue > totalPedido">Compra</button>
 
                   </div>
                 </nav>

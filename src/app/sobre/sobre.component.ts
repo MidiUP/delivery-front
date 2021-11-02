@@ -9,7 +9,7 @@ import { EmpresaService } from '../info-empresa/empresa.service';
 })
 export class SobreComponent implements OnInit {
 
-  empresa: Empresa = new Empresa(0, "", "","", "", "", "", "", "", true, [], "", "");
+  empresa: Empresa = new Empresa(0, "", "","", "", "", "", "", "", true, [], "", "", 0);
 
   constructor(private empresaService: EmpresaService) { }
 
