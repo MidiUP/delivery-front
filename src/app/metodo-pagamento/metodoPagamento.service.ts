@@ -10,7 +10,7 @@ import { MetodoPagamento } from "./metodoPagamento.model";
 @Injectable()
 export class metodoPagamentoService{
     
-    baseUrl =  "http://localhost:8080/v1/paymentMethods"
+    baseUrl =  "https://api-delivery-v1-4.herokuapp.com/v1/paymentMethods"
 
     constructor(private http: HttpClient){}
 

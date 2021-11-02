@@ -8,7 +8,7 @@ import { Categoria } from "./categoria.model";
 @Injectable()
 export class categoriaService{
     
-    baseUrl = "http://localhost:8080/v1/categories"
+    baseUrl = "https://api-delivery-v1-4.herokuapp.com/v1/categories"
 
     constructor(private http: HttpClient){}
 

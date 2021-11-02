@@ -8,7 +8,7 @@ import { Properties } from "../Properties";
 @Injectable()
 export class AdicionalService{
 
-    baseUrl: string = "http://localhost:8080/v1/additionals"
+    baseUrl: string = "https://api-delivery-v1-4.herokuapp.com/v1/additionals"
 
     constructor(private http: HttpClient){}
 

@@ -14,7 +14,7 @@ import { Properties } from "src/app/Properties";
 @Injectable()
 export class authService {
 
-    baseUrl = 'http://localhost:8080';
+    baseUrl = 'https://api-delivery-v1-4.herokuapp.com';
 
     private user: User = new User("", "", "", "", "", 0);
     private username: string;
