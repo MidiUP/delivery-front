@@ -42,7 +42,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label for="nome-produto">Nome da Categoria</mat-label>
                             <input matInput formControlName="name" [(ngModel)]="categoriaNew.description" type="text"
-                                placeholder="Ex: Hambúrguer">
+                                placeholder="Ex: Hambúrguer" maxlength="80">
                             <mat-error *ngIf="newCategoriaForm.controls.name.hasError('required')">
                                 Por favor insira um nome.
                             </mat-error>

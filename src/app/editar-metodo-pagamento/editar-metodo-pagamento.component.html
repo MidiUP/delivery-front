@@ -12,7 +12,7 @@
             <div class="row">
                 <mat-form-field appearance="outline">
                     <mat-label>Novo Nome</mat-label>
-                    <input matInput type="text" matInput [(ngModel)]="metodo.description" formControlName="description" placeholder="Ex: Pix">
+                    <input matInput type="text" matInput [(ngModel)]="metodo.description" formControlName="description" placeholder="Ex: Pix" maxlength="80">
                     <mat-error *ngIf="editMetodoForm.controls.description.hasError('required')">
                         Por favor insira um novo método de pagamento.
                     </mat-error>

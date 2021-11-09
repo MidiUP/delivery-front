@@ -8,7 +8,7 @@
                 <div class="col-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Ex. Pizza" formControlName="name" [(ngModel)]="categoria.description">
+                        <input matInput placeholder="Ex. Pizza" formControlName="name" [(ngModel)]="categoria.description" maxlength="80">
                         <mat-error *ngIf="editCategoriaForm.controls.name.hasError('required')">
                             Por favor insira um nome.
                         </mat-error>

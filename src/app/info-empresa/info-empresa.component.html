@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Nome da Empresa</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.name" formControlName="name" placeholder="Ex: Mc Donalds">
+          <input matInput type="text" [(ngModel)]="empresa.name" formControlName="name" placeholder="Ex: Mc Donalds" maxlength="50">
           <mat-error *ngIf="infoEmpresaForm.controls.name.hasError('required')">
             Por favor insira um nome.
           </mat-error>
@@ -19,7 +19,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Slogan da Empresa</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.slogan" formControlName="slogan"
-            placeholder="Ex: Amo muito tudo isso">
+            placeholder="Ex: Amo muito tudo isso" maxlength="50">
           <mat-error *ngIf="infoEmpresaForm.controls.slogan.hasError('required')">
             Por favor insira um slogan.
           </mat-error>
@@ -39,7 +39,7 @@
         <mat-form-field appearance="outline">
           <mat-label>CNPJ</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.cnpj" formControlName="cnpj"
-            placeholder="Ex: 69.411.320/0001-30">
+            placeholder="Ex: 69.411.320/0001-30" maxlength="20">
           <mat-error *ngIf="infoEmpresaForm.controls.cnpj.hasError('required')">
             Por favor insira um CNPJ.
           </mat-error>
@@ -50,7 +50,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Endereço</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.address" formControlName="address"
-            placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente">
+            placeholder="Ex: Rua Miguel Couto, 2395, Lourival Parente" maxlength="50">
           <mat-error *ngIf="infoEmpresaForm.controls.address.hasError('required')">
             Por favor insira um Endereço.
           </mat-error>
@@ -67,7 +67,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Telefone</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.telefone" formControlName="telefone"
-            placeholder="(XX)9 9999-9999" aria-describedby="basic-addon1" appOnlyNumbers>
+            placeholder="(XX)9 9999-9999" aria-describedby="basic-addon1" appOnlyNumbers maxlength="15">
         </mat-form-field>
       </div>
       <div class="col-md-6">
@@ -94,7 +94,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Horário de Funcionamento</mat-label>
           <input matInput type="text"
-            placeholder="09:00 às 16:00" aria-describedby="basic-addon1" [(ngModel)]="empresa.opening_hours" formControlName="opening_hours">
+            placeholder="09:00 às 16:00" aria-describedby="basic-addon1" [(ngModel)]="empresa.opening_hours" formControlName="opening_hours" maxlength="20">
             <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('required')">
               Por favor insira um horário de funcionamento.
             </mat-error>
@@ -107,7 +107,7 @@
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label for="quantidade">Valor mínimo de pedido</mat-label>
-          <input matInput type="number" placeholder="Ex: R$10,00" [(ngModel)]="empresa.minValue" formControlName="minValue">
+          <input matInput type="number" placeholder="Ex: R$10,00" [(ngModel)]="empresa.minValue" formControlName="minValue" maxlength="10">
           <mat-error *ngIf="infoEmpresaForm.controls.minValue.hasError('required')">
             Por favor insira um valor mínimo para pedido.
           </mat-error>
@@ -118,7 +118,7 @@
         <mat-form-field appearance="outline">
           <mat-label for="quantidade">Link Google Maps</mat-label>
           <input matInput type="text" [(ngModel)]="empresa.linkGoogleMaps" formControlName="linkGoogleMaps"
-            placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A">
+            placeholder="Ex: https://goo.gl/maps/9Gmex5VxPYEnjZB5A" maxlength="50">
         </mat-form-field>
       </div>
 

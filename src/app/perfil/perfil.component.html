@@ -19,7 +19,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Nome</mat-label>
                             <input matInput placeholder="Ex. João da Silva Sousa Junior" formControlName="name"
-                                [(ngModel)]="newUser.name">
+                                [(ngModel)]="newUser.name" maxlength="80">
                             <mat-error *ngIf="novoUsuarioForm.controls.name.hasError('required')">
                                 Por favor insira um nome.
                             </mat-error>
@@ -67,7 +67,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Email</mat-label>
                             <input matInput placeholder="Ex. email@email.com" formControlName="email"
-                                [(ngModel)]="newUser.email">
+                                [(ngModel)]="newUser.email" maxlength="80">
                             <mat-error *ngIf="novoUsuarioForm.controls.email.hasError('required')">
                                 Por favor insira um email.
                             </mat-error>
@@ -108,7 +108,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Rua</mat-label>
                             <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
-                                [(ngModel)]="newAddress.street">
+                                [(ngModel)]="newAddress.street" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm.controls.street.hasError('required')">
                                 Por favor insira uma rua.
                             </mat-error>
@@ -122,7 +122,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Número</mat-label>
                             <input matInput placeholder="Ex. 25" formControlName="number"
-                                [(ngModel)]="newAddress.number">
+                                [(ngModel)]="newAddress.number" maxlength="10">
                             <mat-error *ngIf="novoEnderecoForm.controls.number.hasError('required')">
                                 Por favor insira um número.
                             </mat-error>
@@ -136,7 +136,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Complemento</mat-label>
                             <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
-                                [(ngModel)]="newAddress.complement">
+                                [(ngModel)]="newAddress.complement" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm.controls.complement.hasError('required')">
                                 Por favor insira um complemento.
                             </mat-error>
@@ -179,7 +179,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Cidade</mat-label>
                             <input matInput placeholder="Ex. Teresina" formControlName="city"
-                                [(ngModel)]="newAddress.city">
+                                [(ngModel)]="newAddress.city" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm.controls.city.hasError('required')">
                                 Por favor insira uma cidade.
                             </mat-error>
@@ -207,7 +207,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Rua</mat-label>
                             <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
-                                [(ngModel)]="newAddress2.street">
+                                [(ngModel)]="newAddress2.street" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm2.controls.street.hasError('required')">
                                 Por favor insira uma rua.
                             </mat-error>
@@ -221,7 +221,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Número</mat-label>
                             <input matInput placeholder="Ex. 25" formControlName="number"
-                                [(ngModel)]="newAddress2.number">
+                                [(ngModel)]="newAddress2.number" maxlength="10">
                             <mat-error *ngIf="novoEnderecoForm2.controls.number.hasError('required')">
                                 Por favor insira um número.
                             </mat-error>
@@ -235,7 +235,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Complemento</mat-label>
                             <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
-                                [(ngModel)]="newAddress2.complement">
+                                [(ngModel)]="newAddress2.complement" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm2.controls.complement.hasError('required')">
                                 Por favor insira um complemento.
                             </mat-error>
@@ -278,7 +278,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Cidade</mat-label>
                             <input matInput placeholder="Ex. Teresina" formControlName="city"
-                                [(ngModel)]="newAddress2.city">
+                                [(ngModel)]="newAddress2.city" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm2.controls.city.hasError('required')">
                                 Por favor insira uma cidade.
                             </mat-error>
@@ -307,7 +307,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Rua</mat-label>
                             <input matInput placeholder="Ex. Rua Sete De Setembro" formControlName="street"
-                                [(ngModel)]="newAddress3.street">
+                                [(ngModel)]="newAddress3.street" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm3.controls.street.hasError('required')">
                                 Por favor insira uma rua.
                             </mat-error>
@@ -321,7 +321,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Número</mat-label>
                             <input matInput placeholder="Ex. 25" formControlName="number"
-                                [(ngModel)]="newAddress3.number">
+                                [(ngModel)]="newAddress3.number" maxlength="10">
                             <mat-error *ngIf="novoEnderecoForm3.controls.number.hasError('required')">
                                 Por favor insira um número.
                             </mat-error>
@@ -335,7 +335,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Complemento</mat-label>
                             <input matInput placeholder="Ex. Casa de dois andares vermelha" formControlName="complement"
-                                [(ngModel)]="newAddress3.complement">
+                                [(ngModel)]="newAddress3.complement" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm3.controls.complement.hasError('required')">
                                 Por favor insira um complemento.
                             </mat-error>
@@ -378,7 +378,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Cidade</mat-label>
                             <input matInput placeholder="Ex. Teresina" formControlName="city"
-                                [(ngModel)]="newAddress3.city">
+                                [(ngModel)]="newAddress3.city" maxlength="80">
                             <mat-error *ngIf="novoEnderecoForm3.controls.city.hasError('required')">
                                 Por favor insira uma cidade.
                             </mat-error>
@@ -389,7 +389,6 @@
                     </div>
                 </div>
             </form>
-
 
 
             <div class="botoes">

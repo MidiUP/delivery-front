@@ -29,7 +29,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label for="nome-produto">Nome do Produto</mat-label>
                     <input matInput [(ngModel)]="product.name" formControlName="name" type="text"
-                        placeholder="Ex: Hambúrguer">
+                        placeholder="Ex: Hambúrguer" maxlength="80">
                     <mat-error *ngIf="newProductForm.controls.name.hasError('required')">
                         Por favor insira um nome.
                     </mat-error>
@@ -42,7 +42,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label for="descricao">Descrição do produto</mat-label>
                     <input matInput [(ngModel)]="product.description" formControlName="description" type="text"
-                        placeholder="Ex: Carne, queijo, ovo, alface e tomate">
+                        placeholder="Ex: Carne, queijo, ovo, alface e tomate" maxlength="80">
                     <mat-error *ngIf="newProductForm.controls.description.hasError('required')">
                         Por favor insira uma descrição.
                     </mat-error>
@@ -59,7 +59,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label for="preco-produto" class="form-label">Preço</mat-label>
                     <input matInput [(ngModel)]="product.price" formControlName="price" type="number" placeholder="0,00"
-                        aria-describedby="basic-addon1">
+                        aria-describedby="basic-addon1" maxlength="10">
                     <mat-error *ngIf="newProductForm.controls.price.hasError('required')">
                         Seu produto deve ter o valor minímo de R$1,00.
                     </mat-error>
@@ -174,7 +174,7 @@
                         <div class="col-6">
                             <mat-form-field appearance="outline">
                                 <mat-label>Nome</mat-label>
-                                <input matInput placeholder="Ex. Sabores" [ngModelOptions]="{standalone: true}" [(ngModel)]="adicionalObrigatorio.name">
+                                <input matInput placeholder="Ex. Sabores" [ngModelOptions]="{standalone: true}" [(ngModel)]="adicionalObrigatorio.name" maxlength="80">
                             </mat-form-field>
                         </div>
 

@@ -9,21 +9,21 @@
                     <div class="col-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Nome</mat-label>
-                            <input matInput placeholder="Ex. Pizza" formControlName="name" [(ngModel)]="produto.name">
+                            <input matInput placeholder="Ex. Pizza" formControlName="name" [(ngModel)]="produto.name" maxlength="80">
                         </mat-form-field>
                     </div>
                     <div class="col-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Descrição</mat-label>
                             <input matInput placeholder="Ex. Calabreza, tomate, cebola, serve até 04 pessoas"
-                                formControlName="description" [(ngModel)]="produto.description">
+                                formControlName="description" [(ngModel)]="produto.description" maxlength="80">
                         </mat-form-field>
                     </div>
 
                     <div class="col-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Preço</mat-label>
-                            <input matInput placeholder="Ex. 10,00" formControlName="price" [(ngModel)]="produto.price">
+                            <input matInput placeholder="Ex. 10,00" formControlName="price" [(ngModel)]="produto.price" maxlength="10">
                         </mat-form-field>
                     </div>
 
@@ -135,7 +135,7 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>Nome</mat-label>
                                         <input matInput placeholder="Ex. Sabores" [ngModelOptions]="{standalone: true}"
-                                            [(ngModel)]="adicionalObrigatorio.name">
+                                            [(ngModel)]="adicionalObrigatorio.name" maxlength="80">
                                     </mat-form-field>
                                 </div>
 

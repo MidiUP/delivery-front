@@ -5,7 +5,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Nome do Bairro</mat-label>
                     <input matInput type="text" [(ngModel)]="bairro.name" formControlName="name"
-                        placeholder="Ex: Centro">
+                        placeholder="Ex: Centro" maxlength="80">
                     <mat-error *ngIf="novoBairroForm.controls.name.hasError('required')">
                         Por favor insira um nome.
                     </mat-error>
@@ -19,7 +19,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label for="nome-produto" class="form-label">Taxa de Entrega</mat-label>
                     <input matInput type="number" [(ngModel)]="bairro.value" formControlName="taxa"
-                        placeholder="Ex: 0,00">
+                        placeholder="Ex: 0,00" maxlength="10">
                     <mat-error *ngIf="novoBairroForm.controls.taxa.hasError('required')">
                         Por favor insira um valor.
                     </mat-error>

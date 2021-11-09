@@ -14,7 +14,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Novo Nome</mat-label>
-                        <input matInput type="text"  matInput [(ngModel)]="bairro.name" formControlName="name" placeholder="Ex: Morada Nova">
+                        <input matInput type="text"  matInput [(ngModel)]="bairro.name" formControlName="name" placeholder="Ex: Morada Nova" maxlength="80">
                         <mat-error *ngIf="editBairroForm.controls.name.hasError('required')">
                             Por favor insira um nome.
                         </mat-error>
@@ -26,7 +26,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="outline">
                         <mat-label>Novo Preço</mat-label>
-                        <input matInput type="number"  matInput [(ngModel)]="bairro.value" formControlName="value" placeholder="Ex: 0,00">
+                        <input matInput type="number"  matInput [(ngModel)]="bairro.value" formControlName="value" placeholder="Ex: 0,00" maxlength="10">
                         <mat-error *ngIf="editBairroForm.controls.value.hasError('required')">
                             Por favor insira um novo preço.
                         </mat-error>
