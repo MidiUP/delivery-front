@@ -14,7 +14,7 @@ import { Properties } from "src/app/Properties";
 @Injectable()
 export class authService {
 
-    baseUrl = 'http://localhost:8080';
+    baseUrl = 'http://89.40.5.41:8080';
 
     private user: User = new User("", "", "", "", "", 0);
     private username: string;

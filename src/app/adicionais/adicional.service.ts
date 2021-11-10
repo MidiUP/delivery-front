@@ -8,7 +8,7 @@ import { Properties } from "../Properties";
 @Injectable()
 export class AdicionalService{
 
-    baseUrl: string = "http://localhost:8080/v1/additionals"
+    baseUrl: string = "http://89.40.5.41:8080/v1/additionals"
 
     constructor(private http: HttpClient){}
 

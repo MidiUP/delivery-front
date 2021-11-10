@@ -10,7 +10,7 @@ import { MetodoPagamento } from "./metodoPagamento.model";
 @Injectable()
 export class metodoPagamentoService{
     
-    baseUrl =  "http://localhost:8080/v1/paymentMethods"
+    baseUrl =  "http://89.40.5.41:8080/v1/paymentMethods"
 
     constructor(private http: HttpClient){}
 

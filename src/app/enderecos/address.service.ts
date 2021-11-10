@@ -11,7 +11,7 @@ import { Address } from "./address.model";
 @Injectable()
 export class addressService{
     
-    baseUrl = "http://localhost:8080/v1/addresses"
+    baseUrl = "http://89.40.5.41:8080/v1/addresses"
 
     constructor(private http: HttpClient){}
 

@@ -9,7 +9,7 @@ import { Bairro } from "./bairro.model";
 @Injectable()
 export class bairroService{
     
-    baseUrl = "http://localhost:8080/v1/neighborhoods"
+    baseUrl = "http://89.40.5.41:8080/v1/neighborhoods"
 
     constructor(private http: HttpClient){}
 
