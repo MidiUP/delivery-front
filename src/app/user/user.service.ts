@@ -6,7 +6,7 @@ import { RespostaModel, User } from "./user.model";
 @Injectable()
 export class UserService {
 
-    baseUrl = "https://api-delivery-v1-4.herokuapp.com/users";
+    baseUrl = "http://localhost:8080/users";
 
     constructor(private http: HttpClient){}
 
