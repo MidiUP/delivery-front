@@ -6,7 +6,7 @@ import { RespostaModel, User } from "./user.model";
 @Injectable()
 export class UserService {
 
-    baseUrl = "http://89.40.5.41:8080/users";
+    baseUrl = "http://89.40.5.41:8081/users";
 
     constructor(private http: HttpClient){}
 
