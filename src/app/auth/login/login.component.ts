@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
   }
 
   requisicaoRedefinirSenha(): Observable<any>{
-    return this.http.post<any>(`http://89.40.5.41:8080/users/recover?recoveryPassword=${this.emailRedefinirSenha}`,"");
+    return this.http.post<any>(`http://89.40.5.41:8081/users/recover?recoveryPassword=${this.emailRedefinirSenha}`,"");
   }
 
   getEmpresa(){
