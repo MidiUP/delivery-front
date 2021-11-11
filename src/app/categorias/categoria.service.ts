@@ -8,7 +8,7 @@ import { Categoria } from "./categoria.model";
 @Injectable()
 export class categoriaService{
     
-    baseUrl = "http://89.40.5.41:1/v1/categories"
+    baseUrl = "http://89.40.5.41:8081/v1/categories"
 
     constructor(private http: HttpClient){}
 
