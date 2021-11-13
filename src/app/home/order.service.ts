@@ -10,7 +10,7 @@ import { Order } from "./order.model";
 @Injectable()
 export class orderService{
     
-    baseUrl = "http://89.40.5.41:8081/v1/orders"
+    baseUrl = `${environment.url}/v1/orders`
 
 
     constructor(private http: HttpClient){}

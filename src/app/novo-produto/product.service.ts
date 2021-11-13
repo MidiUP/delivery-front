@@ -8,7 +8,9 @@ import { Product } from "./product.model";
 @Injectable()
 export class ProductService{
 
-    baseUrl: string = 'http://89.40.5.41:8081/v1/products'
+    env = environment;
+    url = this.env.url;
+    baseUrl: string = `${this.env.url}/v1/products`
 
     constructor(private http: HttpClient){}
 
@@ -18,6 +20,7 @@ export class ProductService{
 
     getProducts():Observable<Product[]>{
         return this.http.get<Product[]>(`${this.baseUrl}`);
+
     }
 
     getProduct(id: number):Observable<Product>{
@@ -37,7 +40,7 @@ export class ProductService{
     }
 
     postImage(file: FormData, id: number){
-        return this.http.post<File>(`http://89.40.5.41:8081/v1/amazons3/upload/product/${id}`, file);
+        return this.http.post<File>(`${environment.url}/v1/amazons3/upload/product/${id}`, file);
     }
 
 

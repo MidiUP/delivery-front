@@ -66,6 +66,9 @@
                                     <a class="dropdown-item" (click)="alterarEndereco(endereco)">{{endereco.street}},
                                         {{endereco.number}}, {{endereco.neighborhood.name}}</a>
                                 </li>
+                                <li *ngIf="1>enderecos.length">
+                                    <a class="dropdown-item" [routerLink]="['/novoUsuario']" (click)="fecharDialog()">Cadastrar-se</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

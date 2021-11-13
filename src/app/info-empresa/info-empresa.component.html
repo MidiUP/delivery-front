@@ -139,17 +139,24 @@
     <div class="row">
 
       <div class="col-12">
-        <h2>Logo</h2>
+        <div class="titulo-upload-imagem">
+          <h2>Logo</h2>
+          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 800 x 800px</span>
+        </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverLogo')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverLogo')" [class.dropzone-on]="isDraggingOverLogo"
           (drop)="onDropEvent($event, 'existeIMagemLogo')">
           <span *ngIf="!existeIMagemLogo">Arraste sua imagem</span>
           <span *ngIf="existeIMagemLogo">{{imagensLogo[0].name}}</span>
         </div>
+        
       </div>
 
       <div class="col-12">
-        <h2>Banner 01</h2>
+        <div class="titulo-upload-imagem">
+          <h2>Banner 01</h2>
+          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
+        </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner1')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner1')" [class.dropzone-on]="isDraggingOverBanner1"
           (drop)="onDropEvent($event, 'existeIMagemBanner1')">
@@ -159,7 +166,10 @@
       </div>
       
       <div class="col-12">
-        <h2>Banner 02</h2>
+        <div class="titulo-upload-imagem">
+          <h2>Banner 02</h2>
+          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
+        </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner2')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner2')" [class.dropzone-on]="isDraggingOverBanner2"
           (drop)="onDropEvent($event, 'existeIMagemBanner2')">
@@ -169,7 +179,10 @@
       </div>
 
       <div class="col-12">
-        <h2>Banner 03</h2>
+        <div class="titulo-upload-imagem">
+          <h2>Banner 03</h2>
+          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
+        </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner3')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner3')" [class.dropzone-on]="isDraggingOverBanner3"
           (drop)="onDropEvent($event, 'existeIMagemBanner3')">
@@ -179,7 +192,10 @@
       </div>
 
       <div class="col-12">
-        <h2>Background</h2>
+        <div class="titulo-upload-imagem">
+          <h2>Background</h2>
+          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1920 x 1080px</span>
+        </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBackground')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBackground')" [class.dropzone-on]="isDraggingOverBackground"
           (drop)="onDropEvent($event, 'existeIMagemBackground')">
@@ -190,10 +206,6 @@
 
     </div>
     <hr>
-
-    
-
-
 
 
     <div class="d-flex justify-content-center mt-4"  style="padding-bottom: 15px;">

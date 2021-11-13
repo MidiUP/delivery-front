@@ -14,7 +14,7 @@ import { Properties } from "src/app/Properties";
 @Injectable()
 export class authService {
 
-    baseUrl = 'http://89.40.5.41:8081';
+    baseUrl = `${environment.url}`;
 
     private user: User = new User("", "", "", "", "", 0);
     private username: string;

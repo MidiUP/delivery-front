@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 import { RespostaModel, User } from "./user.model";
 
 @Injectable()
 export class UserService {
 
-    baseUrl = "http://89.40.5.41:8081/users";
+    baseUrl = `${environment.url}/users`;
 
     constructor(private http: HttpClient){}
 

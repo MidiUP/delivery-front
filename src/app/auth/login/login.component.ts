@@ -9,6 +9,7 @@ import { EmpresaService } from 'src/app/info-empresa/empresa.service';
 import { EmailEnviadoComponent } from 'src/app/snack-bars/email-enviado/email-enviado.component';
 import { EmailNaoExisteComponent } from 'src/app/snack-bars/email-nao-existe/email-nao-existe.component';
 import { FalhaLoginComponent } from 'src/app/snack-bars/falha-login/falha-login.component';
+import { environment } from 'src/environments/environment';
 import { authService } from '../auth.service/auth.service';
 import { UserLogin } from './userLogin.model';
 
@@ -94,7 +95,7 @@ export class LoginComponent implements OnInit {
   }
 
   requisicaoRedefinirSenha(): Observable<any>{
-    return this.http.post<any>(`http://89.40.5.41:8081/users/recover?recoveryPassword=${this.emailRedefinirSenha}`,"");
+    return this.http.post<any>(`${environment.url}/users/recover?recoveryPassword=${this.emailRedefinirSenha}`,"");
   }
 
   getEmpresa(){

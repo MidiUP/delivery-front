@@ -114,6 +114,7 @@ export class DialogCarrinhoMobileComponent implements OnInit {
     }
     else if (this.authService.isAuthenticated() != true) {
       this.router.navigate(['login']);
+      this.dialogRef.close();
     } else if (this.itensCarrinho.length == 0) {
       this.openSnackBarCarrinhoVazio();
     } else if (this.enderecoEscolhido == null) {
@@ -164,6 +165,10 @@ export class DialogCarrinhoMobileComponent implements OnInit {
     this._snackBar.openFromComponent(AddressNullComponent, {
       duration: 5 * 1000,
     });
+  }
+
+  fecharDialog(){
+    this.dialogRef.close();
   }
 
 
