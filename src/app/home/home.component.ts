@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
 
   carrinhoMobileOpen: boolean = false;
 
-  ultimoPedido: Order = new Order(0, this.user, "", "", this.status, 0, this.cupom, this.items, "", 0);
+  ultimoPedido: Order = new Order(0, this.user, "", "", this.status, 0, this.items, "", 0);
 
   pagamentoPorDinheiro: boolean = false;
 
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.cupom, this.items, "", 0);
+  order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.items, "", 0);
 
 
   constructor(private productService: ProductService,
