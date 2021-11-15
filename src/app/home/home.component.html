@@ -60,9 +60,9 @@
             <mat-icon class="icon-close" *ngIf="!empresa.open">schedule</mat-icon>
             <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id != 0"
               style="cursor: pointer">PEDIDO #{{ultimoPedido.id}}</h5>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="ultimoPedido.id == 0 && empresa.open">
+            <h5 class="titulo-infos clicavel" *ngIf="ultimoPedido.id == 0 && empresa.open">
               COMPRE JÁ</h5>
-            <h5 class="titulo-infos clicavel" (click)="openHistorico()" *ngIf="!empresa.open">{{empresa.opening_hours}}
+            <h5 class="titulo-infos clicavel" *ngIf="!empresa.open">{{empresa.opening_hours}}
             </h5>
           </div>
           <p class="v-desktop-infos" *ngIf="ultimoPedido.id != 0">{{ultimoPedido.status.description}}</p>
