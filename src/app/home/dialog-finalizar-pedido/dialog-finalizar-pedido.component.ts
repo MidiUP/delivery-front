@@ -41,4 +41,12 @@ export class DialogFinalizarPedidoComponent implements OnInit {
     this.carrinhoService.exportarPedido(this.observacao);
   }
 
+  stringAddress(): string{
+    if(this.enderecoSelecionado.street === "Retirada na Loja"){
+      return "Retirada na Loja"
+    }else {
+      return `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`;
+    }
+  }
+
 }
