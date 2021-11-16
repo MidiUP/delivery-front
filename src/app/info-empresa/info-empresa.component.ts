@@ -1,9 +1,11 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
 import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component';
+import { DialogDeleteBannerComponent } from './dialog-delete-banner/dialog-delete-banner.component';
 import { Empresa } from './empresa.model';
 import { EmpresaService } from './empresa.service';
 
@@ -37,7 +39,8 @@ export class InfoEmpresaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private empresaService: EmpresaService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.infoEmpresaForm = new FormGroup({
@@ -54,9 +57,10 @@ export class InfoEmpresaComponent implements OnInit {
     }, { updateOn: 'change' });
 
     this.empresaService.getEmpresaById()
-    .subscribe(res => {
-      this.empresa = res;
+      .subscribe(res => {
+        this.empresa = res;
       });
+
   }
 
 
@@ -116,46 +120,46 @@ export class InfoEmpresaComponent implements OnInit {
   }
 
   onDragOverEvent(event: DragEvent, isDraggingOver: string) {
-    if(isDraggingOver === "isDraggingOverLogo"){
+    if (isDraggingOver === "isDraggingOverLogo") {
       this.isDraggingOverLogo = true;
     }
 
-    if(isDraggingOver === "isDraggingOverBanner1"){
+    if (isDraggingOver === "isDraggingOverBanner1") {
       this.isDraggingOverBanner1 = true;
     }
 
-    if(isDraggingOver === "isDraggingOverBanner2"){
+    if (isDraggingOver === "isDraggingOverBanner2") {
       this.isDraggingOverBanner2 = true;
     }
 
-    if(isDraggingOver === "isDraggingOverBanner3"){
+    if (isDraggingOver === "isDraggingOverBanner3") {
       this.isDraggingOverBanner3 = true;
     }
 
-    if(isDraggingOver === "isDraggingOverBackground"){
+    if (isDraggingOver === "isDraggingOverBackground") {
       this.isDraggingOverBackground = true;
     }
     event.preventDefault();
   }
 
   onDragLeaveEvent(event: DragEvent, isDraggingOver: string) {
-    if(isDraggingOver === "isDraggingOverLogo"){
+    if (isDraggingOver === "isDraggingOverLogo") {
       this.isDraggingOverLogo = false;
     }
 
-    if(isDraggingOver === "isDraggingOverBanner1"){
+    if (isDraggingOver === "isDraggingOverBanner1") {
       this.isDraggingOverBanner1 = false;
     }
 
-    if(isDraggingOver === "isDraggingOverBanner2"){
+    if (isDraggingOver === "isDraggingOverBanner2") {
       this.isDraggingOverBanner2 = false;
     }
 
-    if(isDraggingOver === "isDraggingOverBanner3"){
+    if (isDraggingOver === "isDraggingOverBanner3") {
       this.isDraggingOverBanner3 = false;
     }
 
-    if(isDraggingOver === "isDraggingOverBackground"){
+    if (isDraggingOver === "isDraggingOverBackground") {
       this.isDraggingOverBackground = false;
     }
     event.preventDefault();
@@ -165,33 +169,33 @@ export class InfoEmpresaComponent implements OnInit {
     event.preventDefault();
     // imagens = event.dataTransfer?.files || new FileList;
 
-    if(controlador == 'existeIMagemLogo'){
+    if (controlador == 'existeIMagemLogo') {
       this.existeIMagemLogo = true;
       this.imagensLogo = event.dataTransfer?.files || new FileList;
     }
 
-    if(controlador == 'existeIMagemBanner1'){
+    if (controlador == 'existeIMagemBanner1') {
       this.existeIMagemBanner1 = true;
       this.imagensBanner01 = event.dataTransfer?.files || new FileList;
     }
 
-    if(controlador == 'existeIMagemBanner2'){
+    if (controlador == 'existeIMagemBanner2') {
       this.existeIMagemBanner2 = true;
       this.imagensBanner02 = event.dataTransfer?.files || new FileList;
     }
 
-    if(controlador == 'existeIMagemBanner3'){
+    if (controlador == 'existeIMagemBanner3') {
       this.existeIMagemBanner3 = true;
       this.imagensBanner03 = event.dataTransfer?.files || new FileList;
     }
 
-    if(controlador == 'existeIMagemBackground'){
+    if (controlador == 'existeIMagemBackground') {
       this.existeIMagemBackground = true;
       this.imagensBackground = event.dataTransfer?.files || new FileList;
     }
 
 
-    
+
     // console.log(this.imagens[0].name);
   }
 
@@ -268,6 +272,19 @@ export class InfoEmpresaComponent implements OnInit {
           })
         )
     }
+  }
+
+  openDialogDeleteBanner() {
+    const dialogRef = this.dialog.open(DialogDeleteBannerComponent, {
+      data: { id: this.empresa.id, name: this.empresa.name, username: this.empresa.username, password: this.empresa.password, phone: this.empresa.phone, slogan: this.empresa.slogan, cnpj: this.empresa.cnpj, address: this.empresa.address, whatsapp: this.empresa.whatsapp, open: this.empresa.open, banners: this.empresa.banners, opening_hours: this.empresa.opening_hours, backgroundPath: this.empresa.backgroundPath, minValue: this.empresa.minValue, linkGoogleMaps: this.empresa.linkGoogleMaps, logoPath: this.empresa.logoPath}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.empresaService.getEmpresaById()
+        .subscribe(res => {
+          this.empresa = res;
+        });
+    });
+
   }
 
   openSnackBarSuccess() {

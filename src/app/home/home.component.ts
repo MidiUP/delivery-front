@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
 
   carrinhoMobileOpen: boolean = false;
 
-  ultimoPedido: Order = new Order(0, this.user, "", "", this.status, 0, this.items, "", 0);
+  ultimoPedido: Order = new Order(0, this.user, "", this.status, 0, this.items, "", 0);
 
   pagamentoPorDinheiro: boolean = false;
 
@@ -94,9 +94,13 @@ export class HomeComponent implements OnInit {
 
   isLogged: boolean = false; 
 
+  isDelivery: boolean = false;
+
+  enderecoRetirada: Address = new Address("Retirada na Loja", new Bairro("",0,0,"",true), "", "", "", "", this.userLogado, 0 )
 
 
-  order: Order = new Order(0, this.user, this.pagamento.description, this.bairro.name, this.status, 0, this.items, "", 0);
+
+  order: Order = new Order(0, this.user, this.pagamento.description, this.status, 0, this.items, "", 0);
 
 
   constructor(private productService: ProductService,
@@ -150,9 +154,7 @@ export class HomeComponent implements OnInit {
   getEmpresa(){
     this.empresaService.getEmpresaById()
       .subscribe(res => {
-        this.empresa = res
-        console.log(this.empresa);
-        
+        this.empresa = res;
       });
   }
 
@@ -162,6 +164,15 @@ export class HomeComponent implements OnInit {
     this.enderecoSelecionado = this.carrinhoService.getEnderecoSelecionado();
     this.frete = endereco.neighborhood.value;
   }
+
+  stringAddress(): string{
+    if(this.enderecoSelecionado.street === "Retirada na Loja"){
+      return "Retirada na Loja"
+    }else {
+      return `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`;
+    }
+  }
+
 
   alterarMetodoPagamento(metodo: MetodoPagamento) {
     this.carrinhoService.selecionarMetodoPagamento(metodo);
@@ -399,6 +410,8 @@ export class HomeComponent implements OnInit {
       return "overflow: hidden; background: url(" + this.empresa.backgroundPath + ")" + "no-repeat fixed; background-size: cover;"
     }
   }
+
+ 
 
 
 }

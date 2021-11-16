@@ -10,12 +10,13 @@ export class Order{
         public id: number,
         public user: User, 
         public paymentMethod: string,
-        public address: string,
         public status: Status,
         public total: number,
         public items: Items[],
         public note: string,
         public deliveryFee: number,
+        public address?: string,
+        public isDelivery?: boolean,
         public coupon?: Cupom,
         public thing?: number
     ){}

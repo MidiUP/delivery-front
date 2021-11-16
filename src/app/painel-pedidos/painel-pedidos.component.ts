@@ -209,6 +209,9 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
 
   imprimir(pedido: Order) {
     let data = new Date();
+    if(pedido.address === null){
+      pedido.address = "Retirada na Loja"
+    }
 
     let popupWin = window.open('', '_blank', 'width=800,height=500,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no,top=50');
     popupWin?.window.focus();
@@ -355,7 +358,7 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
           +'<section class="container notaColumn">'
           +'<h3> cliente cpf: ' + pedido.user.cpf + '</h3>'
               +'<h3>' + pedido.user.name + '</h3>'
-              +'<h3>' + pedido.address + '</h3>'
+              +'<h3>' + pedido.address  + '</h3>'
               // +'<h3> ao lado do colégio são José</h3>'
               +' </section>'
       

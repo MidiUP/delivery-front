@@ -4,7 +4,8 @@
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Nome da Empresa</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.name" formControlName="name" placeholder="Ex: Mc Donalds" maxlength="50">
+          <input matInput type="text" [(ngModel)]="empresa.name" formControlName="name" placeholder="Ex: Mc Donalds"
+            maxlength="50">
           <mat-error *ngIf="infoEmpresaForm.controls.name.hasError('required')">
             Por favor insira um nome.
           </mat-error>
@@ -66,15 +67,15 @@
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Telefone</mat-label>
-          <input matInput type="text" [(ngModel)]="empresa.telefone" formControlName="telefone"
+          <input matInput type="text"  formControlName="telefone"
             placeholder="(XX)9 9999-9999" aria-describedby="basic-addon1" appOnlyNumbers maxlength="15">
         </mat-form-field>
       </div>
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label>Whatsapp</mat-label>
-          <input matInput type="text" formControlName="whatsapp"
-            placeholder="Ex: (XX)9 9999-9999" [ngModel]="empresa.whatsapp | phone" (ngModelChange)="empresa.whatsapp=$event" maxlength="15"
+          <input matInput type="text" formControlName="whatsapp" placeholder="Ex: (XX)9 9999-9999"
+            [ngModel]="empresa.whatsapp | phone" (ngModelChange)="empresa.whatsapp=$event" maxlength="15"
             appOnlyNumbers>
           <mat-error *ngIf="infoEmpresaForm.controls.whatsapp.hasError('required')">
             Por favor insira um número de Whatsapp.
@@ -93,21 +94,22 @@
       <div class="col-6">
         <mat-form-field appearance="outline">
           <mat-label>Horário de Funcionamento</mat-label>
-          <input matInput type="text"
-            placeholder="09:00 às 16:00" aria-describedby="basic-addon1" [(ngModel)]="empresa.opening_hours" formControlName="opening_hours" maxlength="20">
-            <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('required')">
-              Por favor insira um horário de funcionamento.
-            </mat-error>
-            <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('minlength')">
-              Por favor insira um horário de funcionamento com dez ou mais caracteres.
-            </mat-error>
+          <input matInput type="text" placeholder="09:00 às 16:00" aria-describedby="basic-addon1"
+            [(ngModel)]="empresa.opening_hours" formControlName="opening_hours" maxlength="20">
+          <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('required')">
+            Por favor insira um horário de funcionamento.
+          </mat-error>
+          <mat-error *ngIf="infoEmpresaForm.controls.opening_hours.hasError('minlength')">
+            Por favor insira um horário de funcionamento com dez ou mais caracteres.
+          </mat-error>
         </mat-form-field>
       </div>
 
       <div class="col-md-6">
         <mat-form-field appearance="outline">
           <mat-label for="quantidade">Valor mínimo de pedido</mat-label>
-          <input matInput type="number" placeholder="Ex: R$10,00" [(ngModel)]="empresa.minValue" formControlName="minValue" maxlength="10">
+          <input matInput type="number" placeholder="Ex: R$10,00" [(ngModel)]="empresa.minValue"
+            formControlName="minValue" maxlength="10">
           <mat-error *ngIf="infoEmpresaForm.controls.minValue.hasError('required')">
             Por favor insira um valor mínimo para pedido.
           </mat-error>
@@ -126,7 +128,7 @@
         <h6>
           Estado do Estabelecimento
         </h6>
-        <mat-radio-group aria-label="Select an option" formControlName="open" [(ngModel)]="empresa.open" >
+        <mat-radio-group aria-label="Select an option" formControlName="open" [(ngModel)]="empresa.open">
           <mat-radio-button [value]="true">Aberto</mat-radio-button>
           <mat-radio-button [value]="false">Fechado</mat-radio-button>
         </mat-radio-group>
@@ -141,7 +143,6 @@
       <div class="col-12">
         <div class="titulo-upload-imagem">
           <h2>Logo</h2>
-          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 800 x 800px</span>
         </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverLogo')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverLogo')" [class.dropzone-on]="isDraggingOverLogo"
@@ -149,13 +150,15 @@
           <span *ngIf="!existeIMagemLogo">Arraste sua imagem</span>
           <span *ngIf="existeIMagemLogo">{{imagensLogo[0].name}}</span>
         </div>
-        
+        <span class="orientacoes">*Tamanho máx: 1mb, Dimensões recomendadas: 800 x 800px</span>
+
       </div>
+
+      <hr>
 
       <div class="col-12">
         <div class="titulo-upload-imagem">
           <h2>Banner 01</h2>
-          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
         </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner1')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner1')" [class.dropzone-on]="isDraggingOverBanner1"
@@ -163,12 +166,14 @@
           <span *ngIf="!existeIMagemBanner1">Arraste sua imagem</span>
           <span *ngIf="existeIMagemBanner1">{{imagensBanner01[0].name}}</span>
         </div>
+        <span class="orientacoes">*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
       </div>
-      
+
+      <hr>
+
       <div class="col-12">
         <div class="titulo-upload-imagem">
           <h2>Banner 02</h2>
-          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
         </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner2')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner2')" [class.dropzone-on]="isDraggingOverBanner2"
@@ -176,12 +181,15 @@
           <span *ngIf="!existeIMagemBanner2">Arraste sua imagem</span>
           <span *ngIf="existeIMagemBanner2">{{imagensBanner02[0].name}}</span>
         </div>
+        <span class="orientacoes">*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
       </div>
+      
+      <hr>
+
 
       <div class="col-12">
         <div class="titulo-upload-imagem">
           <h2>Banner 03</h2>
-          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
         </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBanner3')"
           (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBanner3')" [class.dropzone-on]="isDraggingOverBanner3"
@@ -189,26 +197,30 @@
           <span *ngIf="!existeIMagemBanner3">Arraste sua imagem</span>
           <span *ngIf="existeIMagemBanner3">{{imagensBanner03[0].name}}</span>
         </div>
+        <span class="orientacoes">*Tamanho máx: 1mb, Dimensões recomendadas: 1280 x 395px</span>
       </div>
+
+      <hr>
 
       <div class="col-12">
         <div class="titulo-upload-imagem">
           <h2>Background</h2>
-          <span>*Tamanho máx: 1mb, Dimensões recomendadas: 1920 x 1080px</span>
+          <mat-icon *ngIf="empresa.backgroundPath" color="warn" (click)="openDialogDeleteBanner()">delete</mat-icon>
         </div>
         <div class="dropzone-off" (dragover)="onDragOverEvent($event, 'isDraggingOverBackground')"
-          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBackground')" [class.dropzone-on]="isDraggingOverBackground"
-          (drop)="onDropEvent($event, 'existeIMagemBackground')">
+          (dragleave)="onDragLeaveEvent($event, 'isDraggingOverBackground')"
+          [class.dropzone-on]="isDraggingOverBackground" (drop)="onDropEvent($event, 'existeIMagemBackground')">
           <span *ngIf="!existeIMagemBackground">Arraste sua imagem</span>
           <span *ngIf="existeIMagemBackground">{{imagensBackground[0].name}}</span>
         </div>
+        <span class="orientacoes">*Tamanho máx: 1mb, Dimensões recomendadas: 1920 x 1080px</span>
       </div>
 
     </div>
     <hr>
 
 
-    <div class="d-flex justify-content-center mt-4"  style="padding-bottom: 15px;">
+    <div class="d-flex justify-content-center mt-4" style="padding-bottom: 15px;">
       <button class="btn btn-primary" [disabled]="!infoEmpresaForm.valid" type="submit">Salvar</button>
     </div>
 

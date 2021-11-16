@@ -66,16 +66,26 @@
                                     <a class="dropdown-item" (click)="alterarEndereco(endereco)">{{endereco.street}},
                                         {{endereco.number}}, {{endereco.neighborhood.name}}</a>
                                 </li>
-                                <li *ngIf="1>enderecos.length">
-                                    <a class="dropdown-item" [routerLink]="['/novoUsuario']" (click)="fecharDialog()">Cadastrar-se</a>
-                                </li>
+                                <li *ngIf="isLogged">
+                                    <hr class="dropdown-divider">
+                                  </li>
+                                  <li *ngIf="isLogged">
+                                    <a class="dropdown-item" (click)="alterarEndereco(enderecoRetirada)">Retirada na Loja</a>
+                                  </li>
+                                  <li>
+                                    <hr class="dropdown-divider">
+                                  </li>
+                                <li>
+                                    <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']">Editar
+                                      Endereços</a>
+                                    <a class="dropdown-item" *ngIf="!isLogged" [routerLink]="['/login']">Fazer Login</a>
+                                  </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
-            <p *ngIf="enderecoEscolhido!=null">{{enderecoEscolhido.street}}, {{enderecoEscolhido.number}},
-                {{enderecoEscolhido.neighborhood.name}}</p>
+            <p class="opcao-selecionada" *ngIf="enderecoEscolhido != null">{{stringAddress()}}</p>
         </nav>
 
         <nav class="navbar navbar-expand navbar-dark">

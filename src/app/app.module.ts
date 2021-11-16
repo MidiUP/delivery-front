@@ -98,6 +98,7 @@ import { SharedModule } from './shared/shared.module';
 import { SobreComponent } from './sobre/sobre.component';
 import { DialogPedidoConcluidoComponent } from './home/dialog-pedido-concluido/dialog-pedido-concluido.component';
 import { EmailCadastradoComponent } from './snack-bars/email-cadastrado/email-cadastrado.component';
+import { DialogDeleteBannerComponent } from './info-empresa/dialog-delete-banner/dialog-delete-banner.component';
 
 @NgModule({
   declarations: [
@@ -156,7 +157,8 @@ import { EmailCadastradoComponent } from './snack-bars/email-cadastrado/email-ca
     DialogDeleteMetodoPagamentoComponent,
     SobreComponent,
     DialogPedidoConcluidoComponent,
-    EmailCadastradoComponent
+    EmailCadastradoComponent,
+    DialogDeleteBannerComponent
   ],
   imports: [
     BrowserModule,

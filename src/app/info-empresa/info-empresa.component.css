@@ -20,7 +20,7 @@ mat-form-field{
   width: 100%;
   height: 30%;
   min-height: 100px;
-  margin: 10px 0 10px 0;
+  margin: 10px 0 0px 0;
   background: #eff0f1;
   border-collapse: separate;
   border: dashed #e0e0dc;
@@ -58,8 +58,18 @@ h6{
   align-items: center;
 }
 
-.titulo-upload-imagem span{
+.orientacoes{
   color: red;
-  margin: 0px 0px 0px 15px;
+  margin: 0px 0px 0px 25px;
   font-size: 0.8em;
+}
+
+.col-12{
+  margin-bottom: 16px;
+}
+
+mat-icon{
+  margin-left: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
 }

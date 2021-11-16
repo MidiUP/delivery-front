@@ -37,7 +37,7 @@ export class carrinhoService {
   items: Items[] = [];
   userLogado: User = new User("", "", "", "", "", 0);
   status: Status = new Status(1, "Novo Pedido");
-  order: Order = new Order(0, this.userLogado, "", "", this.status, 0, this.items, "", 0);
+  order: Order = new Order(0, this.userLogado, "", this.status, 0, this.items, "", 0);
   valorDinheiro: number = 0;
 
   addItem(produto: Product): void {
@@ -129,7 +129,7 @@ export class carrinhoService {
   }
 
   getEnderecoSelecionado(): Address {
-    return this.enderecoSelecionado
+    return this.enderecoSelecionado;
   }
 
   getFrete(): number {
@@ -165,9 +165,16 @@ export class carrinhoService {
       this.order.status = this.status;
       this.order.total = this.totalPedido;
       this.order.items = this.items;
-      this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name} / ${this.enderecoSelecionado.complement}`;
       this.order.note = observacao;
       this.order.deliveryFee = this.enderecoSelecionado.neighborhood.value;
+      
+      if(this.enderecoSelecionado.street === "Retirada na Loja"){
+        this.order.address = undefined;
+        this.order.isDelivery = false;
+      }else{
+        this.order.isDelivery = true;
+        this.order.address = `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name} / ${this.enderecoSelecionado.complement}`;
+      }
 
 
       this.orderService.createOrder(this.order)

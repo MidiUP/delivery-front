@@ -9,7 +9,7 @@ export class Empresa{
         public slogan: string,
         public cnpj: string,
         public address: string,
-        public telefone: string,
+        public phone: string,
         public whatsapp: string,
         public open: boolean,
         public banners: Banner[],

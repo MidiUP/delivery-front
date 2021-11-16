@@ -220,9 +220,16 @@
                               Endereço
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                              <li *ngFor="let endereco of enderecosCadastrados"><a class="dropdown-item"
-                                  (click)="alterarEndereco(endereco)">{{endereco.street}},
-                                  {{endereco.number}}, {{endereco.neighborhood.name}}</a></li>
+                              <li *ngFor="let endereco of enderecosCadastrados">
+                                <a class="dropdown-item" (click)="alterarEndereco(endereco)">{{endereco.street}},
+                                  {{endereco.number}}, {{endereco.neighborhood.name}}</a>
+                              </li>
+                              <li *ngIf="isLogged">
+                                <hr class="dropdown-divider">
+                              </li>
+                              <li *ngIf="isLogged">
+                                <a class="dropdown-item" (click)="alterarEndereco(enderecoRetirada)">Retirada na Loja</a>
+                              </li>
                               <li>
                                 <hr class="dropdown-divider">
                               </li>
@@ -239,8 +246,7 @@
                   </div>
                 </nav>
               </div>
-              <p class="opcao-selecionada" *ngIf="enderecoSelecionado != null">{{enderecoSelecionado.street}},
-                {{enderecoSelecionado.number}}, {{enderecoSelecionado.neighborhood.name}}</p>
+              <p class="opcao-selecionada" *ngIf="enderecoSelecionado != null">{{stringAddress()}}</p>
             </div>
 
 
@@ -248,7 +254,8 @@
               <div class="d-flex align-items-center">
                 <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
                 <h4 class="navbar-brand titulo-carrinho" style="margin-right: 5px;">Carrinho</h4>
-                <span *ngIf="empresa.minValue > totalPedido" class="valor-minimo">*Valor mínimo: R${{empresa.minValue.toFixed(2).replace('.',',')}}</span>
+                <span *ngIf="empresa.minValue > totalPedido" class="valor-minimo">*Valor mínimo:
+                  R${{empresa.minValue.toFixed(2).replace('.',',')}}</span>
               </div>
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">
@@ -313,7 +320,9 @@
                   <mat-icon class="icone-carrinho">shopping_cart</mat-icon>
                   <h4 class="navbar-brand titulo-carrinho" style="margin-bottom: 0 ;">Carrinho</h4>
                 </div>
-                <span *ngIf="empresa.minValue > totalPedido" class="valor-minimo" style="margin: 0px 0px 10px 0px;">*Valor mínimo: R${{empresa.minValue.toFixed(2).replace('.',',')}}</span>
+                <span *ngIf="empresa.minValue > totalPedido" class="valor-minimo"
+                  style="margin: 0px 0px 10px 0px;">*Valor mínimo:
+                  R${{empresa.minValue.toFixed(2).replace('.',',')}}</span>
               </div>
               <ul class="itens-carrinho">
                 <li *ngFor="let item of itensCarrinho">

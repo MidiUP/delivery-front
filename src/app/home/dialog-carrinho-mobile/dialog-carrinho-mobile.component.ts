@@ -7,6 +7,7 @@ import { Address } from 'src/app/enderecos/address.model';
 import { addressService } from 'src/app/enderecos/address.service';
 import { MetodoPagamento } from 'src/app/metodo-pagamento/metodoPagamento.model';
 import { metodoPagamentoService } from 'src/app/metodo-pagamento/metodoPagamento.service';
+import { Bairro } from 'src/app/novo-bairro/bairro.model';
 import { Product } from 'src/app/novo-produto/product.model';
 import { AddressNullComponent } from 'src/app/snack-bars/address-null/address-null.component';
 import { CarrinhoVazioComponent } from 'src/app/snack-bars/carrinho-vazio/carrinho-vazio.component';
@@ -44,6 +45,8 @@ export class DialogCarrinhoMobileComponent implements OnInit {
   pagamentoPorDinheiro: boolean = false;
   valorDinheiro: number = 0;
   pagamentoSelecionado: MetodoPagamento = this.carrinhoService.getMetodoPagamento();
+  enderecoRetirada: Address = new Address("Retirada na Loja", new Bairro("",0,0,"",true), "", "", "", "", new User("","","","","",0), 0 )
+  isLogged: boolean = false; 
   
 
   constructor(public dialogRef: MatDialogRef<DialogCarrinhoMobileComponent>,
@@ -51,6 +54,11 @@ export class DialogCarrinhoMobileComponent implements OnInit {
                             private metodoPagamentoService: metodoPagamentoService, private carrinhoService: carrinhoService, public dialog: MatDialog, private authService: authService, private router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+
+    if (this.authService.isAuthenticated()) {
+      this.isLogged = true;
+    }
+
     this.getEnderecos();
     this.getPagamentos();
   }
@@ -87,6 +95,14 @@ export class DialogCarrinhoMobileComponent implements OnInit {
     this.totalPedido=this.carrinhoService.getTotalPedido();
     this.enderecoEscolhido=this.carrinhoService.getEnderecoSelecionado();
     this.frete=endereco.neighborhood.value;
+  }
+
+  stringAddress(): string{
+    if(this.enderecoEscolhido.street === "Retirada na Loja"){
+      return "Retirada na Loja"
+    }else {
+      return `${this.enderecoEscolhido.street}, ${this.enderecoEscolhido.number}, ${this.enderecoEscolhido.neighborhood.name}`;
+    }
   }
 
   alterarMetodoPagamento(metodo: MetodoPagamento){
