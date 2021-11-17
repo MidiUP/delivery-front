@@ -96,7 +96,6 @@ export class authService {
             let token: any = localStorage.getItem('token');
             if (this.getTokenValid(token) == true) {
                 const decoded: any = jwt_decode(token);
-                console.log(decoded.roles);
                 let roles: any[] = decoded.roles;
                 let admin: boolean = false;
                 roles.forEach(role => {

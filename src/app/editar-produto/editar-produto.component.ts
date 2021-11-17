@@ -155,7 +155,6 @@ export class EditarProdutoComponent implements OnInit {
             .subscribe(
               (data => this.products = data)
             )
-          console.log("requisição");
         }),
       ).subscribe();
 

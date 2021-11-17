@@ -7,11 +7,12 @@
             <div class="row d-flex">
                 <h5>R${{produto.price.toFixed(2)}}</h5>
             </div>
-             <button mat-raised-button color="primary" [mat-dialog-close]="true">OK</button>
+            <button mat-raised-button color="primary" [mat-dialog-close]="true">OK</button>
         </div>
-    
+
         <div class="col-6 " style="padding-left: 0;">
-            <img src="../../../assets/img/Figura-Hamburguer-PNG-1280x720.png">
+            <img src="../../../assets/img/Figura-Hamburguer-PNG-1280x720.png" *ngIf="!produto.imagePath">
+            <img [src]="produto.imagePath" *ngIf="produto.imagePath">
         </div>
     </div>
-    </body>
+</body>

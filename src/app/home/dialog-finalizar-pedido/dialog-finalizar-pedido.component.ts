@@ -33,8 +33,7 @@ export class DialogFinalizarPedidoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.itensCarrinho);
-    
+
   }
 
   finalizarPedido(){

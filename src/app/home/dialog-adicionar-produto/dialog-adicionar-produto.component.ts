@@ -20,7 +20,6 @@ export class DialogAdicionarProdutoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public produto: Product, private carrinhoService: carrinhoService) { }
 
   ngOnInit(): void {
-    console.log(this.produto)
     this.produto.additional?.forEach(item => {
       item.quantityCar = 0;
       item.total = 0;
@@ -148,7 +147,6 @@ export class DialogAdicionarProdutoComponent implements OnInit {
         }
       }
     })
-    console.log(adicionais)
     return adicionais;
   }
 

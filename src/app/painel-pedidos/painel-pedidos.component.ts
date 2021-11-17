@@ -135,8 +135,6 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
               this.pedidos = pedidosEmAberto;
               if (!this.mute && tocar) {
                 this.audio.play();
-                console.log("entrei");
-                
               }
             } else {
               this.pedidos = pedidosFiltrados;

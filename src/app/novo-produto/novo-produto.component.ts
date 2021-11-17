@@ -114,8 +114,6 @@ export class NovoProdutoComponent implements OnInit {
     if (!itemVazio) {
       this.product.additional?.push(adicional);
     }
-    console.log(itemVazio);
-
 
   }
 
@@ -220,7 +218,6 @@ export class NovoProdutoComponent implements OnInit {
     event.preventDefault();
     this.imagens = event.dataTransfer?.files || new FileList;
     this.existeIMagem = true;
-    console.log(this.imagens[0].name);
   }
 
   postarImagem(formData: FormData, produto: Product) {

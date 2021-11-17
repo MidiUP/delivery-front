@@ -90,7 +90,7 @@ export class DialogEditarProdutoComponent implements OnInit {
     if (!itemVazio) {
       this.produto.additionalRequired?.push(adicionalObrigatorio);
     }
-    console.log(itemVazio);
+
   }
 
   removeAdicionalObrigatorio(adicional: additionalRequired) {
@@ -117,7 +117,6 @@ export class DialogEditarProdutoComponent implements OnInit {
       .subscribe(
         (res => {
           this.openSnackBarSuccess();
-          this.dialogRef.close();
           if (this.imagens){
             this.postarImagem(formData, this.produto);
           } else {
@@ -128,7 +127,6 @@ export class DialogEditarProdutoComponent implements OnInit {
         (err => {
           this.openSnackBarError();
           console.log(err);
-
         })
       )
     
@@ -181,7 +179,6 @@ export class DialogEditarProdutoComponent implements OnInit {
     event.preventDefault();
     this.imagens = event.dataTransfer?.files || new FileList;
     this.existeIMagem = true;
-    console.log(this.imagens[0].name);
   }
 
   postarImagem(formData: FormData, produto: Product) {
@@ -194,6 +191,7 @@ export class DialogEditarProdutoComponent implements OnInit {
           }),
           (err => {
             console.log(err);
+            this.dialogRef.close();
           })
         )
     }

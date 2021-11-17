@@ -148,11 +148,10 @@ export class NovoUsuarioComponent implements OnInit {
 
   newCampoEndereco() {
     if (this.campoEndereco > 2) {
-      console.log("Máx de endereços é 3")
+
     } else {
       this.campoEndereco++;
     }
-    console.log(this.campoEndereco)
   }
 
   deleteCampoEndereco() {
@@ -197,11 +196,10 @@ export class NovoUsuarioComponent implements OnInit {
     this.addressService.createAddress(address)
       .subscribe(
         (res) => {
-          console.log("endereco cadastrado");
+
         },
         (err) => {
           console.log(err);
-          console.log(this.newUser)
         })
   }
 
@@ -231,7 +229,6 @@ export class NovoUsuarioComponent implements OnInit {
                         this.userService.createUser(this.newUser)
                           .subscribe(
                             (res) => {
-                              console.log("usuario cadastrado");
                               this.userService.findByUsername(this.newUser.phone)
                                 .subscribe(
                                   (data => {
@@ -249,10 +246,9 @@ export class NovoUsuarioComponent implements OnInit {
                                           }
                                           this.authService.login({ username: this.newUser.phone, password: this.newUser.password })
                                             .subscribe(
-                                              (res => console.log("chamei login")),
+                                              (res => {}),
                                               (err => console.log(err))
                                             );
-                                          console.log("cheguei")
                                         }),
                                         (err => console.log(err))
                                       )

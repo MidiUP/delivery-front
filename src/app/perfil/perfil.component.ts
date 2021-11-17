@@ -169,7 +169,7 @@ export class PerfilComponent implements OnInit {
 
   newCampoEndereco() {
     if (this.campoEndereco > 2) {
-      console.log("Máx de endereços é 3")
+
     } else {
       this.campoEndereco++;
     }
@@ -221,7 +221,6 @@ export class PerfilComponent implements OnInit {
     this.addressService.createAddress(address)
       .subscribe(
         (res) => {
-          console.log("endereco cadastrado");
         },
         (err) => {
           console.log(err);
@@ -232,7 +231,6 @@ export class PerfilComponent implements OnInit {
     this.addressService.putAddress(address, address.id)
       .subscribe(
         (res) => {
-          console.log("endereco cadastrado");
         },
         (err) => {
           console.log(err);
@@ -259,7 +257,6 @@ export class PerfilComponent implements OnInit {
         (err) => {
           this.openSnackBarError();
           console.log(err);
-          console.log(this.newUser)
         })
 
     if (this.enderecos.length === 1) {
@@ -268,7 +265,6 @@ export class PerfilComponent implements OnInit {
           (res => console.log("endereco 1 alterado")),
           (err => {
             console.log(err)
-            console.log(this.newAddress)
           })
         )
 
@@ -297,7 +293,6 @@ export class PerfilComponent implements OnInit {
           (res => console.log("endereco 1 alterado")),
           (err => {
             console.log(err)
-            console.log(this.newAddress)
           })
         )
 
@@ -306,7 +301,6 @@ export class PerfilComponent implements OnInit {
           (res => console.log("endereco 2 alterado")),
           (err => {
             console.log(err)
-            console.log(this.newAddress)
           })
         )
 
@@ -325,7 +319,6 @@ export class PerfilComponent implements OnInit {
           (res => console.log("endereco 1 alterado")),
           (err => {
             console.log(err)
-            console.log(this.newAddress)
           })
         )
 
@@ -351,7 +344,6 @@ export class PerfilComponent implements OnInit {
       .subscribe(
         (data => {
           this.enderecos = data;
-          console.log(data)
           if (data.length == 1) {
             this.newAddress = data[0];
             this.newAddress.userRestaurant = this.userAddress;

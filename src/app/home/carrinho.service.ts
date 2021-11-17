@@ -54,8 +54,6 @@ export class carrinhoService {
 
     if (!itemExistente) {
       this.itensCarrinho.push(produto);
-      console.log(produto);
-      // produto.quantityCar = 1;
       produto.total = produto.quantityCar * produto.price;
       this.totalPedido += produto.total;
     }
@@ -184,7 +182,6 @@ export class carrinhoService {
           }),
           (err => {
             console.log(err);
-            console.log(this.order);
           })
         )
 
