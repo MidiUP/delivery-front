@@ -117,6 +117,7 @@ export class DialogEditarProdutoComponent implements OnInit {
       .subscribe(
         (res => {
           this.openSnackBarSuccess();
+          this.dialogRef.close();
           if (this.imagens){
             this.postarImagem(formData, this.produto);
           } else {

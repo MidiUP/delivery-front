@@ -42,7 +42,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label for="descricao">Descrição do produto</mat-label>
                     <input matInput [(ngModel)]="product.description" formControlName="description" type="text"
-                        placeholder="Ex: Carne, queijo, ovo, alface e tomate" maxlength="80">
+                        placeholder="Ex: Carne, queijo, ovo, alface e tomate" maxlength="200">
                     <mat-error *ngIf="newProductForm.controls.description.hasError('required')">
                         Por favor insira uma descrição.
                     </mat-error>
