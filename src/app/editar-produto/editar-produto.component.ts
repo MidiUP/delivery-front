@@ -121,7 +121,7 @@ export class EditarProdutoComponent implements OnInit {
 
   openDialogInfo(produto: Product) {
     const dialogRef = this.dialog.open(DialogInfoComponent, {
-      data: { name: produto.name, description: produto.description, price: produto.price }
+      data: { name: produto.name, description: produto.description, price: produto.price, imagePath: produto.imagePath }
     });
   }
 

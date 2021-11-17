@@ -5,7 +5,7 @@
             <p>{{produto.description}}</p>
             <hr>
             <div class="row d-flex">
-                <h5>R${{produto.price.toFixed(2)}}</h5>
+                <h5>R${{produto.price.toFixed(2).replace('.',',')}}</h5>
             </div>
             <button mat-raised-button color="primary" [mat-dialog-close]="true">OK</button>
         </div>
