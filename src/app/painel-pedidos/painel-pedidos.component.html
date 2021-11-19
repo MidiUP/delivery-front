@@ -18,11 +18,30 @@
     </mat-card> -->
 
     <section class="menu">
+
+        <mat-form-field appearance="outline" style="margin-right: 15px;">
+            <mat-label>Selecione um intervalo de datas</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Data inicial">
+              <input matEndDate formControlName="end" placeholder="Data final">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          
+            <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Data inicial inválida</mat-error>
+            <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Data final inválida</mat-error>
+          </mat-form-field>
+
+          <div class="botao-pesquisa-data">
+            <button mat-raised-button color="primary" style="margin-top: 15px" (click)="getPedidosByDate(false)">Buscar</button>
+          </div>
+
         <div class="select-lista-pedidos">
             <mat-form-field appearance="outline">
                 <mat-label>{{filtro}}</mat-label>
                 <mat-select>
                     <mat-option value="0" (click)="getPedidosByDate(true)">Todos os Pedidos</mat-option>
+                    <mat-option value="1" (click)="filtroPedidos('Indisponivel', true)">Pedidos Indisponíveis</mat-option>
                     <mat-option value="1" (click)="filtroPedidos('Novo Pedido', true)">Novos Pedidos</mat-option>
                     <mat-option value="2" (click)="filtroPedidos('Em Preparo', true)">Em Preparo</mat-option>
                     <mat-option value="3" (click)="filtroPedidos('Saiu para Entrega', true)">Saiu para Entrega</mat-option>

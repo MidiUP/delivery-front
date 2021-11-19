@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertaErrorComponent } from '../alerta-error/alerta-error.component';
+import { AlertaSuccesComponent } from '../alerta-succes/alerta-succes.component';
 import { MetodoPagamento } from '../metodo-pagamento/metodoPagamento.model';
 import { metodoPagamentoService } from '../metodo-pagamento/metodoPagamento.service';
 
@@ -15,7 +18,7 @@ export class EditarMetodoPagamentoComponent implements OnInit {
   editMetodoForm: FormGroup;
 
   constructor(private metodoPagamentoService: metodoPagamentoService,
-      private formBuilder: FormBuilder) { }
+      private formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getMetodos();
@@ -29,9 +32,10 @@ export class EditarMetodoPagamentoComponent implements OnInit {
     this.metodoPagamentoService.putMetodoPagamento(this.metodo,this.metodo.id)  
       .subscribe(
         (res => {
-          console.log("alterou");
+          this.openSnackBarSuccess();
         }),
         (err => {
+          this.openSnackBarError();
           console.log(err);
         })
       )
@@ -44,5 +48,17 @@ export class EditarMetodoPagamentoComponent implements OnInit {
           this.metodos=data;
         })
       )
+  }
+
+  openSnackBarSuccess() {
+    this._snackBar.openFromComponent(AlertaSuccesComponent, {
+      duration: 5000,
+    });
+  }
+
+  openSnackBarError() {
+    this._snackBar.openFromComponent(AlertaErrorComponent, {
+      duration: 5000,
+    });
   }
 }

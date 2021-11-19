@@ -500,21 +500,19 @@
           </div>
         </div>
 
-
-
       </div>
     </div>
   </section>
 
-  <section id="carrinho-mobile" class="fixed-bottom" style="padding:0">
+  <section id="carrinho-mobile" class="fixed-bottom" style="padding:0; z-index: 0;">
     <div class="row d-flex align-items-center" style="padding: 5px 0px; margin: 0;">
       <div class="col-3">
         <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;"
-          *ngIf="carrinhoMobileOpen==false">
+          *ngIf="carrinhoMobileOpen==false" (click)="openDialogCarMobile()">
           shopping_cart</mat-icon>
 
         <mat-icon [matBadge]="itensCarrinho.length" matBadgeColor="primary" matBadgeSize="small" style="color: white;"
-          *ngIf="carrinhoMobileOpen==true">
+          *ngIf="carrinhoMobileOpen==true" >
           shopping_cart</mat-icon>
       </div>
 

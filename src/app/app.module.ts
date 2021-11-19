@@ -99,6 +99,9 @@ import { SobreComponent } from './sobre/sobre.component';
 import { DialogPedidoConcluidoComponent } from './home/dialog-pedido-concluido/dialog-pedido-concluido.component';
 import { EmailCadastradoComponent } from './snack-bars/email-cadastrado/email-cadastrado.component';
 import { DialogDeleteBannerComponent } from './info-empresa/dialog-delete-banner/dialog-delete-banner.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -183,9 +186,11 @@ import { DialogDeleteBannerComponent } from './info-empresa/dialog-delete-banner
     MatBadgeModule,
     MatCheckboxModule,
     MatRadioModule,
-    SharedModule
+    SharedModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService, AdicionalService],
+  providers: [UserService, ProductService, categoriaService, bairroService, EmpresaService, addressService, orderService, metodoPagamentoService, authService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, carrinhoService, AdicionalService, MatDatepickerModule, MatNativeDateModule, { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
