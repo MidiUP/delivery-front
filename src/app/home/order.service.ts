@@ -35,6 +35,10 @@ export class orderService{
         return this.http.put(`${this.baseUrl}/${id}`,order);
     }
 
+    setStatusOrder(id:number, status:number){
+        return this.http.put(`${this.baseUrl}/status/${id}`, status);
+    }
+
     getOrdersByDate(){
         return this.http.get<Order[]>(`${this.baseUrl}/date`);
     }

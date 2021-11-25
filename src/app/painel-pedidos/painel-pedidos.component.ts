@@ -106,7 +106,7 @@ export class PainelPedidosComponent implements OnInit, OnDestroy {
     pedido.user = { id: pedido.user.id, name: '', email: '', password: '', cpf: '', phone: '' };
     pedido.status = { id: newStatus, description: '' };
 
-    this.orderService.putOrder(pedido, pedido.id)
+    this.orderService.setStatusOrder(pedido.id, newStatus)
       .subscribe(
         (res => {
           if (this.filtro !== 'Todos os Pedidos') {
