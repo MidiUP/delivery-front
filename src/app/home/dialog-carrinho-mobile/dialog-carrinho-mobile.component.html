@@ -78,7 +78,7 @@
                                 <li>
                                     <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']">Editar
                                       Endereços</a>
-                                    <a class="dropdown-item" *ngIf="!isLogged" [routerLink]="['/login']">Fazer Login</a>
+                                    <a class="dropdown-item" *ngIf="!isLogged" [routerLink]="['/login']" mat-dialog-close>Fazer Login</a>
                                   </li>
                             </ul>
                         </li>
