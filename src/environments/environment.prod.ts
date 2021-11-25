@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: "casadocaranguejoback.deliveryfasteasy.com"
+  url: "https://casadocaranguejoback.deliveryfasteasy.com"
 };
