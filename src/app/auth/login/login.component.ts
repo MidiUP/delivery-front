@@ -103,11 +103,23 @@ export class LoginComponent implements OnInit {
       .subscribe(data => this.empresa = data);
   }
 
+
   retornoBackground(): string{
     if (this.empresa.backgroundPath == ""){
       return "overflow: hidden; background: white;"
     }else {
-      return "overflow: hidden; background: url(" + this.empresa.backgroundPath + ")" + "no-repeat fixed; background-size: cover;"
+      let urlVetor: string [] = this.empresa.backgroundPath.split(' ');
+      let url: string = "";
+      let primeiro: boolean =  true;
+      urlVetor.forEach(v =>{
+        if(primeiro){
+          url = url + v;
+          primeiro = false;
+        }else{
+          url = url + "%20" + v;
+        }
+      })
+      return "overflow: hidden; background: url(" + url + ")" + "no-repeat fixed; background-size: cover;"
     }
   }
 
