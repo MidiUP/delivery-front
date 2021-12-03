@@ -49,16 +49,13 @@
         <nav class="navbar navbar-expand navbar-dark" style="margin-bottom: 10px;">
             <div class="container-fluid">
                 <h5 class="navbar-brand">Entrega</h5>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Endereço
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
@@ -68,18 +65,18 @@
                                 </li>
                                 <li *ngIf="isLogged">
                                     <hr class="dropdown-divider">
-                                  </li>
-                                  <li *ngIf="isLogged">
+                                </li>
+                                <li *ngIf="isLogged">
                                     <a class="dropdown-item" (click)="alterarEndereco(enderecoRetirada)">Retirada na Loja</a>
-                                  </li>
-                                  <li>
-                                    <hr class="dropdown-divider">
-                                  </li>
+                                </li>
                                 <li>
-                                    <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']">Editar
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" *ngIf="isLogged" [routerLink]="['/perfil']" mat-dialog-close>Editar
                                       Endereços</a>
                                     <a class="dropdown-item" *ngIf="!isLogged" [routerLink]="['/login']" mat-dialog-close>Fazer Login</a>
-                                  </li>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -91,21 +88,17 @@
         <nav class="navbar navbar-expand navbar-dark">
             <div class="container-fluid">
                 <h5 class="navbar-brand">Pagamento</h5>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Método
                             </a>
                             <ul class="dropdown-menu dropdown-menu-white" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li *ngFor="let metodo of pagamentos"><a class="dropdown-item"
-                                        (click)="alterarMetodoPagamento(metodo)">{{metodo.description}}</a></li>
+                                <li *ngFor="let metodo of pagamentos"><a class="dropdown-item" (click)="alterarMetodoPagamento(metodo)">{{metodo.description}}</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -120,7 +113,7 @@
             <div *ngIf="pagamentoPorDinheiro == true " class="container-fluid dinheiro">
                 <p class="opcao-selecionada-dinheiro"> Troco para: </p>
                 <input class="form-control troco" type="text" placeholder="Troco para quanto?" [(ngModel)]="valorDinheiro" appOnlyNumbers>
-              </div>
+            </div>
         </nav>
     </div>
     <div class="valor-minimo" *ngIf="carrinho.minValue > totalPedido">

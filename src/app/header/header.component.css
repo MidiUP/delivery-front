@@ -1,126 +1,110 @@
-
-html, body{
+html,
+body {
     height: 100%;
 }
 
-#complemento-header{
+#complemento-header {
     background: white;
     height: 100%;
     margin-top: 110px;
 }
 
-
-#navbar{
+#navbar {
     background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 10px 0px;
 }
 
-#navbar h1{
+#navbar h1 {
     color: black;
 }
 
-#navbar a{
+#navbar a {
     color: white;
 }
 
-
-#navbar a:hover{
-    color: 	#0065CB;
+#navbar a:hover {
+    color: #0065CB;
 }
 
-#nav-principal{
+#nav-principal {
     padding-top: 10px;
-
 }
 
-#menu-direita{
+#menu-direita {
     margin-left: auto;
 }
 
-
-#logo-empresa{
+#logo-empresa {
     width: 80px;
     height: 80px;
     margin: 0%;
     padding: 0%;
 }
 
-#saudacao-usuario{
+#saudacao-usuario {
     color: white;
 }
 
-#complemento-header a{
+#complemento-header a {
     color: white;
     font-family: Helvetica, Arial, sans-serif;
     transition: 1s;
     font-size: 1em;
     text-decoration: none;
-
-
 }
 
-#complemento-header a:hover{
+#complemento-header a:hover {
     color: black;
     text-decoration: none;
-
 }
 
-#complemento-header i{
+#complemento-header i {
     margin: 10px 20px;
     color: black;
-    
-
 }
 
-#complemento-header ul{
+#complemento-header ul {
     margin: 0px 0px 0px 0px;
     padding: 0px 0px;
-    
-
 }
 
-#complemento-header li{
+#complemento-header li {
     list-style-type: none;
 }
 
-#complemento-header nav.navbar.navbar-expand-md{
+#complemento-header nav.navbar.navbar-expand-md {
     padding: 3px 0px 7px 0px;
 }
 
-.divisor{
+.divisor {
     width: 1px;
     background: white;
     margin: 10px;
-
 }
 
-.container-logo{
+.container-logo {
     background: black;
     padding: 10px;
     margin: 0px;
 }
 
-.container-titulo{
+.container-titulo {
     padding: 10px;
     margin: 0px;
 }
 
-.container-titulo h4{
+.container-titulo h4 {
     margin: auto;
     cursor: pointer;
-
 }
 
-.container-titulo p{
+.container-titulo p {
     margin: auto;
     font-size: 0.6em;
-    
 }
 
-
-
-.btn-sub-menu{
+.btn-sub-menu {
     border: 1px solid black;
     border-radius: 500px;
     text-transform: uppercase;
@@ -130,75 +114,82 @@ html, body{
     transition: 1s;
 }
 
-.btn-sub-menu:hover{
+.btn-sub-menu:hover {
     border: 1px solid black;
     text-transform: uppercase;
     background: white;
 }
 
-a.navbar-brand{
+a.navbar-brand {
     margin-right: 0px;
 }
 
-.margin-botoes{
+.margin-botoes {
     margin-left: 15px;
 }
 
 
 /* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
 
+@media (max-width: 575.98px) {
+    .container-titulo {
+        padding: 0;
     }
+    .container-titulo h4 {
+        font-size: 0.9em;
+    }
+}
 
 
 /* Small devices (landscape phones, 576px and up) */
+
 @media (min-width: 576px) and (max-width: 767.98px) {
-    #complemento-header a{
-        display: none;
-        }
-    #complemento-header{
+    #complemento-header a {
         display: none;
     }
-
+    #complemento-header {
+        display: none;
+    }
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    #complemento-header a{
-        font-size: 0.7em;
-        transition:1s;
-        }
-    .margin-botoes{
-        margin-left: 5px;
-    }    
 
-    .divisor{
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #complemento-header a {
+        font-size: 0.7em;
+        transition: 1s;
+    }
+    .margin-botoes {
+        margin-left: 5px;
+    }
+    .divisor {
         margin: 14px 0px
     }
 }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    #complemento-header a{
-    font-size: 0.7em;
-    transition: 1s;
-    }
 
-    .divisor{
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    #complemento-header a {
+        font-size: 0.7em;
+        transition: 1s;
+    }
+    .divisor {
         margin: 13px 0px
     }
 }
 
+
 /* Extra large devices (large desktops, 1200px and up) */
+
 @media (min-width: 1200px) {
-    #complemento-header a{
+    #complemento-header a {
         font-size: 0.7em;
         transition: 1s;
-        }
-
-        .divisor{
-            margin: 12px 10px
-        }
-  
-   
+    }
+    .divisor {
+        margin: 12px 10px
+    }
 }
