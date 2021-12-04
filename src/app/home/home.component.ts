@@ -90,13 +90,13 @@ export class HomeComponent implements OnInit {
 
   valorDinheiro: number = 0;
 
-  empresa: Empresa = new Empresa(0,"","","","","","","","", true, [], "", "", 0);
+  empresa: Empresa = new Empresa(0, "", "", "", "", "", "", "", "", true, [], "", "", 0);
 
-  isLogged: boolean = false; 
+  isLogged: boolean = false;
 
   isDelivery: boolean = false;
 
-  enderecoRetirada: Address = new Address("Retirada na Loja", new Bairro("",0,0,"",true), "", "", "", "", this.userLogado, 0 )
+  enderecoRetirada: Address = new Address("Retirada na Loja", new Bairro("", 0, 0, "", true), "", "", "", "", this.userLogado, 0)
 
 
 
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
     private carrinhoService: carrinhoService,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private empresaService: EmpresaService) {  }
+    private empresaService: EmpresaService) { }
 
   ngOnInit(): void {
 
@@ -146,12 +146,18 @@ export class HomeComponent implements OnInit {
     this.productService.getProducts()
       .subscribe(
         data => {
-          this.products = data
+          this.products = [];
+          data.forEach(produto => {
+            if (produto.availability == true) {
+              this.products.push(produto);
+            }
+          })
+
         }
       );
   }
 
-  getEmpresa(){
+  getEmpresa() {
     this.empresaService.getEmpresaById()
       .subscribe(res => {
         this.empresa = res;
@@ -165,10 +171,10 @@ export class HomeComponent implements OnInit {
     this.frete = endereco.neighborhood.value;
   }
 
-  stringAddress(): string{
-    if(this.enderecoSelecionado.street === "Retirada na Loja"){
+  stringAddress(): string {
+    if (this.enderecoSelecionado.street === "Retirada na Loja") {
       return "Retirada na Loja"
-    }else {
+    } else {
       return `${this.enderecoSelecionado.street}, ${this.enderecoSelecionado.number}, ${this.enderecoSelecionado.neighborhood.name}`;
     }
   }
@@ -177,9 +183,9 @@ export class HomeComponent implements OnInit {
   alterarMetodoPagamento(metodo: MetodoPagamento) {
     this.carrinhoService.selecionarMetodoPagamento(metodo);
     this.pagamentoSelecionado = metodo;
-    if(metodo.description === "Dinheiro"){
+    if (metodo.description === "Dinheiro") {
       this.pagamentoPorDinheiro = true;
-    }else {
+    } else {
       this.pagamentoPorDinheiro = false;
     }
   }
@@ -242,9 +248,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openHistorico(){
+  openHistorico() {
     const dialogRef = this.dialog.open(DialogHistoricoComponent, {
-      data: {id: this.userLogado.id}
+      data: { id: this.userLogado.id }
     });
   }
 
@@ -258,13 +264,13 @@ export class HomeComponent implements OnInit {
   }
 
   exportarPedido() {
-    
+
     if (this.authService.isAuthenticated() == true && this.itensCarrinho.length > 0 && this.pagamentoSelecionado != null && this.enderecoSelecionado != null) {
-      if(this.pagamentoSelecionado.description === "Dinheiro"){
-        if(this.valorDinheiro >= this.carrinhoService.totalPedido){
+      if (this.pagamentoSelecionado.description === "Dinheiro") {
+        if (this.valorDinheiro >= this.carrinhoService.totalPedido) {
           this.carrinhoService.valorDinheiro = this.valorDinheiro;
           this.openDialogFinalPedido();
-        }else {
+        } else {
           this.openSnackBarDinheiroMenorQueTotal();
         }
       } else {
@@ -338,7 +344,13 @@ export class HomeComponent implements OnInit {
     this.productService.searchProduct(categoria, "")
       .subscribe(
         (data => {
-          this.products = data;
+          this.products = [];
+          data.forEach(produto => {
+            if (produto.availability == true) {
+              this.products.push(produto);
+            }
+          })
+          // this.products = data;
         })
       )
   }
@@ -347,11 +359,12 @@ export class HomeComponent implements OnInit {
     this.productService.searchProduct("", this.buscaNome)
       .subscribe(
         (data => {
-          if (data.length > 0) {
-            this.products = data;
-          } else {
-            this.products = [];
-          }
+          this.products = [];
+          data.forEach(produto => {
+            if (produto.availability == true) {
+              this.products.push(produto);
+            }
+          })
         })
       )
   }
@@ -366,7 +379,14 @@ export class HomeComponent implements OnInit {
         tap(value => {
           this.productService.searchProduct("", value)
             .subscribe(
-              (data => this.products = data)
+              (data => {
+                this.products = [];
+                data.forEach(produto => {
+                  if (produto.availability == true) {
+                    this.products.push(produto);
+                  }
+                })
+              })
             )
         }),
       ).subscribe();
@@ -380,7 +400,14 @@ export class HomeComponent implements OnInit {
         tap(value => {
           this.productService.searchProduct("", "")
             .subscribe(
-              (data => this.products = data)
+              (data => {
+                this.products = [];
+                data.forEach(produto => {
+                  if (produto.availability == true) {
+                    this.products.push(produto);
+                  }
+                })
+              })
             )
         }),
       ).subscribe();
@@ -400,21 +427,21 @@ export class HomeComponent implements OnInit {
 
   pagamentoDinheiro(isDinheiro: boolean) {
     this.pagamentoPorDinheiro = isDinheiro;
-    this.alterarMetodoPagamento(new MetodoPagamento (0,"Dinheiro"))
+    this.alterarMetodoPagamento(new MetodoPagamento(0, "Dinheiro"))
   }
 
-  retornoBackground(): string{
-    if (this.empresa.backgroundPath == ""){
+  retornoBackground(): string {
+    if (this.empresa.backgroundPath == "") {
       return "overflow: hidden; background: white;"
-    }else {
-      let urlVetor: string [] = this.empresa.backgroundPath.split(' ');
+    } else {
+      let urlVetor: string[] = this.empresa.backgroundPath.split(' ');
       let url: string = "";
-      let primeiro: boolean =  true;
-      urlVetor.forEach(v =>{
-        if(primeiro){
+      let primeiro: boolean = true;
+      urlVetor.forEach(v => {
+        if (primeiro) {
           url = url + v;
           primeiro = false;
-        }else{
+        } else {
           url = url + "%20" + v;
         }
       })

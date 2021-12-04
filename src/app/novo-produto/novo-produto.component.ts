@@ -45,7 +45,7 @@ export class NovoProdutoComponent implements OnInit {
       category: this.formBuilder.control('',),
       quantity: this.formBuilder.control('', []),
       price: this.formBuilder.control('', [Validators.required, Validators.min(1)]),
-      availability: this.formBuilder.control('', [])
+      availability: this.formBuilder.control('', [Validators.required])
     }, { updateOn: 'change' });
 
     this.additionalRequired = new FormGroup({
